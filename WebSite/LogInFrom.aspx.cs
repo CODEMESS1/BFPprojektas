@@ -18,7 +18,6 @@ public partial class LogInFrom : System.Web.UI.Page
     {
         if (checkLogin())
         {
-            //ikelta is Gito
             //perkelia i admin page
             Server.Transfer("AdminPuslapis.aspx", true);
         }
