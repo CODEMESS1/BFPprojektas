@@ -6,9 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Windows;
+using System.Drawing;
 
 public partial class LogInFrom : System.Web.UI.Page
 {
+    // Reik kazkaip ta validator pritaikyt kad toj vidurinej vietoj mestu klaida xddd
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -23,7 +27,7 @@ public partial class LogInFrom : System.Web.UI.Page
         }
         else
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "wrong credentials");
+            Page.ClientScript.RegisterStartupScript(GetType(), "myalert", "wrong credentials");
         }
     }
 
@@ -76,5 +80,14 @@ public partial class LogInFrom : System.Web.UI.Page
             }
         }
         return isCorrect;
+    }
+
+    protected void username_tb_TextChanged1(object sender, EventArgs e)
+    {
+    }
+
+    protected void RememberMe_CheckedChanged(object sender, EventArgs e)
+    {
+
     }
 }
