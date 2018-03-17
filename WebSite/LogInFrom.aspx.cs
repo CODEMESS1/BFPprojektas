@@ -11,7 +11,6 @@ using System.Drawing;
 
 public partial class LogInFrom : System.Web.UI.Page
 {
-    // Reik kazkaip ta validator pritaikyt kad toj vidurinej vietoj mestu klaida xddd
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -24,10 +23,6 @@ public partial class LogInFrom : System.Web.UI.Page
         {
             //perkelia i admin page
             Server.Transfer("AdminPuslapis.aspx", true);
-        }
-        else
-        {
-            Page.ClientScript.RegisterStartupScript(GetType(), "myalert", "wrong credentials");
         }
     }
 
@@ -84,6 +79,7 @@ public partial class LogInFrom : System.Web.UI.Page
 
     protected void username_tb_TextChanged1(object sender, EventArgs e)
     {
+
     }
 
     protected void RememberMe_CheckedChanged(object sender, EventArgs e)

@@ -7,8 +7,8 @@
     <title></title>
     <style type="text/css">
         #form1 {
-             width: s;
-            height: 5000px;
+            width: 100%;
+            height: 2000px;
             background-color: #534A4A;
         }
         .auto-style7 {
@@ -26,9 +26,10 @@
             height: 47px;
         }
         .auto-style10 {
+            align-self:center;
             height: 109px;
             width: 364px;
-            margin-top: 6px;
+            margin-top:50%;
             background-color: #FFFFFF;
         }
         .auto-style11 {
@@ -46,12 +47,8 @@
             margin-left: 80px;
         }
         .auto-style14 {
-            position: absolute;
-            z-index: auto;
-            top: 20px;
-            right: 20px;
-            bottom: 52px;
-            left: 274px;
+            margin-top:0px auto;
+            margin:0px auto;
         }
         .auto-style15 {
             text-align: center;
@@ -70,25 +67,21 @@
             width: 928px;
             height: 494px;
         }
-        .auto-style20 {
-            margin-left: 10px;
-        }
-    </style>
+        </style>
 </head>
-<body style="height: 561px">
+<body style="position: absolute; overflow: hidden; height:100%; width:100%;">
     <form id="form1" runat="server" class="auto-style19">
                 <div class="auto-style18">
-                <table style="border-collapse: collapse;" border="0" class="auto-style14" draggable="false">
+                <table style="border:0"; class="auto-style14"; draggable="false">
                     <tr>
                         <td class="auto-style7">
-                            <table class="auto-style10" border="1">
+                            <table class="auto-style10" border="0">
                                 <tr>
                                     <td class="auto-style9">
                                         <asp:Label ID="UserNameLabel" runat="server">Prisijungimo Vardas</asp:Label>
                                     </td>
                                     <td class="auto-style8">
                                         <asp:TextBox ID="username_tb" runat="server" Height="16px" Width="145px" OnTextChanged="username_tb_TextChanged1"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="login_username_validator" runat="server" ControlToValidate="username_tb" ErrorMessage="Įveskite prisijungimo vardą">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -96,21 +89,19 @@
                                         Slaptažodis</td>
                                     <td class="auto-style12">
                                         <asp:TextBox ID="password_tb" runat="server" TextMode="Password" Width="145px" Height="16px"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="login_password_validator" runat="server" ControlToValidate="password_tb" ErrorMessage="Įveskite slaptažodį">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="auto-style13">
-                                        <asp:CheckBox ID="RememberMe" runat="server" Text="Prisiminti Mano Prisijungimą" OnCheckedChanged="RememberMe_CheckedChanged" />
-                                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="auto-style20" Width="109px">
-                                            <asp:ListItem>Administratorius</asp:ListItem>
-                                            <asp:ListItem>Treneris</asp:ListItem>
-                                            <asp:ListItem>Vartotojas</asp:ListItem>
-                                        </asp:DropDownList>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <asp:CheckBox ID="RememberMe" runat="server" Text="Prisiminti mano prisijungimą" OnCheckedChanged="RememberMe_CheckedChanged" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="color: Red;" class="auto-style16">
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="password_tb"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="username_tb"></asp:RequiredFieldValidator>
+                                        <asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="SingleParagraph" HeaderText="Neteisingas slaptažodis arba prisijungimo vardas" />
                                         <asp:Literal ID="FailureText" runat="server" EnableViewState="False" Text=""></asp:Literal> 
                                     </td>
                                 </tr>
@@ -123,9 +114,7 @@
                         </td>
                     </tr>
                 </table>
-            </tr>
-        </table>
-                </div>
+           </div>
     </form>
 </body>
 </html>
