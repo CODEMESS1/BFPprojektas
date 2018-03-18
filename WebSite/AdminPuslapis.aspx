@@ -23,6 +23,7 @@
                 <asp:BoundField DataField="slaptazodis" HeaderText="slaptazodis" SortExpression="slaptazodis" />
                 <asp:BoundField DataField="valstybe" HeaderText="valstybe" SortExpression="valstybe" />
                 <asp:BoundField DataField="miestas" HeaderText="miestas" SortExpression="miestas" />
+                <asp:BoundField DataField="role" HeaderText="role" SortExpression="role" />
             </Columns>
         </asp:GridView>
         <asp:SqlDataSource ID="SqlDataSource_vartotojai" runat="server" ConnectionString="<%$ ConnectionStrings:DBConnectionString %>" SelectCommand="SELECT * FROM [VARTOTOJAS]"></asp:SqlDataSource>

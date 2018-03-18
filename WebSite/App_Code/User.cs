@@ -16,7 +16,7 @@ public class User
     public string Email { get; set; }
     public string City { get; set; }
     public string Country { get; set; }
-    public string UserRole { get; set; }
+    public char UserRole { get; set; }
 
     public User()
     {
@@ -24,7 +24,7 @@ public class User
     }
 
     public User(int user_id, string username, string name, string surname, DateTime birthday_date,
-        string email, string city, string country, string userrole)
+        string email, string city, string country, char userrole)
     {
         this.UserID = user_id;
         this.Username = username;

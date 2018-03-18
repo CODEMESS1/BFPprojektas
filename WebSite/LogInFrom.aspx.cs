@@ -29,10 +29,12 @@ public partial class LogInFrom : System.Web.UI.Page
                     Response.Redirect("AdminPuslapis.aspx");
                     break;
                 case "O":
-                    //perkelti i teisejo puslapi
+                    Session["officialSession"] = username_tb.Text;
+                    Response.Redirect("OfficialPage.aspx");
                     break;
                 case "C":
-                    //perkelti i trenerio puslapi
+                    Session["coachSession"] = username_tb.Text;
+                    Response.Redirect("CoachPage.aspx");
                     break;
             }
         }
@@ -42,11 +44,10 @@ public partial class LogInFrom : System.Web.UI.Page
         }
     }
 
+    //tikrina duomenu bazeje ar admin'as - A, ar teisejas - O, ar treneris - C
     private string CheckAccountType()
     {
-        //admin, coach, official
-        string[] AccTypes = new string[] { "A", "C", "O" };
-        string command = "SELECT prisijungimo_vardas FROM VARTOTOJAS WHERE role='";
+        string command = "SELECT role FROM VARTOTOJAS WHERE prisijungimo_vardas='" + username_tb.Text + "'";
 
         using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString))
         {
@@ -54,17 +55,11 @@ public partial class LogInFrom : System.Web.UI.Page
             {
                 conn.Open();
 
-                //patikrina kokia vartotojo role ir grazina jei randa
-                foreach (string type in AccTypes)
-                {
-                    String comm = command + type + "'";
-                    SqlCommand command_user = new SqlCommand(comm, conn);
+                SqlCommand command_user = new SqlCommand(command, conn);
 
-                    if (command_user.ExecuteScalar() != null)
-                    {
-                        return type;
-                    }
-                }
+                string response = command_user.ExecuteScalar().ToString();
+
+                return response.Replace(" ", "");
             }
             catch (Exception ex)
             {
