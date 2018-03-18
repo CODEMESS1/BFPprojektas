@@ -26,6 +26,9 @@
             </Columns>
         </asp:GridView>
         <asp:SqlDataSource ID="SqlDataSource_vartotojai" runat="server" ConnectionString="<%$ ConnectionStrings:DBConnectionString %>" SelectCommand="SELECT * FROM [VARTOTOJAS]"></asp:SqlDataSource>
+        <br />
+        <asp:Button ID="logout_btn" runat="server" Text="Atsijungti" OnClick="logout_btn_Click" />
+        <br />
     </form>
 </body>
 </html>

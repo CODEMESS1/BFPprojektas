@@ -25,7 +25,7 @@ public partial class LogInFrom : System.Web.UI.Page
             switch(CheckAccountType())
             {
                 case "A":
-                    Session["userSession"] = username_tb.Text;
+                    Session["adminSession"] = username_tb.Text;
                     Response.Redirect("AdminPuslapis.aspx");
                     break;
                 case "O":
