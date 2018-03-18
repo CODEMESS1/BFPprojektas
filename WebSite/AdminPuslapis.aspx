@@ -25,7 +25,7 @@
                 <asp:BoundField DataField="miestas" HeaderText="miestas" SortExpression="miestas" />
             </Columns>
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource_vartotojai" runat="server" ConnectionString="<%$ ConnectionStrings:VartotojaiConnectionString %>" SelectCommand="SELECT * FROM [VARTOTOJAS]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource_vartotojai" runat="server" ConnectionString="<%$ ConnectionStrings:DBConnectionString %>" SelectCommand="SELECT * FROM [VARTOTOJAS]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

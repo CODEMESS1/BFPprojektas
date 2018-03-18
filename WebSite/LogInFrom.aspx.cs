@@ -19,60 +19,82 @@ public partial class LogInFrom : System.Web.UI.Page
 
     protected void login_btn_Click(object sender, EventArgs e)
     {
+        //jei true, tai vartotojas rastas DB, toliau parenkamas vartotojo tipas
         if (checkLogin())
         {
-            //perkelia i admin page
-            Server.Transfer("AdminPuslapis.aspx", true);
+            switch(CheckAccountType())
+            {
+                case "A":
+                    Session["userSession"] = username_tb.Text;
+                    Response.Redirect("AdminPuslapis.aspx");
+                    break;
+                case "O":
+                    //perkelti i teisejo puslapi
+                    break;
+                case "C":
+                    //perkelti i trenerio puslapi
+                    break;
+            }
+        }
+        else
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Prisijungimas nepavyko" + "');", true);
         }
     }
 
-    private Boolean checkLogin()
+    private string CheckAccountType()
     {
-        Boolean isCorrect = false;
-        //sql komanda parenka logina
-        //string checkuser = "SELECT prisijungimo_vardas FROM VARTOTOJAS WHERE prisijungimo_vardas='" + username_tb.Text + "'";
-        string checkuser = "SELECT prisijungimo_vardas FROM VARTOTOJAS WHERE prisijungimo_vardas='" + username_tb.Text + "'";
-        //sql komanda slaptazodziui tikrinti
-        string checkpass = "SELECT slaptazodis FROM VARTOTOJAS WHERE slaptazodis='" + password_tb.Text + "'";
+        //admin, coach, official
+        string[] AccTypes = new string[] { "A", "C", "O" };
+        string command = "SELECT prisijungimo_vardas FROM VARTOTOJAS WHERE role='";
 
-        using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["VartotojaiConnectionString"].ConnectionString))
+        using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString))
         {
-            //grazinamai reiksmei is duomenu bazes saugoti, jei neranda grazins null
-            object pass_response = new object();
-            object username_response = new object();
-
             try
             {
                 conn.Open();
-                
-                //iesko prisijungimo vardo iraso
-                using (SqlCommand command_user = new SqlCommand(checkuser, conn))
+
+                //patikrina kokia vartotojo role ir grazina jei randa
+                foreach (string type in AccTypes)
                 {
-                    username_response = command_user.ExecuteScalar();
-                }
-                //iesko slaptazodzio iraso
-                using (SqlCommand command_pass = new SqlCommand(checkpass, conn))
-                {
-                    pass_response = command_pass.ExecuteScalar();
+                    String comm = command + type + "'";
+                    SqlCommand command_user = new SqlCommand(comm, conn);
+
+                    if (command_user.ExecuteScalar() != null)
+                    {
+                        return type;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
+        }
 
-            //jei ne null, galima pasiversti i string ir palyginti su ivestais duomenimis i textfield'a
-            if( pass_response != null && username_response != null)
+        return null;
+    }
+
+    private Boolean checkLogin()
+    {
+        Boolean isCorrect = false;
+        string response = "";
+        string query = "SELECT COUNT(*) FROM VARTOTOJAS WHERE prisijungimo_vardas='" + username_tb.Text + "' and slaptazodis='" + password_tb.Text + "'";
+        try
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ToString());
+            con.Open();
+
+            SqlCommand comm = new SqlCommand(query, con);
+            if(comm.ExecuteScalar().ToString().Equals("1"))
             {
-                //panaikina whitespace, nes DB grazina su
-                string passString = pass_response.ToString().Replace(" ", "");
-                string userString = pass_response.ToString().Replace(" ", "");
-
-                if (passString.Equals(password_tb.Text) && userString.Equals(username_tb.Text))
-                {
-                    isCorrect = true;
-                }
+                isCorrect = true;
             }
+            con.Close();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex.ToString());
         }
         return isCorrect;
     }
