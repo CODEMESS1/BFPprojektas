@@ -71,8 +71,10 @@
 </head>
 <body style="position: absolute; overflow: hidden; height:100%; width:100%;">
     <form id="form1" runat="server" class="auto-style19">
+        <script src="RememberMe.js" type="text/javascript"></script>
                 <div class="auto-style18">
                 <table style="border:0"; class="auto-style14"; draggable="false">
+
                     <tr>
                         <td class="auto-style7">
                             <table class="auto-style10" border="0">
@@ -81,7 +83,7 @@
                                         <asp:Label ID="UserNameLabel" runat="server">Prisijungimo Vardas</asp:Label>
                                     </td>
                                     <td class="auto-style8">
-                                        <asp:TextBox ID="username_tb" runat="server" Height="16px" Width="145px" OnTextChanged="username_tb_TextChanged1"></asp:TextBox>
+                                        <asp:TextBox ID="username_tb" runat="server" Height="16px" Width="145px"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -94,7 +96,7 @@
                                 <tr>
                                     <td colspan="2" class="auto-style13">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <asp:CheckBox ID="RememberMe" runat="server" Text="Prisiminti mano prisijungimą" OnCheckedChanged="RememberMe_CheckedChanged" />
+                                        <asp:CheckBox ID="RememberMe" runat="server" Text="Prisiminti mano prisijungimą" />
                                     </td>
                                 </tr>
                                 <tr>

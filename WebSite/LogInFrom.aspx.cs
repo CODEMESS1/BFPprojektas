@@ -8,13 +8,26 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Windows;
 using System.Drawing;
+using System.Web.Security;
+using System.Security.Cryptography;
+using System.Text;
 
 public partial class LogInFrom : System.Web.UI.Page
 {
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //
+        if (!IsPostBack)
+        {
+            if (Request.Cookies["UserName"] != null && Request.Cookies["Password"] != null && 
+                Request.Cookies["RememberMe"] != null)
+            {
+                username_tb.Text = Request.Cookies["UserName"].Value;
+                password_tb.Attributes["value"] = Request.Cookies["Password"].Value;
+                RememberMe.Checked = true;
+            }
+        }
     }
 
     protected void login_btn_Click(object sender, EventArgs e)
@@ -22,7 +35,26 @@ public partial class LogInFrom : System.Web.UI.Page
         //jei true, tai vartotojas rastas DB, toliau parenkamas vartotojo tipas
         if (checkLogin())
         {
-            switch(CheckAccountType())
+            //jei pazymetas prisiminti laukas nustatomas galiojimas ir issaugomi duomenis
+            if (RememberMe.Checked)
+            {
+                Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(30);
+                Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
+                Response.Cookies["RememberMe"].Expires = DateTime.Now.AddDays(30);
+            }
+            else
+            {
+                Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["RememberMe"].Expires = DateTime.Now.AddDays(-1);
+
+            }
+            Response.Cookies["UserName"].Value = username_tb.Text.Trim();
+            Response.Cookies["Password"].Value = password_tb.Text.Trim();
+            Response.Cookies["RememberMe"].Value = RememberMe.Checked.ToString();
+
+            //A - admin, O - official (teisejas), C - coach (treneris)
+            switch (CheckAccountType())
             {
                 case "A":
                     Session["adminSession"] = username_tb.Text;
@@ -58,7 +90,6 @@ public partial class LogInFrom : System.Web.UI.Page
                 SqlCommand command_user = new SqlCommand(command, conn);
 
                 string response = command_user.ExecuteScalar().ToString();
-
                 return response.Replace(" ", "");
             }
             catch (Exception ex)
@@ -69,18 +100,24 @@ public partial class LogInFrom : System.Web.UI.Page
 
         return null;
     }
-
+    //tikrina ar pateikti duomenys egzistuoja duomenu bazeje, grazina true, jei egzistuoja
     private Boolean checkLogin()
     {
+
         Boolean isCorrect = false;
         string response = "";
-        string query = "SELECT COUNT(*) FROM VARTOTOJAS WHERE prisijungimo_vardas='" + username_tb.Text + "' and slaptazodis='" + password_tb.Text + "'";
+        byte[] hashedPass = sha256(password_tb.Text);
+
+        string query = "SELECT COUNT(*) FROM VARTOTOJAS WHERE prisijungimo_vardas='" + username_tb.Text + "' and slaptazodis='" + Convert.ToBase64String(hashedPass) + "'";
         try
         {
+            //db connection'as
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ToString());
             con.Open();
 
+            //sql query parenkanti reiksmes is lenteles
             SqlCommand comm = new SqlCommand(query, con);
+            //jei randa vartotojo duomenis grazina 1
             if(comm.ExecuteScalar().ToString().Equals("1"))
             {
                 isCorrect = true;
@@ -94,13 +131,12 @@ public partial class LogInFrom : System.Web.UI.Page
         return isCorrect;
     }
 
-    protected void username_tb_TextChanged1(object sender, EventArgs e)
+    private byte[] sha256(string value)
     {
-
-    }
-
-    protected void RememberMe_CheckedChanged(object sender, EventArgs e)
-    {
-
+        SHA256 sha = SHA256Managed.Create();
+        byte[] hashValue;
+        UTF8Encoding objUtf8 = new UTF8Encoding();
+        hashValue = sha.ComputeHash(objUtf8.GetBytes(value));
+        return hashValue;
     }
 }
