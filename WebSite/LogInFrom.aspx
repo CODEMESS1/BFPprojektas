@@ -4,6 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="icon" 
+     type="image/png" 
+     href="../Images/pagelogo.png"/>
     <title></title>
     <style type="text/css">
         #form1 {
@@ -14,12 +17,7 @@
             background-repeat: no-repeat, repeat, repeat;
             
         }
-        /*.auto-style7 {
-            width: 364px;
-            height: 21px;
-            background-image: url("https://image.ibb.co/jnXRPc/pattern.jpg");
-            background-color: #534A4A;
-        }*/
+
         .auto-style8 {
             width: 103px;
             height: 47px;
@@ -37,7 +35,6 @@
             width: 364px;
             margin-top:50%;
             background-image: url("../Images/darken70.png");
-            /*background-color: #FFFFFF;*/
         }
         .auto-style11 {
             text-align: center;
@@ -91,9 +88,7 @@
 
         </style>
 </head>
-<link rel="icon" 
-     type="image/png" 
-     href="https://image.ibb.co/fFhGsx/pagelogo.png">
+
 <body style="position: absolute; overflow: hidden; height:100%; width:100%;">
     <form id="form1" runat="server" class="auto-style19">
         <script src="RememberMe.js" type="text/javascript"></script>
