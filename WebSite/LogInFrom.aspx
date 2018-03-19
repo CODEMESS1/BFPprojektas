@@ -9,13 +9,17 @@
         #form1 {
             width: 100%;
             height: 2000px;
-            background-color: #534A4A;
+            background-image: url(../Images/logo.png), url("../Images/darken-40.png"), url("../Images/pattern.jpg");
+            background-position: left top, left top, left top;
+            background-repeat: no-repeat, repeat, repeat;
+            
         }
-        .auto-style7 {
+        /*.auto-style7 {
             width: 364px;
             height: 21px;
+            background-image: url("https://image.ibb.co/jnXRPc/pattern.jpg");
             background-color: #534A4A;
-        }
+        }*/
         .auto-style8 {
             width: 103px;
             height: 47px;
@@ -27,10 +31,13 @@
         }
         .auto-style10 {
             align-self:center;
-            height: 109px;
+            font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+            color: white;
+            height: 200px;
             width: 364px;
             margin-top:50%;
-            background-color: #FFFFFF;
+            background-image: url("../Images/darken70.png");
+            /*background-color: #FFFFFF;*/
         }
         .auto-style11 {
             text-align: center;
@@ -51,7 +58,7 @@
             margin:0px auto;
         }
         .auto-style15 {
-            text-align: center;
+            text-align: center;     
         }
         .auto-style16 {
             text-align: center;
@@ -67,8 +74,26 @@
             width: 928px;
             height: 494px;
         }
+
+        .button {
+            background-color: #56c7e9;
+            font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+            border: none;
+            color: white;
+            padding: 3px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
         </style>
 </head>
+<link rel="icon" 
+     type="image/png" 
+     href="https://image.ibb.co/fFhGsx/pagelogo.png">
 <body style="position: absolute; overflow: hidden; height:100%; width:100%;">
     <form id="form1" runat="server" class="auto-style19">
         <script src="RememberMe.js" type="text/javascript"></script>
@@ -80,7 +105,7 @@
                             <table class="auto-style10" border="0">
                                 <tr>
                                     <td class="auto-style9">
-                                        <asp:Label ID="UserNameLabel" runat="server">Prisijungimo Vardas</asp:Label>
+                                        <asp:Label ID="UserNameLabel" runat="server">Prisijungimo vardas:</asp:Label>
                                     </td>
                                     <td class="auto-style8">
                                         <asp:TextBox ID="username_tb" runat="server" Height="16px" Width="145px"></asp:TextBox>
@@ -88,7 +113,7 @@
                                 </tr>
                                 <tr>
                                     <td class="auto-style11">
-                                        Slaptažodis</td>
+                                        Slaptažodis:</td>
                                     <td class="auto-style12">
                                         <asp:TextBox ID="password_tb" runat="server" TextMode="Password" Width="145px" Height="16px"></asp:TextBox>
                                     </td>
@@ -108,8 +133,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" class="auto-style15">
-                                        <asp:Button ID="login_btn" runat="server" CommandName="Login" OnClick="login_btn_Click" Text="Prisijungti" />
+                                    <td colspan="2" class= "auto-style15">
+                                        <asp:Button ID="login_btn" runat="server" CommandName="Login" OnClick="login_btn_Click" Text="Prisijungti" CssClass="button" />
                                     </td>
                                 </tr>
                             </table>
