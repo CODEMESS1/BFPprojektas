@@ -47,11 +47,6 @@
             width: 103px;
             height: 45px;
         }
-        .auto-style13 {
-            height: 27px;
-            text-align: left;
-            margin-left: 80px;
-        }
         .auto-style14 {
             margin-top:0px auto;
             margin:0px auto;
@@ -114,12 +109,6 @@
                                         Slaptažodis:</td>
                                     <td class="auto-style12">
                                         <asp:TextBox ID="password_tb" runat="server" TextMode="Password" Width="145px" Height="16px"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="auto-style13">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <asp:CheckBox ID="RememberMe" runat="server" Text="Prisiminti mano prisijungimą" />
                                     </td>
                                 </tr>
                                 <tr>
