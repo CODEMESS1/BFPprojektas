@@ -13,7 +13,7 @@
             width: 100%;
             height: 100%;
             background-image: url(../Images/logo.png), url("../Images/darken-40.png"), url("../Images/pattern.jpg");
-            background-position: bottom right, left top, left top;
+            background-position: right 88%, left top, left top;
             background-repeat: no-repeat, repeat, repeat;
             
         }
@@ -84,6 +84,18 @@
             cursor: pointer;
         }
 
+        .footer {
+            position: fixed;
+            font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+            left: 0;
+            bottom: 0;
+            height: 6%;
+            width: 100%;
+            background-image: url("../Images/darken-40.png");
+            color: white;
+            text-align: center;
+        }
+
         </style>
 </head>
 
@@ -131,5 +143,8 @@
                 </table>
            </div>
     </form>
+    <div class="footer">
+  <p>2018 - CodeMess</p>
+</div>
 </body>
 </html>
