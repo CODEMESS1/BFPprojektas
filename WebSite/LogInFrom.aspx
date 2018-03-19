@@ -11,12 +11,14 @@
     <style type="text/css">
         #form1 {
             width: 100%;
-            height: 2000px;
+            height: 100%;
             background-image: url(../Images/logo.png), url("../Images/darken-40.png"), url("../Images/pattern.jpg");
-            background-position: left top, left top, left top;
+            background-position: bottom right, left top, left top;
             background-repeat: no-repeat, repeat, repeat;
             
         }
+
+
 
         .auto-style8 {
             width: 103px;
@@ -65,6 +67,7 @@
             text-align: left;
             height: 3px;
             background-color: #000000;
+            margin-bottom: 0px;
         }
         .auto-style19 {
             background-color: #FFFFFF;
@@ -89,7 +92,7 @@
         </style>
 </head>
 
-<body style="position: absolute; overflow: hidden; height:100%; width:100%;">
+<body style="position: absolute; overflow: hidden; height:101%; width:100%; top: -11px; left: -8px;">
     <form id="form1" runat="server" class="auto-style19">
         <script src="RememberMe.js" type="text/javascript"></script>
                 <div class="auto-style18">
