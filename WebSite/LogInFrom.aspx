@@ -4,22 +4,22 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="icon" 
+     type="image/png" 
+     href="../Images/pagelogo.png"/>
     <title></title>
     <style type="text/css">
         #form1 {
             width: 100%;
-            height: 2000px;
+            height: 100%;
             background-image: url(../Images/logo.png), url("../Images/darken-40.png"), url("../Images/pattern.jpg");
-            background-position: left top, left top, left top;
+            background-position: right 88%, left top, left top;
             background-repeat: no-repeat, repeat, repeat;
             
         }
-        /*.auto-style7 {
-            width: 364px;
-            height: 21px;
-            background-image: url("https://image.ibb.co/jnXRPc/pattern.jpg");
-            background-color: #534A4A;
-        }*/
+
+
+
         .auto-style8 {
             width: 103px;
             height: 47px;
@@ -37,7 +37,6 @@
             width: 364px;
             margin-top:50%;
             background-image: url("../Images/darken70.png");
-            /*background-color: #FFFFFF;*/
         }
         .auto-style11 {
             text-align: center;
@@ -47,11 +46,6 @@
         .auto-style12 {
             width: 103px;
             height: 45px;
-        }
-        .auto-style13 {
-            height: 27px;
-            text-align: left;
-            margin-left: 80px;
         }
         .auto-style14 {
             margin-top:0px auto;
@@ -68,6 +62,7 @@
             text-align: left;
             height: 3px;
             background-color: #000000;
+            margin-bottom: 0px;
         }
         .auto-style19 {
             background-color: #FFFFFF;
@@ -89,12 +84,22 @@
             cursor: pointer;
         }
 
+        .footer {
+            position: fixed;
+            font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+            left: 0;
+            bottom: 0;
+            height: 6%;
+            width: 100%;
+            background-image: url("../Images/darken-40.png");
+            color: white;
+            text-align: center;
+        }
+
         </style>
 </head>
-<link rel="icon" 
-     type="image/png" 
-     href="https://image.ibb.co/fFhGsx/pagelogo.png">
-<body style="position: absolute; overflow: hidden; height:100%; width:100%;">
+
+<body style="position: absolute; overflow: hidden; height:101%; width:100%; top: -11px; left: -8px;">
     <form id="form1" runat="server" class="auto-style19">
         <script src="RememberMe.js" type="text/javascript"></script>
                 <div class="auto-style18">
@@ -119,12 +124,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" class="auto-style13">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <asp:CheckBox ID="RememberMe" runat="server" Text="Prisiminti mano prisijungimą" />
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td colspan="2" style="color: Red;" class="auto-style16">
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="password_tb"></asp:RequiredFieldValidator>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="username_tb"></asp:RequiredFieldValidator>
@@ -143,5 +142,8 @@
                 </table>
            </div>
     </form>
+    <div class="footer">
+  <p>2018 - CodeMess</p>
+</div>
 </body>
 </html>
