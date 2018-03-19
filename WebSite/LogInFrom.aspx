@@ -122,6 +122,7 @@
                                 <tr>
                                     <td colspan="2" class= "auto-style15">
                                         <asp:Button ID="login_btn" runat="server" CommandName="Login" OnClick="login_btn_Click" Text="Prisijungti" CssClass="button" />
+                                        <asp:Button ID="forgot_btn" runat="server" CommandName="Forgot" OnClick="forgot_btn_Click" Text="Pamiršau slaptažodį" CssClass="button" CausesValidation="false" />
                                     </td>
                                 </tr>
                             </table>

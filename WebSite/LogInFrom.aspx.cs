@@ -75,9 +75,7 @@ public partial class LogInFrom : System.Web.UI.Page
     //tikrina ar pateikti duomenys egzistuoja duomenu bazeje, grazina true, jei egzistuoja
     private Boolean checkLogin()
     {
-
         Boolean isCorrect = false;
-        string response = "";
         byte[] hashedPass = sha256(password_tb.Text);
 
         string query = "SELECT COUNT(*) FROM VARTOTOJAS WHERE prisijungimo_vardas='" + username_tb.Text + "' and slaptazodis='" + Convert.ToBase64String(hashedPass) + "'";
@@ -110,5 +108,10 @@ public partial class LogInFrom : System.Web.UI.Page
         UTF8Encoding objUtf8 = new UTF8Encoding();
         hashValue = sha.ComputeHash(objUtf8.GetBytes(value));
         return hashValue;
+    }
+
+    protected void forgot_btn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("ResetPassword/ForgotPassword.aspx");
     }
 }
