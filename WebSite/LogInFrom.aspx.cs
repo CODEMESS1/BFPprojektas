@@ -17,17 +17,7 @@ public partial class LogInFrom : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //
-        if (!IsPostBack)
-        {
-            if (Request.Cookies["UserName"] != null && Request.Cookies["Password"] != null && 
-                Request.Cookies["RememberMe"] != null)
-            {
-                username_tb.Text = Request.Cookies["UserName"].Value;
-                password_tb.Attributes["value"] = Request.Cookies["Password"].Value;
-                RememberMe.Checked = true;
-            }
-        }
+        
     }
 
     protected void login_btn_Click(object sender, EventArgs e)
@@ -35,25 +25,7 @@ public partial class LogInFrom : System.Web.UI.Page
         //jei true, tai vartotojas rastas DB, toliau parenkamas vartotojo tipas
         if (checkLogin())
         {
-            //jei pazymetas prisiminti laukas nustatomas galiojimas ir issaugomi duomenis
-            if (RememberMe.Checked)
-            {
-                Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(30);
-                Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
-                Response.Cookies["RememberMe"].Expires = DateTime.Now.AddDays(30);
-            }
-            else
-            {
-                Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies["RememberMe"].Expires = DateTime.Now.AddDays(-1);
-
-            }
-            Response.Cookies["UserName"].Value = username_tb.Text.Trim();
-            Response.Cookies["Password"].Value = password_tb.Text.Trim();
-            Response.Cookies["RememberMe"].Value = RememberMe.Checked.ToString();
-
-            //A - admin, O - official (teisejas), C - coach (treneris)
+          //A - admin, O - official (teisejas), C - coach (treneris)
             switch (CheckAccountType())
             {
                 case "A":
@@ -72,7 +44,7 @@ public partial class LogInFrom : System.Web.UI.Page
         }
         else
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Prisijungimas nepavyko" + "');", true);
+            RequiredFieldValidator1.IsValid = false;
         }
     }
 
