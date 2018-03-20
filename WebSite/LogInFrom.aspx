@@ -96,6 +96,10 @@
             text-align: center;
         }
 
+        .auto-style20 {
+            width: 364px;
+        }
+
         </style>
 </head>
 
@@ -106,7 +110,7 @@
                 <table style="border:0"; class="auto-style14"; draggable="false">
 
                     <tr>
-                        <td class="auto-style7">
+                        <td class="auto-style20">
                             <table class="auto-style10" border="0">
                                 <tr>
                                     <td class="auto-style9">
