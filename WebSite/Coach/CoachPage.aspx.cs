@@ -20,4 +20,9 @@ public partial class CoachPage : System.Web.UI.Page
         Session.Remove("coachSession");
         Response.Redirect("/LogInFrom.aspx");
     }
+
+    protected void changepass_btn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/ResetPassword/ChangePassword.aspx");
+    }
 }

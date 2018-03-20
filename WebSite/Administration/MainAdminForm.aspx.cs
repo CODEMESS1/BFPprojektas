@@ -25,4 +25,9 @@ public partial class Administration_MainAdminForm : System.Web.UI.Page
     {
         Response.Redirect("/Administration/AdminPuslapis.aspx");
     }
+
+    protected void changepass_btn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/ResetPassword/ChangePassword.aspx");
+    }
 }

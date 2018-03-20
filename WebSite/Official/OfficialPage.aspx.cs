@@ -11,13 +11,18 @@ public partial class OfficialPage : System.Web.UI.Page
     {
         if (Session["officialSession"] == null)
         {
-            Response.Redirect("LogInFrom.aspx");
+            Response.Redirect("/LogInFrom.aspx");
         }
     }
 
     protected void logout_btn_Click(object sender, EventArgs e)
     {
         Session.Remove("officialSession");
-        Response.Redirect("LogInFrom.aspx");
+        Response.Redirect("/LogInFrom.aspx");
+    }
+
+    protected void changepass_btn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/ResetPassword/ChangePassword.aspx");
     }
 }

@@ -14,6 +14,9 @@
         <br />
         <br />
         <asp:Button ID="editusers_btn" runat="server" OnClick="editusers_btn_Click" Text="Dalyvių kūrimas, redagavimas" />
+        <br />
+        <br />
+        <asp:Button ID="changepass_btn" runat="server" OnClick="changepass_btn_Click" Text="Pakeisti slaptažodį" />
     </form>
 </body>
 </html>

@@ -9,7 +9,10 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            Trenerio puslapis</div>
+            Trenerio puslapis<br />
+            <br />
+            <asp:Button ID="changepass_btn" runat="server" OnClick="changepass_btn_Click" Text="Pakeisti slaptažodį" />
+        </div>
         <p>
             <asp:Button ID="logout_btn" runat="server" OnClick="logout_btn_Click" Text="Atsijungti" />
         </p>

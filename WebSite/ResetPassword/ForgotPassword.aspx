@@ -97,12 +97,14 @@
             </td>    
         </tr>
         <tr>
-            <td>              
+            <td>
+                <asp:Button ID="btnBackToStart" runat="server" 
+                Width="150px" Text="Grįžti į pradžią" onclick="btnBackToStart_Click" CssClass="button" />
             </td>    
             <td>
                 <asp:Button ID="btnResetPassword" runat="server" 
                 Width="150px" Text="Atstatyti" onclick="btnResetPassword_Click" CssClass="button" />
-            </td>    
+            </td>  
         </tr>
         <tr>
             <td colspan="2" class="textbox1">

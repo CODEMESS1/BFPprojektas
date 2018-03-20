@@ -17,7 +17,11 @@ public partial class ResetPassword_ForgotPassword : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //jei yra prisijungta, slaptazodzio atstatymo puslapis nepasiekiamas
+        if (Session["adminSession"] != null || Session["officialSession"] != null || Session["coachSession"] != null)
+        {
+            Response.Redirect("/CantReachForm.aspx");
+        }
     }
 
     protected void btnResetPassword_Click(object sender, EventArgs e)
@@ -120,5 +124,10 @@ public partial class ResetPassword_ForgotPassword : System.Web.UI.Page
             }
         }
         return true;
+    }
+
+    protected void btnBackToStart_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/LogInFrom.aspx");
     }
 }
