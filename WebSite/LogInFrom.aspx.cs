@@ -30,7 +30,7 @@ public partial class LogInFrom : System.Web.UI.Page
             {
                 case "A":
                     Session["adminSession"] = username_tb.Text;
-                    Response.Redirect("/Administration/AdminPuslapis.aspx");
+                    Response.Redirect("/Administration/MainAdminForm.aspx");
                     break;
                 case "O":
                     Session["officialSession"] = username_tb.Text;
