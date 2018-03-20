@@ -119,11 +119,10 @@ public partial class _Default : System.Web.UI.Page
             {
                 cmd = new SqlCommand("INSERT dbo.VARTOTOJAS (vardas, pavarde, gimimo_metai, elektroninis_pastas,prisijungimo_vardas, slaptazodis, valstybe, miestas, role, ep_patvirtinimas) VALUES ('"+ txtName.Text +"', '"+ txtSurname.Text + "', '"+ txtBirth.Text + "', '"+ txtEmail.Text + "', '"+ txtLogin.Text + "', '" + pass + "', '" + txtCountry.Text+ "', '" +txtCity.Text + "', '" + txtRole.Text + "', 'true')", con);
             }
-            //GridView1.DataSource = this.GetData(cmd);
-            //GridView1.DataBind();
-
             cmd.ExecuteScalar();
         }
+        
+        GridView1.DataBind();
     }
 
     private byte[] sha256(string value)
