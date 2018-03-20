@@ -12,9 +12,9 @@
         #form1 {
             width: 100%;
             height: 100%;
-            background-image: url(../Images/logo.png), url("../Images/darken-40.png"), url("../Images/pattern.jpg");
-            background-position: right 88%, left top, left top;
-            background-repeat: no-repeat, repeat, repeat;
+            background-image: url(../Images/program-logo.png), url(../Images/logo.png), url("../Images/darken-40.png"), url("../Images/pattern.jpg");
+            background-position: top center ,right 88%, left top, left top;
+            background-repeat: no-repeat, no-repeat, repeat, repeat;
             
         }
 
