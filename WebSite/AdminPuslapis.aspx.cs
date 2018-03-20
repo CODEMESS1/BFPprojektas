@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -92,28 +94,46 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Save(object sender, EventArgs e)
     {
-        using (SqlCommand cmd = new SqlCommand())
+        string CS = ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
+
+        string procedure = "";
+        if (txtUserID.Text.Equals(string.Empty))
         {
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "AddUpdatePerson";
-            cmd.Parameters.AddWithValue("@UserID", txtUserID.Text);
-            cmd.Parameters.AddWithValue("@Name", txtName.Text);
-            cmd.Parameters.AddWithValue("@Surname", txtSurname.Text);
-            cmd.Parameters.AddWithValue("@Date_Of_Birth", txtBirth.Text);
-            cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-            cmd.Parameters.AddWithValue("@LoginName", txtLogin.Text);
-            cmd.Parameters.AddWithValue("@Password", txtPass.Text);
-            cmd.Parameters.AddWithValue("@Country", txtCountry.Text);
-            cmd.Parameters.AddWithValue("@City", txtCity.Text);
-            cmd.Parameters.AddWithValue("@Role", txtRole.Text);
-            GridView1.DataSource = this.GetData(cmd);
-            GridView1.DataBind();
+            procedure = "AddData";
+        }
+        else
+        {
+            procedure = "UpdateData";
+        }
+
+        using (SqlConnection con = new SqlConnection(CS))
+        {
+            SqlCommand cmd = new SqlCommand();
+            con.Open();
+            String pass = Convert.ToBase64String(sha256(txtPass.Text));
+            if (procedure.Equals("UpdateData"))
+            {
+                cmd = new SqlCommand("UPDATE dbo.VARTOTOJAS SET vardas='" + txtName.Text + "', pavarde='" + txtSurname.Text + "', gimimo_metai='"+ txtBirth.Text +"', elektroninis_pastas='"+ txtEmail.Text +"', prisijungimo_vardas='"+ txtLogin.Text +"', slaptazodis='"+ pass +"', valstybe='"+txtCountry.Text+"', miestas='" + txtCity.Text + "', role='" + txtRole.Text + "' WHERE vartotojo_id='"+ txtUserID.Text +"'", con);
+            }
+            else
+            {
+                cmd = new SqlCommand("INSERT dbo.VARTOTOJAS (vardas, pavarde, gimimo_metai, elektroninis_pastas,prisijungimo_vardas, slaptazodis, valstybe, miestas, role, ep_patvirtinimas) VALUES ('"+ txtName.Text +"', '"+ txtSurname.Text + "', '"+ txtBirth.Text + "', '"+ txtEmail.Text + "', '"+ txtLogin.Text + "', '" + pass + "', '" + txtCountry.Text+ "', '" +txtCity.Text + "', '" + txtRole.Text + "', 'true')", con);
+            }
+            //GridView1.DataSource = this.GetData(cmd);
+            //GridView1.DataBind();
+
+            cmd.ExecuteScalar();
         }
     }
 
-
-
-
+    private byte[] sha256(string value)
+    {
+        SHA256 sha = SHA256Managed.Create();
+        byte[] hashValue;
+        UTF8Encoding objUtf8 = new UTF8Encoding();
+        hashValue = sha.ComputeHash(objUtf8.GetBytes(value));
+        return hashValue;
+    }
 
     protected void SqlDataSource_vartotojai_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
     {

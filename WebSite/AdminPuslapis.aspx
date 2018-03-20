@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminPuslapis.aspx.cs" Inherits="_Default" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <!DOCTYPE html>
@@ -46,10 +45,10 @@ HeaderStyle-BackColor = "green" AllowPaging ="True" DataSourceID="SqlDataSource_
     </cc1:ModalPopupExtender>
 <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick = "Add" />
  
-<asp:Panel ID="pnlAddEdit" runat="server" CssClass="modalPopup" style = "display:none">
+<asp:Panel ID="pnlAddEdit" runat="server" CssClass="modalPopup" style="enable-background">
 <asp:Label Font-Bold = "true" ID = "Label4" runat = "server" Text = "Customer Details" ></asp:Label>
 <br />
-<table align = "center">
+<table align = "center" border="1" style="background:initial; background-color:aliceblue">
 <tr>
 <td>
 <asp:Label ID = "Label1" runat = "server" Text = "VartotojoID" ></asp:Label>
