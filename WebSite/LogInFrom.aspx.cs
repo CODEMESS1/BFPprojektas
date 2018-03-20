@@ -30,15 +30,15 @@ public partial class LogInFrom : System.Web.UI.Page
             {
                 case "A":
                     Session["adminSession"] = username_tb.Text;
-                    Response.Redirect("AdminPuslapis.aspx");
+                    Response.Redirect("/Administration/AdminPuslapis.aspx");
                     break;
                 case "O":
                     Session["officialSession"] = username_tb.Text;
-                    Response.Redirect("OfficialPage.aspx");
+                    Response.Redirect("/Official/OfficialPage.aspx");
                     break;
                 case "C":
                     Session["coachSession"] = username_tb.Text;
-                    Response.Redirect("CoachPage.aspx");
+                    Response.Redirect("/Coach/CoachPage.aspx");
                     break;
             }
         }

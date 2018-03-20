@@ -19,7 +19,7 @@ public partial class _Default : System.Web.UI.Page
     {
         if (Session["adminSession"] == null)
         {
-            Response.Redirect("LogInFrom.aspx");
+            Response.Redirect("/LogInFrom.aspx");
         }
         if (!IsPostBack)
         {
@@ -27,12 +27,15 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
+
+    //atsijungimas nuo paskyros
     protected void logout_btn_Click(object sender, EventArgs e)
     {
         Session.Remove("adminSession");
-        Response.Redirect("LogInFrom.aspx");
+        Response.Redirect("/LogInFrom.aspx");
     }
 
+    //atnaujina lentele vartotoju naujais duomenimis
     private void BindData()
     {
         string strQuery = "select Vartotojo_id,Vardas,Pavarde,Gimimo_metai,Elektroninis_pastas,Prisijungimo_vardas,Slaptazodis,Valstybe,Miestas,Role" +
@@ -43,6 +46,7 @@ public partial class _Default : System.Web.UI.Page
         GridView1.DataBind();
     }
 
+    //paima is duombazes duomenis
     private DataTable GetData(SqlCommand cmd)
     {
         DataTable dt = new DataTable();
@@ -58,6 +62,7 @@ public partial class _Default : System.Web.UI.Page
             }
         }
     }
+
     protected void Edit(object sender, EventArgs e)
     {
         using (GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent)
@@ -97,6 +102,7 @@ public partial class _Default : System.Web.UI.Page
         string CS = ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
 
         string procedure = "";
+        //jei txtuserid null, reiskia pridedamas user, nes id neleidzia ivesti pridedant
         if (txtUserID.Text.Equals(string.Empty))
         {
             procedure = "AddData";
@@ -113,18 +119,22 @@ public partial class _Default : System.Web.UI.Page
             String pass = Convert.ToBase64String(sha256(txtPass.Text));
             if (procedure.Equals("UpdateData"))
             {
-                cmd = new SqlCommand("UPDATE dbo.VARTOTOJAS SET vardas='" + txtName.Text + "', pavarde='" + txtSurname.Text + "', gimimo_metai='"+ txtBirth.Text +"', elektroninis_pastas='"+ txtEmail.Text +"', prisijungimo_vardas='"+ txtLogin.Text +"', slaptazodis='"+ pass +"', valstybe='"+txtCountry.Text+"', miestas='" + txtCity.Text + "', role='" + txtRole.Text + "' WHERE vartotojo_id='"+ txtUserID.Text +"'", con);
+                //atnaujinimo komanda
+                cmd = new SqlCommand("UPDATE dbo.VARTOTOJAS SET vardas='" + txtName.Text + "', pavarde='" + txtSurname.Text + "', gimimo_metai='" + txtBirth.Text + "', elektroninis_pastas='" + txtEmail.Text + "', prisijungimo_vardas='" + txtLogin.Text + "', slaptazodis='" + pass + "', valstybe='" + txtCountry.Text + "', miestas='" + txtCity.Text + "', role='" + txtRole.Text + "' WHERE vartotojo_id='" + txtUserID.Text + "'", con);
             }
             else
             {
-                cmd = new SqlCommand("INSERT dbo.VARTOTOJAS (vardas, pavarde, gimimo_metai, elektroninis_pastas,prisijungimo_vardas, slaptazodis, valstybe, miestas, role, ep_patvirtinimas) VALUES ('"+ txtName.Text +"', '"+ txtSurname.Text + "', '"+ txtBirth.Text + "', '"+ txtEmail.Text + "', '"+ txtLogin.Text + "', '" + pass + "', '" + txtCountry.Text+ "', '" +txtCity.Text + "', '" + txtRole.Text + "', 'true')", con);
+                //insetinimas 
+                cmd = new SqlCommand("INSERT dbo.VARTOTOJAS (vardas, pavarde, gimimo_metai, elektroninis_pastas,prisijungimo_vardas, slaptazodis, valstybe, miestas, role, ep_patvirtinimas) VALUES ('" + txtName.Text + "', '" + txtSurname.Text + "', '" + txtBirth.Text + "', '" + txtEmail.Text + "', '" + txtLogin.Text + "', '" + pass + "', '" + txtCountry.Text + "', '" + txtCity.Text + "', '" + txtRole.Text + "', 'true')", con);
             }
             cmd.ExecuteScalar();
+            //lenteles atnaujinimas
             GridView1.DataSource = GetData(cmd);
             GridView1.DataBind();
         }
     }
 
+    //string reiksmes hesavimas
     private byte[] sha256(string value)
     {
         SHA256 sha = SHA256Managed.Create();
@@ -134,12 +144,12 @@ public partial class _Default : System.Web.UI.Page
         return hashValue;
     }
 
-    protected void SqlDataSource_vartotojai_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+    protected void SqlDataSource_vartotojai_Selecting(Object sender, SqlDataSourceSelectingEventArgs e)
     {
 
     }
 
-    protected void OnPaging(object sender, EventArgs e)
+    protected void OnPaging(Object sender, EventArgs e)
     {
 
     }
