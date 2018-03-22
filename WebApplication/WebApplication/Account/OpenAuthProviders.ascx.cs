@@ -37,7 +37,7 @@ namespace WebApplication.Account
 
         public IEnumerable<string> GetProviderNames()
         {
-            return Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes().Select(t => t.AuthenticationType);
+            return null;//Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes().Select(t => t.AuthenticationType);
         }
     }
 }

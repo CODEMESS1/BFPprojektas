@@ -7,15 +7,52 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using WebApplication.Models;
+using System.Configuration;
+using System.Net;
+using System.Diagnostics;
+using SendGrid;
+using System.Net.Mail;
 
 namespace WebApplication
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await configSendGridasync(message);
+        }
+
+        // Use NuGet to install SendGrid (Basic C# client lib) 
+        private async Task configSendGridasync(IdentityMessage message)
+        {
+            MailMessage myMessage = new MailMessage();
+            myMessage.To.Add(message.Destination);
+            myMessage.From = new System.Net.Mail.MailAddress(
+                                "codemess9@gmail.com", "BFP registracija");
+            myMessage.IsBodyHtml = true;
+            myMessage.Subject = message.Subject;
+            myMessage.Body = message.Body;
+
+            var credentials = new NetworkCredential(
+                       ConfigurationManager.AppSettings["emailServiceUserName"],
+                       ConfigurationManager.AppSettings["emailServicePassword"]
+                       );
+
+            // Create a Web transport for sending email.
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.Credentials = credentials;
+            smtpClient.EnableSsl = true;
+
+            // Send the email.
+            if (smtpClient != null)
+            {
+                await smtpClient.SendMailAsync(myMessage);
+            }
+            else
+            {
+                Trace.TraceError("Failed to create Web transport.");
+                await Task.FromResult(0);
+            }
         }
     }
 
