@@ -249,6 +249,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\theme.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -257,7 +258,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Admin\Web.config" />
+    <Content Include="Image\darken-40.png" />
+    <Content Include="Image\darken70.png" />
     <Content Include="Image\navigation-512.png" />
+    <Content Include="Image\pattern.jpg" />
+    <Content Include="Image\program-logo.png" />
     <Content Include="Official\Web.config" />
     <Content Include="Coach\Web.config" />
     <Content Include="Official\OfficialPage.aspx" />

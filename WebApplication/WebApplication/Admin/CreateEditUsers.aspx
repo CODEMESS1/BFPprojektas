@@ -1,19 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateEditUsers.aspx.cs" Inherits="WebApplication.Admin.CreateEditUsers" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CreateEditUsers.aspx.cs" Inherits="WebApplication.Admin.CreateEditUsers" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
-<!DOCTYPE html>
+    <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <link href="/Content/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> 
-    <title></title>
-</head>
-<body style="height: 574px" class="bootstrap.css">
-    <form id="form1" runat="server">
+        <style>
+
+        </style>
+
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Id], [Email], [Name], [Surname], [PhoneNumber], [UserName], [Role] FROM [AspNetUsers]"></asp:SqlDataSource>
         <br />
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover"  DataKeyNames="Id" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover text-primary"  DataKeyNames="Id" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
                 <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
@@ -28,7 +24,7 @@
         <br />
         <div>
 
-            <asp:Button ID="add_btn2" runat="server" class="btn btn-primary" Text="Pridėti" OnClick="add_btn_Click"/>
+            <asp:Button ID="add_btn2" runat="server" class="btn btn-default" Text="Pridėti" OnClick="add_btn_Click"/>
             <asp:LinkButton ID="fake" runat="server"></asp:LinkButton>
 
             <!-- add popup start -->
@@ -38,10 +34,6 @@
                 PopupControlID="PanelAdd"
                 DropShadow="false">
             </cc1:ModalPopupExtender>
-            
-            <asp:ScriptManager ID="ScriptManager" runat="server">
-
-            </asp:ScriptManager>
             
             <asp:Panel ID="PanelAdd" runat="server" CssClass="alert-primary" BorderWidth="5px" style='display: none;'>
                 <h1>Pridėti vartotoją</h1>
@@ -90,10 +82,28 @@
                 TargetControlID="fake"
                 PopupControlID="editPanel"
                 DropShadow="false">
-            </cc1:ModalPopupExtender>>
+            </cc1:ModalPopupExtender>
+            <br />
+            <br />
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
 </div>
             
-            <asp:Panel ID="editPanel" runat="server" style='display: none;'>
+            <asp:Panel ID="editPanel" runat="server" CssClass="alert-primary" style='display: none;'>
                 <h1>Keisti, ištrinti vartotoją</h1>
                 <div>
                     <asp:Label ID="ErrorMessageEdit" runat="server" CssClass="col-md-2 control-label"></asp:Label>
@@ -143,7 +153,7 @@
             </asp:Panel>
 
             <!-- edit popup end-->
-        </div>
-    </form>
-    </body>
-</html>
+        
+
+     
+    </asp:Content>

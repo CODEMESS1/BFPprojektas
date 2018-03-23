@@ -34,6 +34,7 @@ namespace WebApplication.Account
                 manager.SendEmail(user.Id, "Slaptažodžio atstatymas", "Norėdami atstatyti slaptažodį spauskite <a href=\"" + callbackUrl + "\">čia</a>.");
                 loginForm.Visible = false;
                 DisplayEmail.Visible = true;
+                
             }
         }
     }
