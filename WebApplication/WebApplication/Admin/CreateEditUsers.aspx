@@ -3,33 +3,17 @@
 
 <!DOCTYPE html>
 
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> 
     <title></title>
-    <style>
-        .ModalPopupBG
-        {
-            background-color: #666699;
-            filter: alpha(opacity=50);
-            opacity: 0.7;
-        }
-
-        .HellowWorldPopup
-        {
-            min-width:200px;
-            min-height:150px;
-            background:white;
-        }
-    </style>
 </head>
-<body style="height: 574px">
+<body style="height: 574px" class="bootstrap.css">
     <form id="form1" runat="server">
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Id], [Email], [Name], [Surname], [PhoneNumber], [UserName], [Role] FROM [AspNetUsers]"></asp:SqlDataSource>
         <br />
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="Id" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-            <AlternatingRowStyle BackColor="White" />
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover"  DataKeyNames="Id" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
                 <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
@@ -40,19 +24,11 @@
                 <asp:BoundField DataField="Role" HeaderText="Role" SortExpression="Role" />
                 <asp:BoundField DataField="UserName" HeaderText="UserName" SortExpression="UserName" />
             </Columns>
-            <FooterStyle BackColor="#CCCC99" />
-            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-            <RowStyle BackColor="#F7F7DE" />
-            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#FBFBF2" />
-            <SortedAscendingHeaderStyle BackColor="#848384" />
-            <SortedDescendingCellStyle BackColor="#EAEAD3" />
-            <SortedDescendingHeaderStyle BackColor="#575357" />
         </asp:GridView>
         <br />
         <div>
-            <asp:Button ID="add_btn" runat="server" Text="Pridėti" OnClick="add_btn_Click"/>
+
+            <asp:Button ID="add_btn2" runat="server" class="btn btn-primary" Text="Pridėti" OnClick="add_btn_Click"/>
             <asp:LinkButton ID="fake" runat="server"></asp:LinkButton>
 
             <!-- add popup start -->
@@ -67,7 +43,7 @@
 
             </asp:ScriptManager>
             
-            <asp:Panel ID="PanelAdd" runat="server">
+            <asp:Panel ID="PanelAdd" runat="server" CssClass="alert-primary" BorderWidth="5px" style='display: none;'>
                 <h1>Pridėti vartotoją</h1>
                 <div>
                     <asp:Label ID="ErrorMessage" runat="server" CssClass="col-md-2 control-label"></asp:Label>
@@ -106,7 +82,6 @@
                 &nbsp;&nbsp;
                 <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti"/>
             </asp:Panel>
-
             <!-- add popup end-->
 
             <!-- edit popup start-->
@@ -115,9 +90,10 @@
                 TargetControlID="fake"
                 PopupControlID="editPanel"
                 DropShadow="false">
-            </cc1:ModalPopupExtender>
+            </cc1:ModalPopupExtender>>
+</div>
             
-            <asp:Panel ID="editPanel" runat="server">
+            <asp:Panel ID="editPanel" runat="server" style='display: none;'>
                 <h1>Keisti, ištrinti vartotoją</h1>
                 <div>
                     <asp:Label ID="ErrorMessageEdit" runat="server" CssClass="col-md-2 control-label"></asp:Label>
@@ -167,7 +143,6 @@
             </asp:Panel>
 
             <!-- edit popup end-->
-
         </div>
     </form>
     </body>

@@ -6,6 +6,9 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title><%: Page.Title %> - My ASP.NET Application</title>
 
     <asp:PlaceHolder runat="server">
@@ -13,7 +16,11 @@
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <link href="Scripts/bootstrap.js" rel="text/javascript" />
+    <link href="Content/Site.css" rel="text/css" />
+    <link href=”Content/bootstrap.min.css” rel=”stylesheet”>
+    <link rel="stylesheet" href="/Content/bootstrap.cs" />
+    
 </head>
 <body>
     <form runat="server">
@@ -42,6 +49,7 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <img src="Image/navigation-512.png" style="width:25px; height:5%"/>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>

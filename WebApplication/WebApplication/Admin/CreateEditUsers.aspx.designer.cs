@@ -40,13 +40,13 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// add_btn control.
+        /// add_btn2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button add_btn;
+        protected global::System.Web.UI.WebControls.Button add_btn2;
         
         /// <summary>
         /// fake control.

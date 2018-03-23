@@ -257,6 +257,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Admin\Web.config" />
+    <Content Include="Image\navigation-512.png" />
     <Content Include="Official\Web.config" />
     <Content Include="Coach\Web.config" />
     <Content Include="Official\OfficialPage.aspx" />
