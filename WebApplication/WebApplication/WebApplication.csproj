@@ -240,6 +240,7 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Admin\AdminPage.aspx" />
     <Content Include="Admin\CreateEditUsers.aspx" />
+    <Content Include="Coach\AddCompetitors.aspx" />
     <Content Include="Coach\CoachPage.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -477,6 +478,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Coach\AddCompetitors.aspx.cs">
+      <DependentUpon>AddCompetitors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Coach\AddCompetitors.aspx.designer.cs">
+      <DependentUpon>AddCompetitors.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Coach\CoachPage.aspx.cs">
       <DependentUpon>CoachPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -517,9 +525,15 @@
     <Compile Include="Migrations\201803221505283_Surname.Designer.cs">
       <DependentUpon>201803221505283_Surname.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803270805312_CompetitorsMigration.cs" />
+    <Compile Include="Migrations\201803270805312_CompetitorsMigration.Designer.cs">
+      <DependentUpon>201803270805312_CompetitorsMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Competitors.cs" />
+    <Compile Include="Models\ContainerCompetitors.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Official\OfficialPage.aspx.cs">
@@ -585,6 +599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803221505283_Surname.resx">
       <DependentUpon>201803221505283_Surname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803270805312_CompetitorsMigration.resx">
+      <DependentUpon>201803270805312_CompetitorsMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication.Models;
@@ -25,8 +26,7 @@ namespace WebApplication.Admin
         }
 
         private void makeEdit()
-        {
-            string[] roles = { "Admin", "Coach", "Official", "User" };
+        { 
             ApplicationUser user = getUser();
             if (user != null)
             {
@@ -57,9 +57,10 @@ namespace WebApplication.Admin
                             editUser.Surname = surname_tb.Text;
                         }
 
-                        manager.RemoveFromRoles(UserID, roles);
-                        manager.AddToRole(UserID, roleDropList.SelectedItem.Value);
-                        editUser.Role = roleDropList.SelectedItem.Value;
+                        string[] userRoles = manager.GetRoles(UserID).ToArray();
+                        manager.RemoveFromRoles(UserID, userRoles);
+                        manager.AddToRole(UserID, roleDropListEdit.SelectedItem.Value);
+                        editUser.Role = roleDropListEdit.SelectedItem.Value;
                         
                         manager.Update(editUser);
                     }
@@ -98,7 +99,7 @@ namespace WebApplication.Admin
         protected void submit_btn_Click(object sender, EventArgs e)
         {
             popupAdd.Show();
-            if (createUser(roleDropList.SelectedItem.Value))
+            if (createUser(roleDropListAdd.SelectedItem.Value))
             {
                 popupAdd.Hide();
                 GridView1.DataBind();

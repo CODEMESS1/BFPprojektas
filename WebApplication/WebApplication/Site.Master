@@ -61,7 +61,7 @@
             </div>
           </nav>
 
-          <table style="height:100%; width:100%;">
+          <table style="height:100%; width:100%; border:none">
               <tr style="height:100%;width:100%;">
                   <td style="width:17%;">
                       <div class="py-5 h-100 bg-light" style="width:100%; background-image:url(/Image/darken70.png);">
@@ -78,23 +78,42 @@
                                               <a href="#" class="nav-link">Apie</a>
                                             </li>
                                       </AnonymousTemplate>
-                                      <LoggedInTemplate>
-                                          <li class="nav-item">
-                                              <a class="nav-link" href="#">Pradžia</a>
-                                            </li>
-                                            <li class="nav-item">
-                                              <a href="#" class="nav-link">Apie</a>
-                                            </li>
                                           <RoleGroups>
                                               <asp:RoleGroup Roles="Admin">
                                                   <ContentTemplate>
                                                       <li class="nav-item">
+                                                      <a class="nav-link" href="#">Pradžia</a>
+                                                      </li>
+                                                      <li class="nav-item">
+                                                      <a href="#" class="nav-link">Apie</a>
+                                                      </li>
                                                       <a href="/Admin/CreateEditUsers" class="nav-link">Vartotojai</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
+                                              <asp:RoleGroup Roles="Coach">
+                                                  <ContentTemplate>
+                                                      <li class="nav-item">
+                                                      <a class="nav-link" href="#">Pradžia</a>
+                                                      </li>
+                                                      <li class="nav-item">
+                                                      <a href="#" class="nav-link">Apie</a>
+                                                      </li>
+                                                      <a href="/Coach/AddCompetitors" class="nav-link">Dalyviai</a>
+                                                      </li>
+                                                  </ContentTemplate>
+                                              </asp:RoleGroup>
+                                              <asp:RoleGroup Roles="Official">
+                                                  <ContentTemplate>
+                                                      
+                                                  </ContentTemplate>
+                                              </asp:RoleGroup>
+                                              <asp:RoleGroup Roles="User">
+                                                  <ContentTemplate>
+                                                      
+                                                  </ContentTemplate>
+                                              </asp:RoleGroup>
                                           </RoleGroups>
-                                      </LoggedInTemplate>
                                    </asp:LoginView>
                               </ul>
                             </div>

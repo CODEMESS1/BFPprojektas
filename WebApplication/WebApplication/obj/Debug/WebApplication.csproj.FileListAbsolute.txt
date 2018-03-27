@@ -132,7 +132,6 @@ E:\WebSite\WebApplication\WebApplication\bin\System.Web.WebPages.xml
 E:\WebSite\WebApplication\WebApplication\bin\System.Web.WebPages.Deployment.xml
 E:\WebSite\WebApplication\WebApplication\bin\System.Web.WebPages.Razor.xml
 E:\WebSite\WebApplication\WebApplication\bin\roslyn\System.Collections.Immutable.dll
-E:\WebSite\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
 E:\WebSite\WebApplication\WebApplication\bin\Microsoft.Threading.Tasks.dll
 E:\WebSite\WebApplication\WebApplication\bin\Microsoft.Threading.Tasks.Extensions.dll
 E:\WebSite\WebApplication\WebApplication\bin\SendGrid.SmtpApi.dll
@@ -145,3 +144,5 @@ E:\WebSite\WebApplication\WebApplication\bin\Microsoft.Threading.Tasks.Extension
 E:\WebSite\WebApplication\WebApplication\bin\System.Net.Http.Extensions.xml
 E:\WebSite\WebApplication\WebApplication\bin\System.Net.Http.Primitives.xml
 E:\WebSite\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.App.config
+E:\WebSite\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.CompetitorsMigration.resources
+E:\WebSite\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache

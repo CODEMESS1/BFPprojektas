@@ -166,13 +166,13 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.CompareValidator comparepassvalidator;
         
         /// <summary>
-        /// roleDropList control.
+        /// roleDropListAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList roleDropList;
+        protected global::System.Web.UI.WebControls.DropDownList roleDropListAdd;
         
         /// <summary>
         /// dropdownvalidator control.
@@ -310,13 +310,22 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.TextBox surname_tb;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// roleDropListEdit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList roleDropListEdit;
+        
+        /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
         /// edit_btn control.

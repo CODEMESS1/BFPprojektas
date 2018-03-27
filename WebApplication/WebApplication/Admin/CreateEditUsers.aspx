@@ -60,15 +60,15 @@
                     <asp:CompareValidator ID="comparepassvalidator" runat="server" ErrorMessage="Slaptažodžiai nesutampa" ControlToValidate="passwver_tb" Display="Dynamic" ValidationGroup="popup" ControlToCompare="passw_tb"></asp:CompareValidator>
                 </div>
                 <div>
-                    <asp:DropDownList ID="roleDropList" runat="server">
+                    <asp:DropDownList ID="roleDropListAdd" runat="server">
 
-                          <asp:ListItem Selected="True" Value="User"> 3 - Vartotojas </asp:ListItem>
+                          <asp:ListItem Selected="true" Value="User"> 3 - Vartotojas </asp:ListItem>
                           <asp:ListItem Value="Coach"> 2 - Treneris </asp:ListItem>
                           <asp:ListItem Value="Official"> 1 - Teisėjas </asp:ListItem>
                           <asp:ListItem Value="Admin"> 0 - Admin </asp:ListItem>
 
                     </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="dropdownvalidator" runat="server" ErrorMessage="Nepasirinktas vartotojo tipas" ControlToValidate="roleDropList" ValidationGroup="popup"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="dropdownvalidator" runat="server" ErrorMessage="Nepasirinktas vartotojo tipas" ControlToValidate="roleDropListAdd" ValidationGroup="popup"></asp:RequiredFieldValidator>
                 </div>
                 <asp:Button ID="submit_btn" runat="server" Text="Pridėti" CausesValidation="true" ValidationGroup="popup" OnClick="submit_btn_Click"/>
                 &nbsp;&nbsp;
@@ -135,14 +135,15 @@
                     <br />
                 </div>
                 <div>
-                    <asp:DropDownList ID="DropDownList1" runat="server" ValidationGroup="editPopup" Height="16px" >
+                    <asp:DropDownList ID="roleDropListEdit" runat="server">
 
-                          <asp:ListItem Selected="True" Value="User"> 3 - Vartotojas </asp:ListItem>
+                          <asp:ListItem Selected="true" Value="User"> 3 - Vartotojas </asp:ListItem>
                           <asp:ListItem Value="Coach"> 2 - Treneris </asp:ListItem>
                           <asp:ListItem Value="Official"> 1 - Teisėjas </asp:ListItem>
                           <asp:ListItem Value="Admin"> 0 - Admin </asp:ListItem>
 
                     </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Nepasirinktas vartotojo tipas" ControlToValidate="roleDropListEdit" ValidationGroup="popup"></asp:RequiredFieldValidator>
                     <br />
                     <br />
                 </div>
