@@ -44,6 +44,16 @@ namespace WebApplication.Models
             CoachId = coachid;
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0}, {1}, {2:yyyy-mm-dd}", Name, Surname, Year);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public override bool Equals(object c)
         {
             Competitors competitor = (Competitors)c;
