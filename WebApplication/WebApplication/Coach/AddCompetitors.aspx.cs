@@ -38,15 +38,8 @@ namespace WebApplication.Coach
         //grazina tik trenerio, kuris perziuri dalyviu sarasa
         public List<Competitors> filterList(List<Competitors> competitors)
         {
-            List<Competitors> filteredList = new List<Competitors>();
             string currentID = GetCurrent();
-            foreach(Competitors c in competitors)
-            {
-                if(c.CoachId.Equals(currentID))
-                {
-                    filteredList.Add(c);
-                }
-            }
+            List<Competitors> filteredList = competitors.Where(c => c.CoachId.Equals(currentID)).ToList();
             return filteredList;
         }
 
