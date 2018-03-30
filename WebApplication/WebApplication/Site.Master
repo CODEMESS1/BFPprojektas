@@ -17,31 +17,93 @@
         <link href="Scripts/jquery-3.3.1.min.js" type="text/javascript" rel="text/javascript"/>
         <link href="Scripts/popper.min.js" type="text/javascript" rel="text/javascript"/>
         <link href="Scripts/bootstrap.min.js" type="text/javascript" rel="text/javascript"/>
+        <style>
+        .icon::before {
+        display: inline-block;
+        margin-right: .5em;
+        font: normal normal normal 10px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transform: translate(0, 0);
+}
+
+        .take-all-space-you-can{
+            width:100%;
+}
+
+        .nav-tabs{
+          background-color:gray;
+          color:#fff;
+          border-radius: 5px;
+          border-color: white;
+        }
+        .tab-content{
+            background-color:#303136;
+            color:#fff;
+            padding:5px;
+            
+        }
+        .nav-tabs > li > a{
+          border: medium none;
+          color:#fff;
+        }
+        .nav-tabs > li > a:hover{
+          background-color: #161616 !important;
+            border: medium none;
+            border-radius: 5px;
+            color:#fff;
+        
+        }
+
+        .auto-style1 {
+            width: 100%;
+            max-width: 1140px;
+            min-width: 100%;
+            margin-left: 0px;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        html { overflow-y: hidden; }
+
+        @font-face{
+            font-family: "Hemi";
+            src: url('/Font/hemi.ttf');
+        }
+
+        </style>
     </head>
+
 
     <body>
         <form id="form1" runat="server">
-          <nav class="navbar navbar-expand-md border" style="background-image:url(/Image/darken70.png);">
+          <nav class="navbar navbar-expand-md navbar-light border-0" style="background: linear-gradient(to bottom right, #33ccff, #3399ff)">
+           <a href="#" class="navbar-left"><img src="/Image/program-logo.png" width="50" height="50"></a>
+           <a class="navbar-text" style="font-family: Hemi; padding-left: 10px; font-size: large" href="#">BFP programa alpha 0.0001</a>
+            
             <div class="container">
-              <a class="navbar-brand" href="#">Meniu</a>
+              <%--<a class="navbar-brand" href="#">Meniu</a>--%>
               <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
               <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-                <ul class="navbar-nav w-75">
+                <%--<ul class="navbar-nav w-75">
                   <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-bookmark-o"></i> Bookmarks</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-envelope-o"></i> Contacts</a>
                   </li>
-                </ul>
+                </ul>--%>
                 <asp:LoginView runat="server" ViewStateMode="Disabled">
 
                     <AnonymousTemplate>
-                        <a class="btn navbar-btn btn-primary ml-2 text-white" href="/Account/Login">
-                            <i class="fa d-inline fa-lg fa-user-circle-o"></i>
+                        <a class="btn navbar-btn btn-outline-light ml-2 text-uppercase" href="/Account/Login">
+                            <i class="fa d-inline fa-lg fa-user-circle-o "></i>
                             Prisijungti
                         </a>
-                        <a class="btn navbar-btn btn-primary ml-2 text-white" href="/Account/Register">
+                        <a class="btn navbar-btn btn-primary ml-2 text-uppercase btn-outline-light" href="/Account/Register">
                             <i class="fa d-inline fa-lg fa-user-circle-o"></i>
                             Registruotis
                         </a>
@@ -61,31 +123,31 @@
             </div>
           </nav>
 
-          <table style="height:100%; width:100%; border:none">
+          <table style="height:100%; width:100%; background-image:url(/Image/darken70.png);">
               <tr style="height:100%;width:100%;">
                   <td style="width:17%;">
-                      <div class="py-5 h-100 bg-light" style="width:100%; background-image:url(/Image/darken70.png);">
+                      <div class="py-3 h-100 bg-light" style="width:100%; background-image:url(/Image/darken70.png); font-size:large; ">
                         <div class="container" style="height:100%;width:100%;">
                           <div class="row">
                             <div>
-                              <ul class="nav nav-pills flex-column">
+                              <ul class="nav nav-tabs flex-column">
                                   <asp:LoginView runat="server" ViewStateMode="Disabled">
                                       <AnonymousTemplate>
-                                            <li class="nav-item">
-                                              <a class="nav-link" href="#">Pradžia</a>
+                                            <li class="nav-item text-white">
+                                              <a class="nav-link icon fa-home" style="width: 350px;"  href="/#"> Pradžia</a>
                                             </li>
                                             <li class="nav-item">
-                                              <a href="#" class="nav-link">Apie</a>
+                                              <a href="#" class="nav-link icon fa-book"> Apie</a>
                                             </li>
                                       </AnonymousTemplate>
                                           <RoleGroups>
                                               <asp:RoleGroup Roles="Admin">
                                                   <ContentTemplate>
                                                       <li class="nav-item">
-                                                      <a class="nav-link" href="#">Pradžia</a>
+                                                      <a class="nav-link icon fa-home" href="/#">Pradžia</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                      <a href="#" class="nav-link">Apie</a>
+                                                      <a href="#" class="nav-link icon fa-book">Apie</a>
                                                       </li>
                                                       <a href="/Admin/CreateEditUsers" class="nav-link">Vartotojai</a>
                                                       </li>
@@ -94,10 +156,10 @@
                                               <asp:RoleGroup Roles="Coach">
                                                   <ContentTemplate>
                                                       <li class="nav-item">
-                                                      <a class="nav-link" href="#">Pradžia</a>
+                                                      <a class="nav-link icon fa-home" href="#">Pradžia</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                      <a href="#" class="nav-link">Apie</a>
+                                                      <a href="#" class="nav-link icon fa-home">Apie</a>
                                                       </li>
                                                       <a href="/Coach/AddCompetitors" class="nav-link">Dalyviai</a>
                                                       </li>
@@ -121,12 +183,18 @@
                         </div>
                       </div>
                   </td>
+
                   <td style="width:83%; background-color:white";>
                         <!-- content place holder -->
                         <div style="height:100%;width:100%;">
                             <asp:ContentPlaceHolder ID="MainContent" runat="server">
                             </asp:ContentPlaceHolder>
                         </div>
+<%--                      <footer class="footer">
+                    <div class="auto-style1" style="text-align: center;">
+                    <span class="text-muted">CodeMess - 2018</span>
+                </div>
+            </footer>--%>
                         <!-- -->
                   </td>
               </tr>
