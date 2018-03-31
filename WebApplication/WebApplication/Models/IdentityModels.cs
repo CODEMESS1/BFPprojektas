@@ -16,7 +16,6 @@ namespace WebApplication.Models
         public string Role { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Year { get; set; }
 
         public ClaimsIdentity GenerateUserIdentity(ApplicationUserManager manager)
         {

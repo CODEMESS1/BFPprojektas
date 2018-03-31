@@ -539,10 +539,6 @@
     <Compile Include="Migrations\201803270805312_CompetitorsMigration.Designer.cs">
       <DependentUpon>201803270805312_CompetitorsMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803311530541_year.cs" />
-    <Compile Include="Migrations\201803311530541_year.Designer.cs">
-      <DependentUpon>201803311530541_year.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -616,9 +612,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803270805312_CompetitorsMigration.resx">
       <DependentUpon>201803270805312_CompetitorsMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803311530541_year.resx">
-      <DependentUpon>201803311530541_year.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
