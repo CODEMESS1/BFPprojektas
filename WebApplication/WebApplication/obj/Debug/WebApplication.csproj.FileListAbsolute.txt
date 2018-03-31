@@ -135,14 +135,9 @@ C:\Git\projektas\WebApplication\WebApplication\bin\Microsoft.AI.ServerTelemetryC
 C:\Git\projektas\WebApplication\WebApplication\bin\Microsoft.AI.WindowsServer.xml
 C:\Git\projektas\WebApplication\WebApplication\bin\Microsoft.AI.Web.xml
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.App.config
-C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
-C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.InitialCreate.resources
-C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.Role.resources
-C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.Name.resources
-C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.Surname.resources
-C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.CompetitorsMigration.resources
-C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.GenerateResource.cache
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CoreCompileInputs.cache
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
+C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.initial.resources
+C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.GenerateResource.cache
