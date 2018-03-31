@@ -294,3 +294,4 @@ C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.C
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
+C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.year.resources
