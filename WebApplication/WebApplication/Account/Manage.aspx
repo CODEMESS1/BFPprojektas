@@ -22,6 +22,12 @@
                         <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Change]" Visible="false" ID="ChangePassword" runat="server" />
                         <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Create]" Visible="false" ID="CreatePassword" runat="server" />
                     </dd>
+                    <dt>Change Your Email</dt>
+                    <dd><asp:HyperLink NavigateUrl="/Account/ManageEmail" Text="[Change]" runat="server" /></dd>
+                    
+                    <dt>Change Your Credentials</dt>
+                    <dd><asp:HyperLink NavigateUrl="/Account/ManageCredentials" Text="[Change]" runat="server" /></dd>
+
                     <dt>External Logins:</dt>
                     <dd><%: LoginsCount %>
                         <asp:HyperLink NavigateUrl="/Account/ManageLogins" Text="[Manage]" runat="server" />

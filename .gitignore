@@ -1,0 +1,10 @@
+
+*.pdb
+*.dll
+*.cache
+*.cache
+*.txt
+<<<<<<< HEAD
+WebApplication/.vs/config/applicationhost.config
+=======
+>>>>>>> 6383f39d5b4ec92254996f86ff11ae9989da34f1

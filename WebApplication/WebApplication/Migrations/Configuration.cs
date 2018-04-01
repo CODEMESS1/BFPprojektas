@@ -5,29 +5,27 @@ namespace WebApplication.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WebApplication.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<WebApplication.Models.ContainerCompetitors>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WebApplication.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(WebApplication.Models.ApplicationDbContext context)
+        protected override void Seed(WebApplication.Models.ContainerCompetitors context)
         {
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            /*
-                context..AddOrUpdate(
-                  p => p.FullName,
-                  new Person { FullName = "Andrew Peters" },
-                  new Person { FullName = "Brice Lambson" },
-                  new Person { FullName = "Rowan Miller" }
-                );
-            */
+            //    context.People.AddOrUpdate(
+            //      p => p.FullName,
+            //      new Person { FullName = "Andrew Peters" },
+            //      new Person { FullName = "Brice Lambson" },
+            //      new Person { FullName = "Rowan Miller" }
+            //    );
+            //
         }
     }
 }

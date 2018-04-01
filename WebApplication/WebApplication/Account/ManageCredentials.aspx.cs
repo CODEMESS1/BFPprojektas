@@ -1,0 +1,112 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Owin;
+using WebApplication.Models;
+
+namespace WebApplication.Account
+{
+    public partial class ManageCredentials : System.Web.UI.Page
+    {
+        protected string SuccessMessage
+        {
+            get;
+            private set;
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = manager.FindById(User.Identity.GetUserId());
+            if(user.Name != null)
+            {
+                name.Text = user.Name;
+                name.ReadOnly = true;
+            }
+            if (user.Surname != null)
+            {
+                SurnameText.Text = user.Surname;
+                SurnameText.ReadOnly = true;
+            }
+            //if (user.YearOfBirth != null)
+            //{
+            //    BirthYear.Text = user.Name;
+            //    BirthYear.ReadOnly = true;
+            //}
+
+            if (!IsPostBack)
+            {
+                // Determine the sections to render
+
+                // Render success message
+                var message = Request.QueryString["m"];
+                if (message != null)
+                {
+                    // Strip the query string from action
+                    Form.Action = ResolveUrl("~/Account/Manage");
+                }
+            }
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
+
+
+        protected void SetPhoneNumber_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Account/Manage?m=VerifyPhoneNumber");
+        }
+
+        protected void Surname_Click(object sender, EventArgs e)
+        {
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = manager.FindById(User.Identity.GetUserId());
+
+            if (user.Surname == null)
+            {
+                user.Surname = SurnameText.Text;
+                manager.Update(user);
+                Response.Redirect("~/Account/Manage");
+            }
+        }
+
+        protected void Name_Click(object sender, EventArgs e)
+        {
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = manager.FindById(User.Identity.GetUserId());
+
+            if (user.Name == null)
+            {
+                user.Name = name.Text;
+                manager.Update(user);
+
+            }
+        }
+
+        protected void SetDate_Click(object sender, EventArgs e)
+        {
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = manager.FindById(User.Identity.GetUserId());
+
+            //reik i db metus idet
+
+            //if (user.YearOfBirth == null)
+            //{
+            //    BirthYear.Text = user.Name;
+            //    BirthYear.ReadOnly = true;
+            //}
+
+        }
+    }
+}

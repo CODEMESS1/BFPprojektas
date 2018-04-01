@@ -9,6 +9,9 @@
             <br />
             Pasirinkite varžybas:<br />
             <br />
+            <asp:ListView ID="competition_lstview" runat="server">
+            </asp:ListView>
+            <br />
             <asp:Label ID="error_lbl" runat="server"></asp:Label>
             <br />
             <asp:GridView ID="GridView1" runat="server" AutoGenerateSelectButton="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
