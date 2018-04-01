@@ -519,25 +519,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803211736597_InitialCreate.cs" />
-    <Compile Include="Migrations\201803211736597_InitialCreate.Designer.cs">
-      <DependentUpon>201803211736597_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803221316030_Role.cs" />
-    <Compile Include="Migrations\201803221316030_Role.Designer.cs">
-      <DependentUpon>201803221316030_Role.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803221504576_Name.cs" />
-    <Compile Include="Migrations\201803221504576_Name.Designer.cs">
-      <DependentUpon>201803221504576_Name.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803221505283_Surname.cs" />
-    <Compile Include="Migrations\201803221505283_Surname.Designer.cs">
-      <DependentUpon>201803221505283_Surname.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803270805312_CompetitorsMigration.cs" />
-    <Compile Include="Migrations\201803270805312_CompetitorsMigration.Designer.cs">
-      <DependentUpon>201803270805312_CompetitorsMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201803312045182_initial.cs" />
+    <Compile Include="Migrations\201803312045182_initial.Designer.cs">
+      <DependentUpon>201803312045182_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -598,20 +582,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803211736597_InitialCreate.resx">
-      <DependentUpon>201803211736597_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803221316030_Role.resx">
-      <DependentUpon>201803221316030_Role.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803221504576_Name.resx">
-      <DependentUpon>201803221504576_Name.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803221505283_Surname.resx">
-      <DependentUpon>201803221505283_Surname.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803270805312_CompetitorsMigration.resx">
-      <DependentUpon>201803270805312_CompetitorsMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803312045182_initial.resx">
+      <DependentUpon>201803312045182_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

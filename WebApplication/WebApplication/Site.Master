@@ -21,7 +21,11 @@
         .icon::before {
         display: inline-block;
         margin-right: .5em;
+<<<<<<< HEAD
         font: normal normal normal 10px/1 FontAwesome;
+=======
+        font: normal normal normal 14px/1 FontAwesome;
+>>>>>>> 0c1785b38ffd33bbcccb70faff3e07541b447905
         font-size: inherit;
         text-rendering: auto;
         -webkit-font-smoothing: antialiased;
@@ -110,12 +114,12 @@
                      </AnonymousTemplate>
                             <LoggedInTemplate>
 
-                                <a class="btn navbar-btn btn-primary ml-2 text-white" href="/Account/Manage">
-                                    <i class="fa d-inline fa-lg fa-user-circle-o"></i>
+                                <a class="btn navbar-btn btn-outline-light ml-2 text-uppercase" href="/Account/Manage">
+                                    <i class="fa d-inline fa-user-circle-o"></i>
                                     Paskyra
                                 </a>
-                                <li class="btn navbar-btn btn-primary ml-2 text-white ">
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Atsijungti" LogoutPageUrl="/" OnLoggingOut="Unnamed_LoggingOut" />
+                                <li class="btn navbar-btn">
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Atsijungti" LogoutPageUrl="/" OnLoggingOut="Unnamed_LoggingOut" CssClass="btn navbar-btn btn-outline-light ml-2 text-uppercase icon fa-user-circle-o" Font-Size="Medium" />
                                 </li>
                             </LoggedInTemplate>
                  </asp:LoginView>
