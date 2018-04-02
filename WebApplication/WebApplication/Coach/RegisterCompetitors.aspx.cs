@@ -11,18 +11,26 @@ namespace WebApplication.Coach
     {
         private List<Competitors> filteredList = new List<Competitors>();
         private List<Competitors> competitorsList = new List<Competitors>();
-        private ContainerCompetitors container = new ContainerCompetitors();
+        private DbContainer container = new DbContainer();
+        private List<Competition> competitions = new List<Competition>();
         private string coachID = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            coachID = GetCurrent();
-            //atfiltruojam tik trenerio dalyvius
+            competitions = container.Competition.ToList().Where(c => c.Registration == true).ToList();
             competitorsList = container.Comp.ToList();
             filteredList = filterList(competitorsList);
-            popUpRegister.Show();
-            competitors_lstbox.DataSource = filteredList;
-            competitors_lstbox.DataBind();
+            if (!Page.IsPostBack)
+            {
+                //load varzybu listview
+                competitions_gridview.DataSource = competitions;
+                competitions_gridview.DataBind();
+
+                coachID = GetCurrent();
+                //atfiltruojam tik trenerio dalyvius
+                GridView1.DataSource = filteredList;
+                GridView1.DataBind();
+            }
         }
 
         public string GetCurrent()
@@ -38,23 +46,65 @@ namespace WebApplication.Coach
             return filteredList;
         }
 
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //[TODO] pagal pasirinktas varzybas leidzia suregistruori dalyvius
-        }
-
+        //pazymi visus dalyvius (visus checkbox)
         protected void selectAll_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i < competitors_lstbox.Items.Count; i++)
+            for (int i = 0; i < GridView1.Rows.Count; i++)
             {
-                competitors_lstbox.Items[i].Selected = true;
+                CheckBox cb = (CheckBox)GridView1.Rows[i].FindControl("checkBox");
+                if (cb != null && !cb.Checked)
+                {
+                    cb.Checked = true;
+                }
             }
         }
 
+        //prideda pasirinktus dalyvius i DB objekta jei jie dar nera prideti
+        private void addToCompetition()
+        {
+            int selectedCompetitionId = Convert.ToInt16(competitions_gridview.SelectedRow.Cells[3].Text);
+            List<CompetitorsInCompetitions> registeredCompetitors = GetSelection(selectedCompetitionId);
+            foreach(CompetitorsInCompetitions c in registeredCompetitors)
+            {
+                if(!container.CompetitorsInCompetitions.ToList().Contains(c))
+                {
+                    container.CompetitorsInCompetitions.Add(c);
+                    container.SaveChanges();
+                }
+            }
+            
+        }
+
+        //gauna list'a dalyviu, kurie pasirinkti (pazymeti checkbox prie ju)
+        private List<CompetitorsInCompetitions> GetSelection(int competitionId)
+        {
+            List<CompetitorsInCompetitions> comp = new List<CompetitorsInCompetitions>();
+            for(int i = 0; i < GridView1.Rows.Count; i++)
+            {
+                CheckBox cb = (CheckBox) GridView1.Rows[i].FindControl("checkBox");
+                if (cb != null && cb.Checked)
+                {
+                    CompetitorsInCompetitions temp = new CompetitorsInCompetitions();
+                    temp.CompetitionId = competitionId;
+                    temp.CompetitorId = filteredList[i].Id;
+                    comp.Add(temp);
+                }
+            }
+            return comp;
+        }
+
+        //kai varzybu gridview pasirenki varzybas ismeta registracijos popup
+        protected void competitions_gridview_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            popUpRegister.Show();
+        }
+
+        //jei paspaudzia registruoti dalyvius
         protected void registerComp_btn_Click(object sender, EventArgs e)
         {
-            //[TODO]issaugo registracija ir uzdaro popup 
+            addToCompetition();
             popUpRegister.Hide();
+            container.CompetitorsInCompetitions.ToList();
         }
     }
 }

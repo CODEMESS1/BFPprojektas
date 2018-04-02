@@ -17,7 +17,7 @@ namespace WebApplication.Coach
         //atifiltruotas vienam treneriui
         List<Competitors> filteredList = new List<Competitors>();
         //Objektas su kuriuo bendraujame su DB lentele
-        ContainerCompetitors competitors = new ContainerCompetitors();
+        DbContainer competitors = new DbContainer();
 
         protected void Page_Load(object sender, EventArgs e)
         {

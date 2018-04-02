@@ -22,13 +22,22 @@ namespace WebApplication.Coach {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// competition_lstview control.
+        /// competitions_gridview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView competition_lstview;
+        protected global::System.Web.UI.WebControls.GridView competitions_gridview;
+        
+        /// <summary>
+        /// SqlDataSource1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
         
         /// <summary>
         /// error_lbl control.
@@ -38,15 +47,6 @@ namespace WebApplication.Coach {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label error_lbl;
-        
-        /// <summary>
-        /// GridView1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
         /// fake control.
@@ -94,13 +94,13 @@ namespace WebApplication.Coach {
         protected global::System.Web.UI.WebControls.Button selectAll;
         
         /// <summary>
-        /// competitors_lstbox control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox competitors_lstbox;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
         /// registerComp_btn control.

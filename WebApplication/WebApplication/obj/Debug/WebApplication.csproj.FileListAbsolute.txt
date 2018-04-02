@@ -141,3 +141,4 @@ C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.initial.resources
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.GenerateResource.cache
+C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache

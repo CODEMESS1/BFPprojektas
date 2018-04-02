@@ -163,6 +163,9 @@
                                                       </li>
                                                       <a href="/Coach/AddCompetitors" class="nav-link">Dalyviai</a>
                                                       </li>
+                                                      <li>
+                                                          <a href="/Coach/RegisterCompetitors" class="nav-link">Dalyvių registravimas</a>
+                                                      </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
                                               <asp:RoleGroup Roles="Official">

@@ -8,15 +8,12 @@
             Registracija varžyboms<br />
             <br />
             Pasirinkite varžybas:<br />
-            <br />
-            <asp:ListView ID="competition_lstview" runat="server">
-            </asp:ListView>
-            <br />
-            <asp:Label ID="error_lbl" runat="server"></asp:Label>
-            <br />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateSelectButton="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <asp:GridView ID="competitions_gridview" runat="server" AutoGenerateSelectButton="True" OnSelectedIndexChanged="competitions_gridview_SelectedIndexChanged1">
             </asp:GridView>
             <br />
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
+            <br />
+            <asp:Label ID="error_lbl" runat="server"></asp:Label>
             <br />
 
             <div>
@@ -30,8 +27,6 @@
                 DropShadow="false">
             </cc1:ModalPopupExtender>
 
-            <script type="text/javascript" src="js/ListViewMultipleSelect.js"></script>
-
             <asp:Panel ID="panelRegister" runat="server" ScrollBars="Vertical">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
@@ -43,8 +38,17 @@
                         <br />
                     </div>
                     <div>
-                        <asp:ListBox runat="server" ID="competitors_lstbox" onclick="ListBoxClient_SelectionChanged(this, event);" SelectionMode="Multiple" Width="400px" >
-                        </asp:ListBox>
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False">
+                            <Columns>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="checkBox" runat="server" AutoPostBack="true"/>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="Name" HeaderText="Vardas" />
+                                <asp:BoundField DataField="Surname" HeaderText="Pavardė" />
+                            </Columns>
+                        </asp:GridView>
                     </div>
                     <br />
                     <asp:Button ID="registerComp_btn" runat="server" Text="Registruoti" OnClick="registerComp_btn_Click" />
