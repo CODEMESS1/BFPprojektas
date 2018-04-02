@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication.SiteMaster" %>
 
-<html lang="lt"n>
+<html lang="lt">
     <head runat="server">
        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,11 +21,6 @@
         .icon::before {
         display: inline-block;
         margin-right: .5em;
-<<<<<<< HEAD
-        font: normal normal normal 10px/1 FontAwesome;
-=======
-        font: normal normal normal 14px/1 FontAwesome;
->>>>>>> 0c1785b38ffd33bbcccb70faff3e07541b447905
         font-size: inherit;
         text-rendering: auto;
         -webkit-font-smoothing: antialiased;
