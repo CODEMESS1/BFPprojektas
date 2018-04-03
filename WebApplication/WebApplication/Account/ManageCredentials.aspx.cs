@@ -24,7 +24,7 @@ namespace WebApplication.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var user = manager.FindById(User.Identity.GetUserId());
-            if(user.Name != null)
+            if (user.Name != null)
             {
                 name.Text = user.Name;
                 name.ReadOnly = true;
@@ -32,9 +32,9 @@ namespace WebApplication.Account
             if (user.Surname != null)
             {
                 SurnameText.Text = user.Surname;
-                SurnameText.ReadOnly = true;
+                name.ReadOnly = true;
             }
-            //if (user.YearOfBirth != null)
+            //if (user != null)
             //{
             //    BirthYear.Text = user.Name;
             //    BirthYear.ReadOnly = true;
@@ -77,7 +77,7 @@ namespace WebApplication.Account
             {
                 user.Surname = SurnameText.Text;
                 manager.Update(user);
-                Response.Redirect("~/Account/Manage");
+                name.ReadOnly = true;
             }
         }
 
@@ -90,6 +90,7 @@ namespace WebApplication.Account
             {
                 user.Name = name.Text;
                 manager.Update(user);
+                name.ReadOnly = true;
 
             }
         }

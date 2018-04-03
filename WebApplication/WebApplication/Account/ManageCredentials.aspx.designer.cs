@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication.Account {
-    
-    
-    public partial class ManageCredentials {
-        
+namespace WebApplication.Account
+{
+
+
+    public partial class ManageCredentials
+    {
+
         /// <summary>
         /// nameLabel control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace WebApplication.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label nameLabel;
-        
+
         /// <summary>
         /// name control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace WebApplication.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox name;
-        
+
         /// <summary>
         /// SurnameLabel control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace WebApplication.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label SurnameLabel;
-        
+
         /// <summary>
         /// SurnameText control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace WebApplication.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SurnameText;
-        
+
         /// <summary>
         /// YearOfBirth control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace WebApplication.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label YearOfBirth;
-        
+
         /// <summary>
         /// BirthYear control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace WebApplication.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox BirthYear;
-        
+
         /// <summary>
         /// PhoneNumberLabel control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace WebApplication.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label PhoneNumberLabel;
-        
+
         /// <summary>
         /// PhoneNumberTextBox control.
         /// </summary>

@@ -5,7 +5,7 @@
     <div class="form-horizontal">
         <section id="credentialForm">
                 <div class="form-horizontal">
-                    <hr />
+                    <hr style="height: -15px" />
                     <div class="form-group">
                         <asp:Label runat="server" ID="nameLabel" AssociatedControlID="name" CssClass="col-md-2 control-label">Vardas</asp:Label>
                         <div class="col-md-10">
@@ -50,7 +50,7 @@
                         <asp:Label runat="server" ID="PhoneNumberLabel" CssClass="col-md-2 control-label">Telefono Numeris</asp:Label>
                         <div class="col-md-10">
                     <asp:TextBox runat="server" ID="PhoneNumberTextBox" type="number" />
-                            <asp:Button runat="server" Text="Pakeisti" ValidationGroup="SetSurName" OnClick="SetPhoneNumber_Click" CssClass="btn btn-default" />
+                            <asp:Button runat="server" Text="Pakeisti" OnClick="SetPhoneNumber_Click" CssClass="btn btn-default" />
                     </div>
                 </div>
 
