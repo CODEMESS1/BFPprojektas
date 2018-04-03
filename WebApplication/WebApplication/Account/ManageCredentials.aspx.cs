@@ -24,21 +24,23 @@ namespace WebApplication.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var user = manager.FindById(User.Identity.GetUserId());
-            if (user.Name != null || user.Name == "")
+
+            if (user.Name != null)
             {
                 name.Text = user.Name;
                 name.ReadOnly = true;
             }
-            if (user.Surname != null || user.Surname == "")
+            if (user.Surname != null)
             {
                 SurnameText.Text = user.Surname;
                 SurnameText.ReadOnly = true;
             }
-            //if (user. != null)
-            //{
-            //    BirthYear.Text = user.Name;
-            //    BirthYear.ReadOnly = true;
-            //}
+            if (user.Year != null)
+            {
+                BirthYear.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
+                BirthYear.Text = user.Year.ToString("yyyy-MM-dd");
+                BirthYear.Enabled = false;
+            }
 
             if (!IsPostBack)
             {
@@ -65,7 +67,14 @@ namespace WebApplication.Account
 
         protected void SetPhoneNumber_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Account/Manage?m=VerifyPhoneNumber");
+            //[TODO] tikrinti ar teisingas formatas
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = manager.FindById(User.Identity.GetUserId());
+
+            if (user.PhoneNumber == null)
+            {
+                user.PhoneNumber = PhoneNumberTextBox.Text;
+            }
         }
 
         protected void Surname_Click(object sender, EventArgs e)
@@ -102,12 +111,12 @@ namespace WebApplication.Account
 
             //reik i db metus idet
 
-            //if (user.YearOfBirth == null)
-            //{
-            //    BirthYear.Text = user.Name;
-            //manager.Update(user);
-            //    BirthYear.ReadOnly = true;
-            //}
+            if (user.Year == null)
+            {
+                BirthYear.Text = user.Name;
+                manager.Update(user);
+                BirthYear.ReadOnly = true;
+            }
 
         }
     }
