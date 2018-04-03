@@ -34,7 +34,7 @@ namespace WebApplication.Account
                 SurnameText.Text = user.Surname;
                 name.ReadOnly = true;
             }
-            //if (user != null)
+            //if (user. != null)
             //{
             //    BirthYear.Text = user.Name;
             //    BirthYear.ReadOnly = true;
@@ -77,7 +77,7 @@ namespace WebApplication.Account
             {
                 user.Surname = SurnameText.Text;
                 manager.Update(user);
-                name.ReadOnly = true;
+                SurnameText.ReadOnly = true;
             }
         }
 
