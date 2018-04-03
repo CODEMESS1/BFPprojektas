@@ -284,3 +284,4 @@ C:\Users\Dauma\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\obj\D
 C:\Users\Dauma\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CoreCompileInputs.cache
 C:\Users\Dauma\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Users\Dauma\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
+C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache

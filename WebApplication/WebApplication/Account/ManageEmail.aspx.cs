@@ -60,18 +60,22 @@ namespace WebApplication.Account
                 var user = manager.FindById(User.Identity.GetUserId());
 
                 var result = manager.FindByEmail(CurrentEmail.Text);
-                if (user.Email == result.Email)
+                
+                if(result == null)
+                {
+                    //error message i label, kad ne
+                }
+                else if (user.Email.Equals(result.Email))
                 {
                     user.EmailConfirmed = false;
                     user.Email = NewEmail.Text;
+                    user.UserName = NewEmail.Text;
                     manager.Update(user);
                     string code = manager.GenerateEmailConfirmationToken(user.Id);
                     string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
                     manager.SendEmail(user.Id, "Paskyros patvirtinimas", "Norėdami patvirtinti paskyrą spauskite <a href=\"" + callbackUrl + "\">čia</a>.");
-                    //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-                    //Session.Clear();
-                    FormsAuthentication.SignOut();
-                    Response.Redirect("/");
+
+                    signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 }
             }
         }
