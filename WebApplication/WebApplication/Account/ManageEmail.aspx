@@ -35,9 +35,6 @@
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="Password"
                                 CssClass="text-danger" Display="Dynamic" ErrorMessage="Password is required."
                                 ValidationGroup="ChangeEmail" />
-                            <asp:CompareValidator runat="server" ControlToCompare="CurrentEmail" ControlToValidate="Password"
-                                CssClass="text-danger" Display="Dynamic" ErrorMessage="Email and Password do not match."
-                                ValidationGroup="ChangeEmail" />
                         </div>
                     </div>
                     <div class="form-group">

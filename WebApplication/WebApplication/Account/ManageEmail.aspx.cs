@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
@@ -51,25 +52,30 @@ namespace WebApplication.Account
 
         protected void ChangeEmail_Click(object sender, EventArgs e)
         {
+
             if (IsValid)
             {
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-                IdentityResult result = manager.ChangePassword(User.Identity.GetUserId(), CurrentEmail.Text, password.Text);
-                if (result.Succeeded)
+                var user = manager.FindById(User.Identity.GetUserId());
+
+                var result = manager.FindByEmail(CurrentEmail.Text);
+                if (user.Email == result.Email)
                 {
-                    var user = manager.FindById(User.Identity.GetUserId());
-                    signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                     user.EmailConfirmed = false;
-                    Response.Redirect("~/Account/Manage?m=ConfirmEmail");
-                    // reik kazkaip persiust i reconfirma email
-                }
-                else
-                {
-                    AddErrors(result);
+                    user.Email = NewEmail.Text;
+                    manager.Update(user);
+                    string code = manager.GenerateEmailConfirmationToken(user.Id);
+                    string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
+                    manager.SendEmail(user.Id, "Paskyros patvirtinimas", "Norėdami patvirtinti paskyrą spauskite <a href=\"" + callbackUrl + "\">čia</a>.");
+                    //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                    //Session.Clear();
+                    FormsAuthentication.SignOut();
+                    Response.Redirect("/");
                 }
             }
         }
+        
 
         private void AddErrors(IdentityResult result)
         {

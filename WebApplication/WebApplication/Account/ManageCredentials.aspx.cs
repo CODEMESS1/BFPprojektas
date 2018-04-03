@@ -24,15 +24,15 @@ namespace WebApplication.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var user = manager.FindById(User.Identity.GetUserId());
-            if (user.Name != null)
+            if (user.Name != null || user.Name == "")
             {
                 name.Text = user.Name;
                 name.ReadOnly = true;
             }
-            if (user.Surname != null)
+            if (user.Surname != null || user.Surname == "")
             {
                 SurnameText.Text = user.Surname;
-                name.ReadOnly = true;
+                SurnameText.ReadOnly = true;
             }
             //if (user. != null)
             //{
@@ -105,6 +105,7 @@ namespace WebApplication.Account
             //if (user.YearOfBirth == null)
             //{
             //    BirthYear.Text = user.Name;
+            //manager.Update(user);
             //    BirthYear.ReadOnly = true;
             //}
 
