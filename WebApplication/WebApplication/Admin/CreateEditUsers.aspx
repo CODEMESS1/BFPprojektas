@@ -2,7 +2,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
     <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-
         <style>
 
         </style>
