@@ -1193,8 +1193,11 @@ pre {
   border-color: #dee2e6; }
 
 .table-dark {
-  color: white;
-  background-color: #212529; }
+    color: white;
+    background-color: #212529;
+}
+
+
   .table-dark th,
   .table-dark td,
   .table-dark thead th {
@@ -5966,6 +5969,10 @@ button.bg-dark:focus {
 
 .text-primary {
   color: #12bbad !important; }
+
+.text-codemess {
+    color: lightgray !important;
+}
 
 a.text-primary:hover, a.text-primary:focus {
   color: #0e8c82 !important; }
