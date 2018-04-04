@@ -1,5 +1,6 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Printing;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,12 @@ namespace WebApplication.Admin
             
             //padaryti spausdinima i pdf faila
 
+
+            Response.ContentType = "Application/pdf";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=teisejai.pdf");
+            Response.TransmitFile(Server.MapPath("~/PDFs/official.pdf"));
+            Response.End();
+
             pdfOfficial.Save(path + "/official.pdf");
         }
 
@@ -74,6 +81,10 @@ namespace WebApplication.Admin
             List<UserToPrint> users = getUsers("Coach");
 
             //padaryti spausdinima i pdf faila
+            Response.ContentType = "Application/pdf";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=treneriai.pdf");
+            Response.TransmitFile(Server.MapPath("~/PDFs/coach.pdf"));
+            Response.End();
 
             pdfOfficial.Save(path + "/coach.pdf");
         }
