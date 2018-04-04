@@ -38,7 +38,7 @@ namespace WebApplication.Account
             if (user.Year != null)
             {
                 BirthYear.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
-                BirthYear.Text = user.Year.ToString("yyyy-MM-dd");
+                BirthYear.Text = user.Year.ToString();
                 BirthYear.Enabled = false;
             }
 

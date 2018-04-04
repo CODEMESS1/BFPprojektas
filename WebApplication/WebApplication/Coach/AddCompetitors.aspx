@@ -24,9 +24,10 @@
             <h1>Pridėti dalyvį</h1>
             <div>
                 <asp:Label ID="ErrorMessage" runat="server" CssClass="col-md-2 control-label"></asp:Label>
+                
                 <div>
                     <asp:Label ID="gender_lbl" runat="server" Text="Lytis"></asp:Label>
-                    <asp:RadioButtonList ID="gender_radbtn" runat="server" ValidationGroup="addcomp" >
+                    <asp:RadioButtonList ID="gender_radbtn" runat="server" ValidationGroup="addcomp" RepeatDirection="Horizontal">
                         <asp:ListItem>Vyras</asp:ListItem>
                         <asp:ListItem>Moteris</asp:ListItem>
                     </asp:RadioButtonList>
