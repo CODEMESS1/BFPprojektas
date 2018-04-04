@@ -18,5 +18,7 @@ namespace WebApplication.Models
         public DbSet<Competitors> Comp { get; set; }
 
         public DbSet<Competition> Competition { get; set; }
+
+        public DbSet<AspNetUsers> aspNetUsers { get; set; } 
     }
 }

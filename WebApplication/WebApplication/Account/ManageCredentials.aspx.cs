@@ -38,8 +38,9 @@ namespace WebApplication.Account
             if (user.Year != null)
             {
                 BirthYear.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
-                BirthYear.Text = user.Year.ToString("yyyy-MM-dd");
-                BirthYear.Enabled = false;
+                DateTime dateTime = (DateTime) user.Year;
+                BirthYear.Text = dateTime.ToString("yyyy/MM/dd");
+                BirthYear.ReadOnly = true;
             }
 
             if (!IsPostBack)
@@ -113,8 +114,11 @@ namespace WebApplication.Account
 
             if (user.Year == null)
             {
-                BirthYear.Text = user.Name;
+                user.Year = Convert.ToDateTime(BirthYear.Text);
                 manager.Update(user);
+                BirthYear.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
+                DateTime dateTime = (DateTime)user.Year;
+                BirthYear.Text = dateTime.ToString("yyyy/MM/dd");
                 BirthYear.ReadOnly = true;
             }
 

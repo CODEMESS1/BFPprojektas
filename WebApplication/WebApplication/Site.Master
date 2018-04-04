@@ -148,7 +148,11 @@
                                                       <li class="nav-item">
                                                       <a href="#" class="nav-link icon fa-book">Apie</a>
                                                       </li>
+                                                      <li>
                                                       <a href="/Admin/CreateEditUsers" class="nav-link">Vartotojai</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="Admin/PrintLists.aspx" class="nav-link">Sąrašai</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
