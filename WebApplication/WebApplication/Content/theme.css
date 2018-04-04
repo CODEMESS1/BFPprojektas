@@ -1193,8 +1193,11 @@ pre {
   border-color: #dee2e6; }
 
 .table-dark {
-  color: white;
-  background-color: #212529; }
+    color: white;
+    background-color: #212529;
+}
+
+
   .table-dark th,
   .table-dark td,
   .table-dark thead th {
@@ -3372,10 +3375,19 @@ tbody.collapse.show {
   .alert-primary .alert-link {
     color: #05322f; }
 
+
 .alert-secondary {
-  color: #293a6b;
-  background-color: #dce2f5;
-  border-color: #ced7f1; }
+    color: white;
+    background-color: #dce2f5;
+    border-color: #ced7f1;
+}
+
+.alert-codemess {
+    color: white;
+    background-image: url(/Image/darken70.png);
+    border-color: #33ccff;
+}
+
   .alert-secondary hr {
     border-top-color: #bac7eb; }
   .alert-secondary .alert-link {
@@ -5957,6 +5969,10 @@ button.bg-dark:focus {
 
 .text-primary {
   color: #12bbad !important; }
+
+.text-codemess {
+    color: lightgray !important;
+}
 
 a.text-primary:hover, a.text-primary:focus {
   color: #0e8c82 !important; }
