@@ -80,7 +80,7 @@ namespace WebApplication.Coach
                 }
                 else
                 {
-                    ErrorMessage.Text = "Toks dalyvis jau egzistuoja";
+                    this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Toks dalyvis jau egzistuoja');", true);
                     popupAdd.Show();
                 }
             }

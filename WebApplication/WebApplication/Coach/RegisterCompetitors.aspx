@@ -13,7 +13,6 @@
             <br />
             <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
             <br />
-            <asp:Label ID="error_lbl" runat="server"></asp:Label>
             <br />
 
             <div>

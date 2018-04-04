@@ -36,8 +36,6 @@
         <asp:Panel ID="panelAdd" runat="server" CssClass="alert-primary" BorderWidth="5px" Width="30%" HorizontalAlign="center"  >
             <h1>Pridėti dalyvį</h1>
             <div>
-                <asp:Label ID="ErrorMessage" runat="server" CssClass="col-md-2 control-label"></asp:Label>
-                
                 <div>
                     <asp:Label ID="gender_lbl" runat="server" Text="Lytis"></asp:Label>
                     <asp:RadioButtonList ID="gender_radbtn" runat="server" ValidationGroup="addcomp" RepeatDirection="Horizontal">
