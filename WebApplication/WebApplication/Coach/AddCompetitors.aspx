@@ -57,7 +57,7 @@
  /*margin-left: 10px;*/
 }
 .table-curved th {
-  padding: 3px 10px;
+  padding: 5px 10px;
 }
 .table-curved td {
   position: relative;
