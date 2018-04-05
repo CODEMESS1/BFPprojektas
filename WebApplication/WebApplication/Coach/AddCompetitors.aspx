@@ -51,18 +51,28 @@
         }
 
         .table-curved {
-  border-collapse: collapse;
- /*margin-left: 10px;*/
-}
-.table-curved th {
-  padding: 3px 10px;
-}
-.table-curved td {
-  position: relative;
-  padding: 6px 10px;
-  border-bottom: 2px solid white;
-  border-top: 2px solid white;
-}
+          border-collapse: collapse;
+         /*margin-left: 10px;*/
+        }
+        .table-curved th {
+          padding: 3px 10px;
+        }
+        .table-curved td {
+          position: relative;
+          padding: 6px 10px;
+          border-bottom: 2px solid white;
+          border-top: 2px solid white;
+        }
+
+        .modalBackground 
+        {
+            height:100%;
+            background-color:#EBEBEB;
+            filter:alpha(opacity=70);
+            opacity:0.7;
+        }
+        
+
 /*.table-curved td:first-child:before {
   content: '';
   position: absolute;
@@ -101,7 +111,8 @@
      </script>
 
         <div class="panel panel-default">
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" CssClass="table table-curved table-hover table-striped text-codemess table-dark " BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" OnRowDeleting="GridView1_RowDeleting" GridLines="Horizontal" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging">
+        <asp:GridView ID="GridView1" Height ="70%" runat="server" AllowPaging="True" AllowSorting="True" CssClass="table table-curved table-hover table-striped text-codemess table-dark" BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" OnRowDeleting="GridView1_RowDeleting" GridLines="Horizontal" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging">
+            <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
             <Columns>
                 <asp:CommandField ShowDeleteButton="True" DeleteText="Ištrinti" ControlStyle-CssClass="btn btn-danger" />
                 <asp:BoundField DataField="Id" HeaderText="ID" />
@@ -123,7 +134,8 @@
         <cc1:ModalPopupExtender ID="popupAdd" runat="server"
                 TargetControlID="fake"
                 PopupControlID="PanelAdd"
-                DropShadow="false">
+                DropShadow="false"
+                BackgroundCssClass="modalBackground">
             </cc1:ModalPopupExtender>
 
     <asp:ScriptManager ID="ScriptMngr" runat="server" EnableScriptGlobalization="true">

@@ -12,9 +12,14 @@
             margin-right: 1%;
         }
 
-        .gender{
-          text-align:center;
-          margin: 0 auto;
+        .selectAllPos{
+          float: left;
+          margin-left: 2px;
+        }
+
+        .buttonPos{
+          float: right;
+          margin-right: 2px;
         }
 
         .rbl input[type="radio"]
@@ -67,15 +72,48 @@
             border-right: none;
         }
 
+        .modalBackground 
+        {
+            height:100%;
+            background-color:#EBEBEB;
+            filter:alpha(opacity=70);
+            opacity:0.7;
+        }
+
+        .table {
+          width: 100%;
+          margin-bottom: 0px;
+        }
+
 
     </style>
         <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
         <div>
-            Registracija varžyboms<br />
-            <br />
-            Pasirinkite varžybas:<br />
-            <asp:GridView ID="competitions_gridview" runat="server" AutoGenerateSelectButton="True" OnSelectedIndexChanged="competitions_gridview_SelectedIndexChanged1" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="#33CCFF" ForeColor="white">
+            <table class="table table-striped text-codemess table-dark noBorder text-center">
+                <tr>
+                    <th>Registracija varžyboms</th>
+                </tr>
+            </table>
+            <table class="table table-curved table-striped text-codemess table-dark noBorder">
+                <tr>
+                    <th>Pasirinkite varžybas:</th>
+                </tr>
+            </table>
+            <asp:GridView ID="competitions_gridview" runat="server" OnSelectedIndexChanged="competitions_gridview_SelectedIndexChanged1" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" AutoGenerateColumns="False">
+                <Columns>
+                <asp:CommandField ShowSelectButton="True" SelectText="Pasirinkti" ControlStyle-CssClass="btn btn-success" />
+                <asp:BoundField DataField="Name" HeaderText="Pavadinimas" />
+                <asp:BoundField DataField="Location" HeaderText="Vieta" />
+                <asp:BoundField DataField="Id" HeaderText="ID" />
+                <asp:BoundField DataField="Date" HeaderText="Data" />
+                <asp:BoundField DataField="Address" HeaderText="Adresas" />
+                <asp:BoundField DataField="Registration" HeaderText="Registracija" />
+                <asp:BoundField DataField="RegistrationStartDate" HeaderText="Registracijos pradžia" />
+                <asp:BoundField DataField="RegistrationEndDate" HeaderText="Registracijos pabaiga" />
+
+                
+        </Columns>
             </asp:GridView>
             <br />
             <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
@@ -90,7 +128,8 @@
                 TargetControlID="fake"
                 PopupControlID="panelRegister"
                 OkControlID="registerComp_btn"
-                DropShadow="false">
+                DropShadow="false"
+                BackgroundCssClass="modalBackground">
             </cc1:ModalPopupExtender>
 
             <asp:Panel ID="panelRegister" runat="server" ScrollBars="Vertical" BorderWidth="5px" Width="30%" Height="60%" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
@@ -100,7 +139,9 @@
                         <h1>Pridėti dalyvius į varžybas</h1>
                     </div>
                     <div>
-                        <asp:Button ID="selectAll" runat="server" Text="Pasirinkti visus" OnClick="selectAll_Click"/>
+                        <asp:Button ID="selectAll" runat="server" Text="Pasirinkti visus" OnClick="selectAll_Click" CssClass="btn btn-outline-info selectAllPos"/>
+                        <asp:Button ID="Button1" runat="server" Text="Registruoti" OnClick="registerComp_btn_Click" CssClass="btn btn-outline-info buttonPos"/>
+                        <asp:Button ID="Button2" runat="server" Text="Atšaukti" OnClick="cancel_btn_Click" CssClass="btn btn-outline-info buttonPos"/>
                         <br />
                     </div>
                     <div>
