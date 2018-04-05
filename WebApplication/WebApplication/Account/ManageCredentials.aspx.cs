@@ -22,38 +22,46 @@ namespace WebApplication.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var user = manager.FindById(User.Identity.GetUserId());
+            if (User.Identity.IsAuthenticated)
+            {
+                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var user = manager.FindById(User.Identity.GetUserId());
 
-            if (user.Name != null)
-            {
-                name.Text = user.Name;
-                name.ReadOnly = true;
-            }
-            if (user.Surname != null)
-            {
-                SurnameText.Text = user.Surname;
-                SurnameText.ReadOnly = true;
-            }
-            if (user.Year != null)
-            {
-                BirthYear.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
-                DateTime dateTime = (DateTime) user.Year;
-                BirthYear.Text = dateTime.ToString("yyyy/MM/dd");
-                BirthYear.ReadOnly = true;
-            }
-
-            if (!IsPostBack)
-            {
-                // Determine the sections to render
-
-                // Render success message
-                var message = Request.QueryString["m"];
-                if (message != null)
+                if (user.Name != null)
                 {
-                    // Strip the query string from action
-                    Form.Action = ResolveUrl("~/Account/Manage");
+                    name.Text = user.Name;
+                    name.ReadOnly = true;
                 }
+                if (user.Surname != null)
+                {
+                    SurnameText.Text = user.Surname;
+                    SurnameText.ReadOnly = true;
+                }
+                if (user.Year != null)
+                {
+                    BirthYear.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
+                    DateTime dateTime = (DateTime)user.Year;
+                    BirthYear.Text = dateTime.ToString("yyyy/MM/dd");
+                    BirthYear.ReadOnly = true;
+                }
+
+                if (!IsPostBack)
+                {
+                    // Determine the sections to render
+
+                    // Render success message
+                    var message = Request.QueryString["m"];
+                    if (message != null)
+                    {
+                        // Strip the query string from action
+                        Form.Action = ResolveUrl("~/Account/Manage");
+                    }
+
+                }
+            }
+            else
+            {
+                Response.Redirect("/Account/Login");
             }
         }
 

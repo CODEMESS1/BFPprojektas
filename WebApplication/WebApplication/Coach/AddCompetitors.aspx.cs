@@ -18,7 +18,7 @@ namespace WebApplication.Coach
         List<Competitors> filteredList = new List<Competitors>();
         //Objektas su kuriuo bendraujame su DB lentele
         DbContainer competitors = new DbContainer();
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             //grazina visus dalyvius, juos atfiltruoja pagal treneri ir ikelia i gridview
@@ -80,7 +80,7 @@ namespace WebApplication.Coach
                 }
                 else
                 {
-                    ErrorMessage.Text = "Toks dalyvis jau egzistuoja";
+                    this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Toks dalyvis jau egzistuoja');", true);
                     popupAdd.Show();
                 }
             }

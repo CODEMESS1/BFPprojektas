@@ -25,28 +25,35 @@ namespace WebApplication.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
-
-            if (!IsPostBack)
+            if (User.Identity.IsAuthenticated)
             {
-                // Determine the sections to render
-                if (HasPassword(manager))
-                {
-                    changeEmailholder.Visible = true;
-                }
-                else
-                {
-                    changeEmailholder.Visible = false;
-                }
+                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
-                // Render success message
-                var message = Request.QueryString["m"];
-                if (message != null)
+
+                if (!IsPostBack)
                 {
-                    // Strip the query string from action
-                    Form.Action = ResolveUrl("~/Account/Manage");
+                    // Determine the sections to render
+                    if (HasPassword(manager))
+                    {
+                        changeEmailholder.Visible = true;
+                    }
+                    else
+                    {
+                        changeEmailholder.Visible = false;
+                    }
+
+                    // Render success message
+                    var message = Request.QueryString["m"];
+                    if (message != null)
+                    {
+                        // Strip the query string from action
+                        Form.Action = ResolveUrl("~/Account/Manage");
+                    }
                 }
+            }
+            else
+            {
+                Response.Redirect("/Account/Login");
             }
         }
 

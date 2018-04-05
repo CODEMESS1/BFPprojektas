@@ -132,7 +132,7 @@
                               <ul class="nav nav-tabs flex-column">
                                   <asp:LoginView runat="server" ViewStateMode="Disabled">
                                       <AnonymousTemplate>
-                                            <li class="nav-item text-white">
+                                            <li class="nav-item">
                                               <a class="nav-link icon fa-home" style="width: 350px;"  href="/#"> Pradžia</a>
                                             </li>
                                             <li class="nav-item">
