@@ -106,5 +106,10 @@ namespace WebApplication.Coach
             popUpRegister.Hide();
             container.CompetitorsInCompetitions.ToList();
         }
+
+        protected void cancel_btn_Click(object sender, EventArgs e)
+        {
+            popUpRegister.Hide();
+        }
     }
 }
