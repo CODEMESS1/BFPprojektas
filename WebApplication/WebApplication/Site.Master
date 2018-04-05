@@ -148,10 +148,10 @@
                                                       <li class="nav-item">
                                                       <a href="#" class="nav-link icon fa-book">Apie</a>
                                                       </li>
-                                                      <li>
+                                                      <li class="nav-item">
                                                       <a href="/Admin/CreateEditUsers" class="nav-link">Vartotojai</a>
                                                       </li>
-                                                      <li>
+                                                      <li class="nav-item">
                                                           <a href="Admin/PrintLists.aspx" class="nav-link">Sąrašai</a>
                                                       </li>
                                                   </ContentTemplate>
@@ -164,21 +164,32 @@
                                                       <li class="nav-item">
                                                       <a href="#" class="nav-link icon fa-home">Apie</a>
                                                       </li>
+                                                      <li class="nav-item">
                                                       <a href="/Coach/AddCompetitors" class="nav-link">Dalyviai</a>
                                                       </li>
-                                                      <li>
+                                                      <li class="nav-item">
                                                           <a href="/Coach/RegisterCompetitors" class="nav-link">Dalyvių registravimas</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
                                               <asp:RoleGroup Roles="Official">
                                                   <ContentTemplate>
-                                                      
+                                                      <li class="nav-item">
+                                                      <a class="nav-link icon fa-home" href="#">Pradžia</a>
+                                                      </li>
+                                                      <li class="nav-item">
+                                                      <a href="#" class="nav-link icon fa-home">Apie</a>
+                                                      </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
                                               <asp:RoleGroup Roles="User">
                                                   <ContentTemplate>
-                                                      
+                                                      <li class="nav-item">
+                                                      <a class="nav-link icon fa-home" href="#">Pradžia</a>
+                                                      </li>
+                                                      <li class="nav-item">
+                                                      <a href="#" class="nav-link icon fa-home">Apie</a>
+                                                      </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
                                           </RoleGroups>
