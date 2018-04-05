@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -25,6 +26,7 @@ namespace WebApplication.Coach
             compList = competitors.Comp.ToList();
 
             filteredList = filterList(compList);
+
             GridView1.DataSource = filteredList;
             GridView1.DataBind();
         }
@@ -110,10 +112,25 @@ namespace WebApplication.Coach
 
         protected void year_tb_TextChanged(object sender, EventArgs e)
         {
-            if(Convert.ToDateTime(year_tb.Text) > DateTime.Now)
+            try
+            {
+                if (Convert.ToDateTime(year_tb.Text) > DateTime.Now)
+                {
+                    year_tb.Text = "";
+                }
+            }
+            catch(FormatException ex)
             {
                 year_tb.Text = "";
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Neteisingas datos laukas');", true);
             }
+
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
         }
     }
 }

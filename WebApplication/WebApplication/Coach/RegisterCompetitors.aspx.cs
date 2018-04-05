@@ -33,6 +33,8 @@ namespace WebApplication.Coach
             }
         }
 
+
+
         public string GetCurrent()
         {
             return User.Identity.GetUserId();

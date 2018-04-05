@@ -101,7 +101,7 @@
      </script>
 
         <div class="panel panel-default">
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" CssClass="table table-curved table-hover table-striped text-codemess table-dark " BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" OnRowDeleting="GridView1_RowDeleting" GridLines="Horizontal" AutoGenerateColumns="False">
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" CssClass="table table-curved table-hover table-striped text-codemess table-dark " BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" OnRowDeleting="GridView1_RowDeleting" GridLines="Horizontal" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging">
             <Columns>
                 <asp:CommandField ShowDeleteButton="True" DeleteText="Ištrinti" ControlStyle-CssClass="btn btn-danger" />
                 <asp:BoundField DataField="Id" HeaderText="ID" />
