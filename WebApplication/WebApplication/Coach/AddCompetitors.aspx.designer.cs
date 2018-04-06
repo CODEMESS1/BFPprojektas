@@ -13,6 +13,42 @@ namespace WebApplication.Coach {
     public partial class AddCompetitors {
         
         /// <summary>
+        /// PageSizeHiddenField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField PageSizeHiddenField;
+        
+        /// <summary>
+        /// SetPageSizeButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SetPageSizeButton;
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
+        /// MyUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel MyUpdatePanel;
+        
+        /// <summary>
         /// GridView1 control.
         /// </summary>
         /// <remarks>
@@ -47,15 +83,6 @@ namespace WebApplication.Coach {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.ModalPopupExtender popupAdd;
-        
-        /// <summary>
-        /// ScriptMngr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptMngr;
         
         /// <summary>
         /// panelAdd control.

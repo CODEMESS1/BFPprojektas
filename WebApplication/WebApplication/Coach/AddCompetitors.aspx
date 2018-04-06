@@ -2,7 +2,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-
     <style>
         .errorMsg{
             color: red;
@@ -109,8 +108,49 @@
                     }
         }
      </script>
+    
+    <script type="text/javascript">
+    //Initial load of page
+    $(document).ready(sizePage);
 
-        <div class="panel panel-default">
+    //Every resize of window
+    $(window).resize(sizePage);
+
+    //Dynamically assign height
+        function sizePage() {
+            var h = screen.height;
+            if (h > 1000) {
+                $('#<%= GridView1.ClientID %>').attr("PageSize", "14");
+                $('#<%= PageSizeHiddenField.ClientID %>').val('14'); //this is page size
+            }
+            else {
+                $('#<%= GridView1.ClientID %>').attr("PageSize", "7");
+                $('#<%= PageSizeHiddenField.ClientID %>').val('7'); //this is page size
+            }
+        
+        $('#<%= SetPageSizeButton.ClientID %>').click(); //async postback
+        }
+    </script>
+    <script runat="server">
+        protected void SetPageSize_Click(object sender, EventArgs e)
+        {
+            GridView1.PageSize = int.Parse(PageSizeHiddenField.Value);
+            GridView1.PageIndex = 0;
+            GridView1.DataBind();
+            MyUpdatePanel.Update();
+        }
+    </script>
+
+    <asp:HiddenField runat="server" ID="PageSizeHiddenField" />
+    <asp:Button ID="SetPageSizeButton" runat="server" Style="display: none" OnClick="SetPageSize_Click" />
+
+
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+    
+    <asp:UpdatePanel runat="server" ID="MyUpdatePanel" UpdateMode="Conditional" class="panel panel-default">
+    <ContentTemplate>
+           
         <asp:GridView ID="GridView1" Height ="70%" runat="server" AllowPaging="True" AllowSorting="True" CssClass="table table-curved table-hover table-striped text-codemess table-dark" BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" OnRowDeleting="GridView1_RowDeleting" GridLines="Horizontal" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging">
             <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
             <Columns>
@@ -122,10 +162,13 @@
                 <asp:BoundField DataField="Gender" HeaderText="Lytis" />
                 <asp:BoundField DataField="City" HeaderText="Miestas" />
                 <asp:BoundField DataField="Country" HeaderText="Šalis" />
-                
         </Columns>
         </asp:GridView>
-        </div>
+     </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="SetPageSizeButton" EventName="Click" />
+        </Triggers>
+     </asp:UpdatePanel>
         <div>
             <asp:Button ID="add_btn2" runat="server" class="btn btn-default" Text="Pridėti" OnClick="add_btn_Click"/>
             <asp:LinkButton ID="fake" runat="server"></asp:LinkButton>
@@ -137,9 +180,6 @@
                 DropShadow="false"
                 BackgroundCssClass="modalBackground">
             </cc1:ModalPopupExtender>
-
-    <asp:ScriptManager ID="ScriptMngr" runat="server" EnableScriptGlobalization="true">
-        </asp:ScriptManager>
 
         <asp:Panel ID="panelAdd" runat="server" BorderWidth="5px" Width="30%" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary"  >
             <h1>Pridėti dalyvį</h1>
@@ -196,5 +236,4 @@
                 </div>
             </div>
         </asp:Panel>
-    
     </asp:Content>

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication.Models;
@@ -24,9 +26,7 @@ namespace WebApplication.Coach
         {
             //grazina visus dalyvius, juos atfiltruoja pagal treneri ir ikelia i gridview
             compList = competitors.Comp.ToList();
-
             filteredList = filterList(compList);
-
             GridView1.DataSource = filteredList;
             GridView1.DataBind();
         }
