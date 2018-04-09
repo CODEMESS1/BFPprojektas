@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CreateCompetition.aspx.cs" Inherits="WebApplication.Admin.CreateCompetition" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
-    <asp:Content runat="server" ID="AddCompetitorsContent" ContentPlaceHolderID="MainContent">
+    <asp:Content runat="server" ID="CreateCompetitionContent" ContentPlaceHolderID="MainContent">
         <div>
             <asp:ScriptManager EnableScriptGlobalization="true" runat="server"></asp:ScriptManager>
             VARŽYBŲ KŪRIMAS<br />

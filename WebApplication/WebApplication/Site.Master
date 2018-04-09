@@ -152,7 +152,7 @@
                                                       <a href="/Admin/CreateEditUsers" class="nav-link">Vartotojai</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                          <a href="Admin/PrintLists.aspx" class="nav-link">Sąrašai</a>
+                                                          <a href="/Admin/PrintLists.aspx" class="nav-link">Sąrašai</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
