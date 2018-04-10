@@ -17,7 +17,7 @@ namespace WebApplication.Coach
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            competitions = container.Competition.ToList().Where(c => c.Registration == true).ToList();
+            competitions = container.Competition.Where(c => c.Registration == true).ToList();
             competitorsList = container.Comp.ToList();
             filteredList = filterList(competitorsList);
             if (!Page.IsPostBack)

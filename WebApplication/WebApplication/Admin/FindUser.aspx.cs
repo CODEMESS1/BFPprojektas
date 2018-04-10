@@ -43,7 +43,7 @@ namespace WebApplication.Admin
             string strConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             SqlConnection myConnect = new SqlConnection(strConnectionString);
             DbContainer competitors = new DbContainer();
-            List<Competitors> searched = competitors.Comp.ToList().Where(c => c.Surname.Equals(PersonSurname.Text)).ToList();
+            List<Competitors> searched = competitors.Comp.Where(c => c.Surname.Equals(PersonSurname.Text)).ToList();
 
             try
             {
@@ -144,7 +144,7 @@ namespace WebApplication.Admin
         private void makeEdit()
         {
             DbContainer competitors = new DbContainer();
-            List<Competitors> searched = competitors.Comp.ToList().Where(c => c.Surname.Equals(PersonSurname.Text)).ToList();
+            List<Competitors> searched = competitors.Comp.Where(c => c.Surname.Equals(PersonSurname.Text)).ToList();
             Competitors toEdit = searched[GridView1.SelectedIndex];
             try
             {
