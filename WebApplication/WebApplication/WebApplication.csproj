@@ -249,6 +249,7 @@
     <Content Include="Admin\AdminPage.aspx" />
     <Content Include="Admin\CreateCompetition.aspx" />
     <Content Include="Admin\CreateEditUsers.aspx" />
+    <Content Include="Admin\FindUser.aspx" />
     <Content Include="Admin\PrintLists.aspx" />
     <Content Include="Coach\AddCompetitors.aspx" />
     <Content Include="Coach\CoachPage.aspx" />
@@ -500,9 +501,15 @@
     <Compile Include="Admin\CreateEditUsers.aspx.designer.cs">
       <DependentUpon>CreateEditUsers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\FindUser.aspx.cs">
+      <DependentUpon>FindUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\FindUser.aspx.designer.cs">
+      <DependentUpon>FindUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\PrintLists.aspx.cs">
       <DependentUpon>PrintLists.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\PrintLists.aspx.designer.cs">
       <DependentUpon>PrintLists.aspx</DependentUpon>
