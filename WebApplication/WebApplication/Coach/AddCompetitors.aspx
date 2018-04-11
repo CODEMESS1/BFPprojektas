@@ -151,7 +151,7 @@
     <asp:UpdatePanel runat="server" ID="MyUpdatePanel" UpdateMode="Conditional" class="panel panel-default">
     <ContentTemplate>
            
-        <asp:GridView ID="GridView1" Height ="70%" runat="server" AllowPaging="True" AllowSorting="True" CssClass="table table-curved table-hover table-striped text-codemess table-dark" BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" OnRowDeleting="GridView1_RowDeleting" GridLines="Horizontal" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging">
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" CssClass="table table-curved table-hover table-striped text-codemess table-dark" BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" OnRowDeleting="GridView1_RowDeleting" GridLines="Horizontal" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging">
             <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
             <Columns>
                 <asp:CommandField ShowDeleteButton="True" DeleteText="Ištrinti" ControlStyle-CssClass="btn btn-danger" />
