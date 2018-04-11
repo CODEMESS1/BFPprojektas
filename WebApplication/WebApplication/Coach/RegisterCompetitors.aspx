@@ -17,9 +17,14 @@
           margin-left: 2px;
         }
 
-        .buttonPos{
-          float: right;
-          margin-right: 2px;
+        .buttonPos {
+            float: right;
+            margin-right: 2px;
+        }
+
+        .gender{
+          text-align:center;
+          margin: 0 auto;
         }
 
         .rbl input[type="radio"]
@@ -68,16 +73,16 @@
           border-top: 2px solid white;
         }
 
-        .noBorder{
-            border-right: none;
-        }
-
         .modalBackground 
         {
             height:100%;
             background-color:#EBEBEB;
             filter:alpha(opacity=70);
             opacity:0.7;
+        }
+
+        .noBorder{
+            border-right: none;
         }
 
         .table {
@@ -87,6 +92,7 @@
 
 
     </style>
+
         <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
         <div>
@@ -100,7 +106,8 @@
                     <th>Pasirinkite varžybas:</th>
                 </tr>
             </table>
-            <asp:GridView ID="competitions_gridview" runat="server" OnSelectedIndexChanged="competitions_gridview_SelectedIndexChanged1" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" AutoGenerateColumns="False">
+            <asp:GridView ID="competitions_gridview" AllowPaging="true" runat="server" OnSelectedIndexChanged="competitions_gridview_SelectedIndexChanged1" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" AutoGenerateColumns="False">
+                <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
                 <Columns>
                 <asp:CommandField ShowSelectButton="True" SelectText="Pasirinkti" ControlStyle-CssClass="btn btn-success" />
                 <asp:BoundField DataField="Name" HeaderText="Pavadinimas" />

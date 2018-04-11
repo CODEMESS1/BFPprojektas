@@ -130,13 +130,13 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator passwordvalidator;
         
         /// <summary>
-        /// Label1 control.
+        /// passwcheck_lbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label passwcheck_lbl;
         
         /// <summary>
         /// passwver_tb control.
@@ -292,6 +292,15 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.TextBox editpassval_tb;
         
         /// <summary>
+        /// editname_lbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label editname_lbl;
+        
+        /// <summary>
         /// name_tb control.
         /// </summary>
         /// <remarks>
@@ -299,6 +308,15 @@ namespace WebApplication.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox name_tb;
+        
+        /// <summary>
+        /// editsurname_lbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label editsurname_lbl;
         
         /// <summary>
         /// surname_tb control.
