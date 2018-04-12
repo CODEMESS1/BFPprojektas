@@ -64,8 +64,9 @@
                 DropShadow="false">
             </cc1:ModalPopupExtender>
             
-            <asp:Panel ID="panelAdd" runat="server" BorderWidth="5px" Width="30%" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" style='display: none;' ForeColor="White" CssClass=" alert-secondary"  >
+            <asp:Panel ID="panelAdd" runat="server" BorderWidth="5px" Width="30%" HorizontalAlign="center" style='display: none;' BackColor="#484848"  BorderColor="#33CCFF"  ForeColor="White" CssClass=" alert-secondary"  >
             <h1>Pridėti dalyvį</h1>
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" Visible="False" ValidationGroup="addcomp" />
             <div>
                 <div>
                     <asp:Label ID="gender_lbl" runat="server" Text="Lytis"></asp:Label>
@@ -112,15 +113,15 @@
                     <br />
                     <asp:RequiredFieldValidator ID="countryvalidator" runat="server" ControlToValidate="country_tb" ErrorMessage="Pasirinkite šalį" ValidationGroup="addcomp" CssClass="errorMsg errorMsg2"></asp:RequiredFieldValidator>
                     <br />
-                    <asp:DropDownList ID="DropDownList1" runat="server">
+                    <asp:DropDownList ID="DropDownList1" runat="server" ValidationGroup="addcomp">
                     </asp:DropDownList>
                     <br />
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DropDownList1" ErrorMessage="Pairinkite trenerį"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DropDownList1" ErrorMessage="Pairinkite trenerį" ValidationGroup="addcomp"></asp:RequiredFieldValidator>
                     <br />
                 </div>
                 <div class="btn">
                     <asp:Button ID="create_btn" runat="server" Text="Pridėti" CausesValidation="true" ValidationGroup="addcomp" OnClick="submit_btn_Click" CssClass="btn"/>
-                    <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti" CssClass="btn"/>
+                    <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti" CausesValidation="false" CssClass="btn"/>
                 </div>
             </div>
         </asp:Panel>

@@ -47,10 +47,11 @@ namespace WebApplication.Admin
             {
                 int id = Convert.ToInt32(IdTextBox.Text);
                 List<Competitors> competitor = new List<Competitors>();
-                competitor.Add(competitorsContainer.GetCompetitor(id));
+                Competitors competitorToAdd = competitorsContainer.GetCompetitor(id);
 
-                if (competitor != null)
+                if (competitorToAdd != null)
                 {
+                    competitor.Add(competitorToAdd);
                     GridView1.DataSource = competitor;
                     GridView1.DataBind();
                 }
@@ -86,9 +87,17 @@ namespace WebApplication.Admin
 
         protected void submit_btn_Click(object sender, EventArgs e)
         {
-            string coachId = DropDownList1.SelectedItem.Value;
-            Competitors competitor = new Competitors(name_tb.Text, surname_tb.Text, year_tb.Text, gender_radbtn.SelectedValue, city_tb.Text, country_tb.Text, coachId);
-            competitorsContainer.AddCompetitorToCompetitors(competitor);
+            Page.Validate("addcomp");
+            if (Page.IsValid)
+            {
+                string coachId = DropDownList1.SelectedItem.Value;
+                Competitors competitor = new Competitors(name_tb.Text, surname_tb.Text, year_tb.Text, gender_radbtn.SelectedValue, city_tb.Text, country_tb.Text, coachId);
+                competitorsContainer.AddCompetitorToCompetitors(competitor);
+            }
+            else
+            {
+                popupAdd.Show();
+            }
         }
 
         protected void edit_btn_Click(object sender, EventArgs e)
