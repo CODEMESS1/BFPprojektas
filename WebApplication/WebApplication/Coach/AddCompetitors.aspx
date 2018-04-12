@@ -208,7 +208,7 @@
                 </div>
                 <div>
                     <asp:Label ID="year_lbl" runat="server" Text="Gim. metai:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="year_tb" runat="server" OnTextChanged="year_tb_TextChanged"  ValidationGroup="addcomp" TextMode="DateTime"></asp:TextBox>
+                    <asp:TextBox ID="year_tb" runat="server" OnTextChanged="year_tb_TextChanged" ValidationGroup="addcomp" TextMode="DateTime"></asp:TextBox>
                     <ajaxToolkit:CalendarExtender ID="TextBox4_CalendarExtender" runat="server" OnClientDateSelectionChanged="checkDate"
                       Enabled="True" FirstDayOfWeek="Monday"  Format="yyyy-MM-dd" 
                       TargetControlID="year_tb" />

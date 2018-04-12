@@ -23,5 +23,15 @@ namespace WebApplication.Models
         public int AccessFailedCount { get; set;}
         public string UserName { get; set; }
         public DateTime? Year { get; set; }
+        public string FullName { get
+            {
+                return string.Format("Vardas: {0}, Pavardė: {1}, Gim: {2:yyyy:MM}: ", Name, Surname, Year);
+            } }
+
+
+        public override string ToString()
+        {
+            return string.Format("Vardas: {0}, Pavardė: {1}", Name, Surname);
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace WebApplication.Admin
     {
         private PdfDocument pdfCoach = new PdfDocument();
 
-        private DbContainer dbContainer = new DbContainer();
+        private AspUsersContainer dbContainer = new AspUsersContainer();
 
         private struct UserToPrint
         {
@@ -61,12 +61,13 @@ namespace WebApplication.Admin
             //padaryti spausdinima i pdf faila
 
 
+
+            pdfOfficial.Save(path + "/official.pdf");
             Response.ContentType = "Application/pdf";
             Response.AppendHeader("Content-Disposition", "attachment; filename=teisejai.pdf");
             Response.TransmitFile(Server.MapPath("~/PDFs/official.pdf"));
             Response.End();
 
-            pdfOfficial.Save(path + "/official.pdf");
         }
 
         protected void printcoach_btn_Click(object sender, EventArgs e)
@@ -81,12 +82,14 @@ namespace WebApplication.Admin
             List<UserToPrint> users = getUsers("Coach");
 
             //padaryti spausdinima i pdf faila
+
+
+            pdfOfficial.Save(path + "/coach.pdf");
             Response.ContentType = "Application/pdf";
             Response.AppendHeader("Content-Disposition", "attachment; filename=treneriai.pdf");
             Response.TransmitFile(Server.MapPath("~/PDFs/coach.pdf"));
             Response.End();
 
-            pdfOfficial.Save(path + "/coach.pdf");
         }
 
         private List<UserToPrint> getUsers(string role)

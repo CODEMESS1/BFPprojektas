@@ -11,6 +11,7 @@ namespace WebApplication.Coach
     {
         private List<Competitors> filteredList = new List<Competitors>();
         private List<Competitors> competitorsList = new List<Competitors>();
+        private CompetitorsContainer competitorsContainer = new CompetitorsContainer();
         private DbContainer container = new DbContainer();
         private List<Competition> competitions = new List<Competition>();
         private string coachID = "";
@@ -18,7 +19,7 @@ namespace WebApplication.Coach
         protected void Page_Load(object sender, EventArgs e)
         {
             competitions = container.Competition.Where(c => c.Registration == true).ToList();
-            competitorsList = container.Comp.ToList();
+            competitorsList = competitorsContainer.Comp.ToList();
             filteredList = filterList(competitorsList);
             if (!Page.IsPostBack)
             {

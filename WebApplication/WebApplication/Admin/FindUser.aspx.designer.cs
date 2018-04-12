@@ -22,13 +22,13 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// add_btn2 control.
+        /// add_btn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button add_btn2;
+        protected global::System.Web.UI.WebControls.Button add_btn;
         
         /// <summary>
         /// fake control.
@@ -40,22 +40,67 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.LinkButton fake;
         
         /// <summary>
-        /// PersonSurname control.
+        /// searcherror_lbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PersonSurname;
+        protected global::System.Web.UI.WebControls.Label searcherror_lbl;
         
         /// <summary>
-        /// SearchID control.
+        /// IdTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchID;
+        protected global::System.Web.UI.WebControls.TextBox IdTextBox;
+        
+        /// <summary>
+        /// textboxvalidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator textboxvalidator;
+        
+        /// <summary>
+        /// searchid_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button searchid_btn;
+        
+        /// <summary>
+        /// SurnameTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox SurnameTextBox;
+        
+        /// <summary>
+        /// SurnameValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator SurnameValidator;
+        
+        /// <summary>
+        /// searchsurname_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button searchsurname_btn;
         
         /// <summary>
         /// popupAdd control.
@@ -67,139 +112,211 @@ namespace WebApplication.Admin {
         protected global::AjaxControlToolkit.ModalPopupExtender popupAdd;
         
         /// <summary>
-        /// PanelAdd control.
+        /// panelAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelAdd;
+        protected global::System.Web.UI.WebControls.Panel panelAdd;
         
         /// <summary>
-        /// ErrorMessage control.
+        /// gender_lbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ErrorMessage;
+        protected global::System.Web.UI.WebControls.Label gender_lbl;
         
         /// <summary>
-        /// email_lbl control.
+        /// gender_radbtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label email_lbl;
+        protected global::System.Web.UI.WebControls.RadioButtonList gender_radbtn;
         
         /// <summary>
-        /// email_tb control.
+        /// gendervalidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox email_tb;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator gendervalidator;
         
         /// <summary>
-        /// emailvalidator control.
+        /// name_lbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator emailvalidator;
+        protected global::System.Web.UI.WebControls.Label name_lbl;
         
         /// <summary>
-        /// passw_lbl control.
+        /// name_tb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label passw_lbl;
+        protected global::System.Web.UI.WebControls.TextBox name_tb;
         
         /// <summary>
-        /// passw_tb control.
+        /// namevalidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox passw_tb;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator namevalidator;
         
         /// <summary>
-        /// passwordvalidator control.
+        /// surname_lbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator passwordvalidator;
+        protected global::System.Web.UI.WebControls.Label surname_lbl;
         
         /// <summary>
-        /// Label1 control.
+        /// surname_tb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.TextBox surname_tb;
         
         /// <summary>
-        /// passwver_tb control.
+        /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox passwver_tb;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// passconfirmvalidator control.
+        /// year_lbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator passconfirmvalidator;
+        protected global::System.Web.UI.WebControls.Label year_lbl;
         
         /// <summary>
-        /// comparepassvalidator control.
+        /// year_tb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator comparepassvalidator;
+        protected global::System.Web.UI.WebControls.TextBox year_tb;
         
         /// <summary>
-        /// roleDropListAdd control.
+        /// CalendarExtender10 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList roleDropListAdd;
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender10;
         
         /// <summary>
-        /// dropdownvalidator control.
+        /// yearsvalidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator dropdownvalidator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator yearsvalidator;
         
         /// <summary>
-        /// submit_btn control.
+        /// city_lbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submit_btn;
+        protected global::System.Web.UI.WebControls.Label city_lbl;
+        
+        /// <summary>
+        /// city_tb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox city_tb;
+        
+        /// <summary>
+        /// citevalidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator citevalidator;
+        
+        /// <summary>
+        /// country_lbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label country_lbl;
+        
+        /// <summary>
+        /// country_tb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox country_tb;
+        
+        /// <summary>
+        /// countryvalidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator countryvalidator;
+        
+        /// <summary>
+        /// DropDownList1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        
+        /// <summary>
+        /// RequiredFieldValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+        
+        /// <summary>
+        /// create_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button create_btn;
         
         /// <summary>
         /// cancel_btn control.
@@ -299,6 +416,15 @@ namespace WebApplication.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox editYear_tb;
+        
+        /// <summary>
+        /// TextBox4_CalendarExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender TextBox4_CalendarExtender;
         
         /// <summary>
         /// editCity_lbl control.

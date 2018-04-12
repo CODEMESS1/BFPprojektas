@@ -140,6 +140,9 @@
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="WebFormsMvp, Version=1.4.5.0, Culture=neutral, PublicKeyToken=537f18701145dff0, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebFormsMvp.1.4.5.0\lib\WebFormsMvp.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -510,6 +513,7 @@
     </Compile>
     <Compile Include="Admin\PrintLists.aspx.cs">
       <DependentUpon>PrintLists.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\PrintLists.aspx.designer.cs">
       <DependentUpon>PrintLists.aspx</DependentUpon>
@@ -572,9 +576,11 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\AspNetUsers.cs" />
+    <Compile Include="Models\AspUsersContainer.cs" />
     <Compile Include="Models\Competition.cs" />
     <Compile Include="Models\CompetitionContainer.cs" />
     <Compile Include="Models\Competitors.cs" />
+    <Compile Include="Models\CompetitorsContainer.cs" />
     <Compile Include="Models\CompetitorsInCompetitions.cs" />
     <Compile Include="Models\Container.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -613,6 +619,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="PDFs\" />
+    <Folder Include="Presenter\" />
+    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
