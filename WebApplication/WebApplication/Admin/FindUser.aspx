@@ -112,7 +112,27 @@
                         sender._textbox.set_Value("");
                     }
         }
-     </script>
+        </script>
+
+        <script type="text/javascript">
+            function onKeyDownId()
+            {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    document.getElementById("<%=searchid_btn.ClientID%>").click();
+                }
+            }
+        </script>
+
+        <script type="text/javascript">
+            function onKeyDownSurname()
+            {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    document.getElementById("<%=searchsurname_btn.ClientID%>").click();
+                }
+            }
+        </script>
 
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal"  DataKeyNames="Id" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" >
             <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
@@ -145,14 +165,14 @@
                           <span class="input-group-btn pl-5 pl-5">
                             <asp:Button ID="searchid_btn" runat="server" class="btn btn-default" CausesValidation="true" Text="Ieškoti pagal ID" OnClick="FindID_Click" ValidationGroup="search"/>
                           </span>
-                          <asp:TextBox ID="IdTextBox" CssClass="btn-sm" TextMode="Number" runat="server" ClientIDMode="Static" AutoPostBack="false" ValidationGroup="search"></asp:TextBox>
+                          <asp:TextBox ID="IdTextBox" CssClass="btn-sm" TextMode="Number" onkeydown="return onKeyDownId()" runat="server" ClientIDMode="Static" AutoPostBack="false" ValidationGroup="search"></asp:TextBox>
                            <asp:RequiredFieldValidator ID="textboxvalidator" ControlToValidate="IdTextBox" EnableClientScript="true" runat="server" ErrorMessage="Įveskite ID" ForeColor="Red" ValidationGroup="search"></asp:RequiredFieldValidator>
                         </div><!-- /input-group -->
                       </div><!-- /.col-lg-6 -->
                       <div class="col-lg-6" style="margin-left:auto; margin-right:0;">
                         <div class="input-group">
                             <asp:RequiredFieldValidator ID="SurnameValidator" ControlToValidate="SurnameTextBox" runat="server" ErrorMessage="Įveskite pavardę" ForeColor="Red" CssClass="text-sm-center"></asp:RequiredFieldValidator>
-                            <asp:TextBox ID="SurnameTextBox" CssClass="btn-sm" runat="server" ></asp:TextBox>
+                            <asp:TextBox ID="SurnameTextBox" CssClass="btn-sm" onkeydown="return onKeyDownSurname()" runat="server" ></asp:TextBox>
                           <span class="input-group-btn">
                             <asp:Button ID="searchsurname_btn" runat="server" CausesValidation="true" class="btn btn-default test1" Text="Ieškoti pagal pavardę" OnClick="searchsurname_btn_Click"/>
                           </span >
