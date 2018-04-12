@@ -13,15 +13,6 @@ namespace WebApplication.Admin {
     public partial class PrintLists {
         
         /// <summary>
-        /// printofficials_lbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label printofficials_lbl;
-        
-        /// <summary>
         /// printofficial_btn control.
         /// </summary>
         /// <remarks>
@@ -29,15 +20,6 @@ namespace WebApplication.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button printofficial_btn;
-        
-        /// <summary>
-        /// printcoach_lbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label printcoach_lbl;
         
         /// <summary>
         /// printcoach_btn control.

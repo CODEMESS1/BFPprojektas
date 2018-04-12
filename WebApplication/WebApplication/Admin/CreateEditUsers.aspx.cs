@@ -86,7 +86,10 @@ namespace WebApplication.Admin
             }
             else
             {
-                ErrorMessage.Text = result.Errors.FirstOrDefault();
+                ErrorMessage.Text = "Slaptažodis turi būti sudarytas mažiausiai iš 6 simbolių, " + "<br />" +
+                    "privalo turėti bent viena skaičių('0'-'9'), " + "<br />" +
+                    "privalo turėti bent viena mažają raidę('a'-'z') " + "<br />" +
+                    "privalo turėti bent viena didžiają raidę('A'-'Z').";
                 return false;
             }
         }

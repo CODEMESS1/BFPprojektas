@@ -120,8 +120,8 @@
         function sizePage() {
             var h = screen.height;
             if (h > 1000) {
-                $('#<%= GridView1.ClientID %>').attr("PageSize", "14");
-                $('#<%= PageSizeHiddenField.ClientID %>').val('14'); //this is page size
+                $('#<%= GridView1.ClientID %>').attr("PageSize", "13");
+                $('#<%= PageSizeHiddenField.ClientID %>').val('13'); //this is page size
             }
             else {
                 $('#<%= GridView1.ClientID %>').attr("PageSize", "7");
@@ -230,10 +230,11 @@
                     <asp:RequiredFieldValidator ID="countryvalidator" runat="server" ControlToValidate="country_tb" ErrorMessage="Pasirinkite šalį" ValidationGroup="addcomp" CssClass="errorMsg errorMsg2"></asp:RequiredFieldValidator>
                     <br />
                 </div>
-                <div class="btn">
+                <br />
                     <asp:Button ID="create_btn" runat="server" Text="Pridėti" CausesValidation="true" ValidationGroup="addcomp" OnClick="create_btn_Click" CssClass="btn"/>
                     <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti" OnClick="cancel_btn_Click" CssClass="btn"/>
-                </div>
+                <br />
+                <br />
             </div>
         </asp:Panel>
     </asp:Content>
