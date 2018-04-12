@@ -36,7 +36,7 @@
         .nav-tabs{
           background-color:gray;
           color:#fff;
-          border-radius: 5px;
+          border-radius: 10px;
           border-color: white;
         }
         .tab-content{
@@ -51,7 +51,6 @@
         }
         .nav-tabs > li > a:hover{
           background-color: #161616 !important;
-            border: medium none;
             border-radius: 5px;
             color:#fff;
         
@@ -99,7 +98,7 @@
         <form id="form1" runat="server">
           <nav class="navbar navbar-expand-md navbar-light border-0" style="background: linear-gradient(to bottom right, #33ccff, #3399ff)">
            <a href="#" class="navbar-left"><img src="/Image/program-logo.png" width="50" height="50"></a>
-           <a class="navbar-text" style="font-family: Hemi; padding-left: 10px; font-size: large" href="#">BFP programa alpha 0.0001</a>
+           <a class="navbar-text" style="font-family: Hemi; padding-left: 10px; font-size: large" href="#">BFP programa alpha 0.0029</a>
             
             <div class="container">
               <%--<a class="navbar-brand" href="#">Meniu</a>--%>
@@ -131,10 +130,8 @@
                                     <i class="d-inline"><img src="/Image/user1.png" width="27" height="27"/></i>
                                     Paskyra
                                 </a>
-                                <li class="btn navbar-btn">
                                     
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect"  LogoutImageUrl="~/Image/logout4.png" LogoutText="Atsijungti" Width="53" Height="41" LogoutPageUrl="/" OnLoggingOut="Unnamed_LoggingOut" CssClass="btn navbar-btn btn-outline-light ml-2 text-uppercase " Font-Size="Medium" />
-                                </li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect"  LogoutImageUrl="~/Image/logout4.png" LogoutText="" Width="53" Height="41" LogoutPageUrl="/" OnLoggingOut="Unnamed_LoggingOut" CssClass="btn navbar-btn btn-outline-light ml-2 text-uppercase " Font-Size="Medium" />
                             </LoggedInTemplate>
                  </asp:LoginView>
               </div>
@@ -175,7 +172,7 @@
                                                           <a href="/Admin/PrintLists.aspx" class="nav-link"><img src="/Image/lists.png" width="30" height="30"/> Sąrašai</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                          <a href="/Admin/FindUser.aspx" class="nav-link"><img src="/Image/members1.png" width="30" height="30"/> Dalyviai</a>
+                                                          <a href="/Admin/FindUser.aspx" class="nav-link"><img src="/Image/editusers.png" width="30" height="30"/> Dalyvių redagavimas</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>

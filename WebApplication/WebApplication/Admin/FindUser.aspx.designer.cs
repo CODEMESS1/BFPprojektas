@@ -22,6 +22,15 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
+        /// searcherror_lbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label searcherror_lbl;
+        
+        /// <summary>
         /// add_btn control.
         /// </summary>
         /// <remarks>
@@ -40,13 +49,13 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.LinkButton fake;
         
         /// <summary>
-        /// searcherror_lbl control.
+        /// searchid_btn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label searcherror_lbl;
+        protected global::System.Web.UI.WebControls.Button searchid_btn;
         
         /// <summary>
         /// IdTextBox control.
@@ -67,13 +76,13 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator textboxvalidator;
         
         /// <summary>
-        /// searchid_btn control.
+        /// SurnameValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button searchid_btn;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator SurnameValidator;
         
         /// <summary>
         /// SurnameTextBox control.
@@ -83,15 +92,6 @@ namespace WebApplication.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SurnameTextBox;
-        
-        /// <summary>
-        /// SurnameValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator SurnameValidator;
         
         /// <summary>
         /// searchsurname_btn control.
@@ -470,6 +470,15 @@ namespace WebApplication.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox editCountry_tb;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// GenderDropListEdit control.

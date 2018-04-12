@@ -48,7 +48,7 @@
         }
 
         .tableFormat{
-            border-color: #33CCFF;
+            border-color: black;
         }
 
         .tableRound {
@@ -106,7 +106,7 @@
                     <th>Pasirinkite varžybas:</th>
                 </tr>
             </table>
-            <asp:GridView ID="competitions_gridview" AllowPaging="true" runat="server" OnSelectedIndexChanged="competitions_gridview_SelectedIndexChanged1" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="#33CCFF" ForeColor="white" AutoGenerateColumns="False">
+            <asp:GridView ID="competitions_gridview" AllowPaging="true" runat="server" OnSelectedIndexChanged="competitions_gridview_SelectedIndexChanged1" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" AutoGenerateColumns="False">
                 <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
                 <Columns>
                 <asp:CommandField ShowSelectButton="True" SelectText="Pasirinkti" ControlStyle-CssClass="btn btn-success" />
@@ -152,7 +152,7 @@
                         <br />
                     </div>
                     <div>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-curved table-hover table-striped text-codemess table-dark " BackColor="Gray" BorderColor="#33CCFF" ForeColor="white">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-curved table-hover table-striped text-codemess table-dark " BackColor="Gray" BorderColor="black" ForeColor="white">
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>

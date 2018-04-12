@@ -3,15 +3,15 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 
 
-    <div class="alert alert-success text-center" role="alert">
+    <div class="alert alert-dark text-center" role="alert">
       <h4 class="alert-heading">Spausdinti teisėjų sąrašą</h4>
-        <asp:Button ID="printofficial_btn" runat="server" OnClick="printofficial_btn_Click" Text="Spausdinti" CssClass="btn btn-outline-success btn-lg btn-block" />
+        <asp:Button ID="printofficial_btn" runat="server" OnClick="printofficial_btn_Click" Text="Spausdinti" CssClass="btn btn-outline-danger btn-lg btn-block" />
     </div>
     <br />
     <br />
-    <div class="alert alert-success text-center" role="alert">
+    <div class="alert alert-dark text-center" role="alert">
       <h4 class="alert-heading">Spausdinti trenerių sąrašą</h4>
-        <asp:Button ID="printcoach_btn" runat="server" OnClick="printcoach_btn_Click" Text="Spausdinti" CssClass="btn btn-outline-success btn-lg btn-block" />
+        <asp:Button ID="printcoach_btn" runat="server" OnClick="printcoach_btn_Click" Text="Spausdinti" CssClass="btn btn-outline-danger btn-lg btn-block" />
     </div>
 
 </asp:Content>
