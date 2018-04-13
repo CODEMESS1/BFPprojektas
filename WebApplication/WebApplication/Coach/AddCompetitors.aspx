@@ -1,7 +1,9 @@
-﻿<%@ Page Language="C#" Culture="lt-LT" UICulture="lt-LT" AutoEventWireup="true" MasterPageFile="~/Site.Master" EnableEventValidation="true" CodeBehind="AddCompetitors.aspx.cs" Inherits="WebApplication.Coach.AddCompetitors" %>
+﻿<%@ Page Title="Dalyviai" Language="C#" Culture="lt-LT" UICulture="lt-LT" AutoEventWireup="true" MasterPageFile="~/Site.Master" EnableEventValidation="true" CodeBehind="AddCompetitors.aspx.cs" Inherits="WebApplication.Coach.AddCompetitors" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+    <h2><%: Title %></h2>
+    <h4>Pridėt ir ištrinti dalyvius</h4>
     <style>
         .errorMsg{
             color: red;

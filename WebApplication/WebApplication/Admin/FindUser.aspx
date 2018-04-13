@@ -1,7 +1,9 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Culture="lt-LT" UICulture="lt-LT" CodeBehind="FindUser.aspx.cs" Inherits="WebApplication.Admin.FindUser" %>
+﻿<%@ Page Title="Dalyvių redagivmas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Culture="lt-LT" UICulture="lt-LT" CodeBehind="FindUser.aspx.cs" Inherits="WebApplication.Admin.FindUser" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
     <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+        <h2><%: Title %>.</h2>
+        <h4>Dalyvių paieška, pridėjimas, redagavimas</h4>
         <style>
         .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
         background-color: #4A4A4A;

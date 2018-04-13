@@ -49,10 +49,10 @@ namespace WebApplication.Admin
             {
                 try
                 { 
-                    var compet = new Competition() { Name = addName_txt.Text, Location = addPlace_txt.Text, Address = addAdress_txt.Text, Date = Convert.ToDateTime(AddDate_txt.Text), RegistrationStartDate = Convert.ToDateTime(addRegStart_txt.Text), RegistrationEndDate = Convert.ToDateTime(addRegEnd_txt.Text), Registration = (addIsRegOpen_ckbox.SelectedValue == "Open") ? true : false };
-                    DbContainer cp = new DbContainer();
-                    List<Competition> cpList = cp.Competition.ToList();
-                    cpList.Add(compet);
+                    //var compet = new Competition() { Name = addName_txt.Text, Location = addPlace_txt.Text, Address = addAdress_txt.Text, Date = Convert.ToDateTime(AddDate_txt.Text), RegistrationStartDate = Convert.ToDateTime(addRegStart_txt.Text), RegistrationEndDate = Convert.ToDateTime(addRegEnd_txt.Text), Registration = (addIsRegOpen_ckbox.SelectedValue == "Open") ? true : false };
+                    //DbContainer cp = new DbContainer();
+                    //List<Competition> cpList = cp.Competition.ToList();
+                    //cpList.Add(compet);
                     
                 }
                 catch(Exception ex)

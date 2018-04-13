@@ -8,10 +8,10 @@ namespace WebApplication.View
 {
     interface IEventOperations
     {
-        List<Event> Events { get; set; }
+        //List<Event> Events { get; set; }
 
-        event EventHandler<ICreateEvent> CreateEvent;
-        event EventHandler<IGetEvent> GetEvetn;
-        event EventHandler<IDeleteEvent> DeleteEvent;
+        //event EventHandler<ICreateEvent> CreateEvent;
+        //event EventHandler<IGetEvent> GetEvetn;
+        //event EventHandler<IDeleteEvent> DeleteEvent;
     }
 }
