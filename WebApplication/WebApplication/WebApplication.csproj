@@ -585,6 +585,7 @@
     <Compile Include="Models\Container.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Model\ICreateCompetition.cs" />
     <Compile Include="Official\OfficialPage.aspx.cs">
       <DependentUpon>OfficialPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -615,12 +616,14 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="View\ICreateCompetitionOperations.cs" />
+    <Compile Include="View\IEventOperations.cs" />
+    <Compile Include="View\IView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="PDFs\" />
     <Folder Include="Presenter\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

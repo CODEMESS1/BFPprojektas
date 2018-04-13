@@ -15,5 +15,18 @@ namespace WebApplication.Models
         public Boolean Registration { get; set; }
         public DateTime? RegistrationStartDate { get; set; }
         public DateTime? RegistrationEndDate { get; set; }
+
+        public Competition(string name, string locaction, int id, DateTime date, string address, 
+            Boolean registration, DateTime? registrationStartDate, DateTime? registrationEndDate)
+        {
+            Name = name;
+            Location = locaction;
+            Id = id;
+            Date = date;
+            Address = address;
+            Registration = registration;
+            RegistrationStartDate = registrationStartDate;
+            RegistrationEndDate = registrationEndDate;
+        }
     }
 }
