@@ -22,15 +22,34 @@ namespace WebApplication.Models
         }
 
         public Competition(string name, string locaction, string address, DateTime date,
-            Boolean registration, DateTime? registrationStartDate, DateTime? registrationEndDate)
+            Boolean registration, DateTime registrationStartDate, DateTime registrationEndDate)
         {
             Name = name;
             Location = locaction;
             Address = address;
             Date = date;
             Registration = registration;
-            RegistrationStartDate = new DateTime?(registrationStartDate.Value);
-            RegistrationEndDate = new DateTime?(registrationEndDate.Value);
+            RegistrationStartDate = new DateTime?(registrationStartDate);
+            RegistrationEndDate = new DateTime?(registrationEndDate);
+        }
+
+        public Competition(int id, string name, string locaction, string address, DateTime date,
+            Boolean registration, DateTime registrationStartDate, DateTime registrationEndDate)
+        {
+            Id = id;
+            Name = name;
+            Location = locaction;
+            Address = address;
+            Date = date;
+            Registration = registration;
+            RegistrationStartDate = new DateTime?(registrationStartDate);
+            RegistrationEndDate = new DateTime?(registrationEndDate);
+        }
+
+        public override bool Equals(object obj)
+        {
+            Competition c = (Competition)obj;
+            return c.Id == Id;
         }
     }
 }

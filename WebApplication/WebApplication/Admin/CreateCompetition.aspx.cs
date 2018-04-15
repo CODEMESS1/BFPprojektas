@@ -13,7 +13,7 @@ namespace WebApplication.Admin
     {
         private CreateCompetitionPresenter presenter;
 
-        public List<Competition> Competitions { set => GridView1.DataSource = value; }
+        public List<Competition> Competitions { get => Competitions; set => GridView1.DataSource = value; }
         //List<Event> ICreateCompetition.Events { set => ; }
 
         protected void Page_Load(object sender, EventArgs e)

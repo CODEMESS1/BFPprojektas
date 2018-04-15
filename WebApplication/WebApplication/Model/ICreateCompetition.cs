@@ -10,7 +10,7 @@ namespace WebApplication.Model
 {
     public interface ICreateCompetition
     {
-        List<Competition> Competitions { set; }
+        List<Competition> Competitions { get;  set; }
         //List<Event> Events { set; }
         bool AddCompetition(Competition competition);
         bool DeleteCompetition(Competition competition);
