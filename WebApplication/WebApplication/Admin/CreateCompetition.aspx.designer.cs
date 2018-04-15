@@ -22,15 +22,6 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// SqlDataSource1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-        
-        /// <summary>
         /// add_btn2 control.
         /// </summary>
         /// <remarks>
@@ -202,15 +193,6 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.CheckBoxList addIsRegOpen_ckbox;
         
         /// <summary>
-        /// isRegOpen_valid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator isRegOpen_valid;
-        
-        /// <summary>
         /// submit_btn control.
         /// </summary>
         /// <remarks>
@@ -379,16 +361,16 @@ namespace WebApplication.Admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList editisRegOpen_ckbox;
+        protected global::System.Web.UI.WebControls.RadioButtonList editisRegOpen_ckbox;
         
         /// <summary>
-        /// ckboxvalidator control.
+        /// gendervalidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ckboxvalidator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator gendervalidator;
         
         /// <summary>
         /// edit_btn control.

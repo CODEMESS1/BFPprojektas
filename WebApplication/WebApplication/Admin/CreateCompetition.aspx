@@ -6,10 +6,8 @@
             <asp:ScriptManager EnableScriptGlobalization="true" runat="server"></asp:ScriptManager>
             VARŽYBŲ KŪRIMAS<br />
             <br />
-            <asp:GridView ID="GridView1" runat="server" AllowPaging="True"  AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1">
+            <asp:GridView ID="GridView1" runat="server" AllowPaging="True"  AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Id" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AutoGenerateSelectButton="True">
                 <Columns>
-                    <asp:CommandField ShowEditButton="True"  />
-                    <asp:CommandField ShowSelectButton="True"  />
                     <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
                     <asp:BoundField DataField="Name" HeaderText="Pavadinimas" SortExpression="Name" />
                     <asp:BoundField DataField="Location" HeaderText="Vieta" SortExpression="Location" />
@@ -20,7 +18,6 @@
                     <asp:CheckBoxField DataField="Registration" HeaderText="Registracija atidaryta" SortExpression="Registration" />
                 </Columns>
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT * FROM [Competitions]"></asp:SqlDataSource>
             <asp:Button ID="add_btn2" runat="server" class="btn btn-default" Text="Pridėti" OnClick="add_btn_Click"/>
             <asp:LinkButton ID="fake" runat="server"></asp:LinkButton>
             <br />
@@ -74,8 +71,7 @@
                         <asp:ListItem Selected="True" Value="Closed"> Uzdaryta </asp:ListItem>
                     </asp:CheckBoxList>
                     <br />
-                    <asp:RequiredFieldValidator ID="isRegOpen_valid" runat="server" ErrorMessage="Nepasirinkta ar varzybos atidarytos ar uzdarytos" ControlToValidate="addIsRegOpen_ckbox" ValidationGroup="popup"></asp:RequiredFieldValidator>
-                </div>
+                 </div>
                 <asp:Button ID="submit_btn" runat="server" Text="Pridėti" CausesValidation="true" ValidationGroup="popup" OnClick="submit_btn_Click"/>
                 &nbsp;&nbsp;
                 <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti"/>
@@ -144,12 +140,13 @@
                     <br />
                     <asp:Label ID="editisRegOpen_lbl" runat="server" Text="Registracijos atidarymas/uždarymas"></asp:Label>
                     <br />
-                    <asp:CheckBoxList ID="editisRegOpen_ckbox" runat="server" >
+
+                     <asp:RadioButtonList ID="editisRegOpen_ckbox" runat="server" ValidationGroup="editPopup" RepeatDirection="Horizontal" CssClass="gender rbl" ForeColor="White">
                         <asp:ListItem Value="Open"> Atidaryta </asp:ListItem>
                         <asp:ListItem Selected="True" Value="Closed"> Uzdaryta </asp:ListItem>
-                    </asp:CheckBoxList>
+                    </asp:RadioButtonList>
+                    <asp:RequiredFieldValidator ID="gendervalidator" runat="server" ControlToValidate="editisRegOpen_ckbox" ErrorMessage="Pasirinkite ar aktyvuoti" ValidationGroup="addcomp" CssClass="errorMsg"></asp:RequiredFieldValidator>
                     <br />
-                    <asp:RequiredFieldValidator ID="ckboxvalidator" runat="server" ErrorMessage="Nepasirinkta ar varzybos atidarytos ar uzdarytos" ControlToValidate="editisRegOpen_ckbox" ValidationGroup="popup"></asp:RequiredFieldValidator>
                 </div>
                 <div>
                    

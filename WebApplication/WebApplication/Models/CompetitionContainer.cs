@@ -7,30 +7,50 @@ using WebApplication.Model;
 
 namespace WebApplication.Models
 {
-    public class CompetitionContainer : DbContext, ICreateCompetition
+    public class CompetitionContainer : DbContext
     {
         public CompetitionContainer() : base("DefaultConnection")
         {
 
         }
 
-        public DbSet<Competitors> Competitions { get; set; }
+        public DbSet<Competition> Competitions { get; set; }
 
-        List<Competition> ICreateCompetition.Competitions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public bool AddCompetition(Competition competition)
+        public void RemoveCompetition(Competition competition)
         {
-            throw new NotImplementedException();
+            Competitions.Remove(competition);
+            SaveChanges();
         }
 
-        public bool DeleteCompetition(Competition competition)
+        public void AddCompetition(Competition competition)
         {
-            throw new NotImplementedException();
+            Competitions.Add(competition);
+            SaveChanges();
+        }
+        
+        public void EditCompetition(Competition competition)
+        {
+            List<Competition> competitionToChange = Competitions.Where(c => c.Id == competition.Id).ToList();
+            if(competitionToChange.Count != 0)
+            {
+                Competitions.Remove(competitionToChange[0]);
+                Competitions.Add(competition);
+                SaveChanges();
+            }
+
         }
 
-        //public List<Events> GetEvents()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public Competition getById(int Id)
+        {
+            List<Competition> competitions = Competitions.Where(c => c.Id == Id).ToList();
+            if(competitions.Count != 0)
+            {
+                return competitions[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
