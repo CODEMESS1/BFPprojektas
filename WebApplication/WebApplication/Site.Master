@@ -121,14 +121,14 @@
                         </a>
                         <a class="btn navbar-btn btn-primary ml-2 text-uppercase btn-outline-light" href="/Account/Register">
                             <i class="d-inline"><img src="/Image/register2.png" width="30" height="30"/></i>
-                            Registruotis
+                            Registracija
                         </a>
                      </AnonymousTemplate>
                             <LoggedInTemplate>
 
                                 <a class="btn navbar-btn btn-outline-light ml-2 text-uppercase navbarsize" href="/Account/Manage">
                                     <i class="d-inline"><img src="/Image/user1.png" width="27" height="27"/></i>
-                                    Paskyra
+                                    Vartotojas
                                 </a>
                                     
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect"  LogoutImageUrl="~/Image/logout4.png" LogoutText="" Width="53" Height="41" LogoutPageUrl="/" OnLoggingOut="Unnamed_LoggingOut" CssClass="btn navbar-btn btn-outline-light ml-2 text-uppercase " Font-Size="Medium" />
@@ -205,10 +205,10 @@
                                               <asp:RoleGroup Roles="User">
                                                   <ContentTemplate>
                                                       <li class="nav-item">
-                                                      <a class="nav-link" href="/#"><img src="Image/home1.png" width="30" height="30"/> Pradžia</a>
+                                                      <a class="nav-link" href="/#"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                      <a href="#" class="nav-link"><img src="Image/info1.png" width="30" height="30"/> Apie</a>
+                                                      <a href="#" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Manage Account" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="WebApplication.Account.Manage" %>
+﻿<%@ Page Title="Vartotojas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="WebApplication.Account.Manage" %>
 
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
@@ -14,24 +14,53 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-horizontal">
-                <h4>Change your account settings</h4>
+                <h4>Keisti vartotojo nustatymus</h4>
                 <hr />
+
                 <dl class="dl-horizontal">
-                    <dt>Password:</dt>
-                    <dd>
-                        <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Change]" Visible="false" ID="ChangePassword" runat="server" />
-                        <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Create]" Visible="false" ID="CreatePassword" runat="server" />
-                    </dd>
-                    <dt>Change Your Email</dt>
-                    <dd><asp:HyperLink NavigateUrl="/Account/ManageEmail" Text="[Change]" runat="server" /></dd>
                     
-                    <dt>Change Your Credentials</dt>
-                    <dd><asp:HyperLink NavigateUrl="/Account/ManageCredentials" Text="[Change]" runat="server" /></dd>
+                    <dd >
+                        <div class="card">
+                            <div class="card-header">
+                            Keisti slaptažodį:
+                            </div>
+                            <div class="card-body">
+                        <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="Keisti" Visible="false" ID="ChangePassword" runat="server" CssClass="btn btn-info" />
+                        <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Create]" Visible="false" ID="CreatePassword" runat="server" />
+                                </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="card">
+                            <div class="card-header">
+                            Keisti elektroninį paštą:
+                            </div>
+                            <div class="card-body">
+                        <asp:HyperLink NavigateUrl="/Account/ManageEmail" Text="Keisti" runat="server" CssClass="btn btn-info" />
+                                </div>
+                        </div>
+                    </dd>                  
+                    <dd>
+                        <div class="card">
+                            <div class="card-header">
+                            Keisti vartotojo duomenis:
+                            </div>
+                            <div class="card-body">
+                        <asp:HyperLink NavigateUrl="/Account/ManageCredentials" Text="Keisti" runat="server" CssClass="btn btn-info" />
+                                </div>
+                        </div>                               
+                                </dd>
 
-                    <dt>External Logins:</dt>
-                    <dd><%: LoginsCount %>
-                        <asp:HyperLink NavigateUrl="/Account/ManageLogins" Text="[Manage]" runat="server" />
-
+                   <%-- <dd>
+                        <div class="card">
+                            <div class="card-header">
+                            Išoriniai prisijungimai:
+                            </div>
+                            <div class="card-body">
+                        <%: LoginsCount %>
+                        <asp:HyperLink NavigateUrl="/Account/ManageLogins" Text="Tvarkyti" runat="server" CssClass="btn btn-info" />
+                        </div>
+                        </div>  
                     </dd>
                     <%--
                         Phone Numbers can used as a second factor of verification in a two-factor authentication system.
@@ -57,27 +86,27 @@
                     <% } %>
                     --%>
 
-                    <dt>Two-Factor Authentication:</dt>
+                    <%--<dt>Two-Factor Authentication:</dt>
                     <dd>
                         <p>
                             There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                             for details on setting up this ASP.NET application to support two-factor authentication.
                         </p>
-                        <% if (TwoFactorEnabled)
-                          { %> 
-                        <%--
+                         if (TwoFactorEnabled)
+                          { 
+                        
                         Enabled
                         <asp:LinkButton Text="[Disable]" runat="server" CommandArgument="false" OnClick="TwoFactorDisable_Click" />
-                        --%>
-                        <% }
+                        
+                        }
                           else
-                          { %> 
-                        <%--
+                          { 
+                        
                         Disabled
                         <asp:LinkButton Text="[Enable]" CommandArgument="true" OnClick="TwoFactorEnable_Click" runat="server" />
-                        --%>
-                        <% } %>
-                    </dd>
+                        
+                         } 
+                    </dd>--%>
                 </dl>
             </div>
         </div>

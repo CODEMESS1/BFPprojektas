@@ -1,7 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegisterCompetitors.aspx.cs" MasterPageFile="~/Site.Master" Inherits="WebApplication.Coach.RegisterCompetitors" %>
+﻿<%@ Page Title="Dalyvių registravimas" Language="C#" AutoEventWireup="true" CodeBehind="RegisterCompetitors.aspx.cs" MasterPageFile="~/Site.Master" Inherits="WebApplication.Coach.RegisterCompetitors" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content runat="server" ID="AddCompetitorsContent" ContentPlaceHolderID="MainContent">
+    <h2><%: Title %>.</h2>
+    <h4>Dalyvių registracija į varžybas</h4>
     <style>
         .errorMsg{
             color: red;

@@ -1,6 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="PrintLists.aspx.cs" Inherits="WebApplication.Admin.PrintLists" %>
+﻿<%@ Page Title="Sąrašai" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="PrintLists.aspx.cs" Inherits="WebApplication.Admin.PrintLists" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+    <h2><%: Title %>.</h2>
+    <h4>Sąrašų spausdinimas PDF formatu</h4>
+    <hr />
 
 
     <div class="alert alert-dark text-center" role="alert">
