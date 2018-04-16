@@ -593,9 +593,6 @@ B:\asp.net mvp\webformsmvp-master\WebApplication\WebApplication\bin\Microsoft.AI
 B:\asp.net mvp\webformsmvp-master\WebApplication\WebApplication\bin\de\PdfSharp.resources.dll
 B:\asp.net mvp\webformsmvp-master\WebApplication\WebApplication\bin\de\PdfSharp.Charting.resources.dll
 B:\asp.net mvp\webformsmvp-master\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
-B:\MainRepository\WebApplication\WebApplication\bin\WebFormsMvp.dll
-B:\MainRepository\WebApplication\WebApplication\bin\WebFormsMvp.pdb
-B:\MainRepository\WebApplication\WebApplication\bin\WebFormsMvp.xml
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.App.config
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.initial.resources
@@ -764,3 +761,16 @@ C:\Git\projektas\WebApplication\WebApplication\bin\System.Security.Cryptography.
 C:\Git\projektas\WebApplication\WebApplication\bin\System.Security.Cryptography.Primitives.dll
 C:\Git\projektas\WebApplication\WebApplication\bin\System.Security.Cryptography.X509Certificates.dll
 C:\Git\projektas\WebApplication\WebApplication\bin\System.Diagnostics.DiagnosticSource.xml
+B:\MainRepository\WebApplication\WebApplication\bin\System.AppContext.dll
+B:\MainRepository\WebApplication\WebApplication\bin\System.Console.dll
+B:\MainRepository\WebApplication\WebApplication\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+B:\MainRepository\WebApplication\WebApplication\bin\System.Security.Cryptography.Encoding.dll
+B:\MainRepository\WebApplication\WebApplication\bin\System.Security.Cryptography.Primitives.dll
+B:\MainRepository\WebApplication\WebApplication\bin\NUnit3.TestAdapter.dll
+B:\MainRepository\WebApplication\WebApplication\bin\NUnit3.TestAdapter.pdb
+B:\MainRepository\WebApplication\WebApplication\bin\nunit.engine.dll
+B:\MainRepository\WebApplication\WebApplication\bin\nunit.engine.api.dll
+B:\MainRepository\WebApplication\WebApplication\bin\Mono.Cecil.dll
+B:\MainRepository\WebApplication\WebApplication\bin\nunit.framework.dll
+B:\MainRepository\WebApplication\WebApplication\bin\nunit.framework.pdb
+B:\MainRepository\WebApplication\WebApplication\bin\nunit.framework.xml
