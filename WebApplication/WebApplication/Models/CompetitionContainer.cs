@@ -28,7 +28,19 @@ namespace WebApplication.Models
             SaveChanges();
         }
         
-        public void EditCompetition(Competition competition)
+        public bool RemoveCompetition(int Id)
+        {
+            Competition competition = getById(Id);
+            if(competition != null)
+            {
+                Competitions.Remove(competition);
+                SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool EditCompetition(int id, Competition competition)
         {
             List<Competition> competitionToChange = Competitions.Where(c => c.Id == competition.Id).ToList();
             if(competitionToChange.Count != 0)
@@ -36,8 +48,9 @@ namespace WebApplication.Models
                 Competitions.Remove(competitionToChange[0]);
                 Competitions.Add(competition);
                 SaveChanges();
+                return true;
             }
-
+            return false;
         }
 
         public Competition getById(int Id)

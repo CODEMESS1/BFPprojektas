@@ -13,8 +13,8 @@ namespace WebApplication.Model
         List<Competition> Competitions { get;  set; }
         //List<Event> Events { set; }
         bool AddCompetition(Competition competition);
-        bool DeleteCompetition(Competition competition);
-        void EditCompetition(Competition competition);
+        bool DeleteCompetition(int id);
+        bool EditCompetition(int id, Competition competition);
 
     }
 }

@@ -37,7 +37,7 @@ namespace UnitTest.Tests
           public void Remove()
           {
               Competition test = new Competition(5, "BFP", "edit test", "Liepu al. 6", new DateTime(2018, 04, 20), true, new DateTime(2018 - 04 - 09), new DateTime(2018 - 04 - 20));
-              bool ret = view.DeleteCompetition(test);
+              bool ret = view.DeleteCompetition(test.Id);
 
               Assert.AreEqual(ret, true);
           }

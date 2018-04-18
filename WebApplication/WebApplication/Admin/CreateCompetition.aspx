@@ -143,7 +143,7 @@
 
                      <asp:RadioButtonList ID="editisRegOpen_ckbox" runat="server" ValidationGroup="editPopup" RepeatDirection="Horizontal" CssClass="gender rbl" ForeColor="White">
                         <asp:ListItem Value="Open"> Atidaryta </asp:ListItem>
-                        <asp:ListItem Selected="True" Value="Closed"> Uzdaryta </asp:ListItem>
+                        <asp:ListItem Value="Closed"> Uzdaryta </asp:ListItem>
                     </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="gendervalidator" runat="server" ControlToValidate="editisRegOpen_ckbox" ErrorMessage="Pasirinkite ar aktyvuoti" ValidationGroup="addcomp" CssClass="errorMsg"></asp:RequiredFieldValidator>
                     <br />

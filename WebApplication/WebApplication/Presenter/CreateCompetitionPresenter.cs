@@ -35,28 +35,21 @@ namespace WebApplication.Presenter
                 View.Competitions = competitionContainer.Competitions.ToList();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
-        public bool DeleteCompetition(Competition competition)
+        public bool DeleteCompetition(int Id)
         {
-            return View.DeleteCompetition(competition);
+            bool isCompleted = competitionContainer.RemoveCompetition(Id);
+            View.Competitions = competitionContainer.Competitions.ToList();
+            return isCompleted;
         }
 
-        public bool EditCompetition(Competition competition)
+        public bool EditCompetition(int Id, Competition competition)
         {
-            if(competition != null)
-            {
-                competitionContainer.EditCompetition(competition);
-                return true;
-            }
-           else
-            {
-                return false;
-            }
+            bool isCompleted = competitionContainer.EditCompetition(Id, competition);
+            View.Competitions = competitionContainer.Competitions.ToList();
+            return isCompleted;
         }
 
         public Competition getById(int Id)

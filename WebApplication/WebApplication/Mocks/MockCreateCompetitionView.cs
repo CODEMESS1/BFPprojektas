@@ -31,20 +31,32 @@ namespace UnitTest.Tests
             }
         }
 
-        public bool DeleteCompetition(Competition competition)
+        public bool DeleteCompetition(int Id)
         {
-            return competitions.Remove(competition);
+            List<Competition> competitions = this.competitions.Where(c => c.Id == Id).ToList();
+            if (competitions.Count != 0)
+            {
+                competitions.Remove(competitions[0]);
+                return true;
+            }
+            return false;
         }
 
-        public void EditCompetition(Competition competition)
+        public bool EditCompetition(int Id, Competition competition)
         {
             List<Competition> competitions = this.competitions.Where(c => c.Id == competition.Id).ToList();
+            if (competitions.Count != 0)
+            {
                 competitions[0].Name = competition.Name;
                 competitions[0].Location = competition.Location;
                 competitions[0].Registration = competition.Registration;
                 competitions[0].RegistrationStartDate = competition.RegistrationStartDate;
                 competitions[0].RegistrationEndDate = competition.RegistrationEndDate;
                 competitions[0].Date = competition.Date;
+                return true;
+            }
+            return false;
+
         }
     }
 }

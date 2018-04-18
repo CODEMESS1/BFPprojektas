@@ -28,14 +28,14 @@ namespace WebApplication.Admin
             return presenter.AddCompetition(competition);
         }
 
-        bool ICreateCompetition.DeleteCompetition(Competition competition)
+        bool ICreateCompetition.DeleteCompetition(int Id)
         {
-            return presenter.DeleteCompetition(competition);
+            return presenter.DeleteCompetition(Id);
         }
 
-        void ICreateCompetition.EditCompetition(Competition competition)
+        bool ICreateCompetition.EditCompetition(int id, Competition competition)
         {
-            presenter.EditCompetition(competition);
+            return presenter.EditCompetition(id, competition);
         }
 
         protected void add_btn_Click(object sender, EventArgs e)
@@ -46,9 +46,13 @@ namespace WebApplication.Admin
         protected void submit_btn_Click(object sender, EventArgs e)
         {
             popupAdd.Show();
-            Competition competition = new Competition(addName_txt.Text, addPlace_txt.Text, addAdress_txt.Text, Convert.ToDateTime(AddDate_txt.Text), (addIsRegOpen_ckbox.SelectedValue == "Open") ? true : false,
+            //if (editName_tb.Text != string.Empty || editName_tb.Text != "")
+            //{
+                Competition competition = new Competition(addName_txt.Text, addPlace_txt.Text, addAdress_txt.Text, Convert.ToDateTime(AddDate_txt.Text), (addIsRegOpen_ckbox.SelectedValue == "Open") ? true : false,
                 Convert.ToDateTime(addRegStart_txt.Text), Convert.ToDateTime(addRegEnd_txt.Text));
-            presenter.AddCompetition(competition);
+                presenter.AddCompetition(competition);
+            //}
+
             GridView1.DataBind();
             popupAdd.Hide();
         }
@@ -56,21 +60,35 @@ namespace WebApplication.Admin
         protected void remove_btn_Click(object sender, EventArgs e)
         {
             //remove padaryti
+            int compId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
+            presenter.DeleteCompetition(compId);
+            GridView1.DataBind();
+
             popupEdit.Hide();
         }
 
         protected void edit_btn_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
-            Competition competition = presenter.getById(id);
-            if(presenter.EditCompetition(competition) == true)
-            {
-                //jeipaeditino
-            }
+            int compId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
+            Competition competition = new Competition();
+            if (editName_tb.Text != string.Empty || editName_tb.Text != "")
+                competition.Name = editName_tb.Text;
+            if (editLocation_tb.Text != string.Empty || editLocation_tb.Text != "")
+                competition.Location = editLocation_tb.Text;
+            if (editAddress_tb.Text != string.Empty || editAddress_tb.Text != "")
+                competition.Address = editAddress_tb.Text;
+            if (editDate_tb.Text != string.Empty || editDate_tb.Text != "")
+                competition.Date = Convert.ToDateTime(editDate_tb.Text);
+            if (editisRegOpen_ckbox.SelectedValue == "Open")
+                competition.Registration = true;
             else
-            {
-                //jei nepaeditino
-            }
+                competition.Registration = false;
+            if (editRegistrationStartDate_tb.Text != string.Empty || editRegistrationStartDate_tb.Text != "")
+                competition.RegistrationStartDate = Convert.ToDateTime(editRegistrationStartDate_tb.Text);
+            if (editRegistrationEndDate_tb.Text != string.Empty || editRegistrationEndDate_tb.Text != "")
+                competition.RegistrationEndDate = Convert.ToDateTime(editRegistrationEndDate_tb.Text);
+
+                presenter.EditCompetition(compId, competition);
             GridView1.DataBind();
             popupEdit.Hide();
         }
