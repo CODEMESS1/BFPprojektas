@@ -633,7 +633,7 @@
       <DependentUpon>201803312045182_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Mocks\MockCreateCompetitionView.cs" />
+    <Compile Include="Tests\Mocks\MockCreateCompetitionView.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\AspNetUsers.cs" />

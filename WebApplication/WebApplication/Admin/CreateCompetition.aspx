@@ -1,7 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CreateCompetition.aspx.cs" Inherits="WebApplication.Admin.CreateCompetition" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Culture="lt-LT" UICulture="lt-LT" MasterPageFile="~/Site.Master" CodeBehind="CreateCompetition.aspx.cs" Inherits="WebApplication.Admin.CreateCompetition" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-
     <asp:Content runat="server" ID="CreateCompetitionContent" ContentPlaceHolderID="MainContent">
+
+        <script type="text/javascript">
+            function setDate(sender, args) {
+            }
+        </script>
+
         <div>
             <asp:ScriptManager EnableScriptGlobalization="true" runat="server"></asp:ScriptManager>
             VARŽYBŲ KŪRIMAS<br />
@@ -39,37 +44,50 @@
                     <asp:Label ID="addName_lbl" runat="server" Text="Pavadinimas"></asp:Label>
                     <asp:TextBox ID="addName_txt" runat="server" ValidationGroup="popup" ></asp:TextBox>
                     <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="addName_txt" ErrorMessage="RequiredFieldValidator" ValidationGroup="popup"></asp:RequiredFieldValidator>
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="addPlace_lbl" runat="server" Text="Vieta"></asp:Label>
                     <asp:TextBox ID="addPlace_txt" runat="server" ValidationGroup="popup" ></asp:TextBox>
                     <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="addPlace_txt" ErrorMessage="RequiredFieldValidator" ValidationGroup="popup"></asp:RequiredFieldValidator>
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="addAdress_lbl" runat="server" Text="Adresas"></asp:Label>
                     <asp:TextBox ID="addAdress_txt" runat="server" ValidationGroup="popup" ></asp:TextBox>
                     <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="addAdress_txt" ErrorMessage="RequiredFieldValidator" ValidationGroup="popup"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Label ID="AddDate_lbl" runat="server" Text="Data"></asp:Label>
-                    <asp:TextBox ID="AddDate_txt" runat="server" TextMode="Date" ValidationGroup="popup" ></asp:TextBox>
+                    <asp:TextBox ID="AddDate_txt" runat="server" TextMode="DateTime" ReadOnly="true" ValidationGroup="popup"></asp:TextBox>
+                    <ajaxToolkit:CalendarExtender ID="TextBox4_CalendarExtender" runat="server" OnClientDateSelectionChanged="setDate"
+                      Enabled="True" FirstDayOfWeek="Monday"  Format="yyyy-MM-dd" 
+                      TargetControlID="AddDate_txt" />
                     <br />
                     <br />
                     <asp:Label ID="addRegStart_lbl" runat="server" Text="Registracijos pradžia"></asp:Label>
-                    <asp:TextBox ID="addRegStart_txt" runat="server" TextMode="Date" ValidationGroup="popup" ></asp:TextBox>
+                    <asp:TextBox ID="addRegStart_txt" runat="server" TextMode="DateTime" ReadOnly="true" ValidationGroup="popup" ></asp:TextBox>
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" OnClientDateSelectionChanged="setDate"
+                      Enabled="True" FirstDayOfWeek="Monday"  Format="yyyy-MM-dd" 
+                      TargetControlID="addRegStart_txt" />
                     <br />
                     <br />
                     <asp:Label ID="addRegEnd_lbl" runat="server" Text="Registracijos pabaiga"></asp:Label>
-                    <asp:TextBox ID="addRegEnd_txt" runat="server" TextMode="Date" ValidationGroup="popup" ></asp:TextBox>
+                    <asp:TextBox ID="addRegEnd_txt" runat="server" TextMode="DateTime" ReadOnly="true" ValidationGroup="editPopup"  ></asp:TextBox>
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" OnClientDateSelectionChanged="setDate"
+                      Enabled="True" FirstDayOfWeek="Monday"  Format="yyyy-MM-dd" 
+                      TargetControlID="addRegEnd_txt" />
                     <br />
                     <br />
                     <asp:Label ID="addIsRegOpen_lbl" runat="server" Text="Registracijos atidarymas/uždarymas"></asp:Label>
                     <br />
-                    <asp:CheckBoxList ID="addIsRegOpen_ckbox" runat="server" >
+                    <asp:RadioButtonList ID="addIsRegOpen_ckbox" runat="server" ValidationGroup="editPopup" RepeatDirection="Horizontal" CssClass="gender rbl" ForeColor="White">
                         <asp:ListItem Value="Open"> Atidaryta </asp:ListItem>
-                        <asp:ListItem Selected="True" Value="Closed"> Uzdaryta </asp:ListItem>
-                    </asp:CheckBoxList>
+                        <asp:ListItem Selected="True" Value="Closed"> Uždaryta </asp:ListItem>
+                    </asp:RadioButtonList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="RequiredFieldValidator" ValidationGroup="editPopup" ControlToValidate="addIsRegOpen_ckbox"></asp:RequiredFieldValidator>
                     <br />
                  </div>
                 <asp:Button ID="submit_btn" runat="server" Text="Pridėti" CausesValidation="true" ValidationGroup="popup" OnClick="submit_btn_Click"/>
@@ -113,29 +131,41 @@
                     <asp:Label ID="editName_lbl" runat="server" Text="Pavadinimas"></asp:Label>
                     <asp:TextBox ID="editName_tb" runat="server" ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="editName_tb" ValidationGroup="editPopup" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="editLocation_lbl" runat="server" Text="Vieta"></asp:Label>
                     <asp:TextBox ID="editLocation_tb" runat="server" ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="editLocation_tb" ValidationGroup="editPopup" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="editAddress_lbl" runat="server" Text="Adresas"></asp:Label>
                     <asp:TextBox ID="editAddress_tb" runat="server" ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="editAddress_tb" ValidationGroup="editPopup" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Label ID="editDate_lbl" runat="server" Text="Data"></asp:Label>
-                    <asp:TextBox ID="editDate_tb" runat="server" TextMode="Date" ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editDate_tb" runat="server" TextMode="DateTime" ReadOnly="true" ValidationGroup="editPopup" ></asp:TextBox>
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender3" runat="server" OnClientDateSelectionChanged="setDate"
+                      Enabled="True" FirstDayOfWeek="Monday"  Format="yyyy-MM-dd" 
+                      TargetControlID="editDate_tb" />
                     <br />
                     <br />
                     <asp:Label ID="editRegistrationStartDate_lbl" runat="server" Text="Registracijos pradžia"></asp:Label>
-                    <asp:TextBox ID="editRegistrationStartDate_tb" runat="server" TextMode="Date" ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editRegistrationStartDate_tb" runat="server" TextMode="DateTime" ReadOnly="true" ValidationGroup="editPopup" ></asp:TextBox>
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender4" runat="server" OnClientDateSelectionChanged="setDate"
+                      Enabled="True" FirstDayOfWeek="Monday"  Format="yyyy-MM-dd" 
+                      TargetControlID="editRegistrationStartDate_tb" />
                     <br />
                     <br />
                     <asp:Label ID="editRegistrationEndDate_lbl" runat="server" Text="Registracijos pabaiga"></asp:Label>
-                    <asp:TextBox ID="editRegistrationEndDate_tb" runat="server" TextMode="Date" ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editRegistrationEndDate_tb" runat="server" TextMode="DateTime" ReadOnly="true" ValidationGroup="editPopup" ></asp:TextBox>
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender5" runat="server" OnClientDateSelectionChanged="setDate"
+                      Enabled="True" FirstDayOfWeek="Monday"  Format="yyyy-MM-dd" 
+                      TargetControlID="editRegistrationEndDate_tb" />
                     <br />
                     <br />
                     <asp:Label ID="editisRegOpen_lbl" runat="server" Text="Registracijos atidarymas/uždarymas"></asp:Label>
@@ -145,7 +175,7 @@
                         <asp:ListItem Value="Open"> Atidaryta </asp:ListItem>
                         <asp:ListItem Value="Closed"> Uzdaryta </asp:ListItem>
                     </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator ID="gendervalidator" runat="server" ControlToValidate="editisRegOpen_ckbox" ErrorMessage="Pasirinkite ar aktyvuoti" ValidationGroup="addcomp" CssClass="errorMsg"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="gendervalidator" runat="server" ControlToValidate="editisRegOpen_ckbox" ErrorMessage="Pasirinkite ar aktyvuoti"  ValidationGroup="editPopup" CssClass="errorMsg"></asp:RequiredFieldValidator>
                     <br />
                 </div>
                 <div>

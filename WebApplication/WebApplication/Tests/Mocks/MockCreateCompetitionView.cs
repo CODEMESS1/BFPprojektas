@@ -10,13 +10,21 @@ namespace UnitTest.Tests
 {
     class MockCreateCompetitionView : ICreateCompetition
     {
-        private List<Competition> competitions = new List<Competition>();
-        
+        private List<Competition> competitions;
+
         public List<Competition> Competitions
         {
             get => competitions;
             set { competitions = value; }
         }
+
+        public string Name { get; set; }
+        public string Location { get; set; }
+        public DateTime Date { get; set; }
+        public string Address { get; set; }
+        public DateTime? RegistrationStartDate { get; set; }
+        public DateTime? RegistrationEndDate { get; set; }
+        public bool Registration { get; set; }
 
         public bool AddCompetition(Competition competition)
         {
@@ -57,6 +65,11 @@ namespace UnitTest.Tests
             }
             return false;
 
+        }
+
+        public bool EditCompetition(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

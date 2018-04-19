@@ -18,9 +18,9 @@ namespace WebApplication.Presenter
             if (view == null)
                 throw new ArgumentNullException("view cannot be null");
 
-            this.View = view; 
+            this.View = view;
         }
-         
+
         public void InitView()
         {
             View.Competitions = competitionContainer.Competitions.ToList();
@@ -29,7 +29,7 @@ namespace WebApplication.Presenter
 
         public bool AddCompetition(Competition competition)
         {
-            if(competition != null)
+            if (competition != null)
             {
                 competitionContainer.AddCompetition(competition);
                 View.Competitions = competitionContainer.Competitions.ToList();
@@ -45,11 +45,34 @@ namespace WebApplication.Presenter
             return isCompleted;
         }
 
-        public bool EditCompetition(int Id, Competition competition)
+        public bool EditCompetition(int Id)
         {
+            Competition competition = new Competition(View.Name, View.Location, View.Address, View.Date, View.Registration, 
+                View.RegistrationStartDate, View.RegistrationEndDate);
             bool isCompleted = competitionContainer.EditCompetition(Id, competition);
             View.Competitions = competitionContainer.Competitions.ToList();
             return isCompleted;
+        }
+
+        public bool PopulatePopup(int compId)
+        {
+            List<Competition> competitionList = competitionContainer.Competitions.Where(c => c.Id == compId).ToList();
+            if(competitionList.Count != 0)
+            {
+                Competition competition = competitionList[0];
+                View.Name = competition.Name;
+                View.Location = competition.Location;
+                View.RegistrationStartDate = competition.RegistrationStartDate;
+                View.RegistrationEndDate = competition.RegistrationEndDate;
+                View.Date = competition.Date;
+                View.Address = competition.Address;
+                View.Registration = competition.Registration;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Competition getById(int Id)

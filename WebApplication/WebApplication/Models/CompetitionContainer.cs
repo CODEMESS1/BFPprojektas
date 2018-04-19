@@ -42,7 +42,7 @@ namespace WebApplication.Models
 
         public bool EditCompetition(int id, Competition competition)
         {
-            List<Competition> competitionToChange = Competitions.Where(c => c.Id == competition.Id).ToList();
+            List<Competition> competitionToChange = Competitions.Where(c => c.Id == id).ToList();
             if(competitionToChange.Count != 0)
             {
                 Competitions.Remove(competitionToChange[0]);

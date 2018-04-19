@@ -22,6 +22,30 @@ namespace WebApplication.Models
         }
 
         public Competition(string name, string locaction, string address, DateTime date,
+            Boolean registration, DateTime? registrationStartDate, DateTime? registrationEndDate)
+        {
+            Name = name;
+            Location = locaction;
+            Address = address;
+            Date = date;
+            Registration = registration;
+            RegistrationStartDate = registrationStartDate;
+            RegistrationEndDate = registrationEndDate;
+        }
+
+        public Competition(string name, string locaction, string address, DateTime date,
+            Boolean registration)
+        {
+            Name = name;
+            Location = locaction;
+            Address = address;
+            Date = date;
+            Registration = registration;
+            RegistrationStartDate = null;
+            RegistrationEndDate = null;
+        }
+
+        public Competition(string name, string locaction, string address, DateTime date,
             Boolean registration, DateTime registrationStartDate, DateTime registrationEndDate)
         {
             Name = name;

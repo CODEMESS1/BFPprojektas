@@ -14,6 +14,38 @@ namespace WebApplication.Admin
         private CreateCompetitionPresenter presenter;
 
         public List<Competition> Competitions { get => Competitions; set => GridView1.DataSource = value; }
+        public string Name { get => editName_tb.Text;  set => editName_tb.Text = value; }
+        public string Location { get => editLocation_tb.Text;  set => editLocation_tb.Text = value; }
+        public DateTime Date { get => Convert.ToDateTime(Request.Form[editDate_tb.UniqueID]);  set => editDate_tb.Text = value.ToString("yyyy/MM/dd"); }
+        public string Address { get => editAddress_tb.Text;  set => editAddress_tb.Text = value; }
+        public DateTime? RegistrationStartDate { get => Convert.ToDateTime(Request.Form[editRegistrationStartDate_tb.UniqueID]);
+                                                                    set => editRegistrationStartDate_tb.Text = value.ToString(); }
+        public DateTime? RegistrationEndDate { get => Convert.ToDateTime(Request.Form[editRegistrationEndDate_tb.UniqueID]);
+                                                                   set => editRegistrationEndDate_tb.Text = value.ToString(); }
+
+        public bool Registration
+        {
+            get
+            {
+                if (editisRegOpen_ckbox.SelectedValue.Equals("Open"))
+                {
+                    return true;
+                }
+                return false;
+            }
+            set
+            {
+                if(value == true)
+                {
+                    editisRegOpen_ckbox.SelectedValue = "Open";
+                }
+                else
+                {
+                    editisRegOpen_ckbox.SelectedValue = "Closed";
+                }
+            }
+        }
+
         //List<Event> ICreateCompetition.Events { set => ; }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -23,21 +55,6 @@ namespace WebApplication.Admin
             GridView1.DataBind();
         }
 
-        bool ICreateCompetition.AddCompetition(Competition competition)
-        {
-            return presenter.AddCompetition(competition);
-        }
-
-        bool ICreateCompetition.DeleteCompetition(int Id)
-        {
-            return presenter.DeleteCompetition(Id);
-        }
-
-        bool ICreateCompetition.EditCompetition(int id, Competition competition)
-        {
-            return presenter.EditCompetition(id, competition);
-        }
-
         protected void add_btn_Click(object sender, EventArgs e)
         {
             popupAdd.Show();
@@ -45,57 +62,96 @@ namespace WebApplication.Admin
 
         protected void submit_btn_Click(object sender, EventArgs e)
         {
-            popupAdd.Show();
-            //if (editName_tb.Text != string.Empty || editName_tb.Text != "")
-            //{
-                Competition competition = new Competition(addName_txt.Text, addPlace_txt.Text, addAdress_txt.Text, Convert.ToDateTime(AddDate_txt.Text), (addIsRegOpen_ckbox.SelectedValue == "Open") ? true : false,
-                Convert.ToDateTime(addRegStart_txt.Text), Convert.ToDateTime(addRegEnd_txt.Text));
-                presenter.AddCompetition(competition);
-            //}
-
-            GridView1.DataBind();
-            popupAdd.Hide();
+            Page.Validate("popup");
+            if (Page.IsValid)
+            {
+                Competition competition;
+                popupAdd.Show();
+                if(addRegStart_txt.Text.Equals("") || addRegEnd_txt.Text.Equals(""))
+                {
+                    competition = new Competition(addName_txt.Text, addPlace_txt.Text, addAdress_txt.Text, Convert.ToDateTime(Request.Form[AddDate_txt.UniqueID]), (addIsRegOpen_ckbox.SelectedValue == "Open") ? true : false);
+                }
+                else
+                {
+                    competition = new Competition(addName_txt.Text, addPlace_txt.Text, addAdress_txt.Text, Convert.ToDateTime(Request.Form[AddDate_txt.UniqueID]), (addIsRegOpen_ckbox.SelectedValue == "Open") ? true : false,
+                        Convert.ToDateTime(Request.Form[addRegStart_txt.UniqueID]), Convert.ToDateTime(Request.Form[addRegEnd_txt.UniqueID]));
+                }
+                if (presenter.AddCompetition(competition))
+                {
+                    GridView1.DataBind();
+                    popupAdd.Hide();
+                }
+                else
+                {
+                    this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Įvyko klaida! Nepavyko pridėti varžybų');", true);
+                }
+            }
+            else
+            {
+                popupAdd.Show();
+            }
         }
 
         protected void remove_btn_Click(object sender, EventArgs e)
         {
             //remove padaryti
             int compId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
-            presenter.DeleteCompetition(compId);
-            GridView1.DataBind();
-
-            popupEdit.Hide();
+            if(presenter.DeleteCompetition(compId))
+            {
+                GridView1.DataBind();
+                popupEdit.Hide();
+            }
+            else
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Įvyko klaida! Nepavyko ištrinti varžybų');", true);
+            }
         }
 
         protected void edit_btn_Click(object sender, EventArgs e)
         {
-            int compId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
-            Competition competition = new Competition();
-            if (editName_tb.Text != string.Empty || editName_tb.Text != "")
-                competition.Name = editName_tb.Text;
-            if (editLocation_tb.Text != string.Empty || editLocation_tb.Text != "")
-                competition.Location = editLocation_tb.Text;
-            if (editAddress_tb.Text != string.Empty || editAddress_tb.Text != "")
-                competition.Address = editAddress_tb.Text;
-            if (editDate_tb.Text != string.Empty || editDate_tb.Text != "")
-                competition.Date = Convert.ToDateTime(editDate_tb.Text);
-            if (editisRegOpen_ckbox.SelectedValue == "Open")
-                competition.Registration = true;
+            Page.Validate("editPopup");
+            if (Page.IsValid)
+            {
+                int compId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
+                if (EditCompetition(compId))
+                {
+                    GridView1.DataBind();
+                    popupEdit.Hide();
+                }
+                else
+                {
+                    this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Įvyko klaida! Nepavyko pakeisti varžybų duomenų');", true);
+                }
+            }
             else
-                competition.Registration = false;
-            if (editRegistrationStartDate_tb.Text != string.Empty || editRegistrationStartDate_tb.Text != "")
-                competition.RegistrationStartDate = Convert.ToDateTime(editRegistrationStartDate_tb.Text);
-            if (editRegistrationEndDate_tb.Text != string.Empty || editRegistrationEndDate_tb.Text != "")
-                competition.RegistrationEndDate = Convert.ToDateTime(editRegistrationEndDate_tb.Text);
-
-                presenter.EditCompetition(compId, competition);
-            GridView1.DataBind();
-            popupEdit.Hide();
+            {
+                popupEdit.Show();
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            popupEdit.Show();
+            int compId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
+            if(presenter.PopulatePopup(compId))
+            {
+                popupEdit.Show();
+            }
         }
+
+        public bool AddCompetition(Competition competition)
+        {
+            return presenter.AddCompetition(competition);
+        }
+
+        public bool DeleteCompetition(int id)
+        {
+            return presenter.DeleteCompetition(id);
+        }
+
+        public bool EditCompetition(int id)
+        {
+            return presenter.EditCompetition(id);
+        }
+
     }
 }
