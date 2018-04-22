@@ -106,6 +106,7 @@
                         DropShadow="false"
                         >
                  </cc1:ModalPopupExtender>
+
                 <asp:LinkButton ID="fake" runat="server"></asp:LinkButton>
         
                     <asp:Panel ID="PanelAdd" runat="server" CssClass="alert-primary" BorderWidth="5px" style='position:relative; display: none; min-height:50%; min-width:50%; height:auto; width:auto'>
@@ -128,7 +129,7 @@
                                             </div>
                                             <div>
                                                 <label id="selectType_lbl">Pasirinkite rungties tipą</label>
-                                                <asp:DropDownList ID="addType_dropDownList" runat="server">
+                                                <asp:DropDownList ID="addType_dropDownList" runat="server" DataValueField="Type">
                                                 </asp:DropDownList>
                                             </div>
                                     </div>
@@ -146,7 +147,7 @@
                                                     <Columns>
                                                         <asp:TemplateField>
                                                             <ItemTemplate>
-                                                                <asp:CheckBox ID="checkBox" runat="server" AutoPostBack="true"/>
+                                                                <asp:CheckBox ID="checkBox" runat="server" AutoPostBack="false"/>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:BoundField DataField="Type" HeaderText="Pavadinimas" />
@@ -158,7 +159,8 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                         <div style="position: absolute;bottom: 0;left: 0;">
-                            <asp:Button ID="submit_btn" runat="server" Text="Pridėti" CausesValidation="true" ValidationGroup="addPopup" OnClick="submit_btn_Click"/>
+                            <asp:Button ID="submit_btn" runat="server" Text="Pridėti" CausesValidation="true" Visible="false" ValidationGroup="addPopup" OnClick="submit_btn_Click"/>
+                            <asp:Button ID="edit_btn" runat="server" Text="Pakeisti" CausesValidation="true" Visible="false" ValidationGroup="addPopup" OnClick="edit_btn_Click"/>
                             <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti" OnClick="cancel_btn_Click"/>
                          </div>
                     </asp:Panel>

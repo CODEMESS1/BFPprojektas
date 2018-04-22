@@ -310,8 +310,8 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Admin\AdminPage.aspx" />
+    <Content Include="Admin\Competition\CreateCompetition.aspx" />
     <Content Include="Admin\Competition\CreateEvents.aspx" />
-    <Content Include="Admin\CreateCompetition.aspx" />
     <Content Include="Admin\CreateEditUsers.aspx" />
     <Content Include="Admin\FindUser.aspx" />
     <Content Include="Admin\PrintLists.aspx" />
@@ -551,19 +551,19 @@
     <Compile Include="Admin\AdminPage.aspx.designer.cs">
       <DependentUpon>AdminPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Competition\CreateCompetition.aspx.cs">
+      <DependentUpon>CreateCompetition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Competition\CreateCompetition.aspx.designer.cs">
+      <DependentUpon>CreateCompetition.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Competition\CreateEvents.aspx.cs">
       <DependentUpon>CreateEvents.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\Competition\CreateEvents.aspx.designer.cs">
       <DependentUpon>CreateEvents.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\CreateCompetition.aspx.cs">
-      <DependentUpon>CreateCompetition.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\CreateCompetition.aspx.designer.cs">
-      <DependentUpon>CreateCompetition.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\CreateEditUsers.aspx.cs">
       <DependentUpon>CreateEditUsers.aspx</DependentUpon>
@@ -642,12 +642,14 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AgeGroupContainer.cs" />
+    <Compile Include="Models\AgeGroupEvents.cs" />
     <Compile Include="Models\AgeGroupTypes.cs" />
     <Compile Include="Models\AgeGroupTypesContainer.cs" />
     <Compile Include="Models\EventTypes.cs" />
     <Compile Include="Models\EventTypesContainer.cs" />
     <Compile Include="Model\ICreateEvents.cs" />
     <Compile Include="Presenter\CreateEventsPresenter.cs" />
+    <Compile Include="Tests\CreateEventsTest.cs" />
     <Compile Include="Tests\Mocks\MockCreateCompetitionView.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />

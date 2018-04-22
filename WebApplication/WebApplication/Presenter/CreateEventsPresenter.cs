@@ -19,7 +19,7 @@ namespace WebApplication.Presenter
         {
             if (view == null)
                 throw new ArgumentNullException("view cannot be null");
-            
+
             this.View = view;
         }
 
@@ -38,7 +38,7 @@ namespace WebApplication.Presenter
             View.AgeGroupTypes = ageGroupTypesContainer.AgeGroupTypes.ToList();
         }
 
-        public void getSelectedGroups(List<string> selectedGroups)
+        public void setSelectedGroups(List<string> selectedGroups)
         {
             this.selectedGroups = selectedGroups;
         }
@@ -50,11 +50,20 @@ namespace WebApplication.Presenter
 
         public bool AddNewEvent(Events events)
         {
-            if(eventsContainer.addEvent(events))
+            if (eventsContainer.addEvent(events, selectedGroups))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool EditEvent(int Id)
+        {
+            if (eventsContainer.editEvent(Id, View.Title, View.Type))
             {
                 return true;
             }
             return false;
         }
     }
-}
+} 

@@ -12,8 +12,8 @@ namespace WebApplication.Model
         List<EventTypes> EventTypes { set; }
         List<Events> Events { set; }
         List<AgeGroupTypes> AgeGroupTypes { set; }
-        string Title { get; set; }
-        string Type { get; set; }
+        string Title { get; }
+        string Type { get; }
         bool AddEvent(Events eventToAdd);
         bool RemoveEvent(int eventIdToRemove);
         bool EditEvent(int eventIdToEdit);

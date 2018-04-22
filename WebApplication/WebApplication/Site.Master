@@ -176,7 +176,10 @@
                                                           <a href="/Admin/FindUser.aspx" class="nav-link"><img src="/Image/editusers.png" width="30" height="30"/> Dalyvių redagavimas</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                          <a href="/Admin/CreateCompetition.aspx" class="nav-link"><img src="/Image/editmatch1.png" width="30" height="30"/> Varžybų redagavimas</a>
+                                                          <a href="/Admin/Competition/CreateCompetition.aspx" class="nav-link"><img src="/Image/editmatch1.png" width="30" height="30"/> Varžybų redagavimas</a>
+                                                      </li>
+                                                      <li class="nav-item">
+                                                          <a href="/Admin/Competition/CreateEvents.aspx" class="nav-link"><img src="/Image/editmatch1.png" width="30" height="30"/> Rungčių redagavimas</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
