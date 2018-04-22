@@ -118,7 +118,7 @@
             </cc1:ModalPopupExtender>
 
             
-            <asp:Panel ID="PanelAdd" runat="server" BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
+            <asp:Panel ID="PanelAdd" runat="server" BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary" style='display: none;'>
                 <h1>Pridėti vartotoją</h1>
                 <div>
                     <asp:Label ID="ErrorMessage" runat="server" CssClass="col-md-2 control-label errorMsg"></asp:Label>
@@ -156,7 +156,6 @@
                 </div>
                 <br />
                 <asp:Button ID="submit_btn" runat="server" Text="Pridėti" CausesValidation="true" ValidationGroup="popup" OnClick="submit_btn_Click" CssClass="btn"/>
-                &nbsp;&nbsp;
                 <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti" CssClass="btn"/>
                 <br />
                 <br />

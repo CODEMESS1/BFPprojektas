@@ -87,13 +87,10 @@
           margin: 0 auto;
         }
 
-        .test{
+        .centerElement{
             margin-left: 40%;
         }
 
-        .test1{
-            margin-right: 100%;
-        }
 
 
 
@@ -206,7 +203,7 @@
                 BackgroundCssClass="modalBackground">
             </cc1:ModalPopupExtender>
             
-            <asp:Panel ID="panelAdd" runat="server" BorderWidth="5px" HorizontalAlign="center" style='display: none;' BackColor="#484848"  BorderColor="#33CCFF"  ForeColor="White" CssClass=" alert-secondary"  >
+            <asp:Panel ID="panelAdd" runat="server" BorderWidth="5px" HorizontalAlign="center" style='display: none;' BackColor="#484848"  BorderColor="#33CCFF"  ForeColor="White" CssClass=" alert-secondary">
             <h1>Pridėti dalyvį</h1>
                 <asp:ValidationSummary ID="ValidationSummary1" runat="server" Visible="False" ValidationGroup="addcomp" />
             <div>
@@ -336,7 +333,7 @@
                 <div>
                     <asp:Label ID="Label1" runat="server" Text="Lytis:" CssClass=" text-center"></asp:Label>
                     <br />
-                    <asp:DropDownList ID="GenderDropListEdit" runat="server" RepeatDirection="Horizontal" CssClass="gender rbl test">
+                    <asp:DropDownList ID="GenderDropListEdit" runat="server" RepeatDirection="Horizontal" CssClass="gender rbl centerElement">
                           <asp:ListItem Selected="true" Value="Vyras"> Vyras </asp:ListItem>
                           <asp:ListItem Value="Moteris"> Moteris </asp:ListItem>
 
@@ -346,9 +343,8 @@
                     <br />
                 </div>
                 <asp:Button ID="edit_btn" runat="server" Text="Keisti" CausesValidation="true" OnClick="edit_btn_Click" ValidationGroup="editPopup" CssClass="btn"/>
-                &nbsp;&nbsp;
                 <asp:Button ID="canceledit_btn" runat="server" Text="Atšaukti" CssClass="btn"/>
-                &nbsp;<asp:Button ID="remove_btn" runat="server" Text="Ištrinti paskyrą" OnClick="remove_btn_Click" CssClass="btn btn-danger"/>
+                <asp:Button ID="remove_btn" runat="server" Text="Ištrinti paskyrą" OnClick="remove_btn_Click" CssClass="btn btn-danger"/>
                 <br />
                 <br />
             </asp:Panel>

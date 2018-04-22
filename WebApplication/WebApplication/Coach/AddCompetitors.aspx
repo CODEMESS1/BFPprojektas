@@ -183,7 +183,7 @@
                 BackgroundCssClass="modalBackground">
             </cc1:ModalPopupExtender>
 
-        <asp:Panel ID="panelAdd" runat="server" BorderWidth="5px" Width="30%" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary"  >
+        <asp:Panel ID="panelAdd" runat="server" BorderWidth="5px" Width="30%" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary" style='display: none;'>
             <h1>Pridėti dalyvį</h1>
             <div>
                 <div>

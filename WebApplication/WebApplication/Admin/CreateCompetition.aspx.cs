@@ -18,10 +18,16 @@ namespace WebApplication.Admin
         public string Location { get => editLocation_tb.Text;  set => editLocation_tb.Text = value; }
         public DateTime Date { get => Convert.ToDateTime(Request.Form[editDate_tb.UniqueID]);  set => editDate_tb.Text = value.ToString("yyyy/MM/dd"); }
         public string Address { get => editAddress_tb.Text;  set => editAddress_tb.Text = value; }
-        public DateTime? RegistrationStartDate { get => Convert.ToDateTime(Request.Form[editRegistrationStartDate_tb.UniqueID]);
-                                                                    set => editRegistrationStartDate_tb.Text = value.ToString(); }
-        public DateTime? RegistrationEndDate { get => Convert.ToDateTime(Request.Form[editRegistrationEndDate_tb.UniqueID]);
-                                                                   set => editRegistrationEndDate_tb.Text = value.ToString(); }
+        public DateTime? RegistrationStartDate
+        {
+            get => Request.Form[editRegistrationStartDate_tb.UniqueID].Equals("") ? null : new DateTime?(Convert.ToDateTime(Request.Form[editRegistrationStartDate_tb.UniqueID]));
+            set => editRegistrationStartDate_tb.Text = value.ToString();
+        }
+        public DateTime? RegistrationEndDate
+        {
+            get => Request.Form[editRegistrationEndDate_tb.UniqueID].Equals("") ? null : new DateTime?(Convert.ToDateTime(Request.Form[editRegistrationEndDate_tb.UniqueID]));
+            set => editRegistrationEndDate_tb.Text = value.ToString();
+        }
 
         public bool Registration
         {

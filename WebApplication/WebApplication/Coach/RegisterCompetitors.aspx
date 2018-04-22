@@ -141,7 +141,7 @@
                 BackgroundCssClass="modalBackground">
             </cc1:ModalPopupExtender>
 
-            <asp:Panel ID="panelRegister" runat="server" ScrollBars="Vertical" BorderWidth="5px" Width="30%" Height="60%" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
+            <asp:Panel ID="panelRegister" runat="server" ScrollBars="Vertical" BorderWidth="5px" Width="30%" Height="60%" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary" style='display: none;'>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                     <div>

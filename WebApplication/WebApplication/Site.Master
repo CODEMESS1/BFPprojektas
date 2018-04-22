@@ -39,10 +39,11 @@
           border-radius: 10px;
           border-color: white;
         }
+
         .tab-content{
             background-color:#303136;
             color:#fff;
-            padding:5px;
+            padding:0px;
             
         }
         .nav-tabs > li > a{
@@ -175,7 +176,7 @@
                                                           <a href="/Admin/FindUser.aspx" class="nav-link"><img src="/Image/editusers.png" width="30" height="30"/> Dalyvių redagavimas</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                          <a href="/Admin/CreateCompetition.aspx" class="nav-link"><img <%--src="/Image/editusers.png"--%> width="30" height="30"/> Varžybų redagavimas</a>
+                                                          <a href="/Admin/CreateCompetition.aspx" class="nav-link"><img src="/Image/editmatch1.png" width="30" height="30"/> Varžybų redagavimas</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
