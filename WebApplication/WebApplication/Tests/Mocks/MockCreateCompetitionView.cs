@@ -12,6 +12,7 @@ namespace UnitTest.Tests
     class MockCreateCompetitionView : ICreateCompetition
     {
         private List<Competition> competitions;
+        private List<Events> events;
 
         public List<Competition> Competitions
         {
@@ -25,7 +26,7 @@ namespace UnitTest.Tests
         public DateTime? RegistrationStartDate { get; set; }
         public DateTime? RegistrationEndDate { get; set; }
         public bool Registration { get; set; }
-        public List<Events> Events { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public List<Events> Events { get => events; set => events = value; }
 
         public bool AddCompetition(Competition competition)
         {

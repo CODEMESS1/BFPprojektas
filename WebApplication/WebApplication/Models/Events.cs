@@ -15,6 +15,13 @@ namespace WebApplication.Models
         {
         }
 
+        public Events(int id, string title, string type)
+        {
+            Id = id;
+            Title = title;
+            Type = type;
+        }
+
         public Events(string title, string type)
         {
             Title = title;

@@ -160,4 +160,3 @@ B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.
 B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
 B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
-B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
