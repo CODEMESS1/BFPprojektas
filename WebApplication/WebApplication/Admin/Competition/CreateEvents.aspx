@@ -1,6 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" Culture="lt-LT" UICulture="lt-LT" MasterPageFile="~/Site.Master" CodeBehind="~/Admin/Competition/CreateEvents.aspx.cs" Inherits="WebApplication.Admin.Competition.CreateEvents" %>
+﻿<%@ Page Title="Rungčių redagavimas" Language="C#" AutoEventWireup="true" Culture="lt-LT" UICulture="lt-LT" MasterPageFile="~/Site.Master" CodeBehind="~/Admin/Competition/CreateEvents.aspx.cs" Inherits="WebApplication.Admin.Competition.CreateEvents" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
     <asp:Content runat="server" ID="CreateEventsContent" ContentPlaceHolderID="MainContent">
+        <h2><%: Title %>.</h2>
 
         <style type="text/css">
         /* Style the tab */
@@ -37,6 +38,83 @@
                     padding: 6px 12px;
                     border: 1px solid #ccc;
                     border-top: none;
+                }
+
+                .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+                background-color: #4A4A4A;
+                }
+                .tableFormat{
+                    border-color: black;
+                }
+                .tableRound {
+                border-radius: 4px;
+                }
+                .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+                  background-image:url(/Image/darken-40.png);
+                }
+                .table-curved {
+                  border-collapse: collapse;
+                 /*margin-left: 10px;*/
+                }
+                .table-curved th {
+                  padding: 3px 10px;
+                }
+                .table-curved td {
+                  position: relative;
+                  padding: 6px 10px;
+                  border-bottom: 2px solid white;
+                  border-top: 2px solid white;
+                }
+                .errorMsg{
+                    color: red;
+                    font-size: small
+                }
+                .errorMsg2{
+                    margin-left: 30%;
+                    margin-right: 1%;
+                }
+                .selectAllPos{
+                  float: left;
+                  margin-left: 2px;
+                }
+                .buttonPos{
+                  float: right;
+                  margin-right: 2px;
+                }
+                .rbl input[type="radio"]
+                {
+                    margin-left: 10px;
+                    margin-right: 1px;
+                }
+                .dateBorder{
+                    border-color: black;
+                }
+                .formatText{
+                    display: inline-block;
+                    width: 160px;
+                    text-align: right;
+                }
+                    
+                .noBorder{
+                border-right: none;
+                }
+                .modalBackground 
+                {
+                    height:100%;
+                    background-color:#EBEBEB;
+                    filter:alpha(opacity=70);
+                    opacity:0.7;
+                }
+                .template-checkbox {
+                text-align:center;
+                }
+                .centerElement{
+                    margin-left: 30%;
+                    margin-right: 30%;
+                }
+                .navTabFormat{
+                    border-radius: 0px;
+                    padding: 0px;
                 }
         </style>
 
@@ -84,7 +162,7 @@
                 }
         </script>
 
-        <h1>Rungčių redagavimas ir kūrimas</h1>
+        <h4>Rungčių redagavimas ir kūrimas</h4>
         <div>
                <asp:ScriptManager EnableScriptGlobalization="true" runat="server"></asp:ScriptManager>
                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal" DataKeyNames="Id"  OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnPageIndexChanging="GridView1_PageIndexChanging">
@@ -109,18 +187,19 @@
 
                 <asp:LinkButton ID="fake" runat="server"></asp:LinkButton>
         
-                    <asp:Panel ID="PanelAdd" runat="server" CssClass="alert-primary" BorderWidth="5px" style='position:relative; display: none; min-height:50%; min-width:50%; height:auto; width:auto'>
+                    <asp:Panel ID="PanelAdd" runat="server" style='position:relative; display: none; min-height:60%; min-width:30%; height:auto; width:auto' BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
                         <asp:UpdatePanel ID="UpdatePanelAdd" runat="server">
                             <ContentTemplate>
                                 <div>
                                     <!-- Tab links -->
-                                    <ul class="nav nav-tabs">
-                                      <li class="tablinks"><a data-toggle="tab" onclick="openLink(event, 'creation')" id="defaultTab">Rungtis</a></li>
-                                      <li class="tablinks"><a data-toggle="tab" onclick="openLink(event, 'ageGroupsAdd')">Amžiaus grupės</a></li>
+                                    <ul class="nav nav-tabs navTabFormat">
+                                      <li class="nav-item"><a class="nav-link active" data-toggle="tab" onclick="openLink(event, 'creation')" id="defaultTab">Rungtis</a></li>
+                                      <li class="nav-item"><a class="nav-link active" data-toggle="tab" onclick="openLink(event, 'ageGroupsAdd')">Amžiaus grupės</a></li>
                                     </ul>
                                     
                                     <!-- Tab content -->
-                                    <div id="creation" class="tabcontent" style="border:none">
+                                    <div class="tab-content" id="myTabContent1">
+                                    <div id="creation" class="tabcontent show active" style="border:none">
                                         <h3>Pridėti rungtį</h3>
                                             <div>
                                                 <label id="addName_lbl">Rungties pavadinimas</label>
@@ -156,12 +235,16 @@
                                             </div>
                                         </div>
                                 </div>
+                                </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
-                        <div style="position: absolute;bottom: 0;left: 0;">
-                            <asp:Button ID="submit_btn" runat="server" Text="Pridėti" CausesValidation="true" Visible="false" ValidationGroup="addPopup" OnClick="submit_btn_Click"/>
-                            <asp:Button ID="edit_btn" runat="server" Text="Pakeisti" CausesValidation="true" Visible="false" ValidationGroup="addPopup" OnClick="edit_btn_Click"/>
-                            <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti" OnClick="cancel_btn_Click"/>
+                        <div>
+                            <br />
+                            <asp:Button ID="submit_btn" runat="server" Text="Pridėti" CausesValidation="true" Visible="false" ValidationGroup="addPopup" CssClass="btn" OnClick="submit_btn_Click"/>
+                            <asp:Button ID="edit_btn" runat="server" Text="Pakeisti" CausesValidation="true" Visible="false" ValidationGroup="addPopup" CssClass="btn" OnClick="edit_btn_Click"/>
+                            <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti" CssClass="btn" OnClick="cancel_btn_Click"/>
+                            <br />
+                            <br />
                          </div>
                     </asp:Panel>
         </div>
