@@ -312,6 +312,7 @@
     <Content Include="Admin\AdminPage.aspx" />
     <Content Include="Admin\Competition\CreateCompetition.aspx" />
     <Content Include="Admin\Competition\CreateEvents.aspx" />
+    <Content Include="Admin\Competition\RegisterCompetitorsAdmin.aspx" />
     <Content Include="Admin\CreateEditUsers.aspx" />
     <Content Include="Admin\FindUser.aspx" />
     <Content Include="Admin\PrintLists.aspx" />
@@ -564,6 +565,13 @@
     </Compile>
     <Compile Include="Admin\Competition\CreateEvents.aspx.designer.cs">
       <DependentUpon>CreateEvents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Competition\RegisterCompetitorsAdmin.aspx.cs">
+      <DependentUpon>RegisterCompetitorsAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Competition\RegisterCompetitorsAdmin.aspx.designer.cs">
+      <DependentUpon>RegisterCompetitorsAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\CreateEditUsers.aspx.cs">
       <DependentUpon>CreateEditUsers.aspx</DependentUpon>
