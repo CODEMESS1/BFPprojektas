@@ -1,27 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication.Model;
 using WebApplication.Models;
 using WebApplication.Presenter;
 
-namespace WebApplication.Admin
+namespace WebApplication.Admin.Competition
 {
-    public partial class CreateCompetition : System.Web.UI.Page, ICreateCompetition
+    public partial class CreateCompetition : Page, ICreateCompetition
     {
         private CreateCompetitionPresenter presenter;
-
+        private List<Events> eventsList;
+        
         public List<Models.Competition> Competitions { set => GridView1.DataSource = value; }
-        public string Name { get => editName_tb.Text;  set => editName_tb.Text = value; }
-        public string Location { get => editLocation_tb.Text;  set => editLocation_tb.Text = value; }
-        public DateTime Date { get => Convert.ToDateTime(Request.Form[editDate_tb.UniqueID]);  set => editDate_tb.Text = value.ToString("yyyy/MM/dd"); }
-        public string Address { get => editAddress_tb.Text;  set => editAddress_tb.Text = value; }
-        public DateTime? RegistrationStartDate { get => Request.Form[editRegistrationStartDate_tb.UniqueID].Equals("") ? null : new DateTime?(Convert.ToDateTime(Request.Form[editRegistrationStartDate_tb.UniqueID]));
-                                                                    set => editRegistrationStartDate_tb.Text = value.ToString(); }
-        public DateTime? RegistrationEndDate { get => Request.Form[editRegistrationEndDate_tb.UniqueID].Equals("") ? null : new DateTime?(Convert.ToDateTime(Request.Form[editRegistrationEndDate_tb.UniqueID]));
-                                                                   set => editRegistrationEndDate_tb.Text = value.ToString(); }
+        public string Name { get => editName_tb.Text; set => editName_tb.Text = value; }
+        public string Location { get => editLocation_tb.Text; set => editLocation_tb.Text = value; }
+        public DateTime Date { get => Convert.ToDateTime(Request.Form[editDate_tb.UniqueID]); set => editDate_tb.Text = value.ToString("yyyy/MM/dd"); }
+        public string Address { get => editAddress_tb.Text; set => editAddress_tb.Text = value; }
+        public DateTime? RegistrationStartDate
+        {
+            get => Request.Form[editRegistrationStartDate_tb.UniqueID].Equals("") ? null : new DateTime?(Convert.ToDateTime(Request.Form[editRegistrationStartDate_tb.UniqueID]));
+            set => editRegistrationStartDate_tb.Text = value.ToString();
+        }
+        public DateTime? RegistrationEndDate
+        {
+            get => Request.Form[editRegistrationEndDate_tb.UniqueID].Equals("") ? null : new DateTime?(Convert.ToDateTime(Request.Form[editRegistrationEndDate_tb.UniqueID]));
+            set => editRegistrationEndDate_tb.Text = value.ToString();
+        }
 
         public bool Registration
         {
@@ -35,7 +43,7 @@ namespace WebApplication.Admin
             }
             set
             {
-                if(value == true)
+                if (value == true)
                 {
                     editisRegOpen_ckbox.SelectedValue = "Open";
                 }
@@ -46,7 +54,17 @@ namespace WebApplication.Admin
             }
         }
 
-        //List<Event> ICreateCompetition.Events { set => ; }
+        List<Events> ICreateCompetition.Events
+        {
+            get => eventsList;
+            set
+            {
+                eventsList = value;
+                GridView2.DataSource = value;
+                GridView3.DataSource = value;
+            }
+        }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -57,6 +75,7 @@ namespace WebApplication.Admin
 
         protected void add_btn_Click(object sender, EventArgs e)
         {
+            GridView3.DataBind();
             popupAdd.Show();
         }
 
@@ -67,7 +86,8 @@ namespace WebApplication.Admin
             {
                 Models.Competition competition;
                 popupAdd.Show();
-                if(addRegStart_txt.Text.Equals("") || addRegEnd_txt.Text.Equals(""))
+                presenter.setSelectedEvents(GetSelectedEvents(GridView3));
+                if (addRegStart_txt.Text.Equals("") || addRegEnd_txt.Text.Equals(""))
                 {
                     competition = new Models.Competition(addName_txt.Text, addPlace_txt.Text, addAdress_txt.Text, Convert.ToDateTime(Request.Form[AddDate_txt.UniqueID]), (addIsRegOpen_ckbox.SelectedValue == "Open") ? true : false);
                 }
@@ -96,7 +116,8 @@ namespace WebApplication.Admin
         {
             //remove padaryti
             int compId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
-            if(presenter.DeleteCompetition(compId))
+            presenter.setSelectedEvents(GetSelectedEvents(GridView2));
+            if (presenter.DeleteCompetition(compId))
             {
                 GridView1.DataBind();
                 popupEdit.Hide();
@@ -113,6 +134,7 @@ namespace WebApplication.Admin
             if (Page.IsValid)
             {
                 int compId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
+                presenter.setSelectedEvents(GetSelectedEvents(GridView2));
                 if (EditCompetition(compId))
                 {
                     GridView1.DataBind();
@@ -132,8 +154,9 @@ namespace WebApplication.Admin
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int compId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
-            if(presenter.PopulatePopup(compId))
+            if (presenter.PopulatePopup(compId))
             {
+                GridView2.DataBind();
                 popupEdit.Show();
             }
         }
@@ -151,6 +174,38 @@ namespace WebApplication.Admin
         public bool EditCompetition(int id)
         {
             return presenter.EditCompetition(id);
+        }
+
+        public List<Events> GetSelectedEvents(GridView gridView)
+        {
+            List<Events> eventsSelected = new List<Events>();
+            for (int i = 0; i < gridView.Rows.Count; i++)
+            {
+                CheckBox cb = (CheckBox)gridView.Rows[i].FindControl("checkBox");
+                if (cb != null && cb.Checked)
+                {
+                    eventsSelected.Add(eventsList[i]);
+                }
+            }
+            return eventsSelected;
+        }
+
+        protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView2.PageIndex = e.NewPageIndex;
+            GridView2.DataBind();
+        }
+
+        protected void GridView3_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView3.PageIndex = e.NewPageIndex;
+            GridView3.DataBind();
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
         }
     }
 }

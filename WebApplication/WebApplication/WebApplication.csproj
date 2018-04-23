@@ -645,6 +645,8 @@
     <Compile Include="Models\AgeGroupEvents.cs" />
     <Compile Include="Models\AgeGroupTypes.cs" />
     <Compile Include="Models\AgeGroupTypesContainer.cs" />
+    <Compile Include="Models\CompetitionEvents.cs" />
+    <Compile Include="Models\CompetitionEventsContainer.cs" />
     <Compile Include="Models\EventTypes.cs" />
     <Compile Include="Models\EventTypesContainer.cs" />
     <Compile Include="Model\ICreateEvents.cs" />

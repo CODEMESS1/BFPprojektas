@@ -11,7 +11,9 @@ namespace WebApplication.Presenter
     {
         private ICreateCompetition View;
         private CompetitionContainer competitionContainer = new CompetitionContainer();
+        private CompetitionEventsContainer competitionEventsContainer = new CompetitionEventsContainer();
         private EventsContainer eventsContainer = new EventsContainer();
+        private List<Events> events = new List<Events>();
 
         public CreateCompetitionPresenter(ICreateCompetition view)
         {
@@ -24,14 +26,14 @@ namespace WebApplication.Presenter
         public void InitView()
         {
             View.Competitions = competitionContainer.Competitions.ToList();
-            //View.Events = eventsContainer.Events.ToList();
+            View.Events = eventsContainer.Events.ToList();
         }
 
         public bool AddCompetition(Competition competition)
         {
             if (competition != null)
             {
-                competitionContainer.AddCompetition(competition);
+                competitionContainer.AddCompetition(competition, events);
                 View.Competitions = competitionContainer.Competitions.ToList();
                 return true;
             }
@@ -40,7 +42,7 @@ namespace WebApplication.Presenter
 
         public bool DeleteCompetition(int Id)
         {
-            bool isCompleted = competitionContainer.RemoveCompetition(Id);
+            bool isCompleted = competitionContainer.RemoveCompetition(Id, events);
             View.Competitions = competitionContainer.Competitions.ToList();
             return isCompleted;
         }
@@ -49,7 +51,7 @@ namespace WebApplication.Presenter
         {
             Competition competition = new Competition(View.Name, View.Location, View.Address, View.Date, View.Registration, 
                 View.RegistrationStartDate, View.RegistrationEndDate);
-            bool isCompleted = competitionContainer.EditCompetition(Id, competition);
+            bool isCompleted = competitionContainer.EditCompetition(Id, competition, events);
             View.Competitions = competitionContainer.Competitions.ToList();
             return isCompleted;
         }
@@ -80,5 +82,9 @@ namespace WebApplication.Presenter
             return competitionContainer.getById(Id);
         }
 
+        public void setSelectedEvents(List<Events> events)
+        {
+            this.events = events;
+        }
     }
 }

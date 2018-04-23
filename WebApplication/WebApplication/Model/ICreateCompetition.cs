@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using WebApplication.Models;
 
 namespace WebApplication.Model
@@ -18,7 +19,8 @@ namespace WebApplication.Model
         DateTime? RegistrationStartDate { get; set; }
         DateTime? RegistrationEndDate { get; set; }
         List<Competition> Competitions { set; }
-        //List<Event> Events { get; set; }
+        List<Events> Events { get;  set; }
+        List<Events> GetSelectedEvents(GridView gridview);
         bool AddCompetition(Competition competition);
         bool DeleteCompetition(int id);
         bool EditCompetition(int id);

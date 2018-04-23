@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using WebApplication.Model;
 using WebApplication.Models;
 
@@ -24,6 +25,7 @@ namespace UnitTest.Tests
         public DateTime? RegistrationStartDate { get; set; }
         public DateTime? RegistrationEndDate { get; set; }
         public bool Registration { get; set; }
+        public List<Events> Events { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public bool AddCompetition(Competition competition)
         {
@@ -57,6 +59,16 @@ namespace UnitTest.Tests
                 return true;
             }
             return false;
+        }
+
+        public List<Events> GetSelectedEvents()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Events> GetSelectedEvents(GridView gridview)
+        {
+            throw new NotImplementedException();
         }
     }
 }
