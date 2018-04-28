@@ -64,6 +64,17 @@ namespace WebApplication.Models
             }
         }
 
+        public List<Competitors> Search(string data)
+        {
+            List<Competitors> competitors = new List<Competitors>();
+            if (data != null)
+            {
+                competitors.AddRange(Comp.Where(c => c.Name.Equals(data)));
+                competitors.AddRange(Comp.Where(c => c.Surname.Equals(data)));
+            }
+            return competitors;
+        }
+
         public List<Competitors> AddCompetitorToCompetitors(Competitors competitor)
         {
             Comp.Add(competitor);

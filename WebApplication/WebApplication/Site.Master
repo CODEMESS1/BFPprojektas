@@ -187,10 +187,10 @@
                                                       <a href="#" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                      <a href="/Coach/AddCompetitors" class="nav-link"><img src="/Image/members1.png" width="30" height="30"/> Dalyviai</a>
+                                                      <a href="/Coach/Competitors/AddCompetitors" class="nav-link"><img src="/Image/members1.png" width="30" height="30"/> Dalyviai</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                          <a href="/Coach/RegisterCompetitors" class="nav-link"><img src="/Image/register1.png" width="30" height="30"/> Dalyvių registravimas</a>
+                                                          <a href="/Coach/Competitors/RegisterCompetitors" class="nav-link"><img src="/Image/register1.png" width="30" height="30"/> Dalyvių registravimas</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>

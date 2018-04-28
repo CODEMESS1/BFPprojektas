@@ -18,9 +18,8 @@ namespace WebApplication.Models
 
         }
 
-        public AgeGroups(string id, int competitionId, string title, int fromYear, int toYear)
+        public AgeGroups(int competitionId, string title, int fromYear, int toYear)
         {
-            Id = Convert.ToInt32(id);
             CompetitionId = competitionId;
             Title = title;
             StartYear = fromYear;

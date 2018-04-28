@@ -141,7 +141,7 @@
                     <asp:TextBox ID="passwver_tb" runat="server" TextMode="Password" ValidationGroup="popup"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="passconfirmvalidator" runat="server" ErrorMessage="Patvirtinkite slaptažodį" ControlToValidate="passwver_tb" ValidationGroup="popup" CssClass="errorMsg"></asp:RequiredFieldValidator>
-                    <asp:CompareValidator ID="comparepassvalidator" runat="server" ErrorMessage="Slaptažodžiai nesutampa" ControlToValidate="passwver_tb" Display="Dynamic" ValidationGroup="popup" ControlToCompare="passw_tb" CssClass="errorMsg"></asp:CompareValidator>
+                    <asp:CompareValidator ID="comparepassvalidator" runat="server" ErrorMessage="Slaptažodžiai nesutampa" ControlToValidate="passwver_tb" Display="Dynamic" ValidationGroup="popup" ControlToCompare="passw_tb" CssClass="errorMsg" ></asp:CompareValidator>
                 </div>
                 <div>
                     <asp:DropDownList ID="roleDropListAdd" runat="server" CssClass="btn-sm">
@@ -190,6 +190,8 @@
 </div>
             
             <asp:Panel ID="editPanel" runat="server" BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
+                <asp:UpdatePanel ID="editUpdatePanel" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
                 <h1>Keisti, ištrinti vartotoją</h1>
                 <div>
                     <asp:Label ID="ErrorMessageEdit" runat="server" CssClass="col-md-2 control-label errorMsg"></asp:Label>
@@ -209,7 +211,8 @@
                 <div>
                     <asp:Label ID="editpassval_lbl" runat="server" Text="Patvirtinti slaptažodį:" CssClass="formatText"></asp:Label>
                     <asp:TextBox ID="editpassval_tb" runat="server" TextMode="Password" ValidationGroup="editPopup" ></asp:TextBox>
-                    <br />
+                     <asp:CompareValidator ID="CompareValidator2" runat="server" ErrorMessage="Slaptažodžiai nesutampa" ControlToValidate="editpassval_tb" Display="Dynamic" ValidationGroup="editPopup" ControlToCompare="editpass_tb" CssClass="errorMsg" ClientIDMode="AutoID" CultureInvariantValues="True"></asp:CompareValidator>
+                   <br />
                     <br />
                     <asp:Label ID="editname_lbl" runat="server" Text="Vardas:" CssClass="formatText"></asp:Label>
                     <asp:TextBox ID="name_tb" runat="server" ValidationGroup="editPopup"></asp:TextBox>
@@ -238,6 +241,8 @@
                 &nbsp;<asp:Button ID="remove_btn" runat="server" Text="Ištrinti paskyrą" OnClick="remove_btn_Click" CssClass="btn btn-danger"/>
                 <br />
                 <br />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
             </asp:Panel>
 
 

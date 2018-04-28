@@ -28,6 +28,14 @@ namespace UnitTest.Tests
         public bool Registration { get; set; }
         public List<Events> Events { get => events; set => events = value; }
 
+        public List<string> AgeGroupTypesSelected => throw new NotImplementedException();
+
+        public List<int> AgeGroupsStartYear => throw new NotImplementedException();
+
+        public List<int> AgeGroupsEndYear => throw new NotImplementedException();
+
+        public List<AgeGroupTypes> ageGroupTypes { set => throw new NotImplementedException(); }
+
         public bool AddCompetition(Competition competition)
         {
             if (competition != null)
@@ -62,12 +70,32 @@ namespace UnitTest.Tests
             return false;
         }
 
+        public List<int> GetSelectedEndYearAdd()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<int> GetSelectedEndYearEdit()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Events> GetSelectedEvents()
         {
             throw new NotImplementedException();
         }
 
         public List<Events> GetSelectedEvents(GridView gridview)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<int> GetSelectedStartYearAdd()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<int> GetSelectedStartYearEdit()
         {
             throw new NotImplementedException();
         }

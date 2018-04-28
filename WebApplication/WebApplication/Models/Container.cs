@@ -15,6 +15,21 @@ namespace WebApplication.Models
 
          public DbSet<CompetitorsInCompetitions> CompetitorsInCompetitions { get; set; }
 
-        
+        public void Add(int competitionId, int competitorId)
+        {
+            Models.CompetitorsInCompetitions competitorsInCompetitions = new CompetitorsInCompetitions();
+            competitorsInCompetitions.CompetitionId = competitionId;
+            competitorsInCompetitions.CompetitorId = competitorId;
+            CompetitorsInCompetitions.Add(competitorsInCompetitions);
+            SaveChanges();
+        }
+
+        public void Remove(int competitionId, int competitorId)
+        {
+            CompetitorsInCompetitions competitorsInCompetitions = CompetitorsInCompetitions.Where(c => c.CompetitionId == competitionId &&
+                                                                                                                                                                                 c.CompetitorId == competitorId).ToList()[0];
+            CompetitorsInCompetitions.Remove(competitorsInCompetitions);
+            SaveChanges();
+        }
     }
 }

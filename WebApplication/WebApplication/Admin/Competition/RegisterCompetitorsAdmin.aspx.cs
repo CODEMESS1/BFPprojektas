@@ -1,119 +1,85 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebApplication.Model;
 using WebApplication.Models;
+using WebApplication.Presenter;
 
 namespace WebApplication.Admin.Competition
 {
-    public partial class RegisterCompetitorsAdmin : System.Web.UI.Page
+    public partial class RegisterCompetitorsAdmin : Page, IRegisterCompetitorsAdmin
     {
-        private List<Competitors> filteredList = new List<Competitors>();
-        private List<Competitors> competitorsList = new List<Competitors>();
-        private CompetitorsContainer competitorsContainer = new CompetitorsContainer();
-        private CompetitionContainer container = new CompetitionContainer();
-        private DbContainer dbContainer = new DbContainer();
-        private List<Models.Competition> competitions = new List<Models.Competition>();
-        private string coachID = "";
+        public int competitorId => Convert.ToInt32(competitorsGridView.SelectedRow.Cells[0]);
+
+        public int competitionId => Convert.ToInt32(GridView1.SelectedRow.Cells[0]);
+
+        public List<Models.Competition> Competitions { set =>GridView1.DataSource = value; }
+        public List<Competitors> Competitors { set => competitorsGridView.DataSource = value; }
+
+        private RegisterCompetitorsAdminPresenter presenter;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            competitions = container.Competitions.Where(c => c.Registration == true).ToList();
-            competitorsList = competitorsContainer.Comp.ToList();
-            filteredList = filterList(competitorsList);
-            if (!Page.IsPostBack)
-            {
-                //load varzybu listview
-                competitions_gridview.DataSource = competitions;
-                competitions_gridview.DataBind();
-
-                coachID = GetCurrent();
-                //atfiltruojam tik trenerio dalyvius
-                GridView1.DataSource = filteredList;
-                GridView1.DataBind();
-            }
+            presenter = new RegisterCompetitorsAdminPresenter(this);
+            presenter.InitView();
+            GridView1.DataBind();
         }
 
-
-
-        public string GetCurrent()
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            return User.Identity.GetUserId();
+            searchPopup.Show();
         }
 
-        //grazina tik trenerio, kuris perziuri dalyviu sarasa
-        public List<Competitors> filterList(List<Competitors> competitors)
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            string currentID = GetCurrent();
-            List<Competitors> filteredList = competitors.Where(c => c.CoachId.Equals(currentID)).ToList();
-            return filteredList;
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
         }
 
-        //pazymi visus dalyvius (visus checkbox)
-        protected void selectAll_Click(object sender, EventArgs e)
+        public void GetCompetitors(string searchField)
         {
-            for (int i = 0; i < GridView1.Rows.Count; i++)
-            {
-                CheckBox cb = (CheckBox)GridView1.Rows[i].FindControl("checkBox");
-                if (cb != null && !cb.Checked)
-                {
-                    cb.Checked = true;
-                }
-            }
+            presenter.CompetitorsSearch(searchField);
         }
 
-        //prideda pasirinktus dalyvius i DB objekta jei jie dar nera prideti
-        private void addToCompetition()
+        public bool RegisterCompetitor()
         {
-            int selectedCompetitionId = Convert.ToInt16(competitions_gridview.SelectedRow.Cells[3].Text);
-            List<CompetitorsInCompetitions> registeredCompetitors = GetSelection(selectedCompetitionId);
-            foreach(CompetitorsInCompetitions c in registeredCompetitors)
-            {
-                if(!dbContainer.CompetitorsInCompetitions.ToList().Contains(c))
-                {
-                    dbContainer.CompetitorsInCompetitions.Add(c);
-                    container.SaveChanges();
-                }
-            }
-            
+            throw new NotImplementedException();
         }
 
-        //gauna list'a dalyviu, kurie pasirinkti (pazymeti checkbox prie ju)
-        private List<CompetitorsInCompetitions> GetSelection(int competitionId)
+        protected void competitorsGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<CompetitorsInCompetitions> comp = new List<CompetitorsInCompetitions>();
-            for(int i = 0; i < GridView1.Rows.Count; i++)
-            {
-                CheckBox cb = (CheckBox) GridView1.Rows[i].FindControl("checkBox");
-                if (cb != null && cb.Checked)
-                {
-                    CompetitorsInCompetitions temp = new CompetitorsInCompetitions();
-                    temp.CompetitionId = competitionId;
-                    temp.CompetitorId = filteredList[i].Id;
-                    comp.Add(temp);
-                }
-            }
-            return comp;
+            addCompetitorPopup.Show();
         }
 
-        //kai varzybu gridview pasirenki varzybas ismeta registracijos popup
-        protected void competitions_gridview_SelectedIndexChanged1(object sender, EventArgs e)
+        protected void search_btn_Click(object sender, EventArgs e)
         {
-            popUpRegister.Show();
-        }
-
-        //jei paspaudzia registruoti dalyvius
-        protected void registerComp_btn_Click(object sender, EventArgs e)
-        {
-            addToCompetition();
-            popUpRegister.Hide();
-            dbContainer.CompetitorsInCompetitions.ToList();
+            GetCompetitors(search_tb.Text);
+            competitorsGridView.DataBind();
         }
 
         protected void cancel_btn_Click(object sender, EventArgs e)
         {
-            popUpRegister.Hide();
+            searchPopup.Hide();
+            competitorsGridView.DataSource = null;
+            competitorsGridView.DataBind();
+        }
+
+        protected void AddToCompeition_Click(object sender, EventArgs e)
+        {
+            presenter.AddToCompetition();
+        }
+
+        protected void RemoveFromCompetition_Click(object sender, EventArgs e)
+        {
+            presenter.RemoveFromCompetition();
+        }
+
+        protected void cancelAdding_Click(object sender, EventArgs e)
+        {
+            addCompetitorPopup.Hide();
         }
     }
 }

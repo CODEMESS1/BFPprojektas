@@ -316,10 +316,10 @@
     <Content Include="Admin\CreateEditUsers.aspx" />
     <Content Include="Admin\FindUser.aspx" />
     <Content Include="Admin\PrintLists.aspx" />
-    <Content Include="Coach\AddCompetitors.aspx" />
+    <Content Include="Coach\Competitors\AddCompetitors.aspx" />
     <Content Include="Coach\CoachPage.aspx" />
     <Content Include="Coach\js\ListViewMultipleSelect.js" />
-    <Content Include="Coach\RegisterCompetitors.aspx" />
+    <Content Include="Coach\Competitors\RegisterCompetitors.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -606,11 +606,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Coach\AddCompetitors.aspx.cs">
+    <Compile Include="Coach\Competitors\AddCompetitors.aspx.cs">
       <DependentUpon>AddCompetitors.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Coach\AddCompetitors.aspx.designer.cs">
+    <Compile Include="Coach\Competitors\AddCompetitors.aspx.designer.cs">
       <DependentUpon>AddCompetitors.aspx</DependentUpon>
     </Compile>
     <Compile Include="Coach\CoachPage.aspx.cs">
@@ -620,11 +620,11 @@
     <Compile Include="Coach\CoachPage.aspx.designer.cs">
       <DependentUpon>CoachPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Coach\RegisterCompetitors.aspx.cs">
+    <Compile Include="Coach\Competitors\RegisterCompetitors.aspx.cs">
       <DependentUpon>RegisterCompetitors.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Coach\RegisterCompetitors.aspx.designer.cs">
+    <Compile Include="Coach\Competitors\RegisterCompetitors.aspx.designer.cs">
       <DependentUpon>RegisterCompetitors.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
@@ -658,7 +658,9 @@
     <Compile Include="Models\EventTypes.cs" />
     <Compile Include="Models\EventTypesContainer.cs" />
     <Compile Include="Model\ICreateEvents.cs" />
+    <Compile Include="Model\IRegisterCompetitorsAdmin.cs" />
     <Compile Include="Presenter\CreateEventsPresenter.cs" />
+    <Compile Include="Presenter\RegisterCompetitorsAdminPresenter.cs" />
     <Compile Include="Tests\CreateEventsTest.cs" />
     <Compile Include="Tests\Mocks\MockCreateCompetitionView.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
