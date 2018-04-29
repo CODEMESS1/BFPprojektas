@@ -14,6 +14,7 @@ namespace WebApplication.Models
         }
 
         public DbSet<Competitors> Comp { get; set; }
+        public DbSet<AgeGroups> AgeGroups { get; set; }
 
         /// <summary>
         /// pagal trenerio id, išfiltruoja sąrašą dalyvių
@@ -146,6 +147,17 @@ namespace WebApplication.Models
                 return false;
             }
             return true;
+        }
+
+        public List<Competitors> GetAgeGroupCompetitors(string title)
+        {
+            AgeGroups ageGroups = GetAgeGroup(title);
+            return Comp.Where(c => (c.Year.Year) >= ageGroups.StartYear && (c.Year.Year) <= ageGroups.EndYear).ToList();
+        }
+
+        public AgeGroups GetAgeGroup(string title)
+        {
+            return AgeGroups.Where(c => c.Title.Equals(title)).ToList()[0];
         }
     }
 }

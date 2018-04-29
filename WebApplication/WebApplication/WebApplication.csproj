@@ -313,6 +313,7 @@
     <Content Include="Admin\Competition\CreateCompetition.aspx" />
     <Content Include="Admin\Competition\CreateEvents.aspx" />
     <Content Include="Admin\Competition\RegisterCompetitorsAdmin.aspx" />
+    <Content Include="Admin\Competition\StartCompetition.aspx" />
     <Content Include="Admin\CreateEditUsers.aspx" />
     <Content Include="Admin\FindUser.aspx" />
     <Content Include="Admin\PrintLists.aspx" />
@@ -573,6 +574,13 @@
     <Compile Include="Admin\Competition\RegisterCompetitorsAdmin.aspx.designer.cs">
       <DependentUpon>RegisterCompetitorsAdmin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Competition\StartCompetition.aspx.cs">
+      <DependentUpon>StartCompetition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Competition\StartCompetition.aspx.designer.cs">
+      <DependentUpon>StartCompetition.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\CreateEditUsers.aspx.cs">
       <DependentUpon>CreateEditUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -659,8 +667,10 @@
     <Compile Include="Models\EventTypesContainer.cs" />
     <Compile Include="Model\ICreateEvents.cs" />
     <Compile Include="Model\IRegisterCompetitorsAdmin.cs" />
+    <Compile Include="Model\IStartCompetition.cs" />
     <Compile Include="Presenter\CreateEventsPresenter.cs" />
     <Compile Include="Presenter\RegisterCompetitorsAdminPresenter.cs" />
+    <Compile Include="Presenter\StartCompetitionPresenter.cs" />
     <Compile Include="Tests\CreateEventsTest.cs" />
     <Compile Include="Tests\Mocks\MockCreateCompetitionView.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

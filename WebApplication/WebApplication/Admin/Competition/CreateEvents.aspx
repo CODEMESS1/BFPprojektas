@@ -213,8 +213,6 @@
                                             </div>
                                     </div>
 
-                                    
-
                                     <div id="ageGroupsAdd" class="tabcontent" style="border:none">
                                         <h3>Priskirti amžiaus grupes</h3>
                                            <div>
