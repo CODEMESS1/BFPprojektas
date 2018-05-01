@@ -661,10 +661,13 @@
     <Compile Include="Models\AgeGroupEvents.cs" />
     <Compile Include="Models\AgeGroupTypes.cs" />
     <Compile Include="Models\AgeGroupTypesContainer.cs" />
+    <Compile Include="Models\CompetitionAgeSubgroups.cs" />
     <Compile Include="Models\CompetitionEvents.cs" />
     <Compile Include="Models\CompetitionEventsContainer.cs" />
+    <Compile Include="Models\CompetitorsWithSubgroups.cs" />
     <Compile Include="Models\EventTypes.cs" />
     <Compile Include="Models\EventTypesContainer.cs" />
+    <Compile Include="Models\SubGroupsContainer.cs" />
     <Compile Include="Model\ICreateEvents.cs" />
     <Compile Include="Model\IRegisterCompetitorsAdmin.cs" />
     <Compile Include="Model\IStartCompetition.cs" />

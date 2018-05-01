@@ -500,3 +500,4 @@ C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.C
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
 C:\Users\Pufis\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\System.Diagnostics.DiagnosticSource.xml
+B:\MainRepository\WebApplication\WebApplication\bin\System.Diagnostics.DiagnosticSource.xml

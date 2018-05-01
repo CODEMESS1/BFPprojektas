@@ -9,8 +9,10 @@ namespace WebApplication.Model
     public interface IStartCompetition
     {
         List<Models.AgeGroupTypes> AgeGroupTypes { set; }
-        List<Models.Competitors> Competitors { set; }
+        List<Models.CompetitorsWithSubgroups> Competitors { set; }
         string SelectedAgeGroup { get; }
+        int SelectedSubgroupCount { get; }
+        int SelectedCompetitionId { get; }
         List<Models.Competition> Competitions { set; }
     }
 }

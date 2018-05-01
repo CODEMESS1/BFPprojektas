@@ -13,6 +13,15 @@ namespace WebApplication.Admin.Competition {
     public partial class StartCompetition {
         
         /// <summary>
+        /// ScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager;
+        
+        /// <summary>
         /// SelectPopup control.
         /// </summary>
         /// <remarks>
@@ -85,15 +94,6 @@ namespace WebApplication.Admin.Competition {
         protected global::System.Web.UI.WebControls.DropDownList AgeGroup_DropDownList;
         
         /// <summary>
-        /// GetCompetitorsInGroup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GetCompetitorsInGroup;
-        
-        /// <summary>
         /// SubgroupsCount control.
         /// </summary>
         /// <remarks>
@@ -110,6 +110,15 @@ namespace WebApplication.Admin.Competition {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView CompetitorsGridView;
+        
+        /// <summary>
+        /// GetCompetitorsInGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GetCompetitorsInGroup;
         
         /// <summary>
         /// GenerateSubGroups control.

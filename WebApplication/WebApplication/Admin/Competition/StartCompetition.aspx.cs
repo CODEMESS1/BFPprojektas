@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,35 +15,53 @@ namespace WebApplication.Admin.Competition
     {
         private StartCompetitionPresenter presenter;
         public List<AgeGroupTypes> AgeGroupTypes { set => AgeGroup_DropDownList.DataSource = value; }
-        public List<Competitors> Competitors { set => CompetitorsGridView.DataSource = value; }
+        public List<CompetitorsWithSubgroups> Competitors { set => CompetitorsGridView.DataSource = value; }
 
         public string SelectedAgeGroup => AgeGroup_DropDownList.SelectedValue;
 
-        public List<Models.Competition> Competitions { set => CompetitorsGridView.DataSource = value; }
+        public List<Models.Competition> Competitions { set => CompetitionsGridView.DataSource = value; }
+
+        public int SelectedSubgroupCount => Convert.ToInt32(SubgroupsCount.SelectedValue);
+
+        public int SelectedCompetitionId => Convert.ToInt32(CompetitionsGridView.SelectedRow.Cells[1].Text);
 
         protected void Page_Load(object sender, EventArgs e)
         {
             presenter = new StartCompetitionPresenter(this);
             presenter.InitView();
+            CompetitionsGridView.DataBind();
             SelectPopup.Show();
-            CompetitorsGridView.DataBind();
-            AgeGroup_DropDownList.DataBind();
         }
 
         protected void GenerateSubGroups_Click(object sender, EventArgs e)
         {
-
+            SelectPopup.Hide();
+            SelectPanel.Visible = false;
+            CompetitorsGridView.DataSource = null;
+            CompetitorsGridView.DataBind();
+            presenter.SetAgeGroupSubgroupsCount();
+            AgeGroup_DropDownList.Enabled = true;
+            SubgroupsCount.Enabled = true;
+            ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
         }
 
         protected void GetCompetitorsInGroup_Click(object sender, EventArgs e)
         {
             presenter.GetByGroup();
             CompetitorsGridView.DataBind();
+            GroupGridView(CompetitorsGridView.Rows, 0, 2);
+            AgeGroup_DropDownList.Enabled = false;
+            SubgroupsCount.Enabled = false;
+            ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
         }
 
         protected void CompetitionsGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectPopup.Hide();
+            SelectPanel.Visible = false;
+            CompetitorsGridView.DataBind();
+            AgeGroup_DropDownList.DataBind();
+            CompetitionPanel.Visible = true;
         }
 
         protected void CompetitionsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -53,7 +72,46 @@ namespace WebApplication.Admin.Competition
 
         protected void cancel_btn_Click(object sender, EventArgs e)
         {
-            SelectPopup.Hide();
+
+        }
+
+
+        void GroupGridView(GridViewRowCollection gvrc, int startIndex, int total)
+        {
+            if (total == 0) return;
+            int i, count = 1;
+            ArrayList lst = new ArrayList();
+            lst.Add(gvrc[0]);
+            var ctrl = gvrc[0].Cells[startIndex];
+            for (i = 1; i < gvrc.Count; i++)
+            {
+                TableCell nextCell = gvrc[i].Cells[startIndex];
+                if (ctrl.Text == nextCell.Text)
+                {
+                    count++;
+                    nextCell.Visible = false;
+                    lst.Add(gvrc[i]);
+                }
+                else
+                {
+                    if (count > 1)
+                    {
+                        ctrl.RowSpan = count;
+                        GroupGridView(new GridViewRowCollection(lst), startIndex + 1, total - 1);
+                    }
+                    count = 1;
+                    lst.Clear();
+                    ctrl = gvrc[i].Cells[startIndex];
+                    lst.Add(gvrc[i]);
+                }
+            }
+            if (count > 1)
+            {
+                ctrl.RowSpan = count;
+                GroupGridView(new GridViewRowCollection(lst), startIndex + 1, total - 1);
+            }
+            count = 1;
+            lst.Clear();
         }
     }
 }
