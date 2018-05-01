@@ -4,6 +4,33 @@
 <asp:Content runat="server" ID="CreateEventsContent" ContentPlaceHolderID="MainContent">
       
         <asp:ScriptManager EnableScriptGlobalization="true" runat="server"></asp:ScriptManager>
+    <style>
+                .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+                background-color: #4A4A4A;
+                }
+                .tableFormat{
+                    border-color: black;
+                }
+                .tableRound {
+                border-radius: 4px;
+                }
+                .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+                  background-image:url(/Image/darken-40.png);
+                }
+                .table-curved {
+                  border-collapse: collapse;
+                 /*margin-left: 10px;*/
+                }
+                .table-curved th {
+                  padding: 3px 10px;
+                }
+                .table-curved td {
+                  position: relative;
+                  padding: 6px 10px;
+                  border-bottom: 2px solid white;
+                  border-top: 2px solid white;
+                }
+    </style>
 
         <cc1:ModalPopupExtender ID="SelectPopup" runat="server"
                 TargetControlID="fake"
@@ -11,10 +38,13 @@
                 DropShadow="false"
                 BackgroundCssClass="modalBackground">
             </cc1:ModalPopupExtender>
+
         <asp:LinkButton ID="fake" runat="server"></asp:LinkButton>
 
-        <asp:Panel ID="SelectPanel" runat="server">
-            <asp:GridView ID="CompetitionsGridView" runat="server" AllowPaging="true" OnPageIndexChanging="CompetitionsGridView_PageIndexChanging" OnSelectedIndexChanged="CompetitionsGridView_SelectedIndexChanged">
+        <asp:Panel ID="SelectPanel" runat="server" style='position:relative; display: none; min-height:60%; min-width:30%; height:auto; width:auto' BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
+            <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+            <asp:GridView ID="CompetitionsGridView"  runat="server" AllowPaging="true" OnPageIndexChanging="CompetitionsGridView_PageIndexChanging" OnSelectedIndexChanged="CompetitionsGridView_SelectedIndexChanged" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal">
                  <Columns>
                     <asp:CommandField ShowSelectButton="True" SelectText="Pasirinkti" ControlStyle-CssClass="btn btn-success" />
                     <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
@@ -27,7 +57,9 @@
                     <asp:CheckBoxField DataField="Registration" HeaderText="Registracija atidaryta" SortExpression="Registration" />
                 </Columns>
             </asp:GridView>
-            <asp:Button ID="cancel_btn" runat="server" OnClick="cancel_btn_Click" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+                <asp:Button ID="cancel_btn" runat="server" Text="Place_Holder" OnClick="cancel_btn_Click" CssClass="btn" />
         </asp:Panel>
         
         <script type="text/javascript">
@@ -59,23 +91,27 @@
 
                     <!-- Tab links -->
                     <ul class="nav nav-tabs navTabFormat">
-                        <li class="nav-item"><a style="display: none;"  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'default')"  id="defaultLink"></a></li>
-                        <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'generate')"></a></li>
-                        <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'documents')"></a></li>
+                        <li class="nav-item"><a  style="display:none" class="nav-link active" data-toggle="tab" onclick="openLink(event, 'default')"  id="defaultLink">Default</a></li>
+                        <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'generate')">Generate</a></li>
+                        <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'documents')">Documents</a></li>
                     </ul>
 
                     <!-- Tab content -->
                     <div class="tab-content" id="myTabContent1" style="height:100%; width: 100%;">
                         <div id="default" class="tabcontent show active" style="border:none">
-                            Default
+                            <h2>Default(What for?)</h2>
                         </div>
-                        <div id="generate" class="tabcontent show active" style="border:none">
-                            <asp:DropDownList ID="AgeGroup_DropDownList" DataValueField="Type" runat="server">
+                        <div id="generate" class="tabcontent show active dropdown" style="border:none">
+                            <h2>Generate</h2>
+                            <hr>
+                            <asp:DropDownList ID="AgeGroup_DropDownList" DataValueField="Type" runat="server" CssClass="btn dropdown-toggle dropdown">
                             </asp:DropDownList>
+                            
+                             <asp:Button ID="GetCompetitorsInGroup" runat="server" CssClass="btn" Text="Place_Holder"  OnClick="GetCompetitorsInGroup_Click"/>
+                            <br />
+                            <br />
 
-                             <asp:Button ID="GetCompetitorsInGroup" runat="server"  OnClick="GetCompetitorsInGroup_Click"/>
-
-                            <asp:DropDownList ID="SubgroupsCount" runat="server">
+                            <asp:DropDownList ID="SubgroupsCount" runat="server" CssClass="btn dropdown-toggle">
                                 <asp:ListItem Value="1" Text="1 pogrupis"></asp:ListItem>
                                 <asp:ListItem Value="2" Text="2 pogrupis"></asp:ListItem>
                                 <asp:ListItem Value="3" Text="3 pogrupis"></asp:ListItem>
@@ -84,12 +120,27 @@
                                 <asp:ListItem Value="6" Text="6 pogrupis"></asp:ListItem>
                             </asp:DropDownList>
 
-                            <asp:GridView ID="CompetitorsGridView" runat="server" PageSize="7"></asp:GridView>
+                            <asp:GridView ID="CompetitorsGridView" runat="server" PageSize="7" AllowPaging="True" AutoGenerateColumns="False" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal">
+                                <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
+                                <Columns>
+                                    <asp:CommandField ShowSelectButton="True" SelectText="Pasirinkti" ControlStyle-CssClass="btn btn-success" />
+                                    <asp:BoundField DataField="Name" HeaderText="Pavadinimas" />
+                                    <asp:BoundField DataField="Location" HeaderText="Vieta" />
+                                    <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" />
+                                    <asp:BoundField DataField="Date" HeaderText="Date" />
+                                    <asp:BoundField DataField="Address" HeaderText="Adresas" />
+                                    <asp:CheckBoxField DataField="Registration" HeaderText="Registracija" ReadOnly="true" />
+                                    <asp:BoundField DataField="RegistrationStartDate" HeaderText="Registracijos pradžią" />
+                                    <asp:BoundField DataField="RegistrationEndDate" HeaderText="Registracijos pabaiga" />
+                                    
+                                </Columns>
+                            </asp:GridView>
 
-                            <asp:Button ID="GenerateSubGroups" runat="server"  OnClick="GenerateSubGroups_Click"/>
+                            <asp:Button ID="GenerateSubGroups" runat="server" Text="Place_Holder" CssClass="btn"  OnClick="GenerateSubGroups_Click"/>
                         </div>
                         <div id="documents" class="tabcontent show active" style="border:none">
-                            Documents
+                            <h2>Documents</h2>
+                            <hr>
                         </div>
                     </div>
 

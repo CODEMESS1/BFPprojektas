@@ -155,6 +155,7 @@
                                           <RoleGroups>
                                               <asp:RoleGroup Roles="Admin">
                                                   <ContentTemplate>
+
                                                       <li class="nav-item">
                                                       <a class="nav-link" href="/#"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
                                                       </li>
@@ -176,6 +177,10 @@
                                                       <li class="nav-item">
                                                           <a href="/Admin/Competition/CreateEvents.aspx" class="nav-link"><img src="/Image/editmatch.png" width="30" height="30"/> Rungčių redagavimas</a>
                                                       </li>
+                                                      <li class="nav-item">
+                                                          <a href="/Admin/Competition/StartCompetition.aspx" class="nav-link"><img src="/Image/startmatch.png" width="30" height="30"/> Start_Competition</a>
+                                                      </li>
+
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
                                               <asp:RoleGroup Roles="Coach">
