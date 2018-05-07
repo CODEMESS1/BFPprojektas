@@ -3,7 +3,7 @@
 
 <asp:Content runat="server" ID="CreateEventsContent" ContentPlaceHolderID="MainContent">
       
-        <asp:ScriptManager ID="ScriptManager" EnableScriptGlobalization="true" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScriptManager" EnableScriptGlobalization="true" runat="server"></asp:ScriptManager>
     <style>
                 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
                 background-color: #4A4A4A;
@@ -60,7 +60,9 @@
         </asp:Panel>
         
         <script type="text/javascript">
-                function openLink(evt, tabName) {
+            function openLink(evt, tabName) {
+                var startBtn = document.getElementById('<%=startCompetition_btn.ClientID%>');
+                if (startBtn.style.display != "none") {
                     // Declare all variables
                     var i, tabcontent, tablinks;
 
@@ -79,17 +81,16 @@
                     // Show the current tab, and add an "active" class to the button that opened the tab
                     document.getElementById(tabName).style.display = "block";
                     evt.currentTarget.className += " active";
+                    }
                 }
         </script>
 
         <asp:Panel ID="CompetitionPanel" runat="server" Visible="false">
-            <asp:UpdatePanel ID="CompetitionUpdatePanel" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>
-
                     <!-- Tab links -->
                     <ul class="nav nav-tabs navTabFormat">
-                        <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'generate')" id="defaultLink">Generate</a></li>
-                        <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'documents')">Documents</a></li>
+                        <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'generate')" id="defaultLink">Pogrūpiai</a></li>
+                        <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'documents')">Protokolai</a></li>
+                        <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'results')" id="startLink">Rezultatų vedimas</a></li>
                     </ul>
 
                     <!-- Tab content -->
@@ -112,36 +113,126 @@
                                 <asp:ListItem Value="6" Text="6 pogrupiai"></asp:ListItem>
                             </asp:DropDownList>
 
-                            <asp:GridView ID="CompetitorsGridView" runat="server" PageSize="7" AllowPaging="True" AutoGenerateColumns="False" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal">
-                                <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
-                                 <Columns>
+                            <br />
+                            <br />
+                            <asp:Label ID="InformationLabel" runat="server" Text=""></asp:Label>
+                            <asp:Panel runat="server" ScrollBars="Vertical">
+                            <asp:GridView ID="CompetitorsGridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="Gray" BorderColor="black" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" ForeColor="white" GridLines="Horizontal" PageSize="1000">
+                                <PagerStyle BackColor="#4A4A4A" Font-Bold="True" ForeColor="Black" HorizontalAlign="Center" />
+                                <Columns>
                                     <asp:BoundField DataField="Subgroup" HeaderText="Pogrupis" />
                                     <asp:BoundField DataField="Name" HeaderText="Vardas" />
                                     <asp:BoundField DataField="Surname" HeaderText="Pavardė" />
                                     <asp:BoundField DataField="Year" HeaderText="Gimimo metai" />
                                 </Columns>
                             </asp:GridView>
-
+                            </asp:Panel>
                             <asp:Button ID="GetCompetitorsInGroup" runat="server" CssClass="btn" Text="Sugeneruoti pogrupius"  OnClick="GetCompetitorsInGroup_Click"/>
                             <asp:Button ID="GenerateSubGroups" runat="server" Text="Išsaugoti" CssClass="btn" OnClick="GenerateSubGroups_Click"/>
+                            <asp:Button ID="Button1" runat="server" Text="Atšaukti" CssClass="btn" OnClick="Button1_Click"/>
                         </div>
                         <div id="documents" class="tabcontent show active" style="border:none">
                             <h2>Documents</h2>
                             <hr>
                         </div>
+                        <div id="results" class="tabcontent show active" style="border:none">
+                            <h2>Rezultatų suvedimas</h2>
+                            <div>
+                                <label id="start_lbl">Pradėti varžybas?</label>
+                               
+                                <asp:Button ID="startCompetition_btn" runat="server" Text="Pradėti varžybas" OnClick="startCompetition_Click"/>
+                                
+                            </div>
+                        </div>
                     </div>
-
-                </ContentTemplate>
-            </asp:UpdatePanel>
         </asp:Panel>
 
-        <script type="text/javascript">
-            document.getElementById('defaultLink').click();
-        </script>
+         <div id="ResultsInputContent">
+            <asp:Panel ID="ResultsUpdatePanel" runat="server" > 
+                
+                    <asp:Button ID="saveCompetition_btn" runat="server" Text="Saugoti varžybas" OnClick="saveCompetition_btn_Click" />
+                    <label id="save_lbl">Išsaugoti varžybas</label>
+                    <div id="select">
+                        <label>Pasirinkite grupę</label>
+                        <asp:DropDownList ID="selectGroup_list" runat="server" DataValueField="Type"></asp:DropDownList>
+                        <asp:Button ID="SelectGroup_btn" runat="server" Text="Pasirinkti" OnClick="SelectGroup_btn_Click" />
+                        <label>Pasirinkite rungtį</label>
+                        <asp:DropDownList ID="selectEvent_list" DataValueField="Type" DataTextField="Title" runat="server" Enabled="false"></asp:DropDownList>
+                        <asp:Button ID="WriteResults_btn" runat="server" OnClick="WriteResults_btn_Click" Text="Vesti rezultatus"/>
+                    </div>
+                        <div>
+                            <label>Įveskite ID</label>
+                            <asp:TextBox ID="EnterId_tb" runat="server" TextMode="Number" OnTextChanged="EnterId_tb_TextChanged"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="EnterId_Validator" ControlToValidate="EnterId_tb" runat="server" ErrorMessage="" Text="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                
+            </asp:Panel>
+
+             <asp:Panel ID="time" runat="server">
+                    <div>
+                        <label>Įveskite rezultatą</label>
+                        <asp:TextBox ID="ResultsTimeMinute_TextBox" runat="server" TextMode="Number" min="0" max="60"></asp:TextBox>
+                        <label> mm</label>
+                        <asp:TextBox ID="ResultsTimeSeconds_TextBox" runat="server" TextMode="Number" min="0" max="60"></asp:TextBox>
+                        <label> ss</label>
+                        <asp:TextBox ID="ResultsTimeMili_TextBox" runat="server" TextMode="Number" min="0" max="99"></asp:TextBox>
+                        <label> ms</label>
+                        <asp:Button ID="ResultsTime_btn" runat="server" Text="Saugoti" OnClick="ResultsTime_btn_Click"/>
+                    </div>
+             </asp:Panel>
+
+             <asp:Panel ID="count" runat="server">
+                    <div>
+                        <label>Įveskite rezultatą</label>
+                        <asp:TextBox ID="TextBox3" runat="server" TextMode="Number" min="0"></asp:TextBox>
+                        <asp:Button ID="ResultsCount_btn" runat="server" Text="Saugoti" OnClick="ResultsCount_btn_Click" />
+                    </div>
+             </asp:Panel>
+        </div>
+        <div>
+            <asp:Panel ID="last_entries_panel" runat="server">
+                 <asp:GridView ID="LastEntries_Gridview" runat="server" AutoGenerateColumns="false" AllowPaging="false" PageSize="5">
+                     <Columns>
+                         <asp:BoundField DataField="Id" HeaderText="ID" />
+                         <asp:BoundField DataField="Name" HeaderText="Vardas" />
+                         <asp:BoundField DataField="Surname" HeaderText="Pavardė" />
+                         <asp:BoundField DataField="Event" HeaderText="Rungtis" />
+                         <asp:BoundField DataField="Result" HeaderText="Rezultatas" />
+                     </Columns>
+                 </asp:GridView>
+             </asp:Panel>
+        </div>
 
         <script type="text/javascript">
+
             function click() {
                 document.getElementById('defaultLink').click();
+            }
+
+            function clickPostBackStart(){
+                document.getElementById('startLink').click();
+            }
+
+            function clickStart() {
+                document.getElementById('ResultsInputContent').style.display = "block";
+                document.getElementById('save_lbl').style.display = "block";
+                document.getElementById('start_lbl').style.display = "none";
+                document.getElementById('startLink').click();
+                var startBtn = document.getElementById('<%=startCompetition_btn.ClientID%>');
+                startBtn.style.display = "none";
+                var saveBtn = document.getElementById('<%=saveCompetition_btn.ClientID%>');
+                saveBtn.style.display = "block";
+            }
+
+            function clickSave() {
+                document.getElementById('ResultsInputContent').style.display = "none";
+                document.getElementById('save_lbl').style.display = "none";
+                document.getElementById('start_lbl').style.display = "block";
+                var startBtn = document.getElementById('<%=startCompetition_btn.ClientID%>');
+                startBtn.style.display = "block";
+                var saveBtn = document.getElementById('<%=saveCompetition_btn.ClientID%>');
+                saveBtn.style.display = "none";
+                document.getElementById('startLink').click();
             }
         </script>
 </asp:Content>

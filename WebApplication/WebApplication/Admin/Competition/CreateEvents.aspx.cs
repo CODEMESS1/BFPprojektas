@@ -14,7 +14,7 @@ namespace WebApplication.Admin.Competition
     {
         private CreateEventsPresenter presenter;
         
-        public string Type { get => addType_dropDownList.SelectedValue; }
+        public int Type { get => Convert.ToInt16(addType_dropDownList.SelectedValue); }
         List<Events> ICreateEvents.Events { set => GridView1.DataSource = value; }
         public List<EventTypes> EventTypes { set => addType_dropDownList.DataSource = value; }
         public List<AgeGroupTypes> AgeGroupTypes { set => AgeGroupsGridView.DataSource = value; }
@@ -65,7 +65,7 @@ namespace WebApplication.Admin.Competition
         protected void submit_btn_Click(object sender, EventArgs e)
         {
             presenter.setSelectedGroups(getSelectedGroups());
-            Models.Events eventToAdd = new Models.Events(addName_tb.Text, addType_dropDownList.SelectedValue);
+            Models.Events eventToAdd = new Models.Events(addName_tb.Text, Convert.ToInt16(addType_dropDownList.SelectedValue));
             if(AddEvent(eventToAdd))
             {
                 popupAdd.Hide();

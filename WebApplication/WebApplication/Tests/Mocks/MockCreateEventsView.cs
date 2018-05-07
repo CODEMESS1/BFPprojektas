@@ -15,7 +15,7 @@ namespace WebApplication.Tests.Mocks
 
         public List<Models.Events> Events { set => events = value; }
         public string Title { get; set; }
-        public string Type { get; set; }
+        public int Type { get; set; }
         public List<EventTypes> EventTypes { set => eventTypes = value; }
         public List<AgeGroupTypes> AgeGroupTypes { set => ageGroupTypes = value; }
 

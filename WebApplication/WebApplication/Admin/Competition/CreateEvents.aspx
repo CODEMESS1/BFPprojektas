@@ -208,7 +208,7 @@
                                             </div>
                                             <div>
                                                 <label id="selectType_lbl">Pasirinkite rungties tipą</label>
-                                                <asp:DropDownList ID="addType_dropDownList" runat="server" DataValueField="Type">
+                                                <asp:DropDownList ID="addType_dropDownList" runat="server" DataValueField="Id" DataTextField="Name">
                                                 </asp:DropDownList>
                                             </div>
                                     </div>

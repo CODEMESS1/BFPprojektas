@@ -205,7 +205,14 @@ namespace WebApplication.Admin.Competition
             for (int i = 0; i < GridView5.Rows.Count; i++)
             {
                 TextBox StartYearTb = (TextBox)GridView5.Rows[i].FindControl("EditStartYear_tb");
-                YearInt.Add(Convert.ToInt32(StartYearTb.Text));
+                if (!String.IsNullOrEmpty(StartYearTb.Text))
+                {
+                    YearInt.Add(Convert.ToInt32(StartYearTb.Text));
+                }
+                else
+                {
+                    YearInt.Add(0);
+                }
             }
             return YearInt;
         }
@@ -216,7 +223,14 @@ namespace WebApplication.Admin.Competition
             for (int i = 0; i < GridView5.Rows.Count; i++)
             {
                 TextBox StartYearTb = (TextBox)GridView4.Rows[i].FindControl("AddStartYear_tb");
-                YearInt.Add(Convert.ToInt32(StartYearTb.Text));
+                if (!String.IsNullOrEmpty(StartYearTb.Text))
+                {
+                    YearInt.Add(Convert.ToInt32(StartYearTb.Text));
+                }
+                else
+                {
+                    YearInt.Add(0);
+                }
             }
             return YearInt;
         }
@@ -227,8 +241,15 @@ namespace WebApplication.Admin.Competition
             for (int i = 0; i < GridView5.Rows.Count; i++)
             {
                 TextBox EndYearTb = (TextBox)GridView5.Rows[i].FindControl("EditEndYear_tb");
-                YearInt.Add(Convert.ToInt32(EndYearTb.Text));
-            }
+                if (!String.IsNullOrEmpty(EndYearTb.Text))
+                { 
+                    YearInt.Add(Convert.ToInt32(EndYearTb.Text));
+                }
+                else
+                {
+                    YearInt.Add(0);
+                }
+        }
             return YearInt;
         }
 
@@ -238,7 +259,14 @@ namespace WebApplication.Admin.Competition
             for (int i = 0; i < GridView4.Rows.Count; i++)
             {
                 TextBox EndYearTb = (TextBox)GridView4.Rows[i].FindControl("AddEndYear_tb");
-                YearInt.Add(Convert.ToInt32(EndYearTb.Text));
+                if (!String.IsNullOrEmpty(EndYearTb.Text))
+                {
+                    YearInt.Add(Convert.ToInt32(EndYearTb.Text));
+                }
+                else
+                {
+                    YearInt.Add(0);
+                }
             }
             return YearInt;
         }

@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication.Model;
 using WebApplication.Models;
+using WebApplication.Models.Objects;
 using WebApplication.Presenter;
 
 namespace WebApplication.Admin.Competition
@@ -14,7 +15,9 @@ namespace WebApplication.Admin.Competition
     public partial class StartCompetition : Page, IStartCompetition
     {
         private StartCompetitionPresenter presenter;
-        public List<AgeGroupTypes> AgeGroupTypes { set => AgeGroup_DropDownList.DataSource = value; }
+        private string Result;
+
+        public List<AgeGroupTypes> AgeGroupTypes { set => AgeGroup_DropDownList.DataSource = selectGroup_list.DataSource = value; }
         public List<CompetitorsWithSubgroups> Competitors { set => CompetitorsGridView.DataSource = value; }
 
         public string SelectedAgeGroup => AgeGroup_DropDownList.SelectedValue;
@@ -25,12 +28,32 @@ namespace WebApplication.Admin.Competition
 
         public int SelectedCompetitionId => Convert.ToInt32(CompetitionsGridView.SelectedRow.Cells[1].Text);
 
+        List<Events> IStartCompetition.Events { set => selectEvent_list.DataSource = value; }
+
+        public string SelectedAgeGroupForResult => selectGroup_list.SelectedValue;
+
+        public int SelectedEventForResult => Convert.ToUInt16(selectEvent_list.SelectedValue);
+
+        public List<LastEntries> LastEntries { set => LastEntries_Gridview.DataSource = value; }
+
+        public LastEntries LastEntry {
+            get {
+                return new LastEntries(Convert.ToInt16(EnterId_tb.Text), "", "", selectEvent_list.SelectedItem.Text, Result);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             presenter = new StartCompetitionPresenter(this);
             presenter.InitView();
             CompetitionsGridView.DataBind();
             SelectPopup.Show();
+            if (!Page.IsPostBack)
+            {
+                ResultsUpdatePanel.Visible = false;
+                time.Visible = false;
+                count.Visible = false;
+            }
         }
 
         protected void GenerateSubGroups_Click(object sender, EventArgs e)
@@ -62,6 +85,7 @@ namespace WebApplication.Admin.Competition
             CompetitorsGridView.DataBind();
             AgeGroup_DropDownList.DataBind();
             CompetitionPanel.Visible = true;
+            ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
         }
 
         protected void CompetitionsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -112,6 +136,87 @@ namespace WebApplication.Admin.Competition
             }
             count = 1;
             lst.Clear();
+        }
+
+        protected void startCompetition_Click(object sender, EventArgs e)
+        {
+            CompetitionPanel.Visible = false;
+            ResultsUpdatePanel.Visible = true;
+            selectGroup_list.DataBind();
+        }
+
+        protected void saveCompetition_btn_Click(object sender, EventArgs e)
+        {
+            CompetitionPanel.Visible = true;
+            ResultsUpdatePanel.Visible = false;
+            ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
+        }
+
+        protected void WriteResults_btn_Click(object sender, EventArgs e)
+        {
+            if(selectGroup_list.SelectedValue != null && selectEvent_list.SelectedValue != null)
+            {
+                if(GetEventType().Type.Equals("Time"))
+                {
+                    count.Visible = false;
+                    time.Visible = true;
+                }
+                else
+                {
+                    count.Visible = true;
+                    time.Visible = false;
+                }
+            }
+            else
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Pasirinkite grupę ir rungtį.');", true);
+            }
+        }
+
+        protected void SelectGroup_btn_Click(object sender, EventArgs e)
+        {
+            if (presenter.GetEvents())
+            {
+                selectEvent_list.Enabled = true;
+                selectEvent_list.DataBind();
+            }
+            else
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Nėra sukurtų rungčių');", true);
+            }
+        }
+
+        protected void EnterId_tb_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public EventTypes GetEventType()
+        {
+            return presenter.GetEventType();
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            CompetitorsGridView.DataSource = null;
+            CompetitorsGridView.DataBind();
+            AgeGroup_DropDownList.Enabled = true;
+            SubgroupsCount.Enabled = true;
+            ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
+        }
+
+        protected void ResultsTime_btn_Click(object sender, EventArgs e)
+        {
+            Result = ResultsTimeMinute_TextBox.Text + ":" + ResultsTimeSeconds_TextBox.Text + "," + ResultsTimeMili_TextBox.Text;
+            presenter.BindLastEntry();
+            LastEntries_Gridview.DataBind();
+        }
+
+        protected void ResultsCount_btn_Click(object sender, EventArgs e)
+        {
+            Result = TextBox3.Text;
+            presenter.BindLastEntry();
+            LastEntries_Gridview.DataBind();
         }
     }
 }

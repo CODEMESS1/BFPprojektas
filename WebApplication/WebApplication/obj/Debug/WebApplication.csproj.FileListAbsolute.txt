@@ -160,7 +160,6 @@ B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.
 B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
 B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
-B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
 C:\Users\Pufis\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\NUnit3.TestAdapter.dll
 C:\Users\Pufis\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\NUnit3.TestAdapter.pdb
 C:\Users\Pufis\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\nunit.engine.dll
@@ -500,4 +499,4 @@ C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.C
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
 C:\Users\Pufis\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\System.Diagnostics.DiagnosticSource.xml
-B:\MainRepository\WebApplication\WebApplication\bin\System.Diagnostics.DiagnosticSource.xml
+B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache

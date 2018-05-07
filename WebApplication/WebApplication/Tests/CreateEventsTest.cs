@@ -22,8 +22,8 @@ namespace WebApplication.Tests
 
             List<Models.Events> events = new List<Models.Events>()
             {
-                new Models.Events(1, "Test1", "MoreCount"),
-                new Models.Events(2, "Test2", "LessCount")
+                new Models.Events(1, "Test1", 1),
+                new Models.Events(2, "Test2", 2)
             };
 
             List<Models.AgeGroupTypes> ageGroupTypes = new List<Models.AgeGroupTypes>()
@@ -39,7 +39,7 @@ namespace WebApplication.Tests
         [TestCase]
         public void AddEventTest()
         {
-            bool ret = view.AddEvent(new Models.Events(5, "Test3", "BestTime"));
+            bool ret = view.AddEvent(new Models.Events(5, "Test3", 3));
 
             Assert.AreEqual(ret, true);
         }
@@ -48,7 +48,7 @@ namespace WebApplication.Tests
         public void EditEventTest()
         {
             view.Title = "New title";
-            view.Type = "New type";
+            view.Type = 4;
             bool ret = view.EditEvent(1);
 
             Assert.AreEqual(ret, true);
