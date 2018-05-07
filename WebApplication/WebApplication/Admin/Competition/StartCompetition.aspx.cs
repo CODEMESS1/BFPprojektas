@@ -47,7 +47,7 @@ namespace WebApplication.Admin.Competition
             presenter = new StartCompetitionPresenter(this);
             presenter.InitView();
             CompetitionsGridView.DataBind();
-            SelectPopup.Show();
+            //SelectPopup.Show();
             if (!Page.IsPostBack)
             {
                 ResultsUpdatePanel.Visible = false;
@@ -58,8 +58,8 @@ namespace WebApplication.Admin.Competition
 
         protected void GenerateSubGroups_Click(object sender, EventArgs e)
         {
-            SelectPopup.Hide();
-            SelectPanel.Visible = false;
+            //SelectPopup.Hide();
+            //SelectPanel.Visible = false;
             CompetitorsGridView.DataSource = null;
             CompetitorsGridView.DataBind();
             presenter.SetAgeGroupSubgroupsCount();
@@ -80,11 +80,11 @@ namespace WebApplication.Admin.Competition
 
         protected void CompetitionsGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectPopup.Hide();
-            SelectPanel.Visible = false;
+            //SelectPopup.Hide();
+            //SelectPanel.Visible = false;
             CompetitorsGridView.DataBind();
             AgeGroup_DropDownList.DataBind();
-            CompetitionPanel.Visible = true;
+            //CompetitionPanel.Visible = true;
             ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
         }
 
@@ -140,14 +140,14 @@ namespace WebApplication.Admin.Competition
 
         protected void startCompetition_Click(object sender, EventArgs e)
         {
-            CompetitionPanel.Visible = false;
+            //CompetitionPanel.Visible = false;
             ResultsUpdatePanel.Visible = true;
             selectGroup_list.DataBind();
         }
 
         protected void saveCompetition_btn_Click(object sender, EventArgs e)
         {
-            CompetitionPanel.Visible = true;
+            //CompetitionPanel.Visible = true;
             ResultsUpdatePanel.Visible = false;
             ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
         }

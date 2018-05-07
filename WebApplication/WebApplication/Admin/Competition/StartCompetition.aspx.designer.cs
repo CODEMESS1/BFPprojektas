@@ -40,15 +40,6 @@ namespace WebApplication.Admin.Competition {
         protected global::System.Web.UI.WebControls.LinkButton fake;
         
         /// <summary>
-        /// SelectPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel SelectPanel;
-        
-        /// <summary>
         /// CompetitionsGridView control.
         /// </summary>
         /// <remarks>
@@ -56,24 +47,6 @@ namespace WebApplication.Admin.Competition {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView CompetitionsGridView;
-        
-        /// <summary>
-        /// cancel_btn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cancel_btn;
-        
-        /// <summary>
-        /// CompetitionPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel CompetitionPanel;
         
         /// <summary>
         /// AgeGroup_DropDownList control.
@@ -290,15 +263,6 @@ namespace WebApplication.Admin.Competition {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ResultsCount_btn;
-        
-        /// <summary>
-        /// last_entries_panel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel last_entries_panel;
         
         /// <summary>
         /// LastEntries_Gridview control.
