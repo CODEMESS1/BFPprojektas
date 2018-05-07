@@ -51,5 +51,10 @@ namespace WebApplication.Presenter
         {
             CompetitorsInCompetitions.Remove(View.competitionId, View.competitorId);
         }
+
+        public void SetCompetitorInfo()
+        {
+            View.CompetitorInfo = CompetitorsContainer.Comp.Where(c => c.Id == View.competitorId).ToList()[0].ToString();
+        }
     }
 }

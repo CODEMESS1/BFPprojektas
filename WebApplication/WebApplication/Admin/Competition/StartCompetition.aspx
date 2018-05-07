@@ -30,6 +30,14 @@
                   border-bottom: 2px solid white;
                   border-top: 2px solid white;
                 }
+                .modalBackground 
+        {
+            height:100%;
+            background-color:#EBEBEB;
+            filter:alpha(opacity=70);
+            opacity:0.7;
+        }
+                
     </style>
 
         <cc1:ModalPopupExtender ID="SelectPopup" runat="server"
@@ -41,7 +49,7 @@
 
         <asp:LinkButton ID="fake" runat="server"></asp:LinkButton>
 
-        <asp:Panel ID="SelectPanel" runat="server" style='display: none; position:relative; display: none; min-height:60%; min-width:30%; height:auto; width:auto' BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
+        <%--<asp:Panel ID="SelectPanel" runat="server" style='display: none; position:relative; display: none; min-height:60%; min-width:30%; height:auto; width:auto' BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">--%>
                <asp:GridView ID="CompetitionsGridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal" DataKeyNames="Id"  OnSelectedIndexChanged="CompetitionsGridView_SelectedIndexChanged" OnPageIndexChanging="CompetitionsGridView_PageIndexChanging">
                     <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
                     <Columns>
@@ -57,7 +65,7 @@
                     </Columns>
                 </asp:GridView>
                 <asp:Button ID="cancel_btn" runat="server" Text="--" OnClick="cancel_btn_Click" CssClass="btn" />
-        </asp:Panel>
+        <%--</asp:Panel>--%>
         
         <script type="text/javascript">
             function openLink(evt, tabName) {

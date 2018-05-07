@@ -85,6 +85,15 @@ namespace WebApplication.Admin.Competition {
         protected global::System.Web.UI.WebControls.TextBox search_tb;
         
         /// <summary>
+        /// search_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton search_btn;
+        
+        /// <summary>
         /// search_tb_validator control.
         /// </summary>
         /// <remarks>
@@ -94,15 +103,6 @@ namespace WebApplication.Admin.Competition {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator search_tb_validator;
         
         /// <summary>
-        /// search_btn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button search_btn;
-        
-        /// <summary>
         /// competitorsGridView control.
         /// </summary>
         /// <remarks>
@@ -110,24 +110,6 @@ namespace WebApplication.Admin.Competition {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView competitorsGridView;
-        
-        /// <summary>
-        /// cancel_btn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cancel_btn;
-        
-        /// <summary>
-        /// addCompetitorPopup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender addCompetitorPopup;
         
         /// <summary>
         /// panelAddTo control.
@@ -173,5 +155,14 @@ namespace WebApplication.Admin.Competition {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button cancelAdding;
+        
+        /// <summary>
+        /// cancel_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cancel_btn;
     }
 }

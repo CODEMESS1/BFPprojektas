@@ -498,5 +498,4 @@ C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.C
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
-C:\Users\Pufis\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\System.Diagnostics.DiagnosticSource.xml
 B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache

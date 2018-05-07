@@ -59,7 +59,7 @@ namespace WebApplication.Admin.Competition
         protected void GenerateSubGroups_Click(object sender, EventArgs e)
         {
             SelectPopup.Hide();
-            SelectPanel.Visible = false;
+            //SelectPanel.Visible = false;
             CompetitorsGridView.DataSource = null;
             CompetitorsGridView.DataBind();
             presenter.SetAgeGroupSubgroupsCount();
@@ -81,7 +81,9 @@ namespace WebApplication.Admin.Competition
         protected void CompetitionsGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectPopup.Hide();
-            SelectPanel.Visible = false;
+            CompetitionsGridView.Visible = false;
+            cancel_btn.Visible = false;
+            //SelectPanel.Visible = false;
             CompetitorsGridView.DataBind();
             AgeGroup_DropDownList.DataBind();
             CompetitionPanel.Visible = true;
@@ -96,7 +98,7 @@ namespace WebApplication.Admin.Competition
 
         protected void cancel_btn_Click(object sender, EventArgs e)
         {
-
+            
         }
 
 
@@ -198,6 +200,9 @@ namespace WebApplication.Admin.Competition
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            CompetitionsGridView.Visible = true;
+            cancel_btn.Visible = true;
+            CompetitionPanel.Visible = false;
             CompetitorsGridView.DataSource = null;
             CompetitorsGridView.DataBind();
             AgeGroup_DropDownList.Enabled = true;

@@ -15,5 +15,6 @@ namespace WebApplication.Model
         List<Models.Competitors> Competitors { set; }
         void GetCompetitors(string searchField);
         bool RegisterCompetitor();
+        string CompetitorInfo { set; }
     }
 }
