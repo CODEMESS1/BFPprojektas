@@ -52,38 +52,23 @@ namespace WebApplication.Models
             SaveChanges();
         }
 
+        public void RemoveRange(int compId)
+        {
+            CompetitionEvents.RemoveRange(CompetitionEvents.Where(e => e.CompetitionId == compId));
+            SaveChanges();
+        }
+
         public bool UpdateEventsList(int compId, List<Events> events)
         {
             if (events.Count == 0)
                 return false;
-
-            try
-            {
-                List<CompetitionEvents> eventsToEdit = CompetitionEvents.Where(e => e.CompetitionId == compId).ToList();
-                if (eventsToEdit.Count != 0)
-                {
-                    foreach (Events e in events)
-                    { 
-                        if(eventsToEdit.Where(evt => evt.CompetitionId == compId && evt.EventId == e.Id).Count() == 0)
-                        {
-                            AddEvent(compId, e.Id);
-                        }
-                        else
-                        {
-                            RemoveEvent(compId, e.Id);
-                        }
-                    }
-                }
-                else
-                {
-                    AddEventsList(compId, events);
-                }
-                SaveChanges();
+            RemoveRange(compId);
+            
+           foreach (Events e in events)
+           { 
+               AddEvent(compId, e.Id);
             }
-            catch
-            {
-                return false;
-            }
+            SaveChanges();
             return true;
         }
     }

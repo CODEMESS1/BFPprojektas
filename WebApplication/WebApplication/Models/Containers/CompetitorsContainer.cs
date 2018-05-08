@@ -16,6 +16,8 @@ namespace WebApplication.Models
         public DbSet<Competitors> Comp { get; set; }
         public DbSet<AgeGroups> AgeGroups { get; set; }
 
+        private DbContainer CompetitiorsInCompetition = new DbContainer();
+
         /// <summary>
         /// pagal trenerio id, išfiltruoja sąrašą dalyvių
         /// </summary>
@@ -153,6 +155,22 @@ namespace WebApplication.Models
         {
             AgeGroups ageGroups = GetAgeGroup(title);
             return Comp.Where(c => (c.Year.Year) >= ageGroups.StartYear && (c.Year.Year) <= ageGroups.EndYear).ToList();
+        }
+
+        public List<Competitors> GetAgeGroupCompetitorsInCompetition(int compId, string title)
+        {
+            List<CompetitorsInCompetitions> competitorsInCompetitions = CompetitiorsInCompetition.CompetitorsInCompetitions.Where(c => c.CompetitionId == compId).ToList();
+            if (competitorsInCompetitions.Count() == 0)
+                return null;
+
+            List<Competitors> competitorsToReturn = new List<Competitors>();
+            AgeGroups ageGroups = GetAgeGroup(title);
+            foreach (CompetitorsInCompetitions competitor in competitorsInCompetitions)
+            {
+                competitorsToReturn.Add(Comp.Where(c => c.Id == competitor.CompetitorId &&
+                                                                                 (c.Year.Year) >= ageGroups.StartYear && (c.Year.Year) <= ageGroups.EndYear).Single());
+            }
+            return competitorsToReturn;
         }
 
         public AgeGroups GetAgeGroup(string title)

@@ -44,7 +44,7 @@ namespace WebApplication.Presenter
 
         public void GetByGroup()
         {
-            List<Competitors> competitors = CompetitorsContainer.GetAgeGroupCompetitors(View.SelectedAgeGroup);
+            List<Competitors> competitors = CompetitorsContainer.GetAgeGroupCompetitorsInCompetition(View.SelectedCompetitionId, View.SelectedAgeGroup);
             List<CompetitorsWithSubgroups> competitorsWithSubgroups = new List<CompetitorsWithSubgroups>();
             int subgroupCount = View.SelectedSubgroupCount;
             int subgroupLength = 0;
@@ -146,38 +146,53 @@ namespace WebApplication.Presenter
                 {
                     int startIndex = i;
                     int endIndex = 0;
-                    int index = i +1;
+                    int index = i;
                     double sum = points[i] + points[i + 1];
                     int count = 2;
-                    while(Convert.ToInt16(results[index].Result) == Convert.ToInt16(results[index + 1].Result))
+                    index++;
+                    if (index + 1 != results.Count - 1)
                     {
-                        sum += points[index + 1];
-                        count++;
-                        index++;
-                        if (index == results.Count-1)
+                        while (Convert.ToInt16(results[index].Result) == Convert.ToInt16(results[index + 1].Result))
                         {
-                            break;
+                            sum += points[index + 1];
+                            count++;
+                            index++;
+                            if (index == results.Count - 1)
+                            {
+                                continue;
+                            }
                         }
+                        endIndex = index + 1;
+                        i = endIndex - 1;
+                        double avg = sum / count;
+                        for (int j = startIndex; j <= endIndex; j++)
+                        {
+                            results[j].Score = place;
+                            results[j].Points = avg;
+                        }
+                        place += endIndex - startIndex;
                     }
-                    endIndex = ++index;
-                    i = --endIndex;
-                    double avg = sum / count;
-                    for (int j = startIndex; j <= endIndex; j++)
+                    else
                     {
-                        results[j].Score = place;
-                        results[j].Points = avg;
+
+                        i = index;
                     }
-                    place += endIndex - startIndex;
                 }
                 else
                 {
                     results[i].Score = place;
                     results[i].Points = place;
                     place++;
+
+                    if (i +1 == points.Count-1)
+                    {
+                        int j = i;
+                        results[++j].Score = place;
+                        results[j].Points = place;
+                        break;
+                    }
                 }
             }
-            results.Last().Score = ++place;
-            results.Last().Points = place;
 
             //update DB
             ResultsContainer.UpdateResults(results);

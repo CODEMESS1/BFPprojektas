@@ -45,18 +45,20 @@ namespace WebApplication.Models
             SaveChanges();
         }
 
+        public void RemoveAgeGroupsEventRange(int eventId)
+        {
+            AgeGroupEvents.RemoveRange(AgeGroupEvents.Where(g => g.EventId == eventId));
+            SaveChanges();
+        }
+
         private void SetEventAgeGroups(int eventId, List<string> groups)
         {
+            RemoveAgeGroupsEventRange(eventId);
             for (int i = 0; i<groups.Count; i++)
             {
-                if(AgeGroupEvents.Where(e => e.EventId == eventId && e.AgeGroupType.Equals(groups[i])).Count() == 0)
-                {
-                    AddAgeGroupEvent(eventId, groups[i]);
-                }
-                else
-                {
-                    RemoveAgeGroupEvent(eventId, groups[i]);
-                }
+                string group = groups[i];
+                int ageGroupId = AgeGroupTypesContainer.AgeGroupTypes.Where(g => g.Type.Equals(group)).Single().Id;
+                AddAgeGroupEvent(eventId, groups[i]);
             }
             SaveChanges();
         }

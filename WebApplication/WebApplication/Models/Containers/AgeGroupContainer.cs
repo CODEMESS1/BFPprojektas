@@ -17,10 +17,12 @@ namespace WebApplication.Models
 
         public void AddRange(int Id, List<int> startYear, List<int> endYear, List<AgeGroupTypes> types)
         {
-            if(types.Count() != 0)
-            for(int i = 0; i < types.Count(); i++)
+            if (types.Count() != 0)
             {
-                AgeGroups.Add(new AgeGroups(Id, types[i].Type, startYear[i], endYear[i]));
+                for (int i = 0; i < types.Count(); i++)
+                {
+                    AgeGroups.Add(new AgeGroups(Id, types[i].Type, startYear[i], endYear[i]));
+                }
             }
             SaveChanges();
         }
@@ -46,22 +48,12 @@ namespace WebApplication.Models
 
         public void UpdateAgeGroups(int Id, List<int> startYear, List<int> endYear, List<AgeGroupTypes> types)
         {
-            List<AgeGroups> ageGroups = AgeGroups.Where(g => g.CompetitionId == Id).ToList();
-            if(AgeGroups.Count() != 0)
+            RemoveRange(Id);
+            int index = 0;
+            foreach(AgeGroupTypes type in types)
             {
-                int index = 0;
-                foreach(AgeGroupTypes type in types)
-                {
-                    if(ageGroups.Where(g => g.Title == type.Type).Count() == 0)
-                    {
-                        AddAgeGroup(Id, startYear[index], endYear[index], type.Type);
-                    }
-                    else
-                    {
-                        DeleteAgeGroup(Id, type.Type);
-                    }
-                    index++;
-                }
+                AddAgeGroup(Id, startYear[index], endYear[index], type.Type);
+                index++;
             }
             SaveChanges();
         }
