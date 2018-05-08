@@ -9,11 +9,11 @@ namespace WebApplication.Models
     {
         public int Id { get; set; }
         public int EventId { get; set; }
-        public string AgeGroupType { get; set; }
+        public int AgeGroupType { get; set; }
 
         public AgeGroupEvents() { }
 
-        public AgeGroupEvents(int eventId, string type)
+        public AgeGroupEvents(int eventId, int type)
         {
             EventId = eventId;
             AgeGroupType = type;

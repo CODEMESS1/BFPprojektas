@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication.Model;
+using WebApplication.Models;
+using WebApplication.Models.Containers;
+using WebApplication.Models.Objects;
 
 namespace WebApplication.Presenter
 {
     public class StartCompetitionPresenter
     {
         IStartCompetition View;
-
-        private List<Models.Objects.LastEntries> LastEntries = new List<Models.Objects.LastEntries>();
-        private Models.AgeGroupTypesContainer AgeGroupTypesContainer = new Models.AgeGroupTypesContainer();
-        private Models.AgeGroupContainer AgeGroupContainer = new Models.AgeGroupContainer();
-        private Models.CompetitorsContainer CompetitorsContainer = new Models.CompetitorsContainer();
-        private Models.CompetitionContainer CompetitionContainer = new Models.CompetitionContainer();
-        private Models.SubGroupsContainer SubGroupsContainer = new Models.SubGroupsContainer();
-        private Models.EventsContainer EventsContainer = new Models.EventsContainer();
-        private Models.EventTypesContainer EventTypes = new Models.EventTypesContainer();
+        
+        private AgeGroupTypesContainer AgeGroupTypesContainer = new AgeGroupTypesContainer();
+        private AgeGroupContainer AgeGroupContainer = new AgeGroupContainer();
+        private CompetitorsContainer CompetitorsContainer = new CompetitorsContainer();
+        private CompetitionContainer CompetitionContainer = new CompetitionContainer();
+        private SubGroupsContainer SubGroupsContainer = new SubGroupsContainer();
+        private EventsContainer EventsContainer = new EventsContainer();
+        private EventTypesContainer EventTypes = new EventTypesContainer();
+        private ResultsContainer ResultsContainer = new ResultsContainer();
+        private CompetitionEventsContainer CompetitionEvents = new CompetitionEventsContainer();
 
         public StartCompetitionPresenter(IStartCompetition view)
         {
@@ -40,24 +44,22 @@ namespace WebApplication.Presenter
 
         public void GetByGroup()
         {
-            List<Models.Competitors> competitors = CompetitorsContainer.GetAgeGroupCompetitors(View.SelectedAgeGroup);
-            List<Models.CompetitorsWithSubgroups> competitorsWithSubgroups = new List<Models.CompetitorsWithSubgroups>();
+            List<Competitors> competitors = CompetitorsContainer.GetAgeGroupCompetitors(View.SelectedAgeGroup);
+            List<CompetitorsWithSubgroups> competitorsWithSubgroups = new List<CompetitorsWithSubgroups>();
             int subgroupCount = View.SelectedSubgroupCount;
             int subgroupLength = 0;
 
-            if(competitors.Count / subgroupCount == 0)
+            subgroupLength = competitors.Count / subgroupCount;
+
+            while(subgroupLength * subgroupCount < competitors.Count)
             {
-                subgroupLength = competitors.Count;
-            }
-            else
-            {
-                subgroupLength = competitors.Count / subgroupCount;
+                subgroupLength++;
             }
 
             int subgroup = 1;
             int index = 1;
 
-            foreach(Models.Competitors c in competitors)
+            foreach(Competitors c in competitors)
             {
                 if (index > subgroupLength)
                 {
@@ -65,7 +67,7 @@ namespace WebApplication.Presenter
                     subgroup++;
                 }
      
-                competitorsWithSubgroups.Add(new Models.CompetitorsWithSubgroups(c, subgroup));
+                competitorsWithSubgroups.Add(new CompetitorsWithSubgroups(c, subgroup));
                 index++;
             }
             View.Competitors = competitorsWithSubgroups;
@@ -73,7 +75,7 @@ namespace WebApplication.Presenter
 
         public bool GetEvents()
         {
-            List<Models.Events> eventsList = EventsContainer.GetSelectedEvents(View.SelectedAgeGroup, View.SelectedCompetitionId);
+            List<Events> eventsList = EventsContainer.GetSelectedEvents(View.SelectedAgeGroup, View.SelectedCompetitionId);
             if (eventsList.Count != 0)
             {
                 View.Events = eventsList;
@@ -82,24 +84,115 @@ namespace WebApplication.Presenter
             return false;
         }
 
-        public Models.EventTypes GetEventType()
+        public EventTypes GetEventType()
         {
-            return EventTypes.GetEventTypes(View.SelectedEventForResult);
+            Models.Events events = EventsContainer.Events.Where(e => e.Id == View.SelectedEventForResult).ToList()[0];
+            return EventTypes.GetEventTypes(events.Type);
         }
 
-        public void BindLastEntry()
+        public Competitors CompetitorForEntry()
         {
-            if(LastEntries.Count == 5)
+            Competitors competitors = new Competitors();
+            if((competitors = CompetitorsContainer.GetCompetitor(View.CompetitorId)) != null)
             {
-                LastEntries.RemoveAt(0);
-                LastEntries.Add(View.LastEntry);
-                View.LastEntries = LastEntries;
+                View.Competitor = competitors;
+                return competitors;
             }
-            else
+            return null;
+        }
+
+        public void AddResult()
+        {
+            Results results = new Results(View.CompetitorId, View.SelectedEventForResult, Convert.ToInt16(View.SelectedAgeGroupForResult), View.SelectedCompetitionId, View.Result);
+            ResultsContainer.AddResults(results);
+        }
+
+        public void CalculateSelected()
+        {
+            List<CompetitionEvents> competitionEvents = CompetitionEvents.CompetitionEvents.Where(e => e.CompetitionId == View.SelectedCompetitionId).ToList();
+            List<AgeGroupEvents> ageGroupEvents = EventsContainer.GetEventsInCompetition(View.AgeGroupForCalculation, View.SelectedCompetitionId);
+
+            List<Events> events = EventsContainer.Events.ToList();
+            foreach (AgeGroupEvents e in ageGroupEvents)
             {
-                LastEntries.Add(View.LastEntry);
-                View.LastEntries = LastEntries;
+                int eventTypeValue = events.Where(et => et.Id == e.EventId).ToList()[0].Type;
+                List<Results> results = ResultsContainer.Results.Where(r => r.CompetitionId == View.SelectedCompetitionId && r.AgeGroupType == e.AgeGroupType &&
+                                                                                                    r.EventId == e.EventId).ToList();
+                EventTypes eventType = EventTypes.EventTypes.Where(t => t.Id == eventTypeValue).ToList()[0];
+                View.Results = CalculateResults(results, eventType);
             }
+        }
+
+        private List<Results> CalculateResults(List<Results> results, EventTypes eventType)
+        {
+            if(eventType.Type.Equals("Count") && eventType.Method.Equals("Most"))
+            {
+                results = results.OrderByDescending(r => Convert.ToDouble(r.Result)).ToList();
+            }
+            if(results.Count != 0)
+            {
+                return CalculateMostCount(results);
+            }
+            return null;
+        }
+
+        private List<Results> CalculateMostCount(List<Results> results)
+        {
+            List<double> points = MakePointsList(results.Count);
+            int place = 1;
+            for(int i = 0; i < points.Count-1; i++)
+            {
+                if(Convert.ToInt16(results[i].Result) == Convert.ToInt16(results[i+1].Result))
+                {
+                    int startIndex = i;
+                    int endIndex = 0;
+                    int index = i +1;
+                    double sum = points[i] + points[i + 1];
+                    int count = 2;
+                    while(Convert.ToInt16(results[index].Result) == Convert.ToInt16(results[index + 1].Result))
+                    {
+                        sum += points[index + 1];
+                        count++;
+                        index++;
+                        if (index == results.Count-1)
+                        {
+                            break;
+                        }
+                    }
+                    endIndex = ++index;
+                    i = --endIndex;
+                    double avg = sum / count;
+                    for (int j = startIndex; j <= endIndex; j++)
+                    {
+                        results[j].Score = place;
+                        results[j].Points = avg;
+                    }
+                    place += endIndex - startIndex;
+                }
+                else
+                {
+                    results[i].Score = place;
+                    results[i].Points = place;
+                    place++;
+                }
+            }
+            results.Last().Score = ++place;
+            results.Last().Points = place;
+
+            //update DB
+            ResultsContainer.UpdateResults(results);
+
+            return results;
+        }
+
+        public List<double> MakePointsList(int length)
+        {
+            List<double> points = new List<double>();
+            for(int i = 1; i <= length; i++)
+            {
+                points.Add(Convert.ToDouble(i));
+            }
+            return points;
         }
     }
 }

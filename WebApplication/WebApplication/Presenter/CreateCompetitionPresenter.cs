@@ -38,7 +38,7 @@ namespace WebApplication.Presenter
             {
                 competitionContainer.AddCompetition(competition, events);
                 int Id = competitionContainer.Competitions.ToList().Last().Id;
-                ageGroupsContainer.SetAgeGroups(Id, View.GetSelectedStartYearAdd(), View.GetSelectedEndYearAdd(), ageGroupTypesContainer.AgeGroupTypes.ToList());
+                ageGroupsContainer.AddRange(Id, View.GetSelectedStartYearAdd(), View.GetSelectedEndYearAdd(), ageGroupTypesContainer.AgeGroupTypes.ToList());
                 View.Competitions = competitionContainer.Competitions.ToList();
                 return true;
             }
@@ -49,7 +49,7 @@ namespace WebApplication.Presenter
         {
             bool isCompleted = competitionContainer.RemoveCompetition(Id, events);
             View.Competitions = competitionContainer.Competitions.ToList();
-            ageGroupsContainer.DeleteAgeGroups(Id);
+            ageGroupsContainer.RemoveRange(Id);
             return isCompleted;
         }
 
@@ -61,9 +61,7 @@ namespace WebApplication.Presenter
             if (isCompleted)
             {
                 View.Competitions = competitionContainer.Competitions.ToList();
-                ageGroupsContainer.DeleteAgeGroups(Id);
-                int newId = competitionContainer.Competitions.ToList().Last().Id;
-                ageGroupsContainer.SetAgeGroups(newId, View.GetSelectedStartYearEdit(), View.GetSelectedEndYearEdit(), ageGroupTypesContainer.AgeGroupTypes.ToList());
+                ageGroupsContainer.UpdateAgeGroups(Id, View.GetSelectedStartYearEdit(), View.GetSelectedEndYearEdit(), ageGroupTypesContainer.AgeGroupTypes.ToList());
             }
             return isCompleted;
         }

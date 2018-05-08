@@ -17,6 +17,7 @@ namespace WebApplication.Models
         public DbSet<AgeGroupEvents> AgeGroupEvents { get; set; }
 
         private CompetitionEventsContainer CompetitionEventsContainer = new CompetitionEventsContainer();
+        private AgeGroupTypesContainer AgeGroupTypesContainer = new AgeGroupTypesContainer();
 
         public bool AddEvent(Events events, List<string> ageGroupTypes)
         {
@@ -24,31 +25,50 @@ namespace WebApplication.Models
             {
                 Events.Add(events);
                 SaveChanges();
-                SetEventAgeGroups(events, ageGroupTypes);
+                SetEventAgeGroups(events.Id, ageGroupTypes);
                 return true;
             }
             return false;
         }
 
-        private void SetEventAgeGroups(Events events, List<string> groups)
+        private void AddAgeGroupEvent(int eventId, string group)
         {
-            int id = Events.Where(e => e.Title.Equals(events.Title) && e.Type.Equals(events.Type)).ToList()[0].Id;
+            int ageGroupId = AgeGroupTypesContainer.AgeGroupTypes.Where(g => g.Type.Equals(group)).Single().Id;
+            AgeGroupEvents.Add(new AgeGroupEvents(eventId, ageGroupId));
+            SaveChanges();
+        }
+
+        public void RemoveAgeGroupEvent(int eventId, string group)
+        {
+            int ageGroupId = AgeGroupTypesContainer.AgeGroupTypes.Where(g => g.Type.Equals(group)).Single().Id;
+            AgeGroupEvents.Remove(AgeGroupEvents.Where(g => g.AgeGroupType == ageGroupId && g.EventId == eventId).Single());
+            SaveChanges();
+        }
+
+        private void SetEventAgeGroups(int eventId, List<string> groups)
+        {
             for (int i = 0; i<groups.Count; i++)
             {
-                AgeGroupEvents ageGroupEvent = new AgeGroupEvents(id, groups[i]);
-                AgeGroupEvents.Add(ageGroupEvent);
+                if(AgeGroupEvents.Where(e => e.EventId == eventId && e.AgeGroupType.Equals(groups[i])).Count() == 0)
+                {
+                    AddAgeGroupEvent(eventId, groups[i]);
+                }
+                else
+                {
+                    RemoveAgeGroupEvent(eventId, groups[i]);
+                }
             }
             SaveChanges();
         }
 
-        public bool editEvent(int Id, string title, int type)
+        public bool editEvent(int Id, string title, int type, List<string> groups)
         {
-            List<Events> eventsList = Events.Where(e => e.Id == Id).ToList();
-            if (eventsList.Count != 0)
+            if (Events.Where(e => e.Id == Id).Count() != 0)
             {
-                Events.Remove(eventsList[0]);
-                Events.Add(new Models.Events(title, type));
-                SaveChanges();
+                Events eventToEdit = Events.Where(e => e.Id == Id).Single();
+                eventToEdit.Title = title;
+                eventToEdit.Type = type;
+                SetEventAgeGroups(Id, groups);
                 return true;
             }
             return false;
@@ -57,12 +77,30 @@ namespace WebApplication.Models
         public List<Events> GetSelectedEvents(string ageGroup, int competitionId)
         {
             List<Models.Events> eventsToReturn = new List<Events>();
-            List<Models.CompetitionEvents> competitionEvents = CompetitionEventsContainer.CompetitionEvents.Where(e => e.CompetitionId == competitionId).ToList();
-            foreach(Models.CompetitionEvents c in competitionEvents)
+            int ageGroupType = AgeGroupTypesContainer.AgeGroupTypes.Where(t => t.Type.Equals(ageGroup)).ToList()[0].Id;
+            List<AgeGroupEvents> ageGroupEvents = GetEventsInCompetition(ageGroup, competitionId);
+            foreach (Models.AgeGroupEvents c in ageGroupEvents)
             {
-                eventsToReturn.Add(Events.Where(ev => ev.Id == c.EventId).ToList()[0]);
+                if((Events.Where(ev => ev.Id == c.EventId).Count() != 0))
+                {
+                    eventsToReturn.Add(Events.Where(ev => ev.Id == c.EventId).ToList()[0]);
+                }
             }
             return eventsToReturn;
+        }
+
+        public List<AgeGroupEvents> GetEventsInCompetition(string ageGroup, int competitionId)
+        {
+            List<CompetitionEvents> competitionEvents = CompetitionEventsContainer.CompetitionEvents.Where(ce => ce.CompetitionId == competitionId).ToList();
+            List<AgeGroupEvents> ageGroupEvents = new List<AgeGroupEvents>();
+            foreach (CompetitionEvents e in competitionEvents)
+            {
+                if (AgeGroupEvents.Where(age => age.EventId == e.EventId).Count() != 0)
+                {
+                    ageGroupEvents.Add(AgeGroupEvents.Where(age => age.EventId == e.EventId).ToList()[0]);
+                }
+            }
+            return ageGroupEvents;
         }
     }
 }

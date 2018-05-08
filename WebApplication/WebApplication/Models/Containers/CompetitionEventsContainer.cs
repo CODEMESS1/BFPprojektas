@@ -38,5 +38,53 @@ namespace WebApplication.Models
             CompetitionEvents.RemoveRange(competitionEventsToRemove);
             SaveChanges();
         }
+
+        public void AddEvent(int compId, int eventId)
+        {
+            CompetitionEvents.Add(new CompetitionEvents(compId, eventId));
+            SaveChanges();
+        }
+
+        public void RemoveEvent(int compId, int eventId)
+        {
+            CompetitionEvents eventToRemove = CompetitionEvents.Where(e => e.CompetitionId == compId && e.EventId == eventId).Single();
+            CompetitionEvents.Remove(eventToRemove);
+            SaveChanges();
+        }
+
+        public bool UpdateEventsList(int compId, List<Events> events)
+        {
+            if (events.Count == 0)
+                return false;
+
+            try
+            {
+                List<CompetitionEvents> eventsToEdit = CompetitionEvents.Where(e => e.CompetitionId == compId).ToList();
+                if (eventsToEdit.Count != 0)
+                {
+                    foreach (Events e in events)
+                    { 
+                        if(eventsToEdit.Where(evt => evt.CompetitionId == compId && evt.EventId == e.Id).Count() == 0)
+                        {
+                            AddEvent(compId, e.Id);
+                        }
+                        else
+                        {
+                            RemoveEvent(compId, e.Id);
+                        }
+                    }
+                }
+                else
+                {
+                    AddEventsList(compId, events);
+                }
+                SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

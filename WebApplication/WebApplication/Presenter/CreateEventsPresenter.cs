@@ -59,7 +59,7 @@ namespace WebApplication.Presenter
 
         public bool EditEvent(int Id)
         {
-            if (eventsContainer.editEvent(Id, View.Title, View.Type))
+            if (eventsContainer.editEvent(Id, View.Title, View.Type, selectedGroups))
             {
                 return true;
             }

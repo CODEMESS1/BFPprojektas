@@ -5,6 +5,7 @@ using System.Web;
 
 namespace WebApplication.Models.Objects
 {
+    [Serializable]
     public class LastEntries
     {
         public int Id { get; set; }

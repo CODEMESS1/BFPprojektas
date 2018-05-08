@@ -32,16 +32,7 @@
                 }
     </style>
 
-        <cc1:ModalPopupExtender ID="SelectPopup" runat="server"
-                TargetControlID="fake"
-                PopupControlID="SelectPanel"
-                DropShadow="false"
-                BackgroundCssClass="modalBackground">
-            </cc1:ModalPopupExtender>
-
-        <asp:LinkButton ID="fake" runat="server"></asp:LinkButton>
-
-        <asp:Panel ID="SelectPanel" runat="server" style='display: none; position:relative; display: none; min-height:60%; min-width:30%; height:auto; width:auto' BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
+        <asp:Panel ID="SelectPanel" runat="server" style='position:relative; min-height:60%; min-width:30%; height:auto; width:auto' BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
                <asp:GridView ID="CompetitionsGridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal" DataKeyNames="Id"  OnSelectedIndexChanged="CompetitionsGridView_SelectedIndexChanged" OnPageIndexChanging="CompetitionsGridView_PageIndexChanging">
                     <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
                     <Columns>
@@ -56,9 +47,8 @@
                         <asp:CheckBoxField DataField="Registration" HeaderText="Registracija" ReadOnly="true" />
                     </Columns>
                 </asp:GridView>
-                <asp:Button ID="cancel_btn" runat="server" Text="--" OnClick="cancel_btn_Click" CssClass="btn" />
         </asp:Panel>
-        
+
         <script type="text/javascript">
             function openLink(evt, tabName) {
                 var startBtn = document.getElementById('<%=startCompetition_btn.ClientID%>');
@@ -88,6 +78,7 @@
         <asp:Panel ID="CompetitionPanel" runat="server" Visible="false">
                     <!-- Tab links -->
                     <ul class="nav nav-tabs navTabFormat">
+                        <asp:Button ID="SelectCompetitionBtn" Visible="false" runat="server" Text="Varžybų sąrašas" OnClick="SelectCompetitionBtn_Click" CssClass="nav-link active" />
                         <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'generate')" id="defaultLink">Pogrūpiai</a></li>
                         <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'documents')">Protokolai</a></li>
                         <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'results')" id="startLink">Rezultatų vedimas</a></li>
@@ -139,9 +130,21 @@
                             <h2>Rezultatų suvedimas</h2>
                             <div>
                                 <label id="start_lbl">Pradėti varžybas?</label>
-                               
                                 <asp:Button ID="startCompetition_btn" runat="server" Text="Pradėti varžybas" OnClick="startCompetition_Click"/>
-                                
+                            </div>
+                                    <div>
+                                        <label>Skaičiuoti rezultatus</label>
+                                        <asp:DropDownList ID="CalculateResultsGroup_list" runat="server" DataValueField="Type" AutoPostBack="true" DataTextField="Type" OnSelectedIndexChanged="CalculateResultsGroup_list_SelectedIndexChanged"></asp:DropDownList>
+                                        <asp:Button ID="Calculate_btn" runat="server" Text="Skaičiuoti" OnClick="Calculate_btn_Click"/>
+                                    </div>
+                            <div>
+                                <asp:GridView ID="Results_GridView" runat="server" AutoGenerateColumns="false" BackColor="White">
+                                    <Columns>
+                                        <asp:BoundField DataField="Score" HeaderText="Vieta" />
+                                        <asp:BoundField DataField="Points" HeaderText="Taškai" />
+                                        <asp:BoundField DataField="Result" HeaderText="Rezultatas" />
+                                    </Columns>
+                                </asp:GridView>
                             </div>
                         </div>
                     </div>
@@ -150,22 +153,28 @@
          <div id="ResultsInputContent">
             <asp:Panel ID="ResultsUpdatePanel" runat="server" > 
                 
-                    <asp:Button ID="saveCompetition_btn" runat="server" Text="Saugoti varžybas" OnClick="saveCompetition_btn_Click" />
+                    <asp:Button ID="saveCompetition_btn" runat="server" CausesValidation="false" Text="Saugoti varžybas" OnClick="saveCompetition_btn_Click" />
                     <label id="save_lbl">Išsaugoti varžybas</label>
                     <div id="select">
                         <label>Pasirinkite grupę</label>
-                        <asp:DropDownList ID="selectGroup_list" runat="server" DataValueField="Type"></asp:DropDownList>
+                        <asp:DropDownList ID="selectGroup_list" runat="server" DataValueField="Id" DataTextField="Type"></asp:DropDownList>
                         <asp:Button ID="SelectGroup_btn" runat="server" Text="Pasirinkti" OnClick="SelectGroup_btn_Click" />
                         <label>Pasirinkite rungtį</label>
-                        <asp:DropDownList ID="selectEvent_list" DataValueField="Type" DataTextField="Title" runat="server" Enabled="false"></asp:DropDownList>
-                        <asp:Button ID="WriteResults_btn" runat="server" OnClick="WriteResults_btn_Click" Text="Vesti rezultatus"/>
+                        <asp:DropDownList ID="selectEvent_list" DataValueField="Id" DataTextField="Title" runat="server" Enabled="false"></asp:DropDownList>
+                        <asp:Button ID="WriteResults_btn" runat="server" OnClick="WriteResults_btn_Click" Text="Vesti rezultatus" Width="166px"/>
+                        <br />
                     </div>
                         <div>
                             <label>Įveskite ID</label>
-                            <asp:TextBox ID="EnterId_tb" runat="server" TextMode="Number" OnTextChanged="EnterId_tb_TextChanged"></asp:TextBox>
+                            <asp:TextBox ID="EnterId_tb" runat="server" TextMode="Number"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="EnterId_Validator" ControlToValidate="EnterId_tb" runat="server" ErrorMessage="" Text="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                            &nbsp;&nbsp;
+                            <asp:Button ID="FindById_btn" OnClick="FindById_btn_Click" runat="server" Text="Ieškoti" />
+                            &nbsp;&nbsp;
+                            <asp:TextBox ID="Competitor_tb" runat="server" AutoPostBack="true" ReadOnly="true"></asp:TextBox>
                         </div>
-                
+                    <div>
+                    </div>
             </asp:Panel>
 
              <asp:Panel ID="time" runat="server">
@@ -202,6 +211,7 @@
                  </asp:GridView>
              </asp:Panel>
         </div>
+
 
         <script type="text/javascript">
 

@@ -31,5 +31,12 @@ namespace WebApplication.Models
             }
             return false;
         }
+
+        public bool ContainsEvent(int Id)
+        {
+            if (this.Id == Id)
+                return true;
+            return false;
+        }
     }
 }

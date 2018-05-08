@@ -659,6 +659,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Containers\AgeGroupContainer.cs" />
     <Compile Include="Models\Containers\EventTypesContainer.cs" />
+    <Compile Include="Models\Containers\ResultsContainer.cs" />
     <Compile Include="Models\Objects\AgeGroupEvents.cs" />
     <Compile Include="Models\Objects\AgeGroupTypes.cs" />
     <Compile Include="Models\Containers\AgeGroupTypesContainer.cs" />
@@ -669,6 +670,7 @@
     <Compile Include="Models\Containers\SubGroupsContainer.cs" />
     <Compile Include="Models\Objects\EventTypes.cs" />
     <Compile Include="Models\Objects\LastEntries.cs" />
+    <Compile Include="Models\Objects\Results.cs" />
     <Compile Include="Model\ICreateEvents.cs" />
     <Compile Include="Model\IRegisterCompetitorsAdmin.cs" />
     <Compile Include="Model\IStartCompetition.cs" />

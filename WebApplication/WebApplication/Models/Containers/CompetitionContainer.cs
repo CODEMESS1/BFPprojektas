@@ -47,19 +47,28 @@ namespace WebApplication.Models
 
         public bool EditCompetition(int id, Competition competition, List<Events> events)
         {
-            List<Competition> competitionToChange = Competitions.Where(c => c.Id == id).ToList();
-            if(competitionToChange.Count != 0)
+            try
             {
-                competitionEventsContainer.DeleteRange(id);
-                Competitions.Remove(competitionToChange[0]);
-                Competitions.Add(competition);
+                if (!competitionEventsContainer.UpdateEventsList(id, events))
+                {
+                    return false;
+                }
+                Competition competitionToChange = Competitions.Where(c => c.Id == id).Single();
+                competitionToChange.Name = competition.Name;
+                competitionToChange.Location = competition.Location;
+                competitionToChange.Address = competition.Address;
+                competitionToChange.Date = competition.Date;
+                competitionToChange.RegistrationStartDate = competition.RegistrationStartDate;
+                competitionToChange.RegistrationEndDate = competition.RegistrationEndDate;
+                competitionToChange.Registration = competition.Registration;
                 SaveChanges();
-                List<Competition> competitions = Competitions.ToList();
-                int newId = competitions.Last().Id;
-                competitionEventsContainer.AddEventsList(newId, events);
-                return true;
+                
             }
-            return false;
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
         public Competition getById(int Id)

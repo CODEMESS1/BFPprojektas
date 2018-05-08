@@ -17,8 +17,47 @@ namespace WebApplication.Admin.Competition
         private StartCompetitionPresenter presenter;
         private string Result;
 
-        public List<AgeGroupTypes> AgeGroupTypes { set => AgeGroup_DropDownList.DataSource = selectGroup_list.DataSource = value; }
-        public List<CompetitorsWithSubgroups> Competitors { set => CompetitorsGridView.DataSource = value; }
+        private int IdForCalc
+        {
+            get
+            {
+                if (ViewState["Id"] != null)
+                    return (int)ViewState["Id"];
+                else
+                    return 0;
+            }
+            set
+            {
+                ViewState["Id"] = value;
+            }
+        }
+
+        private List<Models.Objects.LastEntries> LastEntries
+        {
+            get
+            {
+                if (ViewState["list"] != null)
+                    return (List<Models.Objects.LastEntries>)ViewState["list"];
+                else
+                    return LastEntries = new List<LastEntries>();
+            }
+            set
+            {
+                ViewState["list"] = value;
+            }
+        }
+
+        public List<AgeGroupTypes> AgeGroupTypes { set { CalculateResultsGroup_list.DataSource = AgeGroup_DropDownList.DataSource = selectGroup_list.DataSource = value; } } 
+        public List<CompetitorsWithSubgroups> Competitors { set {
+                if (value.Count != 0)
+                {
+                    CompetitorsGridView.DataSource = value;
+                }
+                else
+                {
+                    CompetitorsGridView.DataSource = null;
+                }
+                    } }
 
         public string SelectedAgeGroup => AgeGroup_DropDownList.SelectedValue;
 
@@ -30,26 +69,36 @@ namespace WebApplication.Admin.Competition
 
         List<Events> IStartCompetition.Events { set => selectEvent_list.DataSource = value; }
 
-        public string SelectedAgeGroupForResult => selectGroup_list.SelectedValue;
+        public int SelectedAgeGroupForResult => Convert.ToInt16(selectGroup_list.SelectedValue);
 
         public int SelectedEventForResult => Convert.ToUInt16(selectEvent_list.SelectedValue);
 
-        public List<LastEntries> LastEntries { set => LastEntries_Gridview.DataSource = value; }
-
         public LastEntries LastEntry {
             get {
-                return new LastEntries(Convert.ToInt16(EnterId_tb.Text), "", "", selectEvent_list.SelectedItem.Text, Result);
+                return new LastEntries(Convert.ToInt16(EnterId_tb.Text), Competitor_tb.Text.Split(',')[0], Competitor_tb.Text.Split(',')[1], selectEvent_list.SelectedItem.Text, Result);
             }
         }
+
+        public Competitors Competitor { set {
+                Competitor_tb.Text = value.ToString();
+            } }
+
+        public int CompetitorId => Convert.ToInt16(EnterId_tb.Text);
+
+        string IStartCompetition.Result => this.Result;
+
+        public string AgeGroupForCalculation => CalculateResultsGroup_list.SelectedValue;
+
+        public List<Results> Results { set { Results_GridView.DataSource = value; Results_GridView.DataBind(); } }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             presenter = new StartCompetitionPresenter(this);
             presenter.InitView();
             CompetitionsGridView.DataBind();
-            SelectPopup.Show();
             if (!Page.IsPostBack)
             {
+                CalculateResultsGroup_list.DataBind();
                 ResultsUpdatePanel.Visible = false;
                 time.Visible = false;
                 count.Visible = false;
@@ -58,8 +107,6 @@ namespace WebApplication.Admin.Competition
 
         protected void GenerateSubGroups_Click(object sender, EventArgs e)
         {
-            SelectPopup.Hide();
-            SelectPanel.Visible = false;
             CompetitorsGridView.DataSource = null;
             CompetitorsGridView.DataBind();
             presenter.SetAgeGroupSubgroupsCount();
@@ -71,20 +118,24 @@ namespace WebApplication.Admin.Competition
         protected void GetCompetitorsInGroup_Click(object sender, EventArgs e)
         {
             presenter.GetByGroup();
-            CompetitorsGridView.DataBind();
-            GroupGridView(CompetitorsGridView.Rows, 0, 2);
-            AgeGroup_DropDownList.Enabled = false;
-            SubgroupsCount.Enabled = false;
+            if (CompetitorsGridView.DataSource != null)
+            {
+                CompetitorsGridView.DataBind();
+                GroupGridView(CompetitorsGridView.Rows, 0, 2);
+                AgeGroup_DropDownList.Enabled = false;
+                SubgroupsCount.Enabled = false;
+            }
             ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
+
         }
 
         protected void CompetitionsGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectPopup.Hide();
             SelectPanel.Visible = false;
             CompetitorsGridView.DataBind();
             AgeGroup_DropDownList.DataBind();
             CompetitionPanel.Visible = true;
+            SelectCompetitionBtn.Visible = true;
             ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
         }
 
@@ -94,9 +145,11 @@ namespace WebApplication.Admin.Competition
             CompetitorsGridView.DataBind();
         }
 
-        protected void cancel_btn_Click(object sender, EventArgs e)
+        protected void SelectCompetitionBtn_Click(object sender, EventArgs e)
         {
-
+            SelectPanel.Visible = true;
+            CompetitionPanel.Visible = false;
+            SelectCompetitionBtn.Visible = false;
         }
 
 
@@ -154,7 +207,7 @@ namespace WebApplication.Admin.Competition
 
         protected void WriteResults_btn_Click(object sender, EventArgs e)
         {
-            if(selectGroup_list.SelectedValue != null && selectEvent_list.SelectedValue != null)
+            if(selectGroup_list.SelectedValue != null && selectEvent_list.SelectedItem != null)
             {
                 if(GetEventType().Type.Equals("Time"))
                 {
@@ -188,7 +241,7 @@ namespace WebApplication.Admin.Competition
 
         protected void EnterId_tb_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         public EventTypes GetEventType()
@@ -208,15 +261,63 @@ namespace WebApplication.Admin.Competition
         protected void ResultsTime_btn_Click(object sender, EventArgs e)
         {
             Result = ResultsTimeMinute_TextBox.Text + ":" + ResultsTimeSeconds_TextBox.Text + "," + ResultsTimeMili_TextBox.Text;
-            presenter.BindLastEntry();
+            BindLastEntry();
             LastEntries_Gridview.DataBind();
+            presenter.AddResult();
         }
 
         protected void ResultsCount_btn_Click(object sender, EventArgs e)
         {
             Result = TextBox3.Text;
-            presenter.BindLastEntry();
+            BindLastEntry();
             LastEntries_Gridview.DataBind();
+            presenter.AddResult();
+        }
+
+        private void BindLastEntry()
+        {
+            if (LastEntries.Count == 5)
+            {
+                LastEntries.RemoveAt(0);
+                LastEntries.Add(LastEntry);
+                LastEntries_Gridview.DataSource = LastEntries;
+            }
+            else
+            {
+                LastEntries.Add(LastEntry);
+                LastEntries_Gridview.DataSource = LastEntries;
+            }
+        }
+
+        protected void FindById_btn_Click(object sender, EventArgs e)
+        {
+            if (presenter.CompetitorForEntry() != null)
+            {
+                Competitor_tb.DataBind();
+            }
+            else
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Tokio dalyvio ID nėra');", true);
+            }
+        }
+
+        protected void Calculate_btn_Click(object sender, EventArgs e)
+        {
+            CalculateResultsGroup_list.SelectedIndex = IdForCalc;
+            Results_GridView.DataSource = null;
+            Results_GridView.DataBind();
+            presenter.CalculateSelected();
+            if(Results_GridView.DataSource == null)
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Nėra rezultatų arba dalyvių šios grupės');", true);
+            }
+            ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "clickPostBackStart();", true);
+        }
+
+        protected void CalculateResultsGroup_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IdForCalc = Convert.ToInt16(CalculateResultsGroup_list.SelectedIndex);
+            ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "clickPostBackStart();", true);
         }
     }
 }

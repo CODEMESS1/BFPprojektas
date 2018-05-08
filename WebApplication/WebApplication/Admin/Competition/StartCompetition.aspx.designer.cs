@@ -22,24 +22,6 @@ namespace WebApplication.Admin.Competition {
         protected global::System.Web.UI.ScriptManager ScriptManager;
         
         /// <summary>
-        /// SelectPopup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender SelectPopup;
-        
-        /// <summary>
-        /// fake control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton fake;
-        
-        /// <summary>
         /// SelectPanel control.
         /// </summary>
         /// <remarks>
@@ -58,15 +40,6 @@ namespace WebApplication.Admin.Competition {
         protected global::System.Web.UI.WebControls.GridView CompetitionsGridView;
         
         /// <summary>
-        /// cancel_btn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cancel_btn;
-        
-        /// <summary>
         /// CompetitionPanel control.
         /// </summary>
         /// <remarks>
@@ -74,6 +47,15 @@ namespace WebApplication.Admin.Competition {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel CompetitionPanel;
+        
+        /// <summary>
+        /// SelectCompetitionBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SelectCompetitionBtn;
         
         /// <summary>
         /// AgeGroup_DropDownList control.
@@ -148,6 +130,33 @@ namespace WebApplication.Admin.Competition {
         protected global::System.Web.UI.WebControls.Button startCompetition_btn;
         
         /// <summary>
+        /// CalculateResultsGroup_list control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CalculateResultsGroup_list;
+        
+        /// <summary>
+        /// Calculate_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Calculate_btn;
+        
+        /// <summary>
+        /// Results_GridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView Results_GridView;
+        
+        /// <summary>
         /// ResultsUpdatePanel control.
         /// </summary>
         /// <remarks>
@@ -218,6 +227,24 @@ namespace WebApplication.Admin.Competition {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator EnterId_Validator;
+        
+        /// <summary>
+        /// FindById_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button FindById_btn;
+        
+        /// <summary>
+        /// Competitor_tb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Competitor_tb;
         
         /// <summary>
         /// time control.

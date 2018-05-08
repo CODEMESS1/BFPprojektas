@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication.Models.Objects;
 
 namespace WebApplication.Model
 {
@@ -14,11 +16,15 @@ namespace WebApplication.Model
         string SelectedAgeGroup { get; }
         int SelectedSubgroupCount { get; }
         int SelectedCompetitionId { get; }
-        string SelectedAgeGroupForResult { get; }
+        int SelectedAgeGroupForResult { get; }
         int SelectedEventForResult { get; }
         List<Models.Competition> Competitions { set; }
         List<Models.Events> Events { set; }
-        List<Models.Objects.LastEntries> LastEntries { set; }
         Models.Objects.LastEntries LastEntry { get; }
+        Models.Competitors Competitor { set; }
+        int CompetitorId { get; }
+        string Result { get; }
+        string AgeGroupForCalculation { get; }
+        List<Results> Results { set; }
     }
 }
