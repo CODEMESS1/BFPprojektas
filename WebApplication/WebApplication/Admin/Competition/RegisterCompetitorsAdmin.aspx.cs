@@ -12,12 +12,14 @@ namespace WebApplication.Admin.Competition
 {
     public partial class RegisterCompetitorsAdmin : Page, IRegisterCompetitorsAdmin
     {
-        public int competitorId => Convert.ToInt32(competitorsGridView.SelectedRow.Cells[0]);
+        public int competitorId => Convert.ToInt32(competitorsGridView.SelectedRow.Cells[1].Text);
 
-        public int competitionId => Convert.ToInt32(GridView1.SelectedRow.Cells[0]);
+        public int competitionId => Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
 
         public List<Models.Competition> Competitions { set =>GridView1.DataSource = value; }
         public List<Competitors> Competitors { set => competitorsGridView.DataSource = value; }
+
+        public string CompetitorInfo { set => Info_tb.Text = value; }
 
         private RegisterCompetitorsAdminPresenter presenter;
 
@@ -51,7 +53,11 @@ namespace WebApplication.Admin.Competition
 
         protected void competitorsGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            addCompetitorPopup.Show();
+            presenter.SetCompetitorInfo();
+            panelAddTo.Visible = true;
+            Info_tb.DataBind();
+            
+
         }
 
         protected void search_btn_Click(object sender, EventArgs e)
@@ -70,16 +76,20 @@ namespace WebApplication.Admin.Competition
         protected void AddToCompeition_Click(object sender, EventArgs e)
         {
             presenter.AddToCompetition();
+            searchPopup.Hide();
+
         }
 
         protected void RemoveFromCompetition_Click(object sender, EventArgs e)
         {
             presenter.RemoveFromCompetition();
+            searchPopup.Hide();
         }
 
         protected void cancelAdding_Click(object sender, EventArgs e)
         {
-            addCompetitorPopup.Hide();
+            panelAddTo.Visible = false;
+            searchPopup.Hide();
         }
     }
 }
