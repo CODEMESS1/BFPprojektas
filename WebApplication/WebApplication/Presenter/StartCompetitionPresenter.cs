@@ -12,7 +12,7 @@ namespace WebApplication.Presenter
     public class StartCompetitionPresenter
     {
         IStartCompetition View;
-        
+
         private AgeGroupTypesContainer AgeGroupTypesContainer = new AgeGroupTypesContainer();
         private AgeGroupContainer AgeGroupContainer = new AgeGroupContainer();
         private CompetitorsContainer CompetitorsContainer = new CompetitorsContainer();
@@ -25,6 +25,26 @@ namespace WebApplication.Presenter
 
         public StartCompetitionPresenter(IStartCompetition view)
         {
+            AgeGroupTypesContainer = new AgeGroupTypesContainer();
+            AgeGroupContainer = new AgeGroupContainer();
+            CompetitorsContainer = new CompetitorsContainer();
+            CompetitionContainer = new CompetitionContainer();
+            SubGroupsContainer = new SubGroupsContainer();
+            EventsContainer = new EventsContainer();
+            EventTypes = new EventTypesContainer();
+            ResultsContainer = new ResultsContainer();
+            CompetitionEvents = new CompetitionEventsContainer();
+
+            if (view == null)
+                throw new ArgumentNullException("View cannot be null");
+
+            View = view;
+        }
+
+        public StartCompetitionPresenter(IStartCompetition view, ResultsContainer resultsContainer)
+        {
+            ResultsContainer = resultsContainer;
+
             if (view == null)
                 throw new ArgumentNullException("View cannot be null");
 
@@ -136,7 +156,7 @@ namespace WebApplication.Presenter
             return null;
         }
 
-        private List<Results> CalculateMostCount(List<Results> results)
+        public List<Results> CalculateMostCount(List<Results> results)
         {
             List<double> points = MakePointsList(results.Count);
             int place = 1;

@@ -498,3 +498,8 @@ C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.C
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Git\projektas\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
 B:\MainRepository\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
+B:\MainRepository\WebApplication\WebApplication\bin\Castle.Core.dll
+B:\MainRepository\WebApplication\WebApplication\bin\NSubstitute.dll
+B:\MainRepository\WebApplication\WebApplication\bin\System.Threading.Tasks.Extensions.dll
+B:\MainRepository\WebApplication\WebApplication\bin\System.Diagnostics.DiagnosticSource.xml
+B:\MainRepository\WebApplication\WebApplication\bin\System.Threading.Tasks.Extensions.xml

@@ -38,9 +38,10 @@ namespace WebApplication.Models.Containers
         public void UpdateResults(List<Results> results)
         {
             List<Results> resultsToEdit = Results.ToList();
+
             foreach(Results result in results)
             {
-                var toEdit = results.Where(r => r.Id == result.Id).Single();
+                var toEdit = resultsToEdit.Where(r => r.Id == result.Id).Single();
                 toEdit.Points = result.Points;
                 toEdit.Result = result.Result;
                 toEdit.Score = result.Score;
