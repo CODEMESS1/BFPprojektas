@@ -724,6 +724,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Tests\CreateCompetitionTest.cs" />
     <Compile Include="Tests\Mocks\MockCreateEventsView.cs" />
+    <Compile Include="Tests\Mocks\MockStartCompetitionView.cs" />
+    <Compile Include="Tests\StartCompetitionTest.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

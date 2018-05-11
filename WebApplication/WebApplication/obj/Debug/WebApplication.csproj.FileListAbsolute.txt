@@ -412,7 +412,6 @@ C:\Git\projektas\WebApplication\WebApplication\bin\Microsoft.ScriptManager.WebFo
 C:\Git\projektas\WebApplication\WebApplication\bin\Microsoft.Threading.Tasks.dll
 C:\Git\projektas\WebApplication\WebApplication\bin\Microsoft.Threading.Tasks.Extensions.dll
 C:\Git\projektas\WebApplication\WebApplication\bin\Microsoft.Web.Infrastructure.dll
-C:\Git\projektas\WebApplication\WebApplication\bin\Microsoft.Win32.Primitives.dll
 C:\Git\projektas\WebApplication\WebApplication\bin\Newtonsoft.Json.dll
 C:\Git\projektas\WebApplication\WebApplication\bin\nunit.framework.dll
 C:\Git\projektas\WebApplication\WebApplication\bin\Owin.dll

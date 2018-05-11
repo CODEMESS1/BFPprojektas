@@ -142,55 +142,60 @@ namespace WebApplication.Presenter
             int place = 1;
             for(int i = 0; i < points.Count-1; i++)
             {
-                if(Convert.ToInt16(results[i].Result) == Convert.ToInt16(results[i+1].Result))
+                if (Convert.ToInt16(results[i].Result) == Convert.ToInt16(results[i + 1].Result))
                 {
-                    int startIndex = i;
-                    int endIndex = 0;
                     int index = i;
-                    double sum = points[i] + points[i + 1];
-                    int count = 2;
-                    index++;
-                    if (index + 1 != results.Count - 1)
-                    {
-                        while (Convert.ToInt16(results[index].Result) == Convert.ToInt16(results[index + 1].Result))
-                        {
-                            sum += points[index + 1];
-                            count++;
-                            index++;
-                            if (index == results.Count - 1)
-                            {
-                                continue;
-                            }
-                        }
-                        endIndex = index + 1;
-                        i = endIndex - 1;
-                        double avg = sum / count;
-                        for (int j = startIndex; j <= endIndex; j++)
-                        {
-                            results[j].Score = place;
-                            results[j].Points = avg;
-                        }
-                        place += endIndex - startIndex;
-                    }
-                    else
-                    {
+                    int count = 0;
+                    double sum = 0;
+                    double avg = 0;
+                    int startIndex = i;
+                    int placeToSet = place;
 
-                        i = index;
+                    while(index < (points.Count - 1))
+                    {
+                        i++;
+                        if (Convert.ToInt16(results[index].Result) != Convert.ToInt16(results[index + 1].Result))
+                        {
+                            count++;
+                            sum += points[index];
+                            break;
+                        }
+                        else
+                        {
+                            count++;
+                            sum += points[index];
+                        }
+                        index++;
+                        place++;
+                    }
+                    
+                    int endIndex = startIndex + count;
+                    avg = sum / count;
+                    for(int j = startIndex; j < endIndex; j++)
+                    {
+                        results[j].Score = placeToSet;
+                        results[j].Points = avg;
+                    }
+
+                    if(i + 1 == points.Count)
+                    {
+                        results[i].Score = ++place;
+                        results[i].Points = points[i];
+                        break;
                     }
                 }
                 else
                 {
                     results[i].Score = place;
-                    results[i].Points = place;
+                    results[i].Points = points[i];
                     place++;
+                }
 
-                    if (i +1 == points.Count-1)
-                    {
-                        int j = i;
-                        results[++j].Score = place;
-                        results[j].Points = place;
-                        break;
-                    }
+                if (i + 1 == points.Count - 1)
+                {
+                    results[i+1].Score = place;
+                    results[i+1].Points = points[i+1];
+                    break;
                 }
             }
 
