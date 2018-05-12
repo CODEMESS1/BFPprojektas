@@ -58,6 +58,9 @@
     <Reference Include="AspNet.ScriptManager.jQuery, Version=3.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.3.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -73,6 +76,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.3.1.0\lib\net46\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
@@ -160,6 +166,9 @@
     </Reference>
     <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.1.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -312,13 +321,15 @@
     <Content Include="Admin\AdminPage.aspx" />
     <Content Include="Admin\Competition\CreateCompetition.aspx" />
     <Content Include="Admin\Competition\CreateEvents.aspx" />
+    <Content Include="Admin\Competition\RegisterCompetitorsAdmin.aspx" />
+    <Content Include="Admin\Competition\StartCompetition.aspx" />
     <Content Include="Admin\CreateEditUsers.aspx" />
     <Content Include="Admin\FindUser.aspx" />
     <Content Include="Admin\PrintLists.aspx" />
-    <Content Include="Coach\AddCompetitors.aspx" />
+    <Content Include="Coach\Competitors\AddCompetitors.aspx" />
     <Content Include="Coach\CoachPage.aspx" />
     <Content Include="Coach\js\ListViewMultipleSelect.js" />
-    <Content Include="Coach\RegisterCompetitors.aspx" />
+    <Content Include="Coach\Competitors\RegisterCompetitors.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -341,6 +352,7 @@
     <Content Include="Image\navigation-512.png" />
     <Content Include="Image\pattern.jpg" />
     <Content Include="Image\program-logo.png" />
+    <Content Include="Official\PrintCompetitors.aspx" />
     <Content Include="Official\Web.config" />
     <Content Include="Coach\Web.config" />
     <Content Include="Official\OfficialPage.aspx" />
@@ -565,6 +577,20 @@
     <Compile Include="Admin\Competition\CreateEvents.aspx.designer.cs">
       <DependentUpon>CreateEvents.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Competition\RegisterCompetitorsAdmin.aspx.cs">
+      <DependentUpon>RegisterCompetitorsAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Competition\RegisterCompetitorsAdmin.aspx.designer.cs">
+      <DependentUpon>RegisterCompetitorsAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Competition\StartCompetition.aspx.cs">
+      <DependentUpon>StartCompetition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Competition\StartCompetition.aspx.designer.cs">
+      <DependentUpon>StartCompetition.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\CreateEditUsers.aspx.cs">
       <DependentUpon>CreateEditUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -598,11 +624,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Coach\AddCompetitors.aspx.cs">
+    <Compile Include="Coach\Competitors\AddCompetitors.aspx.cs">
       <DependentUpon>AddCompetitors.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Coach\AddCompetitors.aspx.designer.cs">
+    <Compile Include="Coach\Competitors\AddCompetitors.aspx.designer.cs">
       <DependentUpon>AddCompetitors.aspx</DependentUpon>
     </Compile>
     <Compile Include="Coach\CoachPage.aspx.cs">
@@ -612,11 +638,11 @@
     <Compile Include="Coach\CoachPage.aspx.designer.cs">
       <DependentUpon>CoachPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Coach\RegisterCompetitors.aspx.cs">
+    <Compile Include="Coach\Competitors\RegisterCompetitors.aspx.cs">
       <DependentUpon>RegisterCompetitors.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Coach\RegisterCompetitors.aspx.designer.cs">
+    <Compile Include="Coach\Competitors\RegisterCompetitors.aspx.designer.cs">
       <DependentUpon>RegisterCompetitors.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
@@ -641,16 +667,32 @@
       <DependentUpon>201803312045182_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AgeGroupContainer.cs" />
-    <Compile Include="Models\AgeGroupEvents.cs" />
-    <Compile Include="Models\AgeGroupTypes.cs" />
-    <Compile Include="Models\AgeGroupTypesContainer.cs" />
-    <Compile Include="Models\CompetitionEvents.cs" />
-    <Compile Include="Models\CompetitionEventsContainer.cs" />
-    <Compile Include="Models\EventTypes.cs" />
-    <Compile Include="Models\EventTypesContainer.cs" />
+    <Compile Include="Models\Containers\AgeGroupContainer.cs" />
+    <Compile Include="Models\Containers\EventTypesContainer.cs" />
+    <Compile Include="Models\Containers\ResultsContainer.cs" />
+    <Compile Include="Models\Objects\AgeGroupEvents.cs" />
+    <Compile Include="Models\Objects\AgeGroupTypes.cs" />
+    <Compile Include="Models\Containers\AgeGroupTypesContainer.cs" />
+    <Compile Include="Models\Objects\CompetitionAgeSubgroups.cs" />
+    <Compile Include="Models\Objects\CompetitionEvents.cs" />
+    <Compile Include="Models\Containers\CompetitionEventsContainer.cs" />
+    <Compile Include="Models\Objects\CompetitorsWithSubgroups.cs" />
+    <Compile Include="Models\Containers\SubGroupsContainer.cs" />
+    <Compile Include="Models\Objects\EventTypes.cs" />
+    <Compile Include="Models\Objects\LastEntries.cs" />
+    <Compile Include="Models\Objects\Results.cs" />
     <Compile Include="Model\ICreateEvents.cs" />
+<<<<<<< HEAD
+    <Compile Include="Model\IPrintOfficial.cs" />
+    <Compile Include="Official\PrintCompetitors.aspx.cs">
+      <DependentUpon>PrintCompetitors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Official\PrintCompetitors.aspx.designer.cs">
+      <DependentUpon>PrintCompetitors.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Presenter\CreateEventsPresenter.cs" />
+    <Compile Include="Presenter\PrintCompetitorsPresenter.cs" />
     <Compile Include="Tests\CreateEventsTest.cs" />
     <Compile Include="Tests\Mocks\MockCreateCompetitionView.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -663,14 +705,34 @@
     <Compile Include="Models\Competitors.cs" />
     <Compile Include="Models\CompetitorsContainer.cs" />
     <Compile Include="Models\CompetitorsInCompetitions.cs" />
-    <Compile Include="Models\Container.cs" />
+    <Compile Include="Models\CompetitorsInCompetitionContainer.cs" />
     <Compile Include="Models\Events.cs" />
     <Compile Include="Models\EventsContainer.cs" />
+=======
+    <Compile Include="Model\IRegisterCompetitorsAdmin.cs" />
+    <Compile Include="Model\IStartCompetition.cs" />
+    <Compile Include="Presenter\CreateEventsPresenter.cs" />
+    <Compile Include="Presenter\RegisterCompetitorsAdminPresenter.cs" />
+    <Compile Include="Presenter\StartCompetitionPresenter.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\AspNetUsers.cs" />
+    <Compile Include="Models\Containers\AspUsersContainer.cs" />
+    <Compile Include="Models\Objects\Coach.cs" />
+    <Compile Include="Models\Objects\Competition.cs" />
+    <Compile Include="Models\Containers\CompetitionContainer.cs" />
+    <Compile Include="Models\Objects\Competitors.cs" />
+    <Compile Include="Models\Containers\CompetitorsContainer.cs" />
+    <Compile Include="Models\Objects\CompetitorsInCompetitions.cs" />
+    <Compile Include="Models\Containers\Container.cs" />
+    <Compile Include="Models\Objects\Events.cs" />
+    <Compile Include="Models\Containers\EventsContainer.cs" />
+>>>>>>> 68203e2226c7a52ad549286f6adaef2e4250a50b
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Protocol.cs" />
-    <Compile Include="Models\Referee.cs" />
-    <Compile Include="Models\AgeGroups.cs" />
+    <Compile Include="Models\Objects\Protocol.cs" />
+    <Compile Include="Models\Objects\Referee.cs" />
+    <Compile Include="Models\Objects\AgeGroups.cs" />
     <Compile Include="Model\ICreateCompetition.cs" />
     <Compile Include="Official\OfficialPage.aspx.cs">
       <DependentUpon>OfficialPage.aspx</DependentUpon>
@@ -696,8 +758,9 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="Tests\CreateCompetitionTest.cs" />
-    <Compile Include="Tests\Mocks\MockCreateEventsView.cs" />
+    <Compile Include="Tests\Mocks\MockOfStartCompetitionModel.cs" />
+    <Compile Include="Tests\Mocks\MockStartCompetitionView.cs" />
+    <Compile Include="Tests\StartCompetitionTest.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

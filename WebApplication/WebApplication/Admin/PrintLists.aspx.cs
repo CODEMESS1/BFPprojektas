@@ -1,10 +1,8 @@
-﻿using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
-using PdfSharp.Pdf.Printing;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,6 +16,7 @@ namespace WebApplication.Admin
     public partial class PrintLists : System.Web.UI.Page
     {
         private PdfDocument pdfCoach = new PdfDocument();
+        private const string FONT = "c:/windows/fonts/arial.ttf";
 
         private AspUsersContainer dbContainer = new AspUsersContainer();
 
@@ -50,19 +49,26 @@ namespace WebApplication.Admin
         protected void printofficial_btn_Click(object sender, EventArgs e)
         {
             string path = Page.Server.MapPath("/PDFs");
-            PdfDocument pdfOfficial = new PdfDocument();
-            XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
-            XFont font = new XFont("Times New Roman", 12, XFontStyle.Regular, options);
-            PdfPage pdfPage = pdfOfficial.AddPage();
-            XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+
+            DataTable dtbl = new DataTable();
+
+            dtbl.Columns.Add("Vardas");
+            dtbl.Columns.Add("Pavardė");
+            dtbl.Columns.Add("Metai");
+            dtbl.Columns.Add("El. paštas");
 
             List<UserToPrint> users = getUsers("Official");
 
-            //padaryti spausdinima i pdf faila
+            for (int i = 0; i < users.Count; i++)
+            {
+                dtbl.Rows.Add(users[i].Name, users[i].Surname, users[i].Year,
+                    users[i].Email);
+            }
+
+            ExportDataTableToPdf(dtbl, path + "/official.pdf", "Teisėjų sąrašas");
 
 
 
-            pdfOfficial.Save(path + "/official.pdf");
             Response.ContentType = "Application/pdf";
             Response.AppendHeader("Content-Disposition", "attachment; filename=teisejai.pdf");
             Response.TransmitFile(Server.MapPath("~/PDFs/official.pdf"));
@@ -73,18 +79,25 @@ namespace WebApplication.Admin
         protected void printcoach_btn_Click(object sender, EventArgs e)
         {
             string path = Page.Server.MapPath("/PDFs");
-            PdfDocument pdfOfficial = new PdfDocument();
-            XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
-            XFont font = new XFont("Times New Roman", 12, XFontStyle.Regular, options);
-            PdfPage pdfPage = pdfOfficial.AddPage();
-            XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+
+            DataTable dtbl = new DataTable();
+
+            dtbl.Columns.Add("Vardas");
+            dtbl.Columns.Add("Pavardė");
+            dtbl.Columns.Add("Metai");
+            dtbl.Columns.Add("El. paštas");
 
             List<UserToPrint> users = getUsers("Coach");
 
-            //padaryti spausdinima i pdf faila
+            for (int i = 0; i < users.Count; i++)
+            {
+                dtbl.Rows.Add(users[i].Name, users[i].Surname, users[i].Year,
+                    users[i].Email);
+            }
+
+            ExportDataTableToPdf(dtbl, path + "/coach.pdf", "Trenerių sąrašas");
 
 
-            pdfOfficial.Save(path + "/coach.pdf");
             Response.ContentType = "Application/pdf";
             Response.AppendHeader("Content-Disposition", "attachment; filename=treneriai.pdf");
             Response.TransmitFile(Server.MapPath("~/PDFs/coach.pdf"));
@@ -103,5 +116,70 @@ namespace WebApplication.Admin
             }
             return users;
         }
+
+        private void ExportDataTableToPdf(DataTable dtblTable, String strPdfPath,
+             string strHeader)
+        {
+            System.IO.FileStream fs = new FileStream(strPdfPath, FileMode.Create, FileAccess.Write, FileShare.None);
+            Document document = new Document();
+            document.SetPageSize(iTextSharp.text.PageSize.A4);
+            PdfWriter writer = PdfWriter.GetInstance(document, fs);
+            document.Open();
+
+
+            //ads header
+            BaseFont bfntHead = BaseFont.CreateFont(FONT, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+            Font fntHead = new Font(bfntHead, 16, 1, BaseColor.GRAY);
+            Paragraph prgHeading = new Paragraph();
+            prgHeading.Alignment = Element.ALIGN_CENTER;
+            prgHeading.Add(new Chunk(strHeader.ToUpper(), fntHead));
+            document.Add(prgHeading);
+
+            //adds date
+            Paragraph prgDate = new Paragraph();
+            BaseFont bfntDate = BaseFont.CreateFont(FONT, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+            Font fntDate = new Font(bfntDate, 8, 2, BaseColor.GRAY);
+            prgDate.Alignment = Element.ALIGN_RIGHT;
+            prgDate.Add(new Chunk("Data : " + DateTime.Now.ToShortDateString(), fntDate));
+            document.Add(prgDate);
+
+            //adds a line seperation
+            Paragraph p = new Paragraph(new Chunk(new
+                iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK,
+                Element.ALIGN_LEFT, 0)));
+            document.Add(p);
+
+            //add a line break
+            document.Add(new Chunk("\n", fntHead));
+
+            //write the table
+            PdfPTable table = new PdfPTable(dtblTable.Columns.Count);
+
+            //table header
+            BaseFont bfntColumnHeader = BaseFont.CreateFont(FONT, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+            Font fntColumnHeader = new Font(bfntColumnHeader, 10, 1, BaseColor.WHITE);
+            for (int i = 0; i < dtblTable.Columns.Count; i++)
+            {
+                PdfPCell cell = new PdfPCell();
+                cell.BackgroundColor = BaseColor.GRAY;
+                cell.AddElement(new Chunk(dtblTable.Columns[i].ColumnName.ToUpper(), fntColumnHeader));
+                table.AddCell(cell);
+            }
+
+            //table data
+            for (int i = 0; i < dtblTable.Rows.Count; i++)
+            {
+                for (int j = 0; j < dtblTable.Columns.Count; j++)
+                {
+                    table.AddCell(dtblTable.Rows[i][j].ToString());
+                }
+            }
+
+            document.Add(table);
+            document.Close();
+            writer.Close();
+            fs.Close();
+        }
+
     }
 }

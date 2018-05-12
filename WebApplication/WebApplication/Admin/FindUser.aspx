@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Dalyvių redagivmas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Culture="lt-LT" UICulture="lt-LT" CodeBehind="FindUser.aspx.cs" Inherits="WebApplication.Admin.FindUser" %>
+﻿<%@ Page Title="Dalyvių redagavimas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Culture="lt-LT" UICulture="lt-LT" CodeBehind="FindUser.aspx.cs" Inherits="WebApplication.Admin.FindUser" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
     <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">

@@ -64,8 +64,15 @@ namespace WebApplication.Admin.Competition
                 GridView3.DataSource = value;
             }
         }
+        
 
+        public List<AgeGroupTypes> ageGroupTypes { set {
+                GridView4.DataSource = value;
+                GridView5.DataSource = value;
+            }}
 
+        public List<string> AgeGroupTypesSelected => throw new NotImplementedException();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             presenter = new CreateCompetitionPresenter(this);
@@ -76,6 +83,7 @@ namespace WebApplication.Admin.Competition
         protected void add_btn_Click(object sender, EventArgs e)
         {
             GridView3.DataBind();
+            GridView4.DataBind();
             popupAdd.Show();
         }
 
@@ -157,6 +165,7 @@ namespace WebApplication.Admin.Competition
             if (presenter.PopulatePopup(compId))
             {
                 GridView2.DataBind();
+                GridView5.DataBind();
                 popupEdit.Show();
             }
         }
@@ -188,6 +197,78 @@ namespace WebApplication.Admin.Competition
                 }
             }
             return eventsSelected;
+        }
+
+        public List<int> GetSelectedStartYearEdit()
+        {
+            List<int> YearInt = new List<int>();
+            for (int i = 0; i < GridView5.Rows.Count; i++)
+            {
+                TextBox StartYearTb = (TextBox)GridView5.Rows[i].FindControl("EditStartYear_tb");
+                if (!String.IsNullOrEmpty(StartYearTb.Text))
+                {
+                    YearInt.Add(Convert.ToInt32(StartYearTb.Text));
+                }
+                else
+                {
+                    YearInt.Add(0);
+                }
+            }
+            return YearInt;
+        }
+
+        public List<int> GetSelectedStartYearAdd()
+        {
+            List<int> YearInt = new List<int>();
+            for (int i = 0; i < GridView5.Rows.Count; i++)
+            {
+                TextBox StartYearTb = (TextBox)GridView4.Rows[i].FindControl("AddStartYear_tb");
+                if (!String.IsNullOrEmpty(StartYearTb.Text))
+                {
+                    YearInt.Add(Convert.ToInt32(StartYearTb.Text));
+                }
+                else
+                {
+                    YearInt.Add(0);
+                }
+            }
+            return YearInt;
+        }
+
+        public List<int> GetSelectedEndYearEdit()
+        {
+            List<int> YearInt = new List<int>();
+            for (int i = 0; i < GridView5.Rows.Count; i++)
+            {
+                TextBox EndYearTb = (TextBox)GridView5.Rows[i].FindControl("EditEndYear_tb");
+                if (!String.IsNullOrEmpty(EndYearTb.Text))
+                { 
+                    YearInt.Add(Convert.ToInt32(EndYearTb.Text));
+                }
+                else
+                {
+                    YearInt.Add(0);
+                }
+        }
+            return YearInt;
+        }
+
+        public List<int> GetSelectedEndYearAdd()
+        {
+            List<int> YearInt = new List<int>();
+            for (int i = 0; i < GridView4.Rows.Count; i++)
+            {
+                TextBox EndYearTb = (TextBox)GridView4.Rows[i].FindControl("AddEndYear_tb");
+                if (!String.IsNullOrEmpty(EndYearTb.Text))
+                {
+                    YearInt.Add(Convert.ToInt32(EndYearTb.Text));
+                }
+                else
+                {
+                    YearInt.Add(0);
+                }
+            }
+            return YearInt;
         }
 
         protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
