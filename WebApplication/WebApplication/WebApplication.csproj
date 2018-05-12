@@ -683,6 +683,7 @@
     <Compile Include="Models\Objects\Results.cs" />
     <Compile Include="Model\ICreateEvents.cs" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="Model\IPrintOfficial.cs" />
     <Compile Include="Official\PrintCompetitors.aspx.cs">
       <DependentUpon>PrintCompetitors.aspx</DependentUpon>
@@ -717,6 +718,16 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\AspNetUsers.cs" />
+=======
+    <Compile Include="Model\IRegisterCompetitorsAdmin.cs" />
+    <Compile Include="Model\IStartCompetition.cs" />
+    <Compile Include="Presenter\CreateEventsPresenter.cs" />
+    <Compile Include="Presenter\RegisterCompetitorsAdminPresenter.cs" />
+    <Compile Include="Presenter\StartCompetitionPresenter.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\AspNetUsers.cs" />
+>>>>>>> 68203e2226c7a52ad549286f6adaef2e4250a50b
     <Compile Include="Models\Containers\AspUsersContainer.cs" />
     <Compile Include="Models\Objects\Coach.cs" />
     <Compile Include="Models\Objects\Competition.cs" />
@@ -727,6 +738,9 @@
     <Compile Include="Models\Containers\Container.cs" />
     <Compile Include="Models\Objects\Events.cs" />
     <Compile Include="Models\Containers\EventsContainer.cs" />
+<<<<<<< HEAD
+>>>>>>> 68203e2226c7a52ad549286f6adaef2e4250a50b
+=======
 >>>>>>> 68203e2226c7a52ad549286f6adaef2e4250a50b
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
