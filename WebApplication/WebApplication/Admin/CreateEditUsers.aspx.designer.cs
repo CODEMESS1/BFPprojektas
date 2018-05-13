@@ -229,15 +229,6 @@ namespace WebApplication.Admin {
         protected global::System.Web.UI.WebControls.Panel editPanel;
         
         /// <summary>
-        /// editUpdatePanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel editUpdatePanel;
-        
-        /// <summary>
         /// ErrorMessageEdit control.
         /// </summary>
         /// <remarks>
@@ -299,15 +290,6 @@ namespace WebApplication.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox editpassval_tb;
-        
-        /// <summary>
-        /// CompareValidator2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator2;
         
         /// <summary>
         /// editname_lbl control.

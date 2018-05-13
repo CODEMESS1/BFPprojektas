@@ -12,8 +12,6 @@ namespace WebApplication.Presenter
         private ICreateCompetition View;
         private CompetitionContainer competitionContainer = new CompetitionContainer();
         private CompetitionEventsContainer competitionEventsContainer = new CompetitionEventsContainer();
-        private AgeGroupTypesContainer ageGroupTypesContainer = new AgeGroupTypesContainer();
-        private AgeGroupContainer ageGroupsContainer = new AgeGroupContainer();
         private EventsContainer eventsContainer = new EventsContainer();
         private List<Events> events = new List<Events>();
 
@@ -29,7 +27,6 @@ namespace WebApplication.Presenter
         {
             View.Competitions = competitionContainer.Competitions.ToList();
             View.Events = eventsContainer.Events.ToList();
-            View.ageGroupTypes = ageGroupTypesContainer.AgeGroupTypes.ToList();
         }
 
         public bool AddCompetition(Competition competition)
@@ -37,8 +34,6 @@ namespace WebApplication.Presenter
             if (competition != null)
             {
                 competitionContainer.AddCompetition(competition, events);
-                int Id = competitionContainer.Competitions.ToList().Last().Id;
-                ageGroupsContainer.AddRange(Id, View.GetSelectedStartYearAdd(), View.GetSelectedEndYearAdd(), ageGroupTypesContainer.AgeGroupTypes.ToList());
                 View.Competitions = competitionContainer.Competitions.ToList();
                 return true;
             }
@@ -49,7 +44,6 @@ namespace WebApplication.Presenter
         {
             bool isCompleted = competitionContainer.RemoveCompetition(Id, events);
             View.Competitions = competitionContainer.Competitions.ToList();
-            ageGroupsContainer.RemoveRange(Id);
             return isCompleted;
         }
 
@@ -58,11 +52,7 @@ namespace WebApplication.Presenter
             Competition competition = new Competition(View.Name, View.Location, View.Address, View.Date, View.Registration, 
                 View.RegistrationStartDate, View.RegistrationEndDate);
             bool isCompleted = competitionContainer.EditCompetition(Id, competition, events);
-            if (isCompleted)
-            {
-                View.Competitions = competitionContainer.Competitions.ToList();
-                ageGroupsContainer.UpdateAgeGroups(Id, View.GetSelectedStartYearEdit(), View.GetSelectedEndYearEdit(), ageGroupTypesContainer.AgeGroupTypes.ToList());
-            }
+            View.Competitions = competitionContainer.Competitions.ToList();
             return isCompleted;
         }
 

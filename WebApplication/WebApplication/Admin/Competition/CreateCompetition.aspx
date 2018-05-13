@@ -1,7 +1,6 @@
-﻿<%@ Page Title="Varžybų redagavimas" Language="C#" AutoEventWireup="true" Culture="lt-LT" UICulture="lt-LT" MasterPageFile="~/Site.Master" CodeBehind="~/Admin/Competition/CreateCompetition.aspx.cs" Inherits="WebApplication.Admin.Competition.CreateCompetition" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Culture="lt-LT" UICulture="lt-LT" MasterPageFile="~/Site.Master" CodeBehind="~/Admin/Competition/CreateCompetition.aspx.cs" Inherits="WebApplication.Admin.Competition.CreateCompetition" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
     <asp:Content runat="server" ID="CreateCompetitionContent" ContentPlaceHolderID="MainContent">
-        <h2><%: Title %>.</h2>
         <h4>Redaguoti ir pridėti varžybas</h4>
         <style type="text/css">
         /* Style the tab */
@@ -104,8 +103,7 @@
         text-align:center;
         }
         .centerElement{
-            margin-left: 30%;
-            margin-right: 30%;
+            margin-left: 25%;
         }
         .navTabFormat{
             border-radius: 0px;
@@ -140,8 +138,7 @@
 
         <div>
             <asp:ScriptManager EnableScriptGlobalization="true" runat="server"></asp:ScriptManager>
-            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass=" table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal" DataKeyNames="Id" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnPageIndexChanging="GridView1_PageIndexChanging">
-                <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
+            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass=" table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal" DataKeyNames="Id" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" SelectText="Pasirinkti" ControlStyle-CssClass="btn btn-success" />
                     <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
@@ -167,19 +164,18 @@
                 BackgroundCssClass="modalBackground"
                 >
             </cc1:ModalPopupExtender>
-             
-            <asp:Panel ID="PanelAdd" runat="server" BorderWidth="5px" ScrollBars="Auto" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary" style='position:relative; display: none; min-height:45%; min-width:30%; max-height:65%;  height:auto; width:auto'>
+
+            <asp:Panel ID="PanelAdd" runat="server" BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary" style='display: none;'>
                 
             <!-- Tab links -->
             <ul class="nav nav-tabs navTabFormat">
               <li class="nav-item"><a class="nav-link active" id="home-tab1" data-toggle="tab" onclick="openCity(event, 'creation')">Sukurti varžybas</a></li>
               <li class="nav-item"><a class="nav-link active" id="profile-tab1" data-toggle="tab" onclick="openCity(event, 'eventAdd')">Pridėti rungtis</a></li>
-              <li class="nav-item"><a class="nav-link active" id="groups-tab1" data-toggle="tab" onclick="openCity(event, 'groupsAdd')">Priskirti amžiaus grupes</a></li>
             </ul>
             
             <!-- Tab content -->
                 <div class="tab-content" id="myTabContent1">
-                        <div id="creation" class="tabcontent show active" style="border:none">
+                        <div id="creation" class="tabcontent show active">
                         <h3>Pridėti varžybas</h3>
                          <!--varzybu pridejimas-->
                       
@@ -239,47 +235,19 @@
                             <asp:Button ID="submit_btn" runat="server" Text="Pridėti" CausesValidation="true" ValidationGroup="popup" OnClick="submit_btn_Click" CssClass="btn"/>
                             <asp:Button ID="cancel_btn" runat="server" Text="Atšaukti" CssClass="btn"/>
                      </div>
-                     <div id="eventAdd" class="tabcontent" style="border:none">
+                     <div id="eventAdd" class="tabcontent">
                       <h3>Pridėti rungtis</h3>
-                         <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                             <ContentTemplate>
-                                    <asp:GridView ID="GridView3" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="GridView3_PageIndexChanging" DataKeyNames="Id" CssClass="table table-curved table-hover table-striped text-codemess table-dark " BackColor="Gray" BorderColor="black" ForeColor="white">
-                                    <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
-                                        <Columns>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <asp:CheckBox ID="checkBox" runat="server" AutoPostBack="false"/>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                        <asp:BoundField DataField="Title" HeaderText="Pavadinimas" />
-                                        <asp:BoundField DataField="Type" HeaderText="Tipas" />
-                                    </Columns>
-                                </asp:GridView>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                     </div>
-                     <div id="groupsAdd" class="tabcontent" style="border:none">
-                         <h3>Pridėti rungtis</h3>
-                         <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="GroupAddUpdatePanel">
-                             <ContentTemplate>
-                                    <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" CssClass="table table-curved table-hover table-striped text-codemess table-dark " BackColor="Gray" BorderColor="black" ForeColor="white">
-                                    <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
-                                        <Columns>
-                                            <asp:BoundField DataField="Type" HeaderText="Pavadinimas" />
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <div>
-                                                        <asp:TextBox ID="AddStartYear_tb" runat="server" TextMode="Number">
-                                                        </asp:TextBox>
-                                                        <asp:TextBox ID="AddEndYear_tb" runat="server" TextMode="Number">
-                                                        </asp:TextBox>
-                                                    </div>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                    </Columns>
-                                </asp:GridView>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+                            <asp:GridView ID="GridView3" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="GridView3_PageIndexChanging" DataKeyNames="Id">
+                            <Columns>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="checkBox" runat="server" AutoPostBack="false"/>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                <asp:BoundField DataField="Title" HeaderText="Pavadinimas" />
+                                <asp:BoundField DataField="Type" HeaderText="Tipas" />
+                            </Columns>
+                        </asp:GridView>
                      </div>
                     </div>
             </asp:Panel>
@@ -311,10 +279,11 @@
             <br />
             <br />
 </div>
-       
+            
+            <asp:Panel ID="editPanel" runat="server" BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary" style='display: none;'>
 
-            <asp:Panel ID="editPanel" runat="server" BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary" style='position:relative; display: none; min-height:65%; min-width:30%; height:auto; width:auto'>
                 <!-- Tab links -->
+
                 <ul class="nav nav-tabs navTabFormat" id="myTab" role="tablist">
                   <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" onclick="openCity(event, 'edit')" role="tab" aria-controls="home" aria-selected="true">Varžybų redagavimas</a>
@@ -322,7 +291,6 @@
                   <li class="nav-item">
                     <a class="nav-link active" id="profile-tab" data-toggle="tab" onclick="openCity(event, 'editEventAdd')" role="tab" aria-controls="profile" aria-selected="false">Rungtys</a>
                   </li>
-                    <li class="nav-item"><a class="nav-link active" id="groups-tab2" data-toggle="tab" onclick="openCity(event, 'groupsAddEdit')">Priskirti amžiaus grupes</a></li>
                 </ul>
 
 
@@ -391,10 +359,7 @@
                     </div>
                     <div id="editEventAdd" class="tabcontent" role="tabpanel" aria-labelledby="profile-tab">
                         <h1>Keisti varžybų rungtis</h1>
-                        <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
-                           <asp:GridView ID="GridView2" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="GridView2_PageIndexChanging" DataKeyNames="Id" CssClass="table table-curved table-hover table-striped text-codemess table-dark " BackColor="Gray" BorderColor="black" ForeColor="white">
-                            <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
+                           <asp:GridView ID="GridView2" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="GridView2_PageIndexChanging" DataKeyNames="Id">
                             <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
@@ -405,33 +370,7 @@
                                 <asp:BoundField DataField="Type" HeaderText="Tipas" />
                             </Columns>
                         </asp:GridView>
-                                </ContentTemplate>
-                         </asp:UpdatePanel>
                     </div>
-                     <div id="groupsAddEdit" class="tabcontent" style="border:none">
-                         <h3>Pridėti rungtis</h3>
-                         <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UpdatePanel1">
-                             <ContentTemplate>
-                                    <asp:GridView ID="GridView5" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" CssClass="table table-curved table-hover table-striped text-codemess table-dark " BackColor="Gray" BorderColor="black" ForeColor="white">
-                                    <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
-                                        <Columns>
-                                            <asp:BoundField DataField="Type" HeaderText="Pavadinimas" />
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <div>
-                                                        <asp:TextBox ID="EditStartYear_tb" runat="server" TextMode="Number" ValidationGroup="EditYear">
-                                                        </asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="EditStartYearValid" runat="server" ControlToValidate="EditStartYear_tb" ErrorMessage="VEIKIA"></asp:RequiredFieldValidator>
-                                                        <asp:TextBox ID="EditEndYear_tb" runat="server" TextMode="Number" ValidationGroup="EditYear">
-                                                        </asp:TextBox>
-                                                    </div>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                    </Columns>
-                                </asp:GridView>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                     </div>
                     </div>
                 </asp:Panel>
             <!-- edit popup end-->

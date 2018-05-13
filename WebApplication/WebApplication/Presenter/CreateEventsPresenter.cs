@@ -50,7 +50,7 @@ namespace WebApplication.Presenter
 
         public bool AddNewEvent(Events events)
         {
-            if (eventsContainer.AddEvent(events, selectedGroups))
+            if (eventsContainer.addEvent(events, selectedGroups))
             {
                 return true;
             }
@@ -59,7 +59,7 @@ namespace WebApplication.Presenter
 
         public bool EditEvent(int Id)
         {
-            if (eventsContainer.editEvent(Id, View.Title, View.Type, selectedGroups))
+            if (eventsContainer.editEvent(Id, View.Title, View.Type))
             {
                 return true;
             }

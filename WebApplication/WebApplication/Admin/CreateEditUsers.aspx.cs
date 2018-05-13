@@ -26,57 +26,50 @@ namespace WebApplication.Admin
         }
 
         private void makeEdit()
-        {
-            if (Page.IsValid)
+        { 
+            ApplicationUser user = getUser();
+            if (user != null)
             {
-                ApplicationUser user = getUser();
-                if (user != null)
+                try
                 {
-                    try
+                    using (ApplicationDbContext dbcontext = new ApplicationDbContext())
                     {
-                        using (ApplicationDbContext dbcontext = new ApplicationDbContext())
+                        string UserID = GridView1.SelectedRow.Cells[1].Text;
+                        var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(dbcontext));
+                        var editUser = manager.FindById(UserID);
+
+                        if (editEmail_tb.Text != null && editEmail_tb.Text != string.Empty)
                         {
-                            string UserID = GridView1.SelectedRow.Cells[1].Text;
-                            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(dbcontext));
-                            var editUser = manager.FindById(UserID);
-
-                            if (editEmail_tb.Text != null && editEmail_tb.Text != string.Empty)
-                            {
-                                editUser.EmailConfirmed = false;
-                                editUser.Email = editEmail_tb.Text;
-                            }
-                            if (editpass_tb.Text != null && editpass_tb.Text != string.Empty)
-                            {
-                                PasswordHasher passwordHasher = new PasswordHasher();
-                                editUser.PasswordHash = passwordHasher.HashPassword(editpass_tb.Text);
-                            }
-                            if (name_tb.Text != null && name_tb.Text != string.Empty)
-                            {
-                                editUser.Name = name_tb.Text;
-                            }
-                            if (surname_tb.Text != null && surname_tb.Text != string.Empty)
-                            {
-                                editUser.Surname = surname_tb.Text;
-                            }
-
-                            string[] userRoles = manager.GetRoles(UserID).ToArray();
-                            manager.RemoveFromRoles(UserID, userRoles);
-                            manager.AddToRole(UserID, roleDropListEdit.SelectedItem.Value);
-                            editUser.Role = roleDropListEdit.SelectedItem.Value;
-
-                            manager.Update(editUser);
+                            editUser.EmailConfirmed = false;
+                            editUser.Email = editEmail_tb.Text;
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        ErrorMessageEdit.Text = "Nepavyko pakeisti vartotojo duomenų";
-                        Trace.Write("Error occurred while editing user: {0}", ex.ToString());
+                        if (editpass_tb.Text != null && editpass_tb.Text != string.Empty)
+                        {
+                            PasswordHasher passwordHasher = new PasswordHasher();
+                            editUser.PasswordHash = passwordHasher.HashPassword(editpass_tb.Text);
+                        }
+                        if (name_tb.Text != null && name_tb.Text != string.Empty)
+                        {
+                            editUser.Name = name_tb.Text;
+                        }
+                        if (surname_tb.Text != null && surname_tb.Text != string.Empty)
+                        {
+                            editUser.Surname = surname_tb.Text;
+                        }
+
+                        string[] userRoles = manager.GetRoles(UserID).ToArray();
+                        manager.RemoveFromRoles(UserID, userRoles);
+                        manager.AddToRole(UserID, roleDropListEdit.SelectedItem.Value);
+                        editUser.Role = roleDropListEdit.SelectedItem.Value;
+                        
+                        manager.Update(editUser);
                     }
                 }
-            }
-            else
-            {
-                popupEdit.Show();
+                catch (Exception ex)
+                {
+                    ErrorMessageEdit.Text = "Nepavyko pakeisti vartotojo duomenų";
+                    Trace.Write("Error occurred while editing user: {0}", ex.ToString());
+                }
             }
         }
 
