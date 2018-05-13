@@ -2,6 +2,13 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/WebApplication/.vs/WebApplication/v15/Server/sqlite3
-/WebApplication/.vs/config
+/WebApplication/ApplicationUnitTest
+/WebApplication/packages/NETStandard.Library.1.6.0
+/WebApplication/packages/NUnit.3.10.0
+/WebApplication/packages/NUnit.3.6.1
+/WebApplication/packages/NUnit.ConsoleRunner.3.8.0
+/WebApplication/packages/NUnit3TestAdapter.3.8.0
+/WebApplication/packages/System.AppContext.4.1.0
+/WebApplication/packages/System.Collections.4.0.11
+/WebApplication/packages
 /WebApplication/WebApplication/.vs
