@@ -133,6 +133,14 @@
             }
         </script>
 
+        <script type="text/javascript">
+            function onKeyDown() {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                }
+            }
+        </script>
+
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal"  DataKeyNames="Id" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" >
             <PagerStyle BackColor="#4A4A4A" ForeColor="Black" HorizontalAlign="Center" Font-Bold="True"  />
             <Columns>
@@ -217,21 +225,21 @@
                 </div>
                 <div>
                     <asp:Label ID="name_lbl" runat="server" Text="Vardas:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="name_tb" runat="server" ValidationGroup="addcomp" CssClass="formatCell"></asp:TextBox>
+                    <asp:TextBox ID="name_tb" onkeydown="return onKeyDown()" runat="server" ValidationGroup="addcomp" CssClass="formatCell"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="namevalidator" runat="server" ControlToValidate="name_tb" ErrorMessage="Įveskite vardą" ValidationGroup="addcomp" CssClass="errorMsg errorMsg2"></asp:RequiredFieldValidator>
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="surname_lbl" runat="server" Text="Pavardė:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="surname_tb" runat="server" ValidationGroup="addcomp" CssClass="formatCell"></asp:TextBox>
+                    <asp:TextBox ID="surname_tb" onkeydown="return onKeyDown()" runat="server" ValidationGroup="addcomp" CssClass="formatCell"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="surname_tb" ErrorMessage="Įveskite pavardę" ValidationGroup="addcomp" CssClass="errorMsg errorMsg2"></asp:RequiredFieldValidator>
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="year_lbl" runat="server" Text="Gim. metai:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="year_tb" runat="server" ValidationGroup="addcomp" TextMode="DateTime"></asp:TextBox>
+                    <asp:TextBox ID="year_tb" runat="server" onkeydown="return onKeyDown()" ValidationGroup="addcomp" TextMode="DateTime"></asp:TextBox>
                     <ajaxToolkit:CalendarExtender ID="CalendarExtender10" runat="server" OnClientDateSelectionChanged="checkDate"
                       Enabled="True" FirstDayOfWeek="Monday"  Format="yyyy-MM-dd" 
                       TargetControlID="year_tb" />
@@ -241,14 +249,14 @@
                 </div>
                 <div>
                     <asp:Label ID="city_lbl" runat="server" Text="Miestas:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="city_tb" runat="server" ValidationGroup="addcomp" CssClass="formatCell"></asp:TextBox>
+                    <asp:TextBox ID="city_tb" runat="server" onkeydown="return onKeyDown()" ValidationGroup="addcomp" CssClass="formatCell"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="citevalidator" runat="server" ControlToValidate="city_tb" ErrorMessage="Pasirinkite miestą" ValidationGroup="addcomp" CssClass="errorMsg errorMsg2"></asp:RequiredFieldValidator>
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="country_lbl" runat="server" Text="Šalis:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="country_tb" runat="server" ValidationGroup="addcomp" CssClass="formatCell"></asp:TextBox>
+                    <asp:TextBox ID="country_tb" runat="server" onkeydown="return onKeyDown()" ValidationGroup="addcomp" CssClass="formatCell"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="countryvalidator" runat="server" ControlToValidate="country_tb" ErrorMessage="Pasirinkite šalį" ValidationGroup="addcomp" CssClass="errorMsg errorMsg2"></asp:RequiredFieldValidator>
                     <br />
@@ -303,30 +311,30 @@
                 </div>
                 <div>
                     <asp:Label ID="editName_lbl" runat="server" Text="Vardas:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="editName_tb" runat="server"  ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editName_tb" onkeydown="return onKeyDown()" runat="server"  ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="editSurname_lbl" runat="server" Text="Pavardė:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="editSurname_tb" runat="server"  ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editSurname_tb" onkeydown="return onKeyDown()" runat="server"  ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="editYear_lbl" runat="server" Text="Metai:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="editYear_tb" runat="server" TextMode="DateTime" ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editYear_tb" onkeydown="return onKeyDown()" runat="server" TextMode="DateTime" ValidationGroup="editPopup" ></asp:TextBox>
                     <ajaxToolkit:CalendarExtender ID="TextBox4_CalendarExtender" runat="server" OnClientDateSelectionChanged="checkDate"
                       Enabled="True" FirstDayOfWeek="Monday"  Format="yyyy-MM-dd" 
                       TargetControlID="editYear_tb" />
                     <br />
                     <br />
                     <asp:Label ID="editCity_lbl" runat="server" Text="Miestas:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="editCity_tb" runat="server"  ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editCity_tb" onkeydown="return onKeyDown()" runat="server"  ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
                     <br />
                     <asp:Label ID="editCountry_lbl" runat="server" Text="Šalis:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="editCountry_tb" runat="server"  ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editCountry_tb" onkeydown="return onKeyDown()" runat="server"  ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
                     <br />
                 </div>

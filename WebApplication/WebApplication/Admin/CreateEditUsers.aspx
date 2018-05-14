@@ -126,19 +126,19 @@
                 </div>
                 <div>
                     <asp:Label ID="email_lbl" runat="server" Text="Elektroninis paštas:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="email_tb" CssClass="btn-sm" runat="server" TextMode="Email" ValidationGroup="popup"></asp:TextBox>
+                    <asp:TextBox ID="email_tb" onkeydown="return onKeyDown()" CssClass="btn-sm" runat="server" TextMode="Email" ValidationGroup="popup"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="emailvalidator" runat="server" ErrorMessage="Įveskite el. paštą" ControlToValidate="email_tb" ValidationGroup="popup" CssClass="errorMsg"></asp:RequiredFieldValidator>
                 </div>
                 <div>
                     <asp:Label ID="passw_lbl"  runat="server" Text="Slaptažodis:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="passw_tb" CssClass="btn-sm" runat="server" TextMode="Password" ValidationGroup="popup"></asp:TextBox>
+                    <asp:TextBox ID="passw_tb" onkeydown="return onKeyDown()" CssClass="btn-sm" runat="server" TextMode="Password" ValidationGroup="popup"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="passwordvalidator" runat="server" ErrorMessage="Įveskite slaptažodį" ControlToValidate="passw_tb" ValidationGroup="popup" CssClass="errorMsg"></asp:RequiredFieldValidator>
                 </div>
                 <div>
                     <asp:Label ID="passwcheck_lbl" runat="server" Text="Patvirtinti slaptažodį:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="passwver_tb" runat="server" TextMode="Password" ValidationGroup="popup"></asp:TextBox>
+                    <asp:TextBox ID="passwver_tb" onkeydown="return onKeyDown()" CssClass="btn-sm" runat="server" TextMode="Password" ValidationGroup="popup"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="passconfirmvalidator" runat="server" ErrorMessage="Patvirtinkite slaptažodį" ControlToValidate="passwver_tb" ValidationGroup="popup" CssClass="errorMsg"></asp:RequiredFieldValidator>
                     <asp:CompareValidator ID="comparepassvalidator" runat="server" ErrorMessage="Slaptažodžiai nesutampa" ControlToValidate="passwver_tb" Display="Dynamic" ValidationGroup="popup" ControlToCompare="passw_tb" CssClass="errorMsg" ></asp:CompareValidator>
@@ -198,28 +198,28 @@
                 </div>
                 <div>
                     <asp:Label ID="editEmail_lbl" runat="server" Text="Elektroninis paštas:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="editEmail_tb" runat="server" TextMode="Email" ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editEmail_tb" runat="server" onkeydown="return onKeyDown()" TextMode="Email" ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="editpass_lbl" runat="server" Text="Slaptažodis:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="editpass_tb" runat="server" TextMode="Password" ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editpass_tb" runat="server" TextMode="Password" onkeydown="return onKeyDown()" ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
                     <br />
                 </div>
                 <div>
                     <asp:Label ID="editpassval_lbl" runat="server" Text="Patvirtinti slaptažodį:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="editpassval_tb" runat="server" TextMode="Password" ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="editpassval_tb" runat="server" TextMode="Password" onkeydown="return onKeyDown()" ValidationGroup="editPopup" ></asp:TextBox>
                      <asp:CompareValidator ID="CompareValidator2" runat="server" ErrorMessage="Slaptažodžiai nesutampa" ControlToValidate="editpassval_tb" Display="Dynamic" ValidationGroup="editPopup" ControlToCompare="editpass_tb" CssClass="errorMsg" ClientIDMode="AutoID" CultureInvariantValues="True"></asp:CompareValidator>
                    <br />
                     <br />
                     <asp:Label ID="editname_lbl" runat="server" Text="Vardas:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="name_tb" runat="server" ValidationGroup="editPopup"></asp:TextBox>
+                    <asp:TextBox ID="name_tb" runat="server" onkeydown="return onKeyDown()" ValidationGroup="editPopup"></asp:TextBox>
                     <br />
                     <br />
                     <asp:Label ID="editsurname_lbl" runat="server" Text="Pavardė:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="surname_tb" runat="server" ValidationGroup="editPopup" ></asp:TextBox>
+                    <asp:TextBox ID="surname_tb" runat="server" onkeydown="return onKeyDown()" ValidationGroup="editPopup" ></asp:TextBox>
                     <br />
                     <br />
                 </div>
@@ -248,6 +248,13 @@
 
             <!-- edit popup end-->
         
-
+        <script type="text/javascript">
+            function onKeyDown()
+            {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                }
+            }
+        </script>
      
     </asp:Content>

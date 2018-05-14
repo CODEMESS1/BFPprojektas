@@ -135,7 +135,7 @@ namespace WebApplication.Admin.Competition
             CompetitorsGridView.DataBind();
             AgeGroup_DropDownList.DataBind();
             CompetitionPanel.Visible = true;
-            SelectCompetitionBtn.Visible = true;
+            //SelectCompetitionBtn.Visible = true;
             ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "click();", true);
         }
 
@@ -149,7 +149,7 @@ namespace WebApplication.Admin.Competition
         {
             SelectPanel.Visible = true;
             CompetitionPanel.Visible = false;
-            SelectCompetitionBtn.Visible = false;
+            //SelectCompetitionBtn.Visible = false;
         }
 
 
