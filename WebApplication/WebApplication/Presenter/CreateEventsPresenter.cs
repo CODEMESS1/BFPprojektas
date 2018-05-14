@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication.Admin.Competition;
 using WebApplication.Model;
 using WebApplication.Models;
+using WebApplication.Tests.Mocks;
 
 namespace WebApplication.Presenter
 {
@@ -14,13 +16,26 @@ namespace WebApplication.Presenter
         private EventsContainer eventsContainer = new EventsContainer();
         private EventTypesContainer eventTypesContainer = new EventTypesContainer();
         private List<string> selectedGroups;
+        private EventsContainer context;
+        private CreateEvents createEvents;
 
-        public CreateEventsPresenter(ICreateEvents view)
+        public CreateEventsPresenter(CreateEventsViewMock view1, ICreateEvents view)
         {
             if (view == null)
                 throw new ArgumentNullException("view cannot be null");
 
             this.View = view;
+        }
+
+        public CreateEventsPresenter(CreateEventsViewMock view, EventsContainer context)
+        {
+            View = view;
+            this.context = context;
+        }
+
+        public CreateEventsPresenter(CreateEvents createEvents)
+        {
+            this.createEvents = createEvents;
         }
 
         public void InitView()

@@ -733,6 +733,8 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Tests\CreateEventTests1.cs" />
+    <Compile Include="Tests\Mocks\CreateEventsViewMock.cs" />
     <Compile Include="Tests\Mocks\MockOfStartCompetitionModel.cs" />
     <Compile Include="Tests\Mocks\MockStartCompetitionView.cs" />
     <Compile Include="Tests\StartCompetitionTest.cs" />
