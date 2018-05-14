@@ -184,7 +184,7 @@
                         <label> mm</label>
                         <asp:TextBox ID="ResultsTimeSeconds_TextBox" runat="server" TextMode="Number" min="0" max="60"></asp:TextBox>
                         <label> ss</label>
-                        <asp:TextBox ID="ResultsTimeMili_TextBox" runat="server" TextMode="Number" min="0" max="99"></asp:TextBox>
+                        <asp:TextBox ID="ResultsTimeMili_TextBox" runat="server" TextMode="Number" min="0" max="999"></asp:TextBox>
                         <label> ms</label>
                         <asp:Button ID="ResultsTime_btn" runat="server" Text="Saugoti" OnClick="ResultsTime_btn_Click"/>
                     </div>
