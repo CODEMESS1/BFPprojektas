@@ -8,7 +8,7 @@ namespace WebApplication.Models
     public class CompetitorsWithSubgroups
     {
         public int Id { get; set; }
-        public string Subgroup { get; set; }
+        public int Subgroup { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime Year { get; set; }
@@ -25,7 +25,7 @@ namespace WebApplication.Models
         public CompetitorsWithSubgroups(Competitors competitors, int subgroup)
         {
             Id = competitors.Id;
-            Subgroup = Convert.ToString(subgroup);
+            Subgroup = subgroup;
             Name = competitors.Name;
             Surname = competitors.Surname;
             Year = competitors.Year;

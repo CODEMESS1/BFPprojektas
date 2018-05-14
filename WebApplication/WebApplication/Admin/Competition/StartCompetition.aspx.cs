@@ -16,6 +16,7 @@ namespace WebApplication.Admin.Competition
     {
         private StartCompetitionPresenter presenter;
         private string Result;
+        private List<AgeGroupTypes> Types = new List<AgeGroupTypes>(); //age group types local parameter
 
         private int IdForCalc
         {
@@ -47,7 +48,7 @@ namespace WebApplication.Admin.Competition
             }
         }
 
-        public List<AgeGroupTypes> AgeGroupTypes { set { CalculateResultsGroup_list.DataSource = AgeGroup_DropDownList.DataSource = selectGroup_list.DataSource = value; } } 
+        public List<AgeGroupTypes> AgeGroupTypes { set { CalculateResultsGroup_list.DataSource = AgeGroup_DropDownList.DataSource = selectGroup_list.DataSource = Types = value; } } 
         public List<CompetitorsWithSubgroups> Competitors { set {
                 if (value.Count != 0)
                 {
@@ -320,6 +321,37 @@ namespace WebApplication.Admin.Competition
         {
             IdForCalc = Convert.ToInt16(CalculateResultsGroup_list.SelectedIndex);
             ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "clickPostBackStart();", true);
+        }
+
+        protected void GetStartList_Btn_Click(object sender, EventArgs e)
+        {
+            //bega per kiekviena amziausiaus grupes tipa
+            foreach(AgeGroupTypes type in Types)
+            {
+                //randa visus dalyvius, vienos amziaus grupes
+                List<CompetitorsWithSubgroups> allCompetitors = presenter.GetStartList(type.Type);
+
+                if (allCompetitors.Count > 0)
+                {
+                    //gauna pogrupius 
+                    List<int> subGroups = allCompetitors.Select(c => c.Subgroup).ToList();
+
+                    //bega per pogrupius 1, 2, ...
+                    foreach (int subgroup in subGroups)
+                    {
+
+                    }
+                }
+            }
+            
+        }
+
+        protected void GetResultList_Btn_Click(object sender, EventArgs e)
+        {
+            foreach (AgeGroupTypes type in Types)
+            {
+                List<CompetitorsWithSubgroups> allCompetitors = presenter.GetStartList(type.Type);
+            }
         }
     }
 }

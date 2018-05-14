@@ -16,10 +16,17 @@ namespace WebApplication.Models
         public DbSet<CompetitionAgeSubgroups> CompetitionAgeSubgroups { get; set; }
         private AgeGroupContainer AgeGroupContainer = new AgeGroupContainer();
 
-        public void SetAgeSubgroups(string ageGroupType, int competitionId, int subgroupsCount)
+        public void SetAgeSubgroups(int selectedCompetition, string ageGroupType, int competitionId, int subgroupsCount)
         {
             int ageGroupId = AgeGroupContainer.AgeGroups.Where(g => g.Title.Equals(ageGroupType) && g.CompetitionId == competitionId).ToList()[0].Id;
-            CompetitionAgeSubgroups.Add(new Models.CompetitionAgeSubgroups(ageGroupId, subgroupsCount));
+
+            if(CompetitionAgeSubgroups.Where(c => c.CompetitionId == selectedCompetition && c.AgeGroupId == ageGroupId).Count() > 0)
+            {
+                CompetitionAgeSubgroups.Remove(CompetitionAgeSubgroups.Where(s => s.CompetitionId == selectedCompetition && s.AgeGroupId == ageGroupId).Single());
+            }
+
+            CompetitionAgeSubgroups.Add(new Models.CompetitionAgeSubgroups(selectedCompetition ,ageGroupId, subgroupsCount));
+
             SaveChanges();
         }
     }

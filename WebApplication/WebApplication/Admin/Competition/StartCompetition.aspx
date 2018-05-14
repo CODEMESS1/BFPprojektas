@@ -124,6 +124,8 @@
                         </div>
                         <div id="documents" class="tabcontent show active" style="border:none">
                             <h2>Documents</h2>
+                            <asp:Button ID="GetStartList_Btn" runat ="server" Text ="Starto protokolai" OnClick="GetStartList_Btn_Click" />
+                            <asp:Button ID="GetResultList_Btn" runat="server" Text="Rezultatų protokolai" OnClick="GetResultList_Btn_Click" />
                             <hr>
                         </div>
                         <div id="results" class="tabcontent show active" style="border:none">

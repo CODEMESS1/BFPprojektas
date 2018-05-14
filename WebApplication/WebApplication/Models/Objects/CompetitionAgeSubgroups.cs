@@ -8,18 +8,20 @@ namespace WebApplication.Models
     public class CompetitionAgeSubgroups
     {
         public int Id { get; set; }
-        public int AgeGroupsId { get; set; }
-        public int SubGroupsCount { get; set; }
+        public int CompetitionId { get; set; }
+        public int AgeGroupId { get; set; }
+        public int SubGroupCount { get; set; }
 
         public CompetitionAgeSubgroups()
         {
 
         }
 
-        public CompetitionAgeSubgroups(int ageGroupsId, int subGroupsCount)
+        public CompetitionAgeSubgroups(int competitionId, int ageGroupId, int subGroupCount)
         {
-            AgeGroupsId = ageGroupsId;
-            SubGroupsCount = subGroupsCount;
+            CompetitionId = competitionId;
+            AgeGroupId = ageGroupId;
+            SubGroupCount = subGroupCount;
         }
     }
 }

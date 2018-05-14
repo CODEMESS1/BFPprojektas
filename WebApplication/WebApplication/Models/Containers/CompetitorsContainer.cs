@@ -167,8 +167,12 @@ namespace WebApplication.Models
             AgeGroups ageGroups = GetAgeGroup(title);
             foreach (CompetitorsInCompetitions competitor in competitorsInCompetitions)
             {
-                competitorsToReturn.Add(Comp.Where(c => c.Id == competitor.CompetitorId &&
+                if (Comp.Where(c => c.Id == competitor.CompetitorId &&
+                                                                                  (c.Year.Year) >= ageGroups.StartYear && (c.Year.Year) <= ageGroups.EndYear).Count() > 0)
+                {
+                    competitorsToReturn.Add(Comp.Where(c => c.Id == competitor.CompetitorId &&
                                                                                  (c.Year.Year) >= ageGroups.StartYear && (c.Year.Year) <= ageGroups.EndYear).Single());
+                }
             }
             return competitorsToReturn;
         }

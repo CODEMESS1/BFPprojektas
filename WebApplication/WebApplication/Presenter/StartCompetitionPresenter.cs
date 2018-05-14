@@ -59,7 +59,7 @@ namespace WebApplication.Presenter
 
         public void SetAgeGroupSubgroupsCount()
         {
-            SubGroupsContainer.SetAgeSubgroups(View.SelectedAgeGroup, View.SelectedCompetitionId, View.SelectedSubgroupCount);
+            SubGroupsContainer.SetAgeSubgroups(View.SelectedCompetitionId, View.SelectedAgeGroup, View.SelectedCompetitionId, View.SelectedSubgroupCount);
         }
 
         public void GetByGroup()
@@ -91,6 +91,37 @@ namespace WebApplication.Presenter
                 index++;
             }
             View.Competitors = competitorsWithSubgroups;
+        }
+
+        public List<CompetitorsWithSubgroups> GetSubgroups(string ageGroup)
+        {
+            List<Competitors> competitors = CompetitorsContainer.GetAgeGroupCompetitorsInCompetition(View.SelectedCompetitionId, ageGroup);
+            List<CompetitorsWithSubgroups> competitorsWithSubgroups = new List<CompetitorsWithSubgroups>();
+            int subgroupCount = View.SelectedSubgroupCount;
+            int subgroupLength = 0;
+
+            subgroupLength = competitors.Count / subgroupCount;
+
+            while (subgroupLength * subgroupCount < competitors.Count)
+            {
+                subgroupLength++;
+            }
+
+            int subgroup = 1;
+            int index = 1;
+
+            foreach (Competitors c in competitors)
+            {
+                if (index > subgroupLength)
+                {
+                    index = 1;
+                    subgroup++;
+                }
+
+                competitorsWithSubgroups.Add(new CompetitorsWithSubgroups(c, subgroup));
+                index++;
+            }
+            return competitorsWithSubgroups;
         }
 
         public bool GetEvents()
@@ -378,6 +409,13 @@ namespace WebApplication.Presenter
                 points.Add(Convert.ToDouble(i));
             }
             return points;
+        }
+
+        public List<CompetitorsWithSubgroups> GetStartList(string ageGroupType)
+        {
+            List<CompetitorsWithSubgroups> competitorsWithSubgroups = new List<CompetitorsWithSubgroups>();
+            competitorsWithSubgroups.AddRange(GetSubgroups(ageGroupType));
+            return competitorsWithSubgroups;
         }
     }
 }
