@@ -16,7 +16,7 @@ namespace WebApplication.Admin
 {
     public partial class PrintLists : System.Web.UI.Page
     {
-        private iTextSharp.text.pdf.PdfDocument pdfCoach = new iTextSharp.text.pdf.PdfDocument();
+       
         private const string FONT = "c:/windows/fonts/arial.ttf";
 
         private AspUsersContainer dbContainer = new AspUsersContainer();
