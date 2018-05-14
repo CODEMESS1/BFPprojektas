@@ -67,6 +67,15 @@
             }
         </script>
 
+        <script type="text/javascript">
+            function onKeyDownSearch() {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    document.getElementById("<%=search_btn.ClientID%>").click();
+                }
+            }
+        </script>
+
         <asp:HiddenField runat="server" ID="PageSizeHiddenField" />
 
         <div>
@@ -101,7 +110,7 @@
                     <br />
                             <div class="col-lg-6">
                               <div class="input-group">
-                                <asp:TextBox ID="search_tb" runat="server" placeholder="Ieškoti..." CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="search_tb" runat="server" onkeydown="return onKeyDownSearch()" placeholder="Ieškoti..." CssClass="form-control"></asp:TextBox>
                                 <span class="input-group-btn">
                                   <asp:ImageButton ID="search_btn" runat="server" OnClick="search_btn_Click" ImageUrl="/Image/search4.png"  Width="40px" Height="40px" />
                                 </span>
@@ -129,7 +138,7 @@
                             </Columns>
                         </asp:GridView>
                     </div>
-                    <asp:Panel ID="panelAddTo" Visible="false" runat="server" style="position:relative; min-height:0%; min-width:30%; height:auto; width:auto" BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary" >
+                    <asp:Panel ID="panelAddTo" Visible="false" runat="server" style="position:relative; min-height:0%; min-width:20%; height:auto; width:auto" BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary" >
                         <div>
                                 <div>
                                     <h2>Pridėti/šalinti iš varžybų</h2>
