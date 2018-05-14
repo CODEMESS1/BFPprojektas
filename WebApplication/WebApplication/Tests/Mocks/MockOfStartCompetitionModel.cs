@@ -11,7 +11,8 @@ namespace WebApplication.Tests.Mocks
 {
     public class MockOfStartCompetitionModel
     {
-        public ResultsContainer ResultsContainer = Substitute.For<ResultsContainer>();
+        public ResultsContainer resultsContainer = Substitute.For<ResultsContainer>();
+        
 
     }
 }

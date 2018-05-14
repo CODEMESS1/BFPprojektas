@@ -143,7 +143,7 @@ namespace WebApplication.Presenter
             }
         }
 
-        private List<Results> CalculateResults(List<Results> results, EventTypes eventType)
+        public List<Results> CalculateResults(List<Results> results, EventTypes eventType)
         {
             if(eventType.Type.Equals("Count") && eventType.Method.Equals("Most"))
             {
@@ -241,58 +241,62 @@ namespace WebApplication.Presenter
                 if (Convert.ToInt16(results[i].Result) == Convert.ToInt16(results[i + 1].Result))
                 {
                     int index = i;
-                    int count = 0;
-                    double sum = 0;
+                    int count = 1;
+                    double sum = Convert.ToDouble(points[i]);
                     double avg = 0;
                     int startIndex = i;
                     int placeToSet = place;
+                    bool isEqual = true;
+                    int score = Convert.ToInt32(results[index].Result);
+                    int endIndex = i;
+                    index++;
 
-                    while(index < (points.Count - 1))
+                    while(isEqual)
                     {
-                        i++;
-                        if (Convert.ToInt16(results[index].Result) != Convert.ToInt16(results[index + 1].Result))
+                        if(index == points.Count)
                         {
-                            count++;
-                            sum += points[index];
                             break;
+                        }
+
+                        if(Convert.ToInt32(results[index].Result) == score)
+                        {
+                            endIndex++;
+                            sum += points[index];
+                            count++;
+                            place++;
+                            i++;
                         }
                         else
                         {
-                            count++;
-                            sum += points[index];
+                            isEqual = false;
                         }
+
                         index++;
-                        place++;
                     }
                     
-                    int endIndex = startIndex + count;
                     avg = sum / count;
-                    for(int j = startIndex; j < endIndex; j++)
+                    for(int j = startIndex; j <= endIndex; j++)
                     {
                         results[j].Score = placeToSet;
                         results[j].Points = avg;
                     }
-
-                    if(i + 1 == points.Count)
-                    {
-                        results[i].Score = ++place;
-                        results[i].Points = points[i];
-                        break;
-                    }
+                    place++;
                 }
                 else
                 {
+                    if (i + 1 == points.Count - 1)
+                    {
+                        results[i + 1].Score = place;
+                        results[i + 1].Points = points[i + 1];
+                        break;
+                    }
+
                     results[i].Score = place;
                     results[i].Points = points[i];
                     place++;
                 }
 
-                if (i + 1 == points.Count - 1)
-                {
-                    results[i+1].Score = place;
-                    results[i+1].Points = points[i+1];
-                    break;
-                }
+                
             }
 
             //update DB
@@ -307,61 +311,66 @@ namespace WebApplication.Presenter
             int place = 1;
             for (int i = 0; i < points.Count - 1; i++)
             {
-                if(TimeCompare(results[i].Result, results[i+1].Result) == 0)
+                if (TimeCompare(results[i].Result, results[i + 1].Result) == 0)
                 {
                     int index = i;
-                    int count = 0;
-                    double sum = 0;
+                    int count = 1;
+                    double sum = Convert.ToDouble(points[i]);
                     double avg = 0;
                     int startIndex = i;
                     int placeToSet = place;
+                    bool isEqual = true;
+                    string score = results[index].Result;
+                    int endIndex = i;
+                    index++;
 
-                    while (index < (points.Count - 1))
+                    while (isEqual)
                     {
-                        i++;
-                        if (TimeCompare(results[i].Result, results[i + 1].Result) != 0)
+                        if (index == points.Count)
                         {
-                            count++;
-                            sum += points[index];
                             break;
+                        }
+
+                        if (TimeCompare(score, results[index].Result) == 0)
+                        {
+                            endIndex++;
+                            sum += points[index];
+                            count++;
+                            place++;
+                            i++;
                         }
                         else
                         {
-                            count++;
-                            sum += points[index];
+                            isEqual = false;
                         }
+
                         index++;
-                        place++;
                     }
 
-                    int endIndex = startIndex + count;
                     avg = sum / count;
-                    for (int j = startIndex; j < endIndex; j++)
+                    for (int j = startIndex; j <= endIndex; j++)
                     {
                         results[j].Score = placeToSet;
                         results[j].Points = avg;
                     }
-
-                    if (i + 1 == points.Count)
-                    {
-                        results[i].Score = ++place;
-                        results[i].Points = points[i];
-                        break;
-                    }
+                    place++;
                 }
                 else
                 {
+
+
                     results[i].Score = place;
                     results[i].Points = points[i];
                     place++;
+                    if (i + 1 == points.Count - 1)
+                    {
+                        results[i + 1].Score = place;
+                        results[i + 1].Points = points[i + 1];
+                        break;
+                    }
                 }
 
-                if (i + 1 == points.Count - 1)
-                {
-                    results[i + 1].Score = place;
-                    results[i + 1].Points = points[i + 1];
-                    break;
-                }
+
             }
 
             //update DB

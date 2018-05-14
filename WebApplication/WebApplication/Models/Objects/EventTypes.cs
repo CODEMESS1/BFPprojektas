@@ -20,10 +20,10 @@ namespace WebApplication.Models
 
         }
 
-        public EventTypes(int id, string type)
+        public EventTypes(string type, string method)
         {
-            Id = id;
             Type = type;
+            Method = method;
         }
 
         public override string ToString()

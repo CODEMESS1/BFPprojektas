@@ -57,6 +57,9 @@ namespace WebApplication.Models.Objects
             return result.Equals(Result);
         }
 
-
+        public override int GetHashCode()
+        {
+            return EventId.GetHashCode() + Result.GetHashCode();
+        }
     }
 }
