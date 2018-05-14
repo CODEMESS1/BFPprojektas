@@ -162,6 +162,24 @@
                 }
         </script>
 
+        <script type="text/javascript">
+                function onKeyDownComp() {
+                    if (event.keyCode == 13) {
+                        event.preventDefault();
+                        document.getElementById("<%=edit_btn.ClientID%>").click();
+                    }
+                }
+        </script>
+
+        <script type="text/javascript">
+                function onKeyDownComp() {
+                    if (event.keyCode == 13) {
+                        event.preventDefault();
+                        document.getElementById("<%=submit_btn.ClientID%>").click();
+                    }
+                }
+        </script>
+
         <h4>Rungčių redagavimas ir kūrimas</h4>
         <div>
                <asp:ScriptManager EnableScriptGlobalization="true" runat="server"></asp:ScriptManager>
@@ -203,15 +221,18 @@
                                         <h3>Pridėti rungtį</h3>
                                             <div>
                                                 <label id="addName_lbl">Rungties pavadinimas</label>
-                                                <asp:TextBox ID="addName_tb" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="addName_tb" runat="server" onkeydown="return onKeyDownComp()"></asp:TextBox>
                                                 <asp:RequiredFieldValidator ID="addNameValidator" runat="server" ControlToValidate="addName_tb" ValidationGroup="addPopup" ErrorMessage="Įveskite pavadinimą"></asp:RequiredFieldValidator>
                                             </div>
                                             <div>
                                                 <label id="selectType_lbl">Pasirinkite rungties tipą</label>
                                                 <asp:DropDownList ID="addType_dropDownList" runat="server" DataValueField="Id" DataTextField="Name">
                                                 </asp:DropDownList>
+
                                             </div>
                                     </div>
+
+                                        
 
                                     <div id="ageGroupsAdd" class="tabcontent" style="border:none">
                                         <h3>Priskirti amžiaus grupes</h3>

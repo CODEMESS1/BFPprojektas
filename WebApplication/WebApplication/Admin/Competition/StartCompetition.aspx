@@ -30,6 +30,14 @@
                   border-bottom: 2px solid white;
                   border-top: 2px solid white;
                 }
+
+                .changeComp{
+                    position:absolute;
+                    right:1px;
+                    
+                }
+
+
     </style>
 
         <asp:Panel ID="SelectPanel" runat="server" style='position:relative; min-height:60%; min-width:30%; height:auto; width:auto' BorderWidth="5px" HorizontalAlign="center" BackColor="#484848" BorderColor="#33CCFF" ForeColor="White" CssClass=" alert-secondary">
@@ -78,7 +86,7 @@
         <asp:Panel ID="CompetitionPanel" runat="server" Visible="false">
                     <!-- Tab links -->
                     <ul class="nav nav-tabs navTabFormat">
-                        <asp:Button ID="SelectCompetitionBtn" Visible="false" runat="server" Text="Varžybų sąrašas" OnClick="SelectCompetitionBtn_Click" CssClass="nav-link active" />
+                        <%--<asp:Button ID="SelectCompetitionBtn" Visible="false" runat="server" Text="Varžybų sąrašas" OnClick="SelectCompetitionBtn_Click" CssClass=" nav-link active" />--%>
                         <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'generate')" id="defaultLink">Pogrūpiai</a></li>
                         <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'documents')">Protokolai</a></li>
                         <li class="nav-item"><a  class="nav-link active" data-toggle="tab" onclick="openLink(event, 'results')" id="startLink">Rezultatų vedimas</a></li>
@@ -87,7 +95,10 @@
                     <!-- Tab content -->
                     <div class="tab-content" id="myTabContent1" style="height:100%; width: 100%;">
                         <div id="generate" class="tabcontent show active dropdown" style="border:none">
-                            <h2>Generate</h2>
+                            <h2>Pogrūpiai</h2>
+                            <div class="float-right">
+                                <asp:Button ID="Button2" Visible="true" runat="server" Text="Keisti varžybas" OnClick="SelectCompetitionBtn_Click" CssClass="btn btn-danger" />
+                            </div>
                             <hr>
                             <asp:DropDownList ID="AgeGroup_DropDownList" DataValueField="Type" runat="server" CssClass="btn dropdown-toggle dropdown">
                             </asp:DropDownList>
@@ -107,11 +118,12 @@
                             <br />
                             <br />
                             <asp:Label ID="InformationLabel" runat="server" Text=""></asp:Label>
-                            <asp:Panel runat="server" ScrollBars="Vertical">
-                            <asp:GridView ID="CompetitorsGridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="Gray" BorderColor="black" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" ForeColor="white" GridLines="Horizontal" PageSize="1000">
+                            <asp:Panel runat="server">
+                            <asp:GridView ID="CompetitorsGridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" Width="50%" BackColor="Gray" BorderColor="black" CssClass="table table-curved table- text-codemess table-dark noBorder" ForeColor="white" GridLines="Horizontal" PageSize="1000">
                                 <PagerStyle BackColor="#4A4A4A" Font-Bold="True" ForeColor="Black" HorizontalAlign="Center" />
+                                <HeaderStyle BackColor="#333333" />
                                 <Columns>
-                                    <asp:BoundField DataField="Subgroup" HeaderText="Pogrupis" />
+                                    <asp:BoundField DataField="Subgroup" HeaderText="Pogrupis" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="70"/>
                                     <asp:BoundField DataField="Name" HeaderText="Vardas" />
                                     <asp:BoundField DataField="Surname" HeaderText="Pavardė" />
                                     <asp:BoundField DataField="Year" HeaderText="Gimimo metai" />
@@ -124,21 +136,40 @@
                         </div>
                         <div id="documents" class="tabcontent show active" style="border:none">
                             <h2>Documents</h2>
+                            <asp:Button ID="GetStartList_Btn" runat ="server" Text ="Starto protokolai" OnClick="GetStartList_Btn_Click" />
+                            <asp:Button ID="GetResultList_Btn" runat="server" Text="Rezultatų protokolai" OnClick="GetResultList_Btn_Click" />
+                            <div class="float-right">
+                                <asp:Button ID="Button3" Visible="true" runat="server" Text="Keisti varžybas" OnClick="SelectCompetitionBtn_Click" CssClass="btn btn-danger" />
+                            </div>
+                            
                             <hr>
                         </div>
                         <div id="results" class="tabcontent show active" style="border:none">
                             <h2>Rezultatų suvedimas</h2>
-                            <div>
-                                <label id="start_lbl">Pradėti varžybas?</label>
-                                <asp:Button ID="startCompetition_btn" runat="server" Text="Pradėti varžybas" OnClick="startCompetition_Click"/>
+                            <div class="float-right">
+                                <asp:Button ID="Button4" Visible="true" runat="server" Text="Keisti varžybas" OnClick="SelectCompetitionBtn_Click" CssClass="btn btn-danger" />
                             </div>
-                                    <div>
-                                        <label>Skaičiuoti rezultatus</label>
-                                        <asp:DropDownList ID="CalculateResultsGroup_list" runat="server" DataValueField="Type" AutoPostBack="true" DataTextField="Type" OnSelectedIndexChanged="CalculateResultsGroup_list_SelectedIndexChanged"></asp:DropDownList>
-                                        <asp:Button ID="Calculate_btn" runat="server" Text="Skaičiuoti" OnClick="Calculate_btn_Click"/>
-                                    </div>
                             <div>
-                                <asp:GridView ID="Results_GridView" runat="server" AutoGenerateColumns="false" BackColor="White">
+                                <label id="start_lbl">Ar pradėti varžybas?</label>
+                                <asp:Button ID="startCompetition_btn" runat="server" Text="Pirmyn" CssClass="btn btn-success" OnClick="startCompetition_Click"/>
+                            </div>
+                            <hr />
+                                    <%--<div class="col">
+                                        <br />
+                                        <label>Skaičiuoti rezultatus</label>
+                                        <asp:DropDownList ID="CalculateResultsGroup_list" runat="server" DataValueField="Type" AutoPostBack="true" DataTextField="Type" OnSelectedIndexChanged="CalculateResultsGroup_list_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
+                                        <asp:Button ID="Calculate_btn" runat="server" Text="Skaičiuoti" OnClick="Calculate_btn_Click" CssClass="btn"/>
+                                    </div>--%>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-2">
+                                          <label for="inputGroup">Skaičiuoti rezultatus</label>
+                                            <asp:DropDownList ID="CalculateResultsGroup_list" runat="server" DataValueField="Type" AutoPostBack="true" DataTextField="Type" OnSelectedIndexChanged="CalculateResultsGroup_list_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
+                                            <asp:Button ID="Calculate_btn" runat="server" Text="Skaičiuoti" OnClick="Calculate_btn_Click" CssClass="form-control btn btn-outline-light"/>
+                                        </div>
+                                     </div>
+                            <hr />
+                            <div>
+                                <asp:GridView ID="Results_GridView" runat="server" Width="35%" AutoGenerateColumns="false" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal">
                                     <Columns>
                                         <asp:BoundField DataField="Score" HeaderText="Vieta" />
                                         <asp:BoundField DataField="Points" HeaderText="Taškai" />
@@ -153,29 +184,51 @@
          <div id="ResultsInputContent">
             <asp:Panel ID="ResultsUpdatePanel" runat="server" > 
                 
-                    <asp:Button ID="saveCompetition_btn" runat="server" CausesValidation="false" Text="Saugoti varžybas" OnClick="saveCompetition_btn_Click" />
-                    <label id="save_lbl">Išsaugoti varžybas</label>
-                    <div id="select">
-                        <label>Pasirinkite grupę</label>
-                        <asp:DropDownList ID="selectGroup_list" runat="server" DataValueField="Id" DataTextField="Type"></asp:DropDownList>
-                        <asp:Button ID="SelectGroup_btn" runat="server" Text="Pasirinkti" OnClick="SelectGroup_btn_Click" />
-                        <label>Pasirinkite rungtį</label>
-                        <asp:DropDownList ID="selectEvent_list" DataValueField="Id" DataTextField="Title" runat="server" Enabled="false"></asp:DropDownList>
-                        <asp:Button ID="WriteResults_btn" runat="server" OnClick="WriteResults_btn_Click" Text="Vesti rezultatus" Width="166px"/>
-                        <br />
-                    </div>
+                    <asp:Button ID="saveCompetition_btn" runat="server" CausesValidation="false" Text="Saugoti varžybas" OnClick="saveCompetition_btn_Click" CssClass="btn" />
+
+                <hr />
+                <form>                      
+                      <div class="form-row">
+                        <div class="form-group col-md-4">
+                          <label for="inputGroup">Pasirinkite grupę</label>
+                            <asp:DropDownList ID="selectGroup_list" runat="server" DataValueField="Id" DataTextField="Type" CssClass="form-control"></asp:DropDownList>
+                            <asp:Button ID="SelectGroup_btn" runat="server" Text="Pasirinkti" OnClick="SelectGroup_btn_Click" CssClass="form-control" />
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="inputCompetition">Pasirinkite rungtį</label>
+                          <asp:DropDownList ID="selectEvent_list" DataValueField="Id" CssClass="form-control" DataTextField="Title" runat="server" Enabled="false"></asp:DropDownList>
+                        </div>
+                        <div class="form-group col-md-2">
+                          <label for="inputButton">Patvirtinkite</label>
+                          <asp:Button ID="WriteResults_btn" runat="server" OnClick="WriteResults_btn_Click" Text="Vesti rezultatus" CssClass="form-control"/>
+                        </div>
+                      </div>
+                    <hr />
+                        <div class="form-row">
+                          <div class="form-group col-md-2">
+                            <label for="inputID">Įveskite ID</label>
+                              <asp:TextBox ID="EnterId_tb" runat="server" onkeydown="return onKeyDownFind()" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                              <asp:Button ID="FindById_btn" OnClick="FindById_btn_Click" runat="server" Text="Ieškoti" CssClass="form-control" />
+                              <asp:RequiredFieldValidator ID="EnterId_Validator" ControlToValidate="EnterId_tb" runat="server" ErrorMessage="" Text="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="inputCompetitor">Dalyvis</label>
+                            <asp:TextBox ID="Competitor_tb" runat="server" AutoPostBack="true" ReadOnly="true" CssClass="form-control"></asp:TextBox>
+                          </div>
+                        </div>
+                    </form>
                         <div>
-                            <label>Įveskite ID</label>
-                            <asp:TextBox ID="EnterId_tb" runat="server" TextMode="Number"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="EnterId_Validator" ControlToValidate="EnterId_tb" runat="server" ErrorMessage="" Text="*" ForeColor="Red"></asp:RequiredFieldValidator>
-                            &nbsp;&nbsp;
-                            <asp:Button ID="FindById_btn" OnClick="FindById_btn_Click" runat="server" Text="Ieškoti" />
-                            &nbsp;&nbsp;
-                            <asp:TextBox ID="Competitor_tb" runat="server" AutoPostBack="true" ReadOnly="true"></asp:TextBox>
+                            <%--<asp:TextBox ID="EnterId_tb" runat="server" TextMode="Number"></asp:TextBox>--%>
+                            <%--<asp:RequiredFieldValidator ID="EnterId_Validator" ControlToValidate="EnterId_tb" runat="server" ErrorMessage="" Text="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:Button ID="FindById_btn" OnClick="FindById_btn_Click" runat="server" Text="Ieškoti" />--%>
+                            <%--<asp:TextBox ID="Competitor_tb" runat="server" AutoPostBack="true" ReadOnly="true"></asp:TextBox>--%>
                         </div>
                     <div>
                     </div>
+                
             </asp:Panel>
+
+             <hr />
 
              <asp:Panel ID="time" runat="server">
                     <div>
@@ -188,19 +241,24 @@
                         <label> ms</label>
                         <asp:Button ID="ResultsTime_btn" runat="server" Text="Saugoti" OnClick="ResultsTime_btn_Click"/>
                     </div>
+                 
+                    
              </asp:Panel>
 
              <asp:Panel ID="count" runat="server">
-                    <div>
-                        <label>Įveskite rezultatą</label>
-                        <asp:TextBox ID="TextBox3" runat="server" TextMode="Number" min="0"></asp:TextBox>
-                        <asp:Button ID="ResultsCount_btn" runat="server" Text="Saugoti" OnClick="ResultsCount_btn_Click" />
-                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                          <label for="inputGroup">Įveskite rezultatą</label>
+                            <asp:TextBox ID="TextBox3" runat="server" TextMode="Number" min="0" CssClass="form-control"></asp:TextBox>
+                            <asp:Button ID="ResultsCount_btn" runat="server" Text="Saugoti" OnClick="ResultsCount_btn_Click" CssClass="form-control" />
+                        </div>
+                      </div>
              </asp:Panel>
         </div>
         <div>
             <asp:Panel ID="last_entries_panel" runat="server">
-                 <asp:GridView ID="LastEntries_Gridview" runat="server" AutoGenerateColumns="false" AllowPaging="false" PageSize="5">
+                 <asp:GridView ID="LastEntries_Gridview" runat="server" AutoGenerateColumns="false" AllowPaging="false" PageSize="5" CssClass="table table-curved table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal">
                      <Columns>
                          <asp:BoundField DataField="Id" HeaderText="ID" />
                          <asp:BoundField DataField="Name" HeaderText="Vardas" />
@@ -211,6 +269,15 @@
                  </asp:GridView>
              </asp:Panel>
         </div>
+
+        <script type="text/javascript">
+            function onKeyDownFind() {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    document.getElementById("<%=FindById_btn.ClientID%>").click();
+                }
+            }
+        </script>
 
 
         <script type="text/javascript">
