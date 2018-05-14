@@ -44,7 +44,7 @@ namespace WebApplication.Models.Objects
         public override bool Equals(object obj)
         {
             Results results = (Results)obj;
-            if(results.EventId == EventId && results.CompetitorId == CompetitorId &&
+            if (results.EventId == EventId && results.CompetitorId == CompetitorId &&
                 results.CompetitionId == CompetitionId && results.Result.Equals(Result))
             {
                 return true;
@@ -56,5 +56,7 @@ namespace WebApplication.Models.Objects
         {
             return result.Equals(Result);
         }
+
+
     }
 }

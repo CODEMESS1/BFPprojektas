@@ -260,7 +260,9 @@ namespace WebApplication.Admin.Competition
 
         protected void ResultsTime_btn_Click(object sender, EventArgs e)
         {
-            Result = ResultsTimeMinute_TextBox.Text + ":" + ResultsTimeSeconds_TextBox.Text + "," + ResultsTimeMili_TextBox.Text;
+            DateTime time = new DateTime(2018, 5, 14, 12, Convert.ToInt16(ResultsTimeMinute_TextBox.Text), Convert.ToInt16(ResultsTimeSeconds_TextBox.Text),
+                Convert.ToInt16(ResultsTimeMili_TextBox.Text));
+            Result = time.ToString("mm:ss:fff");
             BindLastEntry();
             LastEntries_Gridview.DataBind();
             presenter.AddResult();

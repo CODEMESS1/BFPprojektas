@@ -149,14 +149,90 @@ namespace WebApplication.Presenter
             {
                 results = results.OrderByDescending(r => Convert.ToDouble(r.Result)).ToList();
             }
-            if(results.Count != 0)
+            else if (eventType.Type.Equals("Count") && eventType.Method.Equals("Least"))
             {
-                return CalculateMostCount(results);
+                results = results.OrderBy(r => Convert.ToDouble(r.Result)).ToList();
+            }
+            else if (eventType.Type.Equals("Time") && eventType.Method.Equals("Worst")) //ilgesnis laikas geriausias
+            {
+                results = SortTimeDsc(results);
+            }
+            else if (eventType.Type.Equals("Time") && eventType.Method.Equals("Best"))
+            {
+                results = SortTimeAsc(results);
+            }
+
+            if (results.Count != 0)
+            {
+                if(eventType.Type.Equals("Count"))
+                {
+                    return CalculateCount(results);
+                }
+                else
+                {
+                    return CalculateTime(results);
+                }
             }
             return null;
         }
 
-        public List<Results> CalculateMostCount(List<Results> results)
+        public List<Results> SortTimeAsc(List<Results> results)
+        {
+            int n = results.Count;
+            for (int i = 1; i < n; ++i)
+            {
+                Results key = results[i];
+                int j = i - 1;
+
+                while (j >= 0 && TimeCompare(results[j].Result, key.Result) == 1)
+                {
+                    results[j + 1] = results[j];
+                    j = j - 1;
+                }
+                results[j + 1] = key;
+            }
+            return results;
+        }
+
+        public List<Results> SortTimeDsc(List<Results> results)
+        {
+            int n = results.Count;
+            for (int i = 1; i < n; ++i)
+            {
+                Results key = results[i];
+                int j = i - 1;
+
+                while (j >= 0 && TimeCompare(results[j].Result, key.Result) == -1)
+                {
+                    results[j + 1] = results[j];
+                    j = j - 1;
+                }
+                results[j + 1] = key;
+            }
+            return results;
+        }
+
+        public int TimeCompare(string first, string second)
+        {
+            string[] firstFields = first.Split(':');
+            string[] secondFields = second.Split(':');
+
+            double firstSum = Convert.ToDouble(firstFields[0]) * 60 + Convert.ToDouble(firstFields[1]) + Convert.ToDouble(firstFields[2]) / 1000;
+            double secondSum = Convert.ToDouble(secondFields[0]) * 60 + Convert.ToDouble(secondFields[1]) + Convert.ToDouble(secondFields[2]) / 1000;
+
+            if (Double.Equals(firstSum, secondSum) == true)
+            {
+                return 0;
+            }
+
+            if (firstSum > secondSum)
+            {
+                return 1;
+            }
+            return -1;
+        }
+
+        public List<Results> CalculateCount(List<Results> results)
         {
             List<double> points = MakePointsList(results.Count);
             int place = 1;
@@ -215,6 +291,75 @@ namespace WebApplication.Presenter
                 {
                     results[i+1].Score = place;
                     results[i+1].Points = points[i+1];
+                    break;
+                }
+            }
+
+            //update DB
+            ResultsContainer.UpdateResults(results);
+
+            return results;
+        }
+
+        public List<Results> CalculateTime(List<Results> results)
+        {
+            List<double> points = MakePointsList(results.Count);
+            int place = 1;
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                if(TimeCompare(results[i].Result, results[i+1].Result) == 0)
+                {
+                    int index = i;
+                    int count = 0;
+                    double sum = 0;
+                    double avg = 0;
+                    int startIndex = i;
+                    int placeToSet = place;
+
+                    while (index < (points.Count - 1))
+                    {
+                        i++;
+                        if (TimeCompare(results[i].Result, results[i + 1].Result) != 0)
+                        {
+                            count++;
+                            sum += points[index];
+                            break;
+                        }
+                        else
+                        {
+                            count++;
+                            sum += points[index];
+                        }
+                        index++;
+                        place++;
+                    }
+
+                    int endIndex = startIndex + count;
+                    avg = sum / count;
+                    for (int j = startIndex; j < endIndex; j++)
+                    {
+                        results[j].Score = placeToSet;
+                        results[j].Points = avg;
+                    }
+
+                    if (i + 1 == points.Count)
+                    {
+                        results[i].Score = ++place;
+                        results[i].Points = points[i];
+                        break;
+                    }
+                }
+                else
+                {
+                    results[i].Score = place;
+                    results[i].Points = points[i];
+                    place++;
+                }
+
+                if (i + 1 == points.Count - 1)
+                {
+                    results[i + 1].Score = place;
+                    results[i + 1].Points = points[i + 1];
                     break;
                 }
             }

@@ -678,3 +678,4 @@ C:\Users\Dauma\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\M
 C:\Users\Dauma\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\Microsoft.AI.Web.xml
 C:\Users\Dauma\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\de\PdfSharp.resources.dll
 C:\Users\Dauma\Documents\GitHub\BFPprojektas\WebApplication\WebApplication\bin\de\PdfSharp.Charting.resources.dll
+B:\MainRepository\WebApplication\WebApplication\bin\itextsharp.xml

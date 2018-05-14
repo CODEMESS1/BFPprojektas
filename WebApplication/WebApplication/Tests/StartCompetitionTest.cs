@@ -86,7 +86,7 @@ namespace WebApplication.Tests
 
             Results expected = new Results(9, 1, 1, 1, "15", new double?(1), new int?(1));
 
-            List<Results> ret = Presenter.CalculateMostCount(results);
+            List<Results> ret = Presenter.CalculateCount(results);
 
             Assert.AreNotEqual(expected, ret.First());
         }
