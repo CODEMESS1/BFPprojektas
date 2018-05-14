@@ -118,12 +118,12 @@
                             <br />
                             <br />
                             <asp:Label ID="InformationLabel" runat="server" Text=""></asp:Label>
-                            <asp:Panel runat="server" ScrollBars="Vertical">
-                            <asp:GridView ID="CompetitorsGridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="Gray" BorderColor="black" CssClass="table table-striped thead-dark table-curved table- text-codemess table-dark noBorder" ForeColor="white" GridLines="Horizontal" PageSize="1000">
+                            <asp:Panel runat="server">
+                            <asp:GridView ID="CompetitorsGridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" Width="50%" BackColor="Gray" BorderColor="black" CssClass="table table-curved table- text-codemess table-dark noBorder" ForeColor="white" GridLines="Horizontal" PageSize="1000">
                                 <PagerStyle BackColor="#4A4A4A" Font-Bold="True" ForeColor="Black" HorizontalAlign="Center" />
                                 <HeaderStyle BackColor="#333333" />
                                 <Columns>
-                                    <asp:BoundField DataField="Subgroup" HeaderText="Pogrupis" />
+                                    <asp:BoundField DataField="Subgroup" HeaderText="Pogrupis" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="70"/>
                                     <asp:BoundField DataField="Name" HeaderText="Vardas" />
                                     <asp:BoundField DataField="Surname" HeaderText="Pavardė" />
                                     <asp:BoundField DataField="Year" HeaderText="Gimimo metai" />
