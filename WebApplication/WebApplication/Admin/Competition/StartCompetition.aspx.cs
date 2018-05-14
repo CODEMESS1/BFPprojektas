@@ -122,7 +122,7 @@ namespace WebApplication.Admin.Competition
             if (CompetitorsGridView.DataSource != null)
             {
                 CompetitorsGridView.DataBind();
-                GroupGridView(CompetitorsGridView.Rows, 0, 2);
+                GroupGridView(CompetitorsGridView.Rows, 0, 1);
                 AgeGroup_DropDownList.Enabled = false;
                 SubgroupsCount.Enabled = false;
             }
@@ -154,7 +154,7 @@ namespace WebApplication.Admin.Competition
         }
 
 
-        void GroupGridView(GridViewRowCollection gvrc, int startIndex, int total)
+        private void GroupGridView(GridViewRowCollection gvrc, int startIndex, int total)
         {
             if (total == 0) return;
             int i, count = 1;
