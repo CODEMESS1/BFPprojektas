@@ -126,13 +126,13 @@
                 </div>
                 <div>
                     <asp:Label ID="email_lbl" runat="server" Text="Elektroninis paštas:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="email_tb" runat="server" TextMode="Email" ValidationGroup="popup"></asp:TextBox>
+                    <asp:TextBox ID="email_tb" CssClass="btn-sm" runat="server" TextMode="Email" ValidationGroup="popup"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="emailvalidator" runat="server" ErrorMessage="Įveskite el. paštą" ControlToValidate="email_tb" ValidationGroup="popup" CssClass="errorMsg"></asp:RequiredFieldValidator>
                 </div>
                 <div>
-                    <asp:Label ID="passw_lbl" runat="server" Text="Slaptažodis:" CssClass="formatText"></asp:Label>
-                    <asp:TextBox ID="passw_tb" runat="server" TextMode="Password" ValidationGroup="popup"></asp:TextBox>
+                    <asp:Label ID="passw_lbl"  runat="server" Text="Slaptažodis:" CssClass="formatText"></asp:Label>
+                    <asp:TextBox ID="passw_tb" CssClass="btn-sm" runat="server" TextMode="Password" ValidationGroup="popup"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="passwordvalidator" runat="server" ErrorMessage="Įveskite slaptažodį" ControlToValidate="passw_tb" ValidationGroup="popup" CssClass="errorMsg"></asp:RequiredFieldValidator>
                 </div>
