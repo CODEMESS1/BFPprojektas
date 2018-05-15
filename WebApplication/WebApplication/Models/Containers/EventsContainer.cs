@@ -8,16 +8,25 @@ namespace WebApplication.Models
 {
     public class EventsContainer : DbContext
     {
+        private CompetitionEventsContainer CompetitionEventsContainer;
+        private AgeGroupTypesContainer AgeGroupTypesContainer;
+
         public EventsContainer() : base("DefaultConnection")
         {
+            CompetitionEventsContainer = new CompetitionEventsContainer();
+            AgeGroupTypesContainer = new AgeGroupTypesContainer();
+        }
 
+        public EventsContainer(CompetitionEventsContainer competitionEventsContainer, AgeGroupTypesContainer ageGroupTypesContainer)
+        {
+            CompetitionEventsContainer = competitionEventsContainer;
+            AgeGroupTypesContainer = ageGroupTypesContainer;
         }
 
         public DbSet<Events> Events { get; set; }
         public DbSet<AgeGroupEvents> AgeGroupEvents { get; set; }
 
-        private CompetitionEventsContainer CompetitionEventsContainer = new CompetitionEventsContainer();
-        private AgeGroupTypesContainer AgeGroupTypesContainer = new AgeGroupTypesContainer();
+        
 
         public bool AddEvent(Events events, List<string> ageGroupTypes)
         {
@@ -25,7 +34,7 @@ namespace WebApplication.Models
             {
                 Events.Add(events);
                 SaveChanges();
-                SetEventAgeGroups(events.Id, ageGroupTypes);
+                //SetEventAgeGroups(events.Id, ageGroupTypes);
                 return true;
             }
             return false;
@@ -54,7 +63,7 @@ namespace WebApplication.Models
         private void SetEventAgeGroups(int eventId, List<string> groups)
         {
             RemoveAgeGroupsEventRange(eventId);
-            for (int i = 0; i<groups.Count; i++)
+            for (int i = 0; i < groups.Count; i++)
             {
                 string group = groups[i];
                 int ageGroupId = AgeGroupTypesContainer.AgeGroupTypes.Where(g => g.Type.Equals(group)).Single().Id;
@@ -83,7 +92,7 @@ namespace WebApplication.Models
             List<AgeGroupEvents> ageGroupEvents = GetEventsInCompetition(ageGroup, competitionId);
             foreach (Models.AgeGroupEvents c in ageGroupEvents)
             {
-                if((Events.Where(ev => ev.Id == c.EventId).Count() != 0))
+                if ((Events.Where(ev => ev.Id == c.EventId).Count() != 0))
                 {
                     eventsToReturn.Add(Events.Where(ev => ev.Id == c.EventId).ToList()[0]);
                 }

@@ -48,5 +48,41 @@ namespace WebApplication.Models.Containers
             }
             SaveChanges();
         }
+
+        public List<Results> GetWinnerList(int competitionId, int ageGroupType)
+        {
+            Results.RemoveRange(Results.Where(r => r.CompetitionId == competitionId && r.EventId == -1 && r.AgeGroupType == ageGroupType && r.Result.Equals("Final")));
+            SaveChanges();
+            List<Results> results = Results.Where(r => r.CompetitionId == competitionId && r.AgeGroupType == ageGroupType).OrderBy(c => c.CompetitorId).ToList();
+            List<Results> returnList = new List<Results>();
+
+            for(int i = 0; i < results.Count; i++)
+            {
+                int competitor = results[i].CompetitorId;
+
+                double? points = 0;
+
+                while(competitor == results[i].CompetitorId)
+                {
+                    points += results[i].Points;
+                    i++;
+
+                    if(i == results.Count)
+                    {
+                        break;
+                    }
+                }
+
+                i--;
+
+                Results result = new Results(competitor, -1, ageGroupType, competitionId, "Final", points, null);
+                Results.Add(result);
+                SaveChanges();
+
+                returnList.Add(result);
+            }
+
+            return returnList;
+        }
     }
 }

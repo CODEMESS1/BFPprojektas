@@ -13,9 +13,9 @@ namespace WebApplication.Tests.Mocks
         public List<Events> Events { set => throw new NotImplementedException(); }
         public List<AgeGroupTypes> AgeGroupTypes { set => throw new NotImplementedException(); }
 
-        public string Title => throw new NotImplementedException();
+        public string Title => "First";
 
-        public int Type => throw new NotImplementedException();
+        public int Type => 2;
 
         public bool AddEvent(Events eventToAdd)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using WebApplication.Model;
@@ -22,6 +23,8 @@ namespace WebApplication.Presenter
         private EventTypesContainer EventTypes = new EventTypesContainer();
         private ResultsContainer ResultsContainer = new ResultsContainer();
         private CompetitionEventsContainer CompetitionEvents = new CompetitionEventsContainer();
+        private CompetitionAgeSubgroupsContainer CompetitionAgeSubgroupsContainer = new CompetitionAgeSubgroupsContainer();
+        private AspUsersContainer AspUsersContainer = new AspUsersContainer();
 
         public StartCompetitionPresenter(IStartCompetition view)
         {
@@ -62,6 +65,12 @@ namespace WebApplication.Presenter
             SubGroupsContainer.SetAgeSubgroups(View.SelectedCompetitionId, View.SelectedAgeGroup, View.SelectedCompetitionId, View.SelectedSubgroupCount);
         }
 
+        public string GetCoachFullName(string Id)
+        {
+            var coach = AspUsersContainer.aspNetUsers.Where(u => u.Id == Id).Single();
+            return coach.Name + " " + coach.Surname; 
+        }
+
         public void GetByGroup()
         {
             List<Competitors> competitors = CompetitorsContainer.GetAgeGroupCompetitorsInCompetition(View.SelectedCompetitionId, View.SelectedAgeGroup);
@@ -97,29 +106,34 @@ namespace WebApplication.Presenter
         {
             List<Competitors> competitors = CompetitorsContainer.GetAgeGroupCompetitorsInCompetition(View.SelectedCompetitionId, ageGroup);
             List<CompetitorsWithSubgroups> competitorsWithSubgroups = new List<CompetitorsWithSubgroups>();
-            int subgroupCount = View.SelectedSubgroupCount;
-            int subgroupLength = 0;
 
-            subgroupLength = competitors.Count / subgroupCount;
-
-            while (subgroupLength * subgroupCount < competitors.Count)
+            if (competitors.Count > 0)
             {
-                subgroupLength++;
-            }
+                int ageGroupId = AgeGroupContainer.AgeGroups.Where(s => s.CompetitionId == View.SelectedCompetitionId && s.Title == ageGroup).Single().Id;
+                int subgroupCount = CompetitionAgeSubgroupsContainer.CompetitionAgeSubgroups.Where(s => s.AgeGroupId == ageGroupId && s.CompetitionId == View.SelectedCompetitionId).Single().SubGroupCount;
+                int subgroupLength = 0;
 
-            int subgroup = 1;
-            int index = 1;
+                subgroupLength = competitors.Count / subgroupCount;
 
-            foreach (Competitors c in competitors)
-            {
-                if (index > subgroupLength)
+                while (subgroupLength * subgroupCount < competitors.Count)
                 {
-                    index = 1;
-                    subgroup++;
+                    subgroupLength++;
                 }
 
-                competitorsWithSubgroups.Add(new CompetitorsWithSubgroups(c, subgroup));
-                index++;
+                int subgroup = 1;
+                int index = 1;
+
+                foreach (Competitors c in competitors)
+                {
+                    if (index > subgroupLength)
+                    {
+                        index = 1;
+                        subgroup++;
+                    }
+
+                    competitorsWithSubgroups.Add(new CompetitorsWithSubgroups(c, subgroup));
+                    index++;
+                }
             }
             return competitorsWithSubgroups;
         }
@@ -162,16 +176,68 @@ namespace WebApplication.Presenter
         {
             List<CompetitionEvents> competitionEvents = CompetitionEvents.CompetitionEvents.Where(e => e.CompetitionId == View.SelectedCompetitionId).ToList();
             List<AgeGroupEvents> ageGroupEvents = EventsContainer.GetEventsInCompetition(View.AgeGroupForCalculation, View.SelectedCompetitionId);
+            List<Competitors> competitors = CompetitorsContainer.GetAgeGroupCompetitorsInCompetition(View.SelectedCompetitionId, View.AgeGroupForCalculation);
+            List<Results> resultsList = new List<Results>();
 
             List<Events> events = EventsContainer.Events.ToList();
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID");
+            dt.Columns.Add("Vardas");
+            dt.Columns.Add("Pavardė");
+
             foreach (AgeGroupEvents e in ageGroupEvents)
             {
+                string eventName = EventsContainer.Events.Where(evt => evt.Id == e.EventId).Single().Title;
+
                 int eventTypeValue = events.Where(et => et.Id == e.EventId).ToList()[0].Type;
                 List<Results> results = ResultsContainer.Results.Where(r => r.CompetitionId == View.SelectedCompetitionId && r.AgeGroupType == e.AgeGroupType &&
                                                                                                     r.EventId == e.EventId).ToList();
                 EventTypes eventType = EventTypes.EventTypes.Where(t => t.Id == eventTypeValue).ToList()[0];
-                View.Results = CalculateResults(results, eventType);
+                resultsList.AddRange(CalculateResults(results, eventType));
+
+                dt.Columns.Add(eventName);
+                dt.Columns.Add(eventName + ": rezultatas");
             }
+
+            dt.Columns.Add("Suma");
+
+            int ageGroupId = AgeGroupTypesContainer.AgeGroupTypes.Where(t => t.Type.Equals(View.AgeGroupForCalculation)).Single().Id;
+            List<Results> finalResults = ResultsContainer.GetWinnerList(View.SelectedCompetitionId, ageGroupId);
+            finalResults = finalResults.OrderBy(r => r.Points).ToList();
+
+            for(int i = 0; i < finalResults.Count; i++)
+            {
+                string name = competitors.Where(c => c.Id == finalResults[i].CompetitorId).Single().Name;
+                string surname = competitors.Where(c => c.Id == finalResults[i].CompetitorId).Single().Surname;
+
+                List<Results> eventsResultsCompetitor = resultsList.Where(r => r.CompetitorId == finalResults[i].CompetitorId).ToList();
+
+                double? sum = finalResults[i].Points;
+
+                int size = 4 + (eventsResultsCompetitor.Count() * 2);
+
+                object[] values = new object[size];
+
+                values[0] = finalResults[i].CompetitorId;
+                values[1] = name;
+                values[2] = surname;
+
+                int index = 3;
+                foreach(Results r in eventsResultsCompetitor)
+                {
+                    values[index] = r.Result;
+                    index++;
+                    values[index] = r.Points;
+                    index++;
+                }
+
+                values[index] = sum;
+
+                dt.Rows.Add(values);
+            }
+
+            View.Results = dt;
         }
 
         public List<Results> CalculateResults(List<Results> results, EventTypes eventType)

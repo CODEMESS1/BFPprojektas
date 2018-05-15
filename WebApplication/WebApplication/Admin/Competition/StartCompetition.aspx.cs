@@ -95,7 +95,7 @@ namespace WebApplication.Admin.Competition
 
         public string AgeGroupForCalculation => CalculateResultsGroup_list.SelectedValue;
 
-        public List<Results> Results { set { Results_GridView.DataSource = value; Results_GridView.DataBind(); } }
+        public DataTable Results { set { Results_GridView.DataSource = value; Results_GridView.DataBind(); } }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -348,6 +348,7 @@ namespace WebApplication.Admin.Competition
                 {
                     //gauna pogrupius 
                     List<int> subGroups = allCompetitors.Select(c => c.Subgroup).ToList();
+                    subGroups = subGroups.Distinct().ToList();
 
                     //bega per pogrupius 1, 2, ...
                     foreach (int subgroup in subGroups)
@@ -355,6 +356,7 @@ namespace WebApplication.Admin.Competition
                         //*******************************    trūksta trenerio var pav *************************
 
                         DataTable dtbl = new DataTable();
+                        List<CompetitorsWithSubgroups> subgroupComp = allCompetitors.Where(c => c.Subgroup == subgroup).ToList();
 
                         dtbl.Columns.Add("ID");
                         dtbl.Columns.Add("Pogrupis");
@@ -365,87 +367,86 @@ namespace WebApplication.Admin.Competition
                         dtbl.Columns.Add("Valstybė");
                         dtbl.Columns.Add("Tren. V. Pavardė");
 
-                        for (int k = 0; k < allCompetitors.Count; k++)
+                        for (int k = 0; k < subgroupComp.Count; k++)
                         {
-                            dtbl.Rows.Add(allCompetitors[k].Id, allCompetitors[k].Subgroup, allCompetitors[k].Name,
-                                allCompetitors[k].Surname, allCompetitors[k].Year, allCompetitors[k].City,
-                                allCompetitors[k].Country, "");
+                            string CoachFullName = presenter.GetCoachFullName(allCompetitors[k].CoachId);
+                            dtbl.Rows.Add(subgroupComp[k].Id, subgroupComp[k].Subgroup, subgroupComp[k].Name,
+                                subgroupComp[k].Surname, subgroupComp[k].Year.ToString("yyyy/MM/dd"), subgroupComp[k].City,
+                                subgroupComp[k].Country, CoachFullName);
                         }
 
-
-
-
-                        ExportDataTableToPdf(document, dtbl, "Pogrupio nr. " + subgroup + " Pogrupių sąrašas");
+                        ExportDataTableToPdf(document, dtbl, type.Type + ". Pogrupio nr. " + subgroup);
 
                         document.NewPage();
-
-
-
                     }
                 }
             }
-
-
-
+            
             document.Close();
             writer.Close();
             fs.Close();
-
 
             Response.ContentType = "Application/pdf";
             Response.AppendHeader("Content-Disposition", "attachment; filename=pogrupiai.pdf");
             Response.TransmitFile(Server.MapPath("~/PDFs/subgroups.pdf"));
             Response.End();
-
         }
 
         protected void GetResultList_Btn_Click(object sender, EventArgs e)
         {
             string path = Page.Server.MapPath("/PDFs");
 
-            System.IO.FileStream fs = new FileStream(path + "/rezults.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            System.IO.FileStream fs = new FileStream(path + "/results.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
             Document document = new Document();
             document.SetPageSize(iTextSharp.text.PageSize.A4);
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();
 
+            //bega per kiekviena amziausiaus grupes tipa
             foreach (AgeGroupTypes type in Types)
             {
+                //randa visus dalyvius, vienos amziaus grupes
                 List<CompetitorsWithSubgroups> allCompetitors = presenter.GetStartList(type.Type);
 
-                DataTable dtbl = new DataTable();
-
-                dtbl.Columns.Add("ID");
-                dtbl.Columns.Add("Pogrupis");
-                dtbl.Columns.Add("Vardas");
-                dtbl.Columns.Add("Pavardė");
-                dtbl.Columns.Add("Metai");
-                dtbl.Columns.Add("Miestas");
-                dtbl.Columns.Add("Valstybė");
-                dtbl.Columns.Add("Tren. V. Pavardė");
-
-                for (int k = 0; k < allCompetitors.Count; k++)
+                if (allCompetitors.Count > 0)
                 {
-                    //*******************************    trūksta trenerio var pav *************************
-                    dtbl.Rows.Add(allCompetitors[k].Id, allCompetitors[k].Subgroup, allCompetitors[k].Name,
-                        allCompetitors[k].Surname, allCompetitors[k].Year, allCompetitors[k].City,
-                        allCompetitors[k].Country, "");
+                    //gauna pogrupius 
+                    List<int> subGroups = allCompetitors.Select(c => c.Subgroup).ToList();
+                    subGroups = subGroups.Distinct().ToList();
+
+                    //bega per pogrupius 1, 2, ...
+                    foreach (int subgroup in subGroups)
+                    {
+                        //*******************************    trūksta trenerio var pav *************************
+
+                        DataTable dtbl = new DataTable();
+                        List<CompetitorsWithSubgroups> subgroupComp = allCompetitors.Where(c => c.Subgroup == subgroup).ToList();
+
+                        dtbl.Columns.Add("ID");
+                        dtbl.Columns.Add("Pogrupis");
+                        dtbl.Columns.Add("Vardas");
+                        dtbl.Columns.Add("Pavardė");
+                        dtbl.Columns.Add("Metai");
+                        dtbl.Columns.Add("Miestas");
+                        dtbl.Columns.Add("Rezultatas");
+
+                        for (int k = 0; k < subgroupComp.Count; k++)
+                        {
+                            string CoachFullName = presenter.GetCoachFullName(allCompetitors[k].CoachId);
+                            dtbl.Rows.Add(subgroupComp[k].Id, subgroupComp[k].Subgroup, subgroupComp[k].Name,
+                                subgroupComp[k].Surname, subgroupComp[k].Year.ToString("yyyy/MM/dd"), subgroupComp[k].City, "");
+                        }
+
+                        ExportDataTableToPdf(document, dtbl, type.Type + ". Pogrupio nr. " + subgroup + "\n" + "Teisėjas: \n" + "Rungtis: ");
+
+                        document.NewPage();
+                    }
                 }
-
-
-
-
-                ExportDataTableToPdf(document, dtbl, "Grupė : " + type + ". Sąrašas");
-                document.NewPage();
-
-
-
             }
 
             document.Close();
             writer.Close();
             fs.Close();
-
 
             Response.ContentType = "Application/pdf";
             Response.AppendHeader("Content-Disposition", "attachment; filename=rezultatai.pdf");
@@ -457,14 +458,11 @@ namespace WebApplication.Admin.Competition
         private void ExportDataTableToPdf(Document document, DataTable dtblTable,
             string strHeader)
         {
-
-
-
             //ads header
             BaseFont bfntHead = BaseFont.CreateFont(FONT, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
             Font fntHead = new Font(bfntHead, 16, 1, BaseColor.GRAY);
             Paragraph prgHeading = new Paragraph();
-            prgHeading.Alignment = Element.ALIGN_CENTER;
+            prgHeading.Alignment = Element.ALIGN_LEFT;
             prgHeading.Add(new Chunk(strHeader.ToUpper(), fntHead));
             document.Add(prgHeading);
 
@@ -487,10 +485,13 @@ namespace WebApplication.Admin.Competition
 
             //write the table
             PdfPTable table = new PdfPTable(dtblTable.Columns.Count);
+            table.WidthPercentage = 95;
 
             //table header
             BaseFont bfntColumnHeader = BaseFont.CreateFont(FONT, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-            Font fntColumnHeader = new Font(bfntColumnHeader, 10, 1, BaseColor.WHITE);
+            BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
+            Font fntColumnHeader = new Font(bfntColumnHeader, 9, 1, BaseColor.WHITE);
+            Font fntCell= new Font(bfTimes, 7, 1, BaseColor.BLACK);
             for (int i = 0; i < dtblTable.Columns.Count; i++)
             {
                 PdfPCell cell = new PdfPCell();
@@ -504,7 +505,7 @@ namespace WebApplication.Admin.Competition
             {
                 for (int j = 0; j < dtblTable.Columns.Count; j++)
                 {
-                    table.AddCell(dtblTable.Rows[i][j].ToString());
+                    table.AddCell(new Phrase(dtblTable.Rows[i][j].ToString(), fntCell));
                 }
             }
             document.Add(table);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using WebApplication.Model;
@@ -37,7 +38,7 @@ namespace WebApplication.Tests.Mocks
 
         public string AgeGroupForCalculation => throw new NotImplementedException();
 
-        public List<Results> Results { set => throw new NotImplementedException(); }
+        public DataTable Results { set => throw new NotImplementedException(); }
 
         public EventTypes GetEventType()
         {

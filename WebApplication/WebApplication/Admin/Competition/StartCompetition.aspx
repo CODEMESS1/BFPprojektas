@@ -95,7 +95,7 @@
                     <!-- Tab content -->
                     <div class="tab-content" id="myTabContent1" style="height:100%; width: 100%;">
                         <div id="generate" class="tabcontent show active dropdown" style="border:none">
-                            <h2>Pogrūpiai</h2>
+                            <h2>Pogrupiai</h2>
                             <div class="float-right">
                                 <asp:Button ID="Button2" Visible="true" runat="server" Text="Keisti varžybas" OnClick="SelectCompetitionBtn_Click" CssClass="btn btn-danger" />
                             </div>
@@ -169,12 +169,8 @@
                                      </div>
                             <hr />
                             <div>
-                                <asp:GridView ID="Results_GridView" runat="server" Width="35%" AutoGenerateColumns="false" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal">
-                                    <Columns>
-                                        <asp:BoundField DataField="Score" HeaderText="Vieta" />
-                                        <asp:BoundField DataField="Points" HeaderText="Taškai" />
-                                        <asp:BoundField DataField="Result" HeaderText="Rezultatas" />
-                                    </Columns>
+                                <asp:GridView ID="Results_GridView" runat="server" Width="35%" AutoGenerateColumns="true" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal">
+                                    
                                 </asp:GridView>
                             </div>
                         </div>

@@ -13,24 +13,26 @@ namespace WebApplication.Presenter
     {
         private ICreateEvents View;
         private AgeGroupTypesContainer ageGroupTypesContainer = new AgeGroupTypesContainer();
-        private EventsContainer eventsContainer = new EventsContainer();
+        private EventsContainer eventsContainer;
         private EventTypesContainer eventTypesContainer = new EventTypesContainer();
         private List<string> selectedGroups;
         private EventsContainer context;
         private CreateEvents createEvents;
 
-        public CreateEventsPresenter(CreateEventsViewMock view1, ICreateEvents view)
+        public CreateEventsPresenter(ICreateEvents view)
         {
             if (view == null)
                 throw new ArgumentNullException("view cannot be null");
 
+            eventsContainer = new EventsContainer();
             this.View = view;
         }
 
         public CreateEventsPresenter(CreateEventsViewMock view, EventsContainer context)
         {
             View = view;
-            this.context = context;
+
+            eventsContainer = context;
         }
 
         public CreateEventsPresenter(CreateEvents createEvents)

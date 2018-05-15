@@ -671,6 +671,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Containers\AgeGroupContainer.cs" />
+    <Compile Include="Models\Containers\CompetitionAgeSubgroupsContainer.cs" />
     <Compile Include="Models\Containers\EventTypesContainer.cs" />
     <Compile Include="Models\Containers\ResultsContainer.cs" />
     <Compile Include="Models\Objects\AgeGroupEvents.cs" />
@@ -735,7 +736,9 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Tests\CreateEventTests1.cs" />
     <Compile Include="Tests\Mocks\CreateEventsViewMock.cs" />
-    <Compile Include="Tests\Mocks\MockOfStartCompetitionModel.cs" />
+    <Compile Include="Tests\Mocks\MockOfAgeGroupTypesContainer.cs" />
+    <Compile Include="Tests\Mocks\MockOfCompetitionEventsContainer.cs" />
+    <Compile Include="Tests\Mocks\MockOfEventsModel.cs" />
     <Compile Include="Tests\Mocks\MockStartCompetitionView.cs" />
     <Compile Include="Tests\StartCompetitionTest.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
