@@ -319,6 +319,7 @@ namespace WebApplication.Admin.Competition
             {
                 this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Nėra rezultatų arba dalyvių šios grupės');", true);
             }
+            PrintResults((DataTable)Results_GridView.DataSource);
             ScriptManager.RegisterStartupScript(this, GetType(), "AKey", "clickPostBackStart();", true);
         }
 
@@ -332,59 +333,62 @@ namespace WebApplication.Admin.Competition
         {
             string path = Page.Server.MapPath("/PDFs");
 
-            System.IO.FileStream fs = new FileStream(path + "/subgroups.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
-            Document document = new Document();
-            document.SetPageSize(iTextSharp.text.PageSize.A4);
-            PdfWriter writer = PdfWriter.GetInstance(document, fs);
-            document.Open();
-
-            //bega per kiekviena amziausiaus grupes tipa
-            foreach (AgeGroupTypes type in Types)
+            using (System.IO.FileStream fs = new FileStream(path + "/subgroups.pdf", FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                //randa visus dalyvius, vienos amziaus grupes
-                List<CompetitorsWithSubgroups> allCompetitors = presenter.GetStartList(type.Type);
-
-                if (allCompetitors.Count > 0)
+                Document document = new Document();
+                document.SetPageSize(iTextSharp.text.PageSize.A4);
+                PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                document.Open();
+                
+                //bega per kiekviena amziausiaus grupes tipa
+                foreach (AgeGroupTypes type in Types)
                 {
-                    //gauna pogrupius 
-                    List<int> subGroups = allCompetitors.Select(c => c.Subgroup).ToList();
-                    subGroups = subGroups.Distinct().ToList();
+                    //randa visus dalyvius, vienos amziaus grupes
+                    List<CompetitorsWithSubgroups> allCompetitors = presenter.GetStartList(type.Type);
 
-                    //bega per pogrupius 1, 2, ...
-                    foreach (int subgroup in subGroups)
+                    if (allCompetitors.Count > 0)
                     {
-                        //*******************************    trūksta trenerio var pav *************************
+                        //gauna pogrupius 
+                        List<int> subGroups = allCompetitors.Select(c => c.Subgroup).ToList();
+                        subGroups = subGroups.Distinct().ToList();
 
-                        DataTable dtbl = new DataTable();
-                        List<CompetitorsWithSubgroups> subgroupComp = allCompetitors.Where(c => c.Subgroup == subgroup).ToList();
-
-                        dtbl.Columns.Add("ID");
-                        dtbl.Columns.Add("Pogrupis");
-                        dtbl.Columns.Add("Vardas");
-                        dtbl.Columns.Add("Pavardė");
-                        dtbl.Columns.Add("Metai");
-                        dtbl.Columns.Add("Miestas");
-                        dtbl.Columns.Add("Valstybė");
-                        dtbl.Columns.Add("Tren. V. Pavardė");
-
-                        for (int k = 0; k < subgroupComp.Count; k++)
+                        //bega per pogrupius 1, 2, ...
+                        foreach (int subgroup in subGroups)
                         {
-                            string CoachFullName = presenter.GetCoachFullName(allCompetitors[k].CoachId);
-                            dtbl.Rows.Add(subgroupComp[k].Id, subgroupComp[k].Subgroup, subgroupComp[k].Name,
-                                subgroupComp[k].Surname, subgroupComp[k].Year.ToString("yyyy/MM/dd"), subgroupComp[k].City,
-                                subgroupComp[k].Country, CoachFullName);
+                            //*******************************    trūksta trenerio var pav *************************
+
+                            DataTable dtbl = new DataTable();
+                            List<CompetitorsWithSubgroups> subgroupComp = allCompetitors.Where(c => c.Subgroup == subgroup).ToList();
+
+                            dtbl.Columns.Add("ID");
+                            dtbl.Columns.Add("Pogrupis");
+                            dtbl.Columns.Add("Vardas");
+                            dtbl.Columns.Add("Pavardė");
+                            dtbl.Columns.Add("Metai");
+                            dtbl.Columns.Add("Miestas");
+                            dtbl.Columns.Add("Valstybė");
+                            dtbl.Columns.Add("Tren. V. Pavardė");
+
+                            for (int k = 0; k < subgroupComp.Count; k++)
+                            {
+                                string CoachFullName = presenter.GetCoachFullName(allCompetitors[k].CoachId);
+                                dtbl.Rows.Add(subgroupComp[k].Id, subgroupComp[k].Subgroup, subgroupComp[k].Name,
+                                    subgroupComp[k].Surname, subgroupComp[k].Year.ToString("yyyy/MM/dd"), subgroupComp[k].City,
+                                    subgroupComp[k].Country, CoachFullName);
+                            }
+
+                            ExportDataTableToPdf(document, dtbl, type.Type + ". Pogrupio nr. " + subgroup);
+
+                            document.NewPage();
                         }
-
-                        ExportDataTableToPdf(document, dtbl, type.Type + ". Pogrupio nr. " + subgroup);
-
-                        document.NewPage();
                     }
                 }
-            }
+
+                document.Close();
+                writer.Close();
             
-            document.Close();
-            writer.Close();
-            fs.Close();
+            }
+
 
             Response.ContentType = "Application/pdf";
             Response.AppendHeader("Content-Disposition", "attachment; filename=pogrupiai.pdf");
@@ -454,6 +458,27 @@ namespace WebApplication.Admin.Competition
             Response.End();
         }
 
+        private void PrintResults(DataTable results)
+        {
+            string path = Page.Server.MapPath("/PDFs");
+
+            System.IO.FileStream fs = new FileStream(path + "/Rez.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            Document document = new Document();
+            document.SetPageSize(iTextSharp.text.PageSize.A4);
+            PdfWriter writer = PdfWriter.GetInstance(document, fs);
+            document.Open();
+
+            ExportDataTableToPdf(document, results, "Rezultatai");
+
+            document.Close();
+            writer.Close();
+            fs.Close();
+
+            Response.ContentType = "Application/pdf";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=Rez.pdf");
+            Response.TransmitFile(Server.MapPath("~/PDFs/Rez.pdf"));
+            Response.End();
+        }
 
         private void ExportDataTableToPdf(Document document, DataTable dtblTable,
             string strHeader)

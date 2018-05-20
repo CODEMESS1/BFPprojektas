@@ -236,7 +236,6 @@ namespace WebApplication.Presenter
 
                 dt.Rows.Add(values);
             }
-
             View.Results = dt;
         }
 
