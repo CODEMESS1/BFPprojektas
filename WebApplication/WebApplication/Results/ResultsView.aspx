@@ -30,7 +30,7 @@
     </style>
   <div class="form-row">
     <div class="col-md-2 mb-3">
-      <asp:Button ID="CompetitionSelect_Button" Text="Varžybų pasirinkimas" runat="server" OnClick="CompetitionSelect_Button_Click" Visible="false" CssClass="form-control"/>
+       <asp:Button ID="CompetitionSelect_Button" Text="Varžybų pasirinkimas" CausesValidation="false" runat="server" OnClick="CompetitionSelect_Button_Click" Visible="false" CssClass="form-control"/>
     </div>
   </div>
   <div class="form-row">
