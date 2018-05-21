@@ -2,7 +2,7 @@
 
 <asp:Content runat="server" ID="ResultsViewContent" ContentPlaceHolderID="MainContent">
     <div>
-        <asp:Button ID="CompetitionSelect_Button" Text="Varžybų pasirinkimas" runat="server" OnClick="CompetitionSelect_Button_Click" Visible="false"/>
+        <asp:Button ID="CompetitionSelect_Button" Text="Varžybų pasirinkimas" CausesValidation="false" runat="server" OnClick="CompetitionSelect_Button_Click" Visible="false"/>
     </div>
     <div>
         <asp:TextBox ID="FindResults_TextBox" runat="server" Visible="false"></asp:TextBox>

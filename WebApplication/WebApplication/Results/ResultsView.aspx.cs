@@ -80,6 +80,8 @@ namespace WebApplication.Results
 
         protected void FindResults_Button_Click(object sender, EventArgs e)
         {
+            ResultsGridView.DataSource = null;
+            ResultsGridView.DataBind();
             Presenter.FindResults();
             if(ResultsGridView.DataSource != null)
             {
