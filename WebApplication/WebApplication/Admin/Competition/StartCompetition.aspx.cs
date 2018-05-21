@@ -427,8 +427,6 @@ namespace WebApplication.Admin.Competition
                         //bega per pogrupius 1, 2, ...
                         foreach (int subgroup in subGroups)
                         {
-                            //*******************************    trūksta trenerio var pav *************************
-
                             DataTable dtbl = new DataTable();
                             List<CompetitorsWithSubgroups> subgroupComp = allCompetitors.Where(c => c.Subgroup == subgroup).ToList();
 

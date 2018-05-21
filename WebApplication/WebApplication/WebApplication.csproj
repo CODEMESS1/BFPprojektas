@@ -377,6 +377,7 @@
     <Content Include="Official\Web.config" />
     <Content Include="Coach\Web.config" />
     <Content Include="Official\OfficialPage.aspx" />
+    <Content Include="Results\ResultsView.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -706,9 +707,11 @@
     <Compile Include="Models\Objects\Results.cs" />
     <Compile Include="Model\ICreateEvents.cs" />
     <Compile Include="Model\IRegisterCompetitorsAdmin.cs" />
+    <Compile Include="Model\IResultsView.cs" />
     <Compile Include="Model\IStartCompetition.cs" />
     <Compile Include="Presenter\CreateEventsPresenter.cs" />
     <Compile Include="Presenter\RegisterCompetitorsAdminPresenter.cs" />
+    <Compile Include="Presenter\ResultsViewPresenter.cs" />
     <Compile Include="Presenter\StartCompetitionPresenter.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -738,6 +741,13 @@
     </Compile>
     <Compile Include="Presenter\CreateCompetitionPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\ResultsView.aspx.cs">
+      <DependentUpon>ResultsView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Results\ResultsView.aspx.designer.cs">
+      <DependentUpon>ResultsView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

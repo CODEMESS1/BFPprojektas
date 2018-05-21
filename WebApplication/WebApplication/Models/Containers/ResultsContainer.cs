@@ -14,9 +14,9 @@ namespace WebApplication.Models.Containers
 
         }
 
-        public DbSet<Results> Results { get; set; }
+        public DbSet<Models.Objects.Results> Results { get; set; }
 
-        public void AddResults(Results result)
+        public void AddResults(Models.Objects.Results result)
         {
             if ((Results.Where(r => r.AgeGroupType == result.AgeGroupType && r.EventId == result.EventId && r.CompetitionId == result.CompetitionId &&
                                         r.CompetitorId == result.CompetitorId).Count()) == 0)
@@ -35,11 +35,11 @@ namespace WebApplication.Models.Containers
             }
         }
 
-        public void UpdateResults(List<Results> results)
+        public void UpdateResults(List<Models.Objects.Results> results)
         {
-            List<Results> resultsToEdit = Results.ToList();
+            List<Models.Objects.Results> resultsToEdit = Results.ToList();
 
-            foreach(Results result in results)
+            foreach(Models.Objects.Results result in results)
             {
                 var toEdit = resultsToEdit.Where(r => r.Id == result.Id).Single();
                 toEdit.Points = result.Points;
@@ -49,12 +49,12 @@ namespace WebApplication.Models.Containers
             SaveChanges();
         }
 
-        public List<Results> GetWinnerList(int competitionId, int ageGroupType)
+        public List<Models.Objects.Results> GetWinnerList(int competitionId, int ageGroupType)
         {
             Results.RemoveRange(Results.Where(r => r.CompetitionId == competitionId && r.EventId == -1 && r.AgeGroupType == ageGroupType && r.Result.Equals("Final")));
             SaveChanges();
-            List<Results> results = Results.Where(r => r.CompetitionId == competitionId && r.AgeGroupType == ageGroupType).OrderBy(c => c.CompetitorId).ToList();
-            List<Results> returnList = new List<Results>();
+            List<Models.Objects.Results> results = Results.Where(r => r.CompetitionId == competitionId && r.AgeGroupType == ageGroupType).OrderBy(c => c.CompetitorId).ToList();
+            List<Models.Objects.Results> returnList = new List<Models.Objects.Results>();
 
             for(int i = 0; i < results.Count; i++)
             {
@@ -75,7 +75,7 @@ namespace WebApplication.Models.Containers
 
                 i--;
 
-                Results result = new Results(competitor, -1, ageGroupType, competitionId, "Final", points, null);
+                Models.Objects.Results result = new Models.Objects.Results(competitor, -1, ageGroupType, competitionId, "Final", points, null);
                 Results.Add(result);
                 SaveChanges();
 
