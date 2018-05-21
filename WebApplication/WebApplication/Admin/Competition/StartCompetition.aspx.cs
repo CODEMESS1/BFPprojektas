@@ -332,14 +332,15 @@ namespace WebApplication.Admin.Competition
         protected void GetStartList_Btn_Click(object sender, EventArgs e)
         {
             string path = Page.Server.MapPath("/PDFs");
+            System.IO.FileStream fs = new FileStream(path + "/subgroups.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            Document document = new Document();
+            document.SetPageSize(iTextSharp.text.PageSize.A4);
+            PdfWriter writer = PdfWriter.GetInstance(document, fs);
 
-            using (System.IO.FileStream fs = new FileStream(path + "/subgroups.pdf", FileMode.Create, FileAccess.Write, FileShare.None))
+            try
             {
-                Document document = new Document();
-                document.SetPageSize(iTextSharp.text.PageSize.A4);
-                PdfWriter writer = PdfWriter.GetInstance(document, fs);
                 document.Open();
-                
+
                 //bega per kiekviena amziausiaus grupes tipa
                 foreach (AgeGroupTypes type in Types)
                 {
@@ -383,12 +384,15 @@ namespace WebApplication.Admin.Competition
                         }
                     }
                 }
-
-                document.Close();
-                writer.Close();
-            
+            }
+            catch
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Klaida spausdinime!');", true);
             }
 
+            document.Close();
+            writer.Close();
+            fs.Close();
 
             Response.ContentType = "Application/pdf";
             Response.AppendHeader("Content-Disposition", "attachment; filename=pogrupiai.pdf");
@@ -407,45 +411,52 @@ namespace WebApplication.Admin.Competition
             document.Open();
 
             //bega per kiekviena amziausiaus grupes tipa
-            foreach (AgeGroupTypes type in Types)
+            try
             {
-                //randa visus dalyvius, vienos amziaus grupes
-                List<CompetitorsWithSubgroups> allCompetitors = presenter.GetStartList(type.Type);
-
-                if (allCompetitors.Count > 0)
+                foreach (AgeGroupTypes type in Types)
                 {
-                    //gauna pogrupius 
-                    List<int> subGroups = allCompetitors.Select(c => c.Subgroup).ToList();
-                    subGroups = subGroups.Distinct().ToList();
+                    //randa visus dalyvius, vienos amziaus grupes
+                    List<CompetitorsWithSubgroups> allCompetitors = presenter.GetStartList(type.Type);
 
-                    //bega per pogrupius 1, 2, ...
-                    foreach (int subgroup in subGroups)
+                    if (allCompetitors.Count > 0)
                     {
-                        //*******************************    trūksta trenerio var pav *************************
+                        //gauna pogrupius 
+                        List<int> subGroups = allCompetitors.Select(c => c.Subgroup).ToList();
+                        subGroups = subGroups.Distinct().ToList();
 
-                        DataTable dtbl = new DataTable();
-                        List<CompetitorsWithSubgroups> subgroupComp = allCompetitors.Where(c => c.Subgroup == subgroup).ToList();
-
-                        dtbl.Columns.Add("ID");
-                        dtbl.Columns.Add("Pogrupis");
-                        dtbl.Columns.Add("Vardas");
-                        dtbl.Columns.Add("Pavardė");
-                        dtbl.Columns.Add("Metai");
-                        dtbl.Columns.Add("Miestas");
-                        dtbl.Columns.Add("Rezultatas");
-
-                        for (int k = 0; k < subgroupComp.Count; k++)
+                        //bega per pogrupius 1, 2, ...
+                        foreach (int subgroup in subGroups)
                         {
-                            string CoachFullName = presenter.GetCoachFullName(allCompetitors[k].CoachId);
-                            dtbl.Rows.Add(subgroupComp[k].Id, subgroupComp[k].Subgroup, subgroupComp[k].Name,
-                                subgroupComp[k].Surname, subgroupComp[k].Year.ToString("yyyy/MM/dd"), subgroupComp[k].City, "");
+                            //*******************************    trūksta trenerio var pav *************************
+
+                            DataTable dtbl = new DataTable();
+                            List<CompetitorsWithSubgroups> subgroupComp = allCompetitors.Where(c => c.Subgroup == subgroup).ToList();
+
+                            dtbl.Columns.Add("ID");
+                            dtbl.Columns.Add("Pogrupis");
+                            dtbl.Columns.Add("Vardas");
+                            dtbl.Columns.Add("Pavardė");
+                            dtbl.Columns.Add("Metai");
+                            dtbl.Columns.Add("Miestas");
+                            dtbl.Columns.Add("Rezultatas");
+
+                            for (int k = 0; k < subgroupComp.Count; k++)
+                            {
+                                string CoachFullName = presenter.GetCoachFullName(allCompetitors[k].CoachId);
+                                dtbl.Rows.Add(subgroupComp[k].Id, subgroupComp[k].Subgroup, subgroupComp[k].Name,
+                                    subgroupComp[k].Surname, subgroupComp[k].Year.ToString("yyyy/MM/dd"), subgroupComp[k].City, "");
+                            }
+
+                            ExportDataTableToPdf(document, dtbl, type.Type + ". Pogrupio nr. " + subgroup + "\n" + "Teisėjas: \n" + "Rungtis: ");
+
+                            document.NewPage();
                         }
-
-                        ExportDataTableToPdf(document, dtbl, type.Type + ". Pogrupio nr. " + subgroup + "\n" + "Teisėjas: \n" + "Rungtis: ");
-
-                        document.NewPage();
                     }
                 }
+            }
+            catch
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Klaida spausdinime!');", true);
             }
 
             document.Close();

@@ -25,7 +25,7 @@ namespace WebApplication.Presenter
                 throw new ArgumentNullException("view cannot be null");
 
             eventsContainer = new EventsContainer();
-            this.View = view;
+            View = view;
         }
 
         public CreateEventsPresenter(CreateEventsViewMock view, EventsContainer context)
@@ -35,10 +35,10 @@ namespace WebApplication.Presenter
             eventsContainer = context;
         }
 
-        public CreateEventsPresenter(CreateEvents createEvents)
+        /*public CreateEventsPresenter(CreateEvents createEvents)
         {
             this.createEvents = createEvents;
-        }
+        }*/
 
         public void InitView()
         {
