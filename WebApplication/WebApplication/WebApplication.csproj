@@ -369,6 +369,7 @@
     <Content Include="Image\program-logo.png" />
     <Content Include="Image\register1.png" />
     <Content Include="Image\register2.png" />
+    <Content Include="Image\results.png" />
     <Content Include="Image\search.png" />
     <Content Include="Image\search4.png" />
     <Content Include="Image\startmatch.png" />

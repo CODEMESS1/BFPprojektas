@@ -152,7 +152,7 @@
                                               <a href="/About" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
                                             </li>
                                             <li class="nav-item">
-                                              <a href="/Results/ResultsView" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Rezultatai</a>
+                                              <a href="/Results/ResultsView" class="nav-link"><img src="/Image/results.png" width="30" height="30"/> Rezultatai</a>
                                             </li>
                                       </AnonymousTemplate>
                                           <RoleGroups>
@@ -186,6 +186,9 @@
                                                       <li class="nav-item">
                                                           <a href="/Admin/Competition/StartCompetition.aspx" class="nav-link"><img src="/Image/startmatch.png" width="30" height="30"/>Varžybų vykdymas</a>
                                                       </li>
+                                                      <li class="nav-item">
+                                                        <a href="/Results/ResultsView" class="nav-link"><img src="/Image/results.png" width="30" height="30"/> Rezultatai</a>
+                                                     </li>
 
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
