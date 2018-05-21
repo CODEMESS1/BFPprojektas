@@ -417,10 +417,14 @@ namespace WebApplication.Presenter
 
         public void FindResults()
         {
-            DataTable dataTableToView = new DataTable();
+            DataTable tableToView = new DataTable();
             List<Competitors> competitors = CompetitorsContainer.Comp.Where(c => c.Name.Equals(View.SearchField) || c.Surname.Equals(View.SearchField)).ToList();
             DataTable dt = GetResultsTable();
-            for(int i = 0; i < dt.Rows.Count; i++)
+            foreach(DataColumn dc in dt.Columns)
+            {
+                tableToView.Columns.Add(dc.ColumnName, dc.DataType);
+            }
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string Id = dt.Rows[i][0].ToString();
                 foreach (Competitors c in competitors)
@@ -428,11 +432,11 @@ namespace WebApplication.Presenter
                     string CompId = Convert.ToString(c.Id);
                     if (Id.Equals(CompId))
                     {
-                        dataTableToView.ImportRow(dt.Rows[i]);
+                        tableToView.ImportRow(dt.Rows[i]);
                     }
                 }
             }
-            View.Results = dataTableToView; 
+            View.Results = tableToView;
         }
     }
 }

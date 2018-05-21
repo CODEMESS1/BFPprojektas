@@ -30,7 +30,7 @@
     </style>
   <div class="form-row">
     <div class="col-md-2 mb-3">
-       <asp:Button ID="CompetitionSelect_Button" Text="Varžybų pasirinkimas" CausesValidation="false" runat="server" OnClick="CompetitionSelect_Button_Click" Visible="false" CssClass="form-control"/>
+       <asp:Button ID="CompetitionSelect_Button" Text="Varžybų pasirinkimas"  CausesValidation="false" runat="server" OnClick="CompetitionSelect_Button_Click" Visible="false" CssClass="form-control btn-light"/>
     </div>
   </div>
   <div class="form-row">
@@ -60,10 +60,11 @@
         </asp:GridView>
     </div>
     <div>
-        <asp:DropDownList ID="AgeGroup_List" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AgeGroup_List_SelectedIndexChanged" Visible="false">
+        <asp:DropDownList ID="AgeGroup_List" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AgeGroup_List_SelectedIndexChanged" Visible="false" CssClass="form-control col-2">
         </asp:DropDownList>
     </div>
+    <hr />
     <div>
-        <asp:GridView ID="ResultsGridView" runat="server" AllowPaging="true" OnPageIndexChanging="ResultsGridView_PageIndexChanging"></asp:GridView>
+        <asp:GridView ID="ResultsGridView" runat="server" AllowPaging="true" OnPageIndexChanging="ResultsGridView_PageIndexChanging" CssClass="table table-curved table-hover table-striped text-codemess table-dark noBorder" BackColor="Gray" BorderColor="black" ForeColor="white" GridLines="Horizontal"></asp:GridView>
     </div>
 </asp:Content>
