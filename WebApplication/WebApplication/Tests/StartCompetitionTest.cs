@@ -18,7 +18,6 @@ namespace WebApplication.Tests
     public class StartCompetitionTest
     {
         private MockStartCompetitionView View = new MockStartCompetitionView();
-        //private MockOfStartCompetitionModel Model = new MockOfStartCompetitionModel();
         private ResultsContainer ModelMock = Substitute.For<ResultsContainer>();
 
         private StartCompetitionPresenter Presenter;
@@ -203,8 +202,7 @@ namespace WebApplication.Tests
                     new Models.Objects.Results { CompetitorId = 7, EventId = 1, AgeGroupType = 1, CompetitionId = 1, Result = "12" },
                     new Models.Objects.Results { CompetitorId = 8, EventId = 1, AgeGroupType = 1, CompetitionId = 1, Result = "13" }
              };
-
-            //Models.Objects.Results expected = new Models.Objects.Results(9, 1, 1, 1, "15", new double?(1), new int?(1));
+            
 
             List<Models.Objects.Results> expected2 = new List<Models.Objects.Results>
             {
@@ -241,9 +239,7 @@ namespace WebApplication.Tests
                     new Models.Objects.Results { CompetitorId = 7, EventId = 1, AgeGroupType = 1, CompetitionId = 1, Result = "25:15:5" },
                     new Models.Objects.Results { CompetitorId = 8, EventId = 1, AgeGroupType = 1, CompetitionId = 1, Result = "30:25:5" }
              };
-
-            //Models.Objects.Results expected = new Models.Objects.Results(9, 1, 1, 1, "15", new double?(1), new int?(1));
-
+            
             List<Models.Objects.Results> expected2 = new List<Models.Objects.Results>
             {
                     new Models.Objects.Results { CompetitorId = 8, EventId = 1, AgeGroupType = 1, CompetitionId = 1, Result = "30:25:5", Points =1, Score = 1 },

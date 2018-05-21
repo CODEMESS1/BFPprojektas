@@ -146,10 +146,10 @@
                                       <AnonymousTemplate>
                                             <li class="nav-item">
                                                 
-                                              <a class="nav-link" href="/#"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
+                                              <a class="nav-link" href="/Default"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
                                             </li>
                                             <li class="nav-item">
-                                              <a href="#" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
+                                              <a href="/About" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
                                             </li>
                                             <li class="nav-item">
                                               <a href="/Results/ResultsView" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Rezultatai</a>
@@ -160,10 +160,10 @@
                                                   <ContentTemplate>
 
                                                       <li class="nav-item">
-                                                      <a class="nav-link" href="/#"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
+                                                      <a class="nav-link" href="/Default"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                      <a href="#" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
+                                                      <a href="/About" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
                                                       </li>
                                                       <li class="nav-item">
                                                       <a href="/Admin/CreateEditUsers" class="nav-link"><img src="/Image/users.png" width="30" height="30"/> Vartotojai</a>
@@ -192,10 +192,10 @@
                                               <asp:RoleGroup Roles="Coach">
                                                   <ContentTemplate>
                                                       <li class="nav-item">
-                                                      <a class="nav-link" href="/#"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
+                                                      <a class="nav-link" href="/Default"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                      <a href="#" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
+                                                      <a href="/About" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
                                                       </li>
                                                       <li class="nav-item">
                                                       <a href="/Coach/Competitors/AddCompetitors" class="nav-link"><img src="/Image/members1.png" width="30" height="30"/> Dalyviai</a>
@@ -208,20 +208,20 @@
                                               <asp:RoleGroup Roles="Official">
                                                   <ContentTemplate>
                                                       <li class="nav-item">
-                                                      <a class="nav-link" href="/#"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
+                                                      <a class="nav-link" href="/Default"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                      <a href="#" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
+                                                      <a href="/About" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
                                               <asp:RoleGroup Roles="User">
                                                   <ContentTemplate>
                                                       <li class="nav-item">
-                                                      <a class="nav-link" href="/#"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
+                                                      <a class="nav-link" href="/Default"><img src="/Image/home1.png" width="30" height="30"/> Pradžia</a>
                                                       </li>
                                                       <li class="nav-item">
-                                                      <a href="#" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
+                                                      <a href="/About" class="nav-link"><img src="/Image/info1.png" width="30" height="30"/> Apie</a>
                                                       </li>
                                                   </ContentTemplate>
                                               </asp:RoleGroup>
