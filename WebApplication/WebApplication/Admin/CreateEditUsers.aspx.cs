@@ -105,6 +105,7 @@ namespace WebApplication.Admin
         {
             popupAdd.Show();
         }
+        
 
         protected void submit_btn_Click(object sender, EventArgs e)
         {
@@ -169,6 +170,11 @@ namespace WebApplication.Admin
                     Trace.Write("Error occurred while deleting user: {0}", ex.ToString());
                 }
             }
+        }
+
+        protected void canceledit_btn_Click(object sender, EventArgs e)
+        {
+            popupAdd.Hide();
         }
     }
 }
