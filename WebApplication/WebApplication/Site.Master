@@ -94,7 +94,7 @@
         <form id="form1" runat="server">
           <nav class="navbar navbar-expand-md navbar-light border-0" style="background: linear-gradient(to bottom right, #33ccff, #3399ff)">
            <a href="#" class="navbar-left"><img src="/Image/program-logo.png" width="50" height="50"></a>
-           <a class="navbar-text" style="font-family: Hemi; padding-left: 10px; font-size: large" href="#">BFP programa alpha 0.0129</a>
+           <a class="navbar-text" style="font-family: Hemi; padding-left: 10px; font-size: large" href="#">BFP programa</a>
             
             <div class="container">
               <%--<a class="navbar-brand" href="#">Meniu</a>--%>

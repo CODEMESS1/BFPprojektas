@@ -136,8 +136,8 @@
                         </div>
                         <div id="documents" class="tabcontent show active" style="border:none">
                             <h2>Documents</h2>
-                            <asp:Button ID="GetStartList_Btn" runat ="server" Text ="Starto protokolai" OnClick="GetStartList_Btn_Click" />
-                            <asp:Button ID="GetResultList_Btn" runat="server" Text="Rezultatų protokolai" OnClick="GetResultList_Btn_Click" />
+                            <asp:Button ID="GetStartList_Btn" runat ="server" Text ="Starto protokolai" OnClick="GetStartList_Btn_Click" CssClass="btn btn-light" />
+                            <asp:Button ID="GetResultList_Btn" runat="server" Text="Rezultatų protokolai" OnClick="GetResultList_Btn_Click" CssClass="btn btn-light" />
                             <div class="float-right">
                                 <asp:Button ID="Button3" Visible="true" runat="server" Text="Keisti varžybas" OnClick="SelectCompetitionBtn_Click" CssClass="btn btn-danger" />
                             </div>

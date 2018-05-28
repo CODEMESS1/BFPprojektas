@@ -387,6 +387,9 @@ namespace WebApplication.Admin.Competition
             }
             catch
             {
+                document.Close();
+                writer.Close();
+                fs.Close();
                 this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Klaida spausdinime!');", true);
             }
 
@@ -454,6 +457,9 @@ namespace WebApplication.Admin.Competition
             }
             catch
             {
+                document.Close();
+                writer.Close();
+                fs.Close();
                 this.Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Klaida spausdinime!');", true);
             }
 
@@ -477,7 +483,16 @@ namespace WebApplication.Admin.Competition
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();
 
-            ExportDataTableToPdf(document, results, "Rezultatai");
+            try
+            {
+                ExportDataTableToPdf(document, results, "Rezultatai");
+            }
+            catch
+            {
+                document.Close();
+                writer.Close();
+                fs.Close();
+            }
 
             document.Close();
             writer.Close();

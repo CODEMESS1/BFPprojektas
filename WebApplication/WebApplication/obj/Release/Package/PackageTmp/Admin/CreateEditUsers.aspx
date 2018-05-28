@@ -237,7 +237,7 @@
                 <br />
                 <asp:Button ID="edit_btn" runat="server" Text="Keisti" CausesValidation="true" OnClick="edit_btn_Click" ValidationGroup="editPopup" CssClass="btn"/>
                 &nbsp;&nbsp;
-                <asp:Button ID="canceledit_btn" runat="server" Text="Atšaukti" CssClass="btn"/>
+                <asp:Button ID="canceledit_btn" runat="server" Text="Atšaukti" CssClass="btn" OnClick="canceledit_btn_Click"/>
                 &nbsp;<asp:Button ID="remove_btn" runat="server" Text="Ištrinti paskyrą" OnClick="remove_btn_Click" CssClass="btn btn-danger"/>
                 <br />
                 <br />
