@@ -1,6 +1,12 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Mobile.master.cs" Inherits="WebApplication.Site_Mobile" %>
 <%@ Register Src="~/ViewSwitcher.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcher" %>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="~/Content/theme.css" type="text/css">
+        <link href="Scripts/jquery-3.3.1.min.js" type="text/javascript" rel="text/javascript"/>
+        <link href="Scripts/popper.min.js" type="text/javascript" rel="text/javascript"/>
+        <link href="Scripts/bootstrap.min.js" type="text/javascript" rel="text/javascript"/>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -9,14 +15,23 @@
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
 <body>
+    <style>
+        body{
+            background-image:url(/Image/whiten.png), url(/Image/background.jpg);
+            background-repeat:repeat, repeat;
+        }
+    </style>
     <form id="form1" runat="server">
     <div>
-        <h1>Mobile Master Page</h1>
+        <h1>Rezultatai</h1>
+        <h1>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="Rodyti Rezultatus" CssClass="btn" />
+        </h1>
         <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
         <section class="content-wrapper main-content clear-fix">
             <asp:ContentPlaceHolder runat="server" ID="MainContent" />
         </section>
-        <friendlyUrls:ViewSwitcher runat="server" />
+        <friendlyUrls:ViewSwitcher runat="server"  />
     </div>
     </form>
 </body>
